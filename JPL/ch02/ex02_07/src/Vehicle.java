@@ -2,24 +2,59 @@
 public class Vehicle {
 	private int currentSpeed;
 	private int currentDirection;
+	public int getCurrentSpeed() {
+		return currentSpeed;
+	}
+
+	public void setCurrentSpeed(int currentSpeed) {
+		this.currentSpeed = currentSpeed;
+	}
+
+	public int getCurrentDirection() {
+		return currentDirection;
+	}
+
+	public void setCurrentDirection(int currentDirection) {
+		this.currentDirection = currentDirection;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
 	private String ownerName;
 	
-	public Vehicle(String name) {
-		this.currentSpeed = 0;
-		this.currentDirection = 0;
-		this.ownerName = name;
-	}
-	
+	/**
+	 * 引数なしコンストラクタ
+	 */
 	public Vehicle() {
-		this.currentSpeed = 0;
-		this.currentDirection = 0;
-		this.ownerName = "default";
+		this.setCurrentSpeed(0);
+		this.setCurrentDirection(0);
+		this.setOwnerName("none");
 	}
 	
-	public void setValue(int speed, int direction) {
-		this.currentSpeed = speed;
-		this.currentDirection = direction;
+	/**
+	 * 所有者の名前を引数にとるコンストラクタ
+	 */
+	public Vehicle(String name) {
+		this.setCurrentSpeed(0);
+		this.setCurrentDirection(0);
+		this.setOwnerName(name);
+	}
+	
+	public void setValue(int speed, int direction, String name) {
+		this.setCurrentSpeed(speed);
+		this.setCurrentDirection(direction);
+		this.setOwnerName(name);
+	}
 
+	public void setValue(int speed, int direction) {
+		this.setCurrentSpeed(speed);
+		this.setCurrentDirection(direction);
 	}
 	
 	public void show() {
@@ -35,5 +70,5 @@ public class Vehicle {
 		v2.setValue(213, 34);
 		v1.show();
 		v2.show();
-	}
+ 	}
 }
