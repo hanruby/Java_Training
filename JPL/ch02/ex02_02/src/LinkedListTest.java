@@ -1,5 +1,5 @@
 import static org.junit.Assert.*;
-import junit.framework.Assert;
+//import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -10,8 +10,8 @@ public class LinkedListTest {
 	public void testLinkedList() {
 		LinkedList l = new LinkedList("list1");
 		
-		Assert.assertEquals("list1", l.obj);
-		Assert.assertEquals(null, l.next);
+		assertEquals("list1", l.obj);
+		assertEquals(null, l.next);
 	}
 	
 	@Test
@@ -19,8 +19,8 @@ public class LinkedListTest {
 		LinkedList l = new LinkedList("list1");
 		l.next = new LinkedList("list2");
 		
-		Assert.assertEquals("list1", l.obj);
-		Assert.assertEquals("list2", l.next.obj);
-		Assert.assertEquals(null, l.next.next);
+		assertEquals("list1", l.obj);
+		assertEquals("list2", l.next.obj);
+		assertEquals(null, l.next.next);
 	}
 }
