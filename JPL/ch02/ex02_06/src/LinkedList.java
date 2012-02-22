@@ -8,22 +8,14 @@ public class LinkedList {
 	}
 	
 	public static void main(String[] args) {
-		LinkedList l = new LinkedList("root");
-		LinkedList lt;
-		lt = l;
+		LinkedList l;
+		
+		l = new LinkedList(new Vehicle(12, 90, "1号"));
+		l.next = new LinkedList(new Vehicle(22, 180, "2号"));
+		l.next.next = new LinkedList(new Vehicle(28, 210, "3号"));
 
-		for(int i=0; i<10; i++) {
-			lt.next = new LinkedList("link"+i);
-			lt = lt.next;
-		}
-		
-		LinkedList ol = l;
-		
-		System.out.println(ol.obj);
-		
-		while(ol.next != null) {
-			System.out.println(ol.next.obj);
-			ol = ol.next;
-		}
+		((Vehicle)l.obj).show();
+		((Vehicle)l.next.obj).show();
+		((Vehicle)l.next.next.obj).show();
 	}
 }
