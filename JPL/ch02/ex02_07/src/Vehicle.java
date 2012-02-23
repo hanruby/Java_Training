@@ -29,11 +29,17 @@ public class Vehicle {
 	private String ownerName;
 	
 	/**
+	 * 初期化ブロック(P47)
+	 */
+	{
+		this.setCurrentSpeed(0);
+		this.setCurrentDirection(0);
+	}
+	
+	/**
 	 * 引数なしコンストラクタ
 	 */
 	public Vehicle() {
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
 		this.setOwnerName("none");
 	}
 	
@@ -41,8 +47,6 @@ public class Vehicle {
 	 * 所有者の名前を引数にとるコンストラクタ
 	 */
 	public Vehicle(String name) {
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
 		this.setOwnerName(name);
 	}
 	

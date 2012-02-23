@@ -7,6 +7,15 @@ import org.junit.Test;
 public class VehicleTest {
 
 	@Test
+	public void testVehicleInit() {
+		Vehicle v = new Vehicle();
+
+		assertEquals(0, v.getCurrentSpeed());
+		assertEquals(0, v.getCurrentDirection());
+		assertEquals("none", v.getOwnerName());
+	}
+	
+	@Test
 	public void testVehicle() {
 		Vehicle v = new Vehicle();
 		v.setValue(100, 90, "hogehoge");
