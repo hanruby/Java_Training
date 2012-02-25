@@ -90,6 +90,17 @@ public class Body {
 		}
 	}
 	
+	/**
+	 * 特定のBodyオブジェクトの状態を表す文字列を返すメソッド P.51
+	 */
+	public String toString() {
+		String desc = idNum + "(" + this.name + ")";
+		if (this.orbits != null) {
+			desc += " orbits " + this.orbits.toString();
+		}
+		return desc;
+	}
+
 	public static void main(String[] args) {
 		// オブジェクトの生成 P.42
 		Body sun = new Body();
@@ -101,7 +112,11 @@ public class Body {
 		earth.idNum = Body.nextID++;
 		earth.name = "Earth";
 		earth.orbits = sun;
-		
+				
+		// toStringの暗黙の呼び出し P.51
+		System.out.println("Body " + sun);
+		System.out.println("Body " + earth);
+
 		// 外部からのstaticフィールドへのアクセス
 		System.out.println(Body.nextID);
 		
