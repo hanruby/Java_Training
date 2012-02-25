@@ -75,13 +75,6 @@ public class Vehicle {
 		this.setCurrentDirection(direction);
 	}
 	
-	public void show() {
-		System.out.println("  name:" + this.ownerName + 
-				"  speed:" + this.currentSpeed +
-				"  direction:" + this.currentDirection +
-				"  id:" + this.id);
-	}
-	
 	/**
 	 * 識別番号の最大値を返すメソッド ex2.9
 	 * @return
@@ -90,12 +83,22 @@ public class Vehicle {
 		return nextVehicleId;
 	}
 	
+	/**
+	 * toString ex2.10
+	 */
+	public String toString() {
+		return "  name:" + this.ownerName + 
+					  "  speed:" + this.currentSpeed +
+					  "  direction:" + this.currentDirection +
+					  "  id:" + this.id;
+	}
+	
 	public static void main(String[] args) {
 		Vehicle v1 = new Vehicle("new car"); 
 		Vehicle v2 = new Vehicle(); 
 		v1.setValue(100, 23);
 		v2.setValue(213, 34);
-		v1.show();
-		v2.show();
+		System.out.println(v1);
+		System.out.println(v2);
  	}
 }
