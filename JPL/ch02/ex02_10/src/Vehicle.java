@@ -90,17 +90,6 @@ public class Vehicle {
 		return nextVehicleId;
 	}
 	
-	/**
-	 * toString ex2.10
-	 */
-	public String toString() {
-		String desc = "  name:" + this.ownerName + 
-					  "  speed:" + this.currentSpeed +
-					  "  direction:" + this.currentDirection +
-					  "  id:" + this.id;
-		return desc;
-	}
-	
 	public static void main(String[] args) {
 		Vehicle v1 = new Vehicle("new car"); 
 		Vehicle v2 = new Vehicle(); 
