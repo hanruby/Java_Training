@@ -21,7 +21,7 @@ public class Body {
 	double someVal = sum + 2*Math.sqrt(rootTwo); // 組み合わせ
 
 	// staticフィールド (static field) OR クラス変数 (class variable) P.39
-	public static long nextID = 987;
+	public static long nextID = 0;
 	
 	// finalフィールド (final field)
 	public static final long bodyID = 11; // blank field
@@ -35,7 +35,8 @@ public class Body {
 
 	// コンストラクタ
 	public Body() {
-		this.idNum = nextID++;
+		nextID++;
+		this.idNum = nextID;
 		this.finalId = 111;
 	}
 	
