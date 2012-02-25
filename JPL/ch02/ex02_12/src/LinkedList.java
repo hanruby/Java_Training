@@ -16,6 +16,20 @@ public class LinkedList {
 		return desc;
 	}
 	
+	/**
+	 * ex02_12 
+	 * 可変長の引数で一括してobjectを登録するメソッドを書いてみた。
+	 * comment: 一括で登録できるため便利だと思う。
+	 * @param objs
+	 */
+	public void setObjects(Object... objs) {
+		LinkedList l = this;
+		for (Object object : objs) {
+			l.next = new LinkedList(object);
+			l = l.next; 
+		}
+	}
+	
 	public static void main(String[] args) {
 		LinkedList l;
 		

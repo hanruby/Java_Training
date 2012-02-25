@@ -23,4 +23,20 @@ public class LinkedListTest {
 		assertEquals("list2", l.next.obj);
 		assertEquals(null, l.next.next);
 	}
+	
+	@Test
+	public void testSetObjects() throws Exception {
+		LinkedList l = new LinkedList(new Vehicle(12, 90, "1号"));
+		
+		Vehicle v2 = new Vehicle(22, 180, "2号");
+		Vehicle v3 = new Vehicle(28, 210, "3号");
+		
+		l.setObjects(v2,v3);
+		
+		assertEquals(((Vehicle)(l.obj)).getOwnerName(), "1号");
+		assertEquals(((Vehicle)(l.next.obj)).getOwnerName(), "2号");
+		assertEquals(((Vehicle)(l.next.next.obj)).getOwnerName(), "3号");
+		
+		System.out.println(l);
+	}
 }
