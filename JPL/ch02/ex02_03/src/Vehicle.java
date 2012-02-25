@@ -5,7 +5,7 @@ public class Vehicle {
 	private String ownerName;
 	
 	// static field
-	static public long nextVehicleId = 456;
+	static public long nextVehicleId = 0;
 
 	// field
 	private long id;
@@ -17,8 +17,8 @@ public class Vehicle {
 		this.currentSpeed = speed;
 		this.currentDirection = direction;
 		this.ownerName = name;
-		
-		this.id = 0;
+		nextVehicleId++;
+		this.id = nextVehicleId;
 	}
 	
 	public void show() {
@@ -29,7 +29,9 @@ public class Vehicle {
 	}
 	
 	public static void main(String[] args) {
-		Vehicle v = new Vehicle(100, 90, "hogehoge"); 
-		v.show();
+		Vehicle v1 = new Vehicle(100, 90, "hogehoge"); 
+		Vehicle v2 = new Vehicle(100, 90, "hogehoge"); 
+		v1.show();
+		v2.show();
 	}
 }
