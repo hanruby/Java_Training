@@ -11,6 +11,7 @@ public class Body {
 	public long idNum;
 	public String name = "<unnamed>"; // 初期化子 // P.43
 	public Body orbits = null;
+	public Body[] bodies; 
 
 	// フィールドの初期化
 	// 初期化子 (initializer) P.38
@@ -100,6 +101,14 @@ public class Body {
 		}
 		return desc;
 	}
+	
+	/**
+	 * 周回している天体群を受け取るメソッド P.52
+	 * @param bodies
+	 */
+	public void setOrbiters(Body... bodies) {
+		this.bodies = bodies;
+	}
 
 	public static void main(String[] args) {
 		// オブジェクトの生成 P.42
@@ -113,9 +122,19 @@ public class Body {
 		earth.name = "Earth";
 		earth.orbits = sun;
 				
+		Body moon = new Body("Moon", earth);
+		Body mars = new Body("Mars", sun);
+		Body phobos = new Body("Phobos", mars);
+		Body deimos = new Body("Deimos", mars);
+		
+		earth.setOrbiters(moon);
+		mars.setOrbiters(phobos, deimos);
+		
 		// toStringの暗黙の呼び出し P.51
 		System.out.println("Body " + sun);
 		System.out.println("Body " + earth);
+		System.out.println("Body " + mars);
+		System.out.println("Body " + phobos);
 
 		// 外部からのstaticフィールドへのアクセス
 		System.out.println(Body.nextID);
