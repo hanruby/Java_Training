@@ -2,8 +2,11 @@
 public class Vehicle {
 	private int currentSpeed;
 	private int currentDirection;
+	private String ownerName;
 	private long id;
 	
+	static public long nextVehicleId = 0;
+
 	public long getId() {
 		return id;
 	}
@@ -11,8 +14,6 @@ public class Vehicle {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	static public long nextVehicleId = 0;
 	
 	public int getCurrentSpeed() {
 		return currentSpeed;
@@ -38,8 +39,6 @@ public class Vehicle {
 		this.ownerName = ownerName;
 	}
 
-	private String ownerName;
-	
 	/**
 	 * 初期化ブロック(P47)
 	 */
@@ -62,6 +61,10 @@ public class Vehicle {
 	 */
 	public Vehicle(String name) {
 		this.setOwnerName(name);
+	}
+
+	public Vehicle(int speed, int direction, String name) {
+		this.setValue(speed, direction, name);
 	}
 	
 	public void setValue(int speed, int direction, String name) {
