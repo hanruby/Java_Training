@@ -1,18 +1,26 @@
-
+/**
+ * JPL chapter 2
+ * 彗星、小惑星、惑星、星などの宇宙の天体に関するデータを保持するクラス
+ * @author ato
+ *
+ */
 public class Body {
-	// フィールド (field) << staticではない
+	// クラス修飾子：annotation public {abstract,final} strict
+	
+	// フィールド (field) << staticではない P.37
 	public long idNum;
-	public String name;
-	public Body orbits;
+	public String name = "<unnamed>"; // 初期化子 // P.43
+	public Body orbits = null;
 
-	// 初期化子 (initializer)
+	// フィールドの初期化
+	// 初期化子 (initializer) P.38
 	double zero = 0.0; // 定数
 	double sum = 4.5 + 3.7; // 定数式
 	double zeroCopy = zero; // フィールド
 	double rootTwo = Math.sqrt(2); // メソッド呼び出し
 	double someVal = sum + 2*Math.sqrt(rootTwo); // 組み合わせ
 
-	// staticフィールド (static field) OR クラス変数 (class variable)
+	// staticフィールド (static field) OR クラス変数 (class variable) P.39
 	public static long nextID = 987;
 	
 	// finalフィールド (final field)
@@ -27,24 +35,53 @@ public class Body {
 
 	// コンストラクタ
 	public Body() {
+		this.idNum = nextID++;
 		this.finalId = 111;
 	}
+	
+	/**
+	 * P.44
+	 * @param bodyName
+	 * @param orbitsAround
+	 */
+	public Body(String bodyName, Body orbitsAround) {
+		this();
+		//this.idNum = other.idNum;
+		this.name = bodyName;
+		this.orbits = orbitsAround;
+	}
 
-	public Body(Body other) {
+	/**
+	 * P.45
+	 * @param bodyName
+	 */
+	public Body(String bodyName) {
+		this(bodyName, null);
+	}
+	
+	/**
+	 * コピーコンストラクタ P.46
+	 * @param other
+	 */
+	public Body(Body other) { 
 		this.finalId = 123;
 		//this.idNum = other.idNum;
 		this.name = other.name;
 		this.orbits = other.orbits;
 	}
 
-	// 初期化ブロック (initialization block)
+	/**
+	 * 初期化ブロック (initialization block) P.47
+	 */
 	{
 		this.idNum++;
 	}
 	
 	static int[] knownPrimes = new int[4];
 
-	// static初期化ブロック (static initialization block)
+	/**
+	 * static初期化ブロック (static initialization block) P.48
+	 */
 	static {
 		knownPrimes[0] = 2;
 		for(int i=1; i<knownPrimes.length; i++) {
@@ -53,6 +90,17 @@ public class Body {
 	}
 	
 	public static void main(String[] args) {
+		// オブジェクトの生成 P.42
+		Body sun = new Body();
+		sun.idNum = Body.nextID++;
+		sun.name = "Sol";
+		sun.orbits = null;
+		
+		Body earth = new Body();
+		earth.idNum = Body.nextID++;
+		earth.name = "Earth";
+		earth.orbits = sun;
+		
 		// 外部からのstaticフィールドへのアクセス
 		System.out.println(Body.nextID);
 		
