@@ -46,6 +46,14 @@ public class LinkedList {
 		}
 	}
 	
+	public long len() {
+		long length = 1;
+		if (this.next != null) {
+			length += this.next.len(); 
+		}
+		return length;
+	}
+	
 	public static void main(String[] args) {
 		LinkedList l;
 		

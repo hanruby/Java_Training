@@ -39,4 +39,18 @@ public class LinkedListTest {
 		
 		System.out.println(l);
 	}
+	
+	@Test
+	public void testLen() throws Exception {
+		LinkedList l = new LinkedList(new Vehicle(12, 90, "1号"));
+		
+		Vehicle v2 = new Vehicle(22, 180, "2号");
+		Vehicle v3 = new Vehicle(28, 210, "3号");
+		Vehicle v4 = new Vehicle(28, 210, "4号");
+		
+		l.setObjects(v2,v3,v4);
+		
+		assertEquals(l.len(), 4);
+
+	}
 }
