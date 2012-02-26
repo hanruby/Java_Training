@@ -7,8 +7,8 @@ class BodyPrint {
 		
 		Body sun = new Body("Sol", null);
 		Body earth = new Body("Earth", sun);
-		System.out.println("Body " + earth.name + 
-						   " orbits " + earth.orbits.name +
+		System.out.println("Body " + earth.getName() + 
+						   " orbits " + earth.getOrbits().getName() +
 						   " and has ID " + earth.getID());
 	}
 

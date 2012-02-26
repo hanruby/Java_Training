@@ -16,7 +16,8 @@ class PassRef {
 
     public static void commonName(Body bodyRef) {
 //    public static void commonName(final Body bodyRef) { // final宣言すると、nullにするところでコンパイルエラーになる P.56
-        bodyRef.name = "Dog Star";
+        //bodyRef.name = "Dog Star";
+        bodyRef.setName("Dog Star");
         bodyRef = null;
     }
 }

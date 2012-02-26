@@ -9,8 +9,8 @@ public class Body {
 	
 	// フィールド (field) << staticではない P.37
 	private long idNum;
-	public String name = "<unnamed>"; // 初期化子 // P.43
-	public Body orbits = null;
+	private String name = "<unnamed>"; // 初期化子 // P.43
+	private Body orbits = null;
 	public Body[] bodies; 
 
 	// フィールドの初期化
@@ -116,6 +116,22 @@ public class Body {
 	 */
 	public long getID() {
 		return idNum;
+	}
+	
+	public String getName() { 
+		return name;
+	}
+	
+	public void setName(String newName) {
+		name = newName;
+	}
+	
+	public Body getOrbits() {
+		return orbits;
+	}
+	
+	public void setOrbits(Body orbitsAround) {
+		orbits = orbitsAround;
 	}
 
 	public static void main(String[] args) {
