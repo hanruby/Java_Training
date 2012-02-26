@@ -8,7 +8,7 @@ public class Body {
 	// クラス修飾子：annotation public {abstract,final} strict
 	
 	// フィールド (field) << staticではない P.37
-	public long idNum;
+	private long idNum;
 	public String name = "<unnamed>"; // 初期化子 // P.43
 	public Body orbits = null;
 	public Body[] bodies; 
@@ -108,6 +108,14 @@ public class Body {
 	 */
 	public void setOrbiters(Body... bodies) {
 		this.bodies = bodies;
+	}
+	
+	/**
+	 * idNumへのアクセッサーメソッド P.57
+	 * @return
+	 */
+	public long getID() {
+		return idNum;
 	}
 
 	public static void main(String[] args) {

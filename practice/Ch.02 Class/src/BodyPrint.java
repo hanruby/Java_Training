@@ -9,7 +9,7 @@ class BodyPrint {
 		Body earth = new Body("Earth", sun);
 		System.out.println("Body " + earth.name + 
 						   " orbits " + earth.orbits.name +
-						   " and has ID " + earth.idNum);
+						   " and has ID " + earth.getID());
 	}
 
 }
