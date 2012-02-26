@@ -7,34 +7,40 @@ public class Vehicle {
 	
 	static private long nextVehicleId = 0; // シーケンスで与えるIDであるため、privateにすべき
 
+	// IDを取得するメソッドは必要
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-	
+	// IDをセットするメソッドは不要
+	//public void setId(long id)
+		
+	// speedを取得するメソッドは必要
 	public int getCurrentSpeed() {
 		return currentSpeed;
 	}
 
+	// speedを設定するメソッドは必要
 	public void setCurrentSpeed(int currentSpeed) {
 		this.currentSpeed = currentSpeed;
 	}
 
+	// directionを取得するメソッドは必要
 	public int getCurrentDirection() {
 		return currentDirection;
 	}
 
+	// directionを設定するメソッドは必要
 	public void setCurrentDirection(int currentDirection) {
 		this.currentDirection = currentDirection;
 	}
 
+	// nameを取得するメソッドは必要
 	public String getOwnerName() {
 		return ownerName;
 	}
 
+	// nameを設定するメソッドは必要かな
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
