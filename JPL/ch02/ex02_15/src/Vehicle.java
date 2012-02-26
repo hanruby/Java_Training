@@ -1,46 +1,43 @@
 
 public class Vehicle {
-	private int currentSpeed; // 値が変更された場合の処理を入れることが出来なくなるため、privateにすべき
-	private int currentDirection; // 上と同じ理由により、privateにすべき
-	private String ownerName; // 上と同じ
-	private long id; // 上と同じ
+	private int currentSpeed;
+	private int currentDirection;
+	private String ownerName;
+	private long id;
 	
-	static private long nextVehicleId = 0; // シーケンスで与えるIDであるため、privateにすべき
+	static private long nextVehicleId = 0;
 
-	// IDを取得するメソッドは必要
+	//! IDを取得するメソッド
 	public long getId() {
 		return id;
 	}
 
-	// IDをセットするメソッドは不要
-	//public void setId(long id)
-		
-	// speedを取得するメソッドは必要
+	//! speedを取得するメソッド
 	public int getCurrentSpeed() {
 		return currentSpeed;
 	}
 
-	// speedを設定するメソッドは必要
+	//! speedを設定するメソッド
 	public void setCurrentSpeed(int currentSpeed) {
 		this.currentSpeed = currentSpeed;
 	}
 
-	// directionを取得するメソッドは必要
+	//! directionを取得するメソッド
 	public int getCurrentDirection() {
 		return currentDirection;
 	}
 
-	// directionを設定するメソッドは必要
+	//! directionを設定するメソッド
 	public void setCurrentDirection(int currentDirection) {
 		this.currentDirection = currentDirection;
 	}
 
-	// nameを取得するメソッドは必要
+	//! nameを取得するメソッド
 	public String getOwnerName() {
 		return ownerName;
 	}
 
-	// nameを設定するメソッドは必要かな
+	//! nameを設定するメソッド
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
