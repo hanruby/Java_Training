@@ -1,11 +1,11 @@
 
 public class Vehicle {
-	private int currentSpeed;
-	private int currentDirection;
-	private String ownerName;
-	private long id;
+	private int currentSpeed; // 値が変更された場合の処理を入れることが出来なくなるため、privateにすべき
+	private int currentDirection; // 上と同じ理由により、privateにすべき
+	private String ownerName; // 上と同じ
+	private long id; // 上と同じ
 	
-	static public long nextVehicleId = 0;
+	static private long nextVehicleId = 0; // シーケンスで与えるIDであるため、privateにすべき
 
 	public long getId() {
 		return id;
