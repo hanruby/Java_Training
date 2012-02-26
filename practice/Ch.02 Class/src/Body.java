@@ -133,6 +133,15 @@ public class Body {
 	public void setOrbits(Body orbitsAround) {
 		orbits = orbitsAround;
 	}
+	
+	/**
+	 * 天体が補足されて起動を周回する
+	 * @param victim
+	 */
+	public void capture(Body victim) {
+		// クラスのメソッドのコードは、クラスのすべてのオブジェクトのすべてのフィールドにアクセスできる P.58
+		victim.orbits = this; 
+	}
 
 	public static void main(String[] args) {
 		// オブジェクトの生成 P.42
