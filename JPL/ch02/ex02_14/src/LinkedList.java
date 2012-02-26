@@ -1,12 +1,28 @@
 
 public class LinkedList {
-	public Object obj;
-	public LinkedList next;
+	private Object obj;
+	private LinkedList next;
 	
 	public LinkedList(Object obj) {
 		this.obj = obj;
 	}
 	
+	public Object getObj() {
+		return obj;
+	}
+
+	public void setObj(Object obj) {
+		this.obj = obj;
+	}
+
+	public LinkedList getNext() {
+		return next;
+	}
+
+	public void setNext(LinkedList next) {
+		this.next = next;
+	}
+
 	@Override
 	public String toString() {
 		String desc = this.obj.toString();

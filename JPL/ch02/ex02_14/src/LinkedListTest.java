@@ -10,18 +10,18 @@ public class LinkedListTest {
 	public void testLinkedList() {
 		LinkedList l = new LinkedList("list1");
 		
-		assertEquals("list1", l.obj);
-		assertEquals(null, l.next);
+		assertEquals("list1", l.getObj());
+		assertEquals(null, l.getNext());
 	}
 	
 	@Test
 	public void testLinkedList2() throws Exception {
 		LinkedList l = new LinkedList("list1");
-		l.next = new LinkedList("list2");
+		l.setNext(new LinkedList("list2"));
 		
-		assertEquals("list1", l.obj);
-		assertEquals("list2", l.next.obj);
-		assertEquals(null, l.next.next);
+		assertEquals("list1", l.getObj());
+		assertEquals("list2", l.getNext().getObj());
+		assertEquals(null, l.getNext().getNext());
 	}
 	
 	@Test
@@ -33,9 +33,9 @@ public class LinkedListTest {
 		
 		l.setObjects(v2,v3);
 		
-		assertEquals(((Vehicle)(l.obj)).getOwnerName(), "1号");
-		assertEquals(((Vehicle)(l.next.obj)).getOwnerName(), "2号");
-		assertEquals(((Vehicle)(l.next.next.obj)).getOwnerName(), "3号");
+		assertEquals(((Vehicle)(l.getObj())).getOwnerName(), "1号");
+		assertEquals(((Vehicle)(l.getNext().getObj())).getOwnerName(), "2号");
+		assertEquals(((Vehicle)(l.getNext().getNext().getObj())).getOwnerName(), "3号");
 		
 		System.out.println(l);
 	}
