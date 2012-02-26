@@ -99,6 +99,22 @@ public class Vehicle {
 					  "  id:" + this.id;
 	}
 	
+	/**
+	 * ex2.15 乗り物の現在のスピードを引数で渡された値に変更する
+	 */
+	public void changeSpeed(int speed) {
+		this.currentSpeed = speed;
+		System.out.println("changed speed : " + speed);
+	}
+	
+	/**
+	 * ex2.15 スピードをゼロにする
+	 */
+	public void stop() {
+		this.currentSpeed = 0;
+		System.out.println("stopped");
+	}
+	
 	public static void main(String[] args) {
 		Vehicle v1 = new Vehicle("new car"); 
 		Vehicle v2 = new Vehicle(); 

@@ -43,4 +43,22 @@ public class VehicleTest {
 		long max = Vehicle.getMaxId();
 		assertEquals(3, max);
 	}
+	
+	@Test
+	public void testChangeSpeed() throws Exception {
+		Vehicle v = new Vehicle("hogehoge");
+		v.setCurrentSpeed(150);
+		v.changeSpeed(120);
+		
+		assertEquals(120, v.getCurrentSpeed());
+	}
+	
+	@Test
+	public void tesetStop() throws Exception {
+		Vehicle v = new Vehicle("hogehoge");
+		v.setCurrentSpeed(150);
+		v.stop();
+		
+		assertEquals(0, v.getCurrentSpeed());
+	}
 }
