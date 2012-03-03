@@ -43,14 +43,13 @@ public class Body {
 	
 	/**
 	 * P.44
-	 * @param bodyName
-	 * @param orbitsAround
+	 * @param name
+	 * @param orbits
 	 */
-	public Body(String bodyName, Body orbitsAround) {
+	public Body(String name, Body orbits) {
 		this();
-		//this.idNum = other.idNum;
-		this.name = bodyName;
-		this.orbits = orbitsAround;
+		this.name = name;
+		this.orbits = orbits;
 	}
 
 	/**
