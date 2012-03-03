@@ -141,6 +141,24 @@ public class Body {
 		// クラスのメソッドのコードは、クラスのすべてのオブジェクトのすべてのフィールドにアクセスできる P.58
 		victim.orbits = this; 
 	}
+	
+	/**
+	 * 現在の天体が指定された天体を周回していればtrueを返す P.60
+	 * @param other
+	 * @return
+	 */
+	public boolean orbitsAround(Body other) {
+		return (orbits == other);
+	}
+	
+	/**
+	 * 指定された識別子の天体を周回していればtrueを返す P.60
+	 * @param id
+	 * @return
+	 */
+	public boolean orbitsAround(long id) {
+		return (orbits != null && orbits.idNum == id);
+	}
 
 	public static void main(String[] args) {
 		// オブジェクトの生成 P.42
