@@ -1,3 +1,5 @@
+import java.security.acl.Owner;
+
 
 public class Vehicle {
 	private int currentSpeed;
@@ -147,7 +149,17 @@ public class Vehicle {
 		return true;
 	}
 	
+	/**
+	 * ex.2.18 コマンドラインで指定された名前を所有者として持つ車を作成する
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		if(args.length != 1) {
+			System.out.println("usage: java Vehicle.class [owner name]");
+			return;
+		}
 
+		Vehicle v = new Vehicle(args[0]);
+		System.out.println(v.toString());
  	}
 }
