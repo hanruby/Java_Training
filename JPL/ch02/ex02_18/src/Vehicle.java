@@ -148,11 +148,6 @@ public class Vehicle {
 	}
 	
 	public static void main(String[] args) {
-		Vehicle v1 = new Vehicle("new car"); 
-		Vehicle v2 = new Vehicle(); 
-		v1.setValue(100, 23);
-		v2.setValue(213, 34);
-		System.out.println(v1);
-		System.out.println(v2);
+
  	}
 }
