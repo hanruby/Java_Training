@@ -6,6 +6,10 @@ public class Vehicle {
 	private long id;
 	
 	static private long nextVehicleId = 0;
+	
+	private enum TURN {LEFT, RIGHT};
+	public static TURN TURN_LEFT = TURN.LEFT;
+	public static TURN TURN_RIGHT = TURN.RIGHT;
 
 	//! IDを取得するメソッド
 	public long getId() {
@@ -113,6 +117,34 @@ public class Vehicle {
 	public void stop() {
 		this.currentSpeed = 0;
 		System.out.println("stopped");
+	}
+	
+	/**
+	 * ex.2.17 回転する角度を受け付ける
+	 * @param rot
+	 */
+	public boolean turn(int rot) {
+		this.currentDirection = (this.currentDirection + rot) % 360;
+		return true;
+	}
+	
+	/**
+	 * ex.2.17 定数
+	 * @param turnDirection
+	 * @return
+	 */
+	public boolean turn(TURN turnDirection) {
+		switch (turnDirection) {
+		case LEFT:
+			this.turn(-90);
+			break;
+		case RIGHT:
+			this.turn(90);
+			break;
+		default:
+			return false;
+		}
+		return true;
 	}
 	
 	public static void main(String[] args) {

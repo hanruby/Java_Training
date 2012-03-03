@@ -61,4 +61,22 @@ public class VehicleTest {
 		
 		assertEquals(0, v.getCurrentSpeed());
 	}
+	
+	@Test
+	public void testTurn() throws Exception {
+		Vehicle v = new Vehicle(150,300,"turncar");
+		boolean result;
+		
+		result = v.turn(Vehicle.TURN_LEFT);
+		assertEquals(true, result);
+		assertEquals(210, v.getCurrentDirection());
+
+		result = v.turn(Vehicle.TURN_RIGHT);
+		assertEquals(true, result);
+		assertEquals(300, v.getCurrentDirection());
+
+		result = v.turn(-30);
+		assertEquals(true, result);
+		assertEquals(270, v.getCurrentDirection());
+	}
 }
