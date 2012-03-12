@@ -17,7 +17,7 @@ public class BadDataSetExceptionTest {
 	@Test
 	public void testGetDataSet() {
 		try {
-			dataSet = utl.getDataSet("testDataa");
+			dataSet = utl.getDataSet("NotFound");
 		} catch (BadDataSetException e) {
 			e.printStackTrace();
 			System.out.println(e.file);
