@@ -23,6 +23,6 @@ public class BadDataSetExceptionTest {
 			System.out.println(e.file);
 			System.out.println(e.e); // DEBUGすると表示順序が変わる？
 		}
-		assertEquals(0, 0);
+		assertEquals(null, dataSet);
 	}
 }
