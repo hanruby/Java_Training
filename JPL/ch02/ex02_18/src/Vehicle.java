@@ -1,5 +1,3 @@
-import java.security.acl.Owner;
-
 
 public class Vehicle {
 	private int currentSpeed;
