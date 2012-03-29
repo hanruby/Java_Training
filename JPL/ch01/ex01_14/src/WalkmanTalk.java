@@ -5,14 +5,14 @@
  */
 public class WalkmanTalk extends WalkmanPair{
 	
-	protected String voice1;
-	protected String voice2;
+	protected Object voice1;
+	protected Object voice2;
 	
-	public void in1(String voice) {
+	public void in1(Object voice) {
 		voice1 = voice;
 	}
 	
-	public void in2(String voice) {
+	public void in2(Object voice) {
 		voice2 = voice;
 	}
 
