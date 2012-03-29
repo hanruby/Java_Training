@@ -6,7 +6,7 @@
 public class WalkmanBase {
 	private int volume = 50;
 	private PlayMode state = PlayMode.STOP;
-	private String music;
+	private Object music;
 	
 	public enum PlayMode { PLAY, STOP, }
 	
@@ -39,7 +39,7 @@ public class WalkmanBase {
 		this.music = music;
 	}
 	
-	public String getMusic() {
+	public Object getMusic() {
 		return this.music;
 	}
 	
