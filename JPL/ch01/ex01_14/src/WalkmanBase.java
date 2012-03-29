@@ -4,9 +4,9 @@
  *
  */
 public class WalkmanBase {
-	protected int volume = 50;
-	protected PlayMode state = PlayMode.STOP;
-	protected String music;
+	private int volume = 50;
+	private PlayMode state = PlayMode.STOP;
+	private String music;
 	
 	public enum PlayMode { PLAY, STOP, }
 	
@@ -37,6 +37,10 @@ public class WalkmanBase {
 	
 	public void setMusic(String music) {
 		this.music = music;
+	}
+	
+	public String getMusic() {
+		return this.music;
 	}
 	
 	public void output() {
