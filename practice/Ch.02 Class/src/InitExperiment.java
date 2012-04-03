@@ -1,6 +1,6 @@
 import static java.lang.System.out;
 
-public class InitTest {
+public class InitExperiment {
 	static String staticVal = "Init on the declaration statement";
 	
 	private String val = "Init on the declaration statement";
@@ -11,13 +11,13 @@ public class InitTest {
 		out.println("initialization block : " + val);
 	}
 	
-	public InitTest() {
+	public InitExperiment() {
 		out.println("constructor : " + val);
 		val = "Init on the constructor";
 		out.println("constructor : " + val);
 	}
 
-	public InitTest(String str) {
+	public InitExperiment(String str) {
 		this();
 		out.println("constructor 2 : " + val);
 		val = str;
@@ -25,7 +25,7 @@ public class InitTest {
 	}
 	
 	public static void main(String[] args) {
-		InitTest test = new InitTest("Init on new");
+		InitExperiment test = new InitExperiment("Init on new");
 		System.out.println(test);
 	}
 }
