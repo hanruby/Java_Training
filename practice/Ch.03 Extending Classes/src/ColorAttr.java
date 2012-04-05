@@ -7,7 +7,7 @@ public class ColorAttr extends Attr{
 	private ScreenColor myColor; // 変換された色
 	
 	public ColorAttr(String name, Object value) {
-		super(name, value);
+		super(name, value); // P.69 スーパークラス・コンストラクタ呼び出し(superclass constructor invocation)
 		decodeColor();
 	}
 	
