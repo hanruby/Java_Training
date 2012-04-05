@@ -12,7 +12,7 @@ public class ColorAttr extends Attr{
 	}
 	
 	public ColorAttr(String name) {
-		this(name, "transparent");
+		this(name, "transparent"); // P.69 自分のコンストラクタのひとつを呼び出す
 	}
 	
 	public ColorAttr(String name, ScreenColor value) {
