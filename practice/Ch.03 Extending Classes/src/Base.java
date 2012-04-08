@@ -18,4 +18,9 @@ class More extends Base {
         System.out.println("sref.name()  = " + sref.name());
         System.out.println("super.name() = " + super.name());
     }
+    
+    public static void main(String[] args) {
+		More m = new More();
+		m.printName();
+	}
 }
