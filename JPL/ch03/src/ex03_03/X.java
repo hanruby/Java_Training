@@ -1,11 +1,10 @@
 package ex03_03;
 
 public class X {
-	protected int xMask = getMask(); // 4. Xのフィールドの初期化 
+	protected int xMask = getMask();
 	protected int fullMask;
 	
-	public X() { // 5. Xのコンストラクタが実行される
-		super(); // 3. Objectのコンストラクタが呼び出される
+	public X() {
 		showMask("Result of X field initialization"); 
 		fullMask = xMask;
 		showMask("X constructor executed");
