@@ -22,5 +22,11 @@ class More extends Base {
     public static void main(String[] args) {
 		More m = new More();
 		m.printName();
+		
+		Base b = new More(); // 広くする変換(widening conversion)
+		b.name();
+		
+		More mb = (More)new Base(); // 狭くする変換(narrowing conversion) ※ castが必要
+		mb.name();
 	}
 }
