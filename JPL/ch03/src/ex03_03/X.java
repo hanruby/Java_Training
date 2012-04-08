@@ -1,7 +1,7 @@
 package ex03_03;
 
 public class X {
-	protected int xMask = getMask();
+	protected int xMask = getxMask();
 	protected int fullMask;
 	
 	public X() {
@@ -12,7 +12,7 @@ public class X {
 		System.out.printf("Mask is 0x%04X %n", this.mask(0xFFFF)); // 0xFF00 ではなく、0となってしまう
 	}
 	
-	private int getMask() {
+	protected int getxMask() {
 		showMask("Result of fields set to default values");
 		return 0x00FF;
 	}
