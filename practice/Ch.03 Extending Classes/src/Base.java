@@ -18,16 +18,14 @@ class More extends Base {
         System.out.println("this.name()  = " + this.name());
         System.out.println("sref.name()  = " + sref.name());
         System.out.println("super.name() = " + super.name());
+        System.out.println("mref.name()  = " + mref.name());
     }
     
     public static void main(String[] args) {
 		More m = new More();
 		m.printName();
 		
-		Base b = new More(); // 広くする変換(widening conversion)
-		b.name();
-		
-		More mb = (More)new Base(); // 狭くする変換(narrowing conversion) ※ castが必要
-		mb.name();
+		//Base b = new More(); // 広くする変換(widening conversion)
+		//More mb = (More)new Base(); // 狭くする変換(narrowing conversion) ※ castが必要
 	}
 }
