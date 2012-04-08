@@ -13,7 +13,10 @@ class More extends Base {
 
     protected void printName() {
         Base sref = (Base) this;
-        More mref = (More) sref;
+        More mref = null;
+
+        if (sref instanceof More)
+        	mref = (More) sref;
 
         System.out.println("this.name()  = " + this.name());
         System.out.println("sref.name()  = " + sref.name());
