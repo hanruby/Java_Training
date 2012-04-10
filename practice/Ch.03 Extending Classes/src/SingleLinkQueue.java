@@ -36,12 +36,14 @@ class PriorityQueue extends SingleLinkQueue {
     }
 
 	public void merge(PriorityQueue q) {
-		Cell first = q.head;
+		@SuppressWarnings("unused")
+        Cell first = q.head;
 		// ...
 	}
 
 	public void merge(SingleLinkQueue q) {
-		Cell first = q.head;
+		@SuppressWarnings("unused")
+        Cell first = q.head;
 		// ...
 	}
 }
