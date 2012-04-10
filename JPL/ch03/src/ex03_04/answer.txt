@@ -1,0 +1,7 @@
+I think that the following methods should be made final:
+ - Vehicle::getCurrentSpeed
+ - Vehicle::getCurrentDirection
+ - Vehicle::getOwnerName
+ - Vehicle::getMaxId
+ - PassengerVehicle::getSeatNum
+ - PassengerVehicle::getOccupiedNum
