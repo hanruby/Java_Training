@@ -3,7 +3,17 @@ public class SingleLinkQueue {
     protected Cell head;
     protected Cell tail;
 
-    public void add(Object item) {/* ... */}
+    public void add(Object item) {
+        Cell cell = new Cell(item);
+        if(tail == null) {
+            head = tail = cell;
+        }
+        else {
+            tail.setNext(cell);
+            tail = cell;
+        }
+    }
+    
     public Object remove() {/* ... */ return null;}
 }
 
