@@ -7,6 +7,22 @@ public class SingleLinkQueue {
     public Object remove() {/* ... */ return null;}
 }
 
+class PriorityQueue extends SingleLinkQueue {
+	// ...
+    public void add(Object item) {
+    }
+
+	public void merge(PriorityQueue q) {
+		Cell first = q.head;
+		// ...
+	}
+
+	public void merge(SingleLinkQueue q) {
+		Cell first = q.head;
+		// ...
+	}
+}
+
 class Cell {
     private Cell next;
     private Object element;
