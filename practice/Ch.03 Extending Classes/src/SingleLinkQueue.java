@@ -14,7 +14,20 @@ public class SingleLinkQueue {
         }
     }
     
-    public Object remove() {/* ... */ return null;}
+    public Object remove() {
+        if(head == null) {
+            return null;
+        }
+
+        Cell cell = head;
+        head = head.getNext();
+
+        if(head == null) {
+            tail = null;
+            return cell.getElement();
+        }
+        return null;
+    }
 }
 
 class PriorityQueue extends SingleLinkQueue {
