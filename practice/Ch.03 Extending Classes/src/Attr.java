@@ -16,7 +16,7 @@ public class Attr {
 		this.value = value;
 	}
 	
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 	
