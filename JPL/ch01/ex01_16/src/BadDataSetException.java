@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 class BadDataSetException extends Exception{ // Question: なんで警告がでるのか？
 	public String file;
     public IOException e;
