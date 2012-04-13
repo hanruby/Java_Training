@@ -67,5 +67,24 @@ public class AttrTest {
         Attr at = new Attr("test", str);
         assertEquals("test='string'", at.toString());
     }
+    
+    @Test
+    public void testEquals() throws Exception {
+        Attr at1 = new Attr("test");
+        Attr at2 = new Attr("test");
+        Attr at3 = new Attr("hoge");
+        
+        assertTrue(at1.equals(at2));
+        assertFalse(at1.equals(at3));
+    }
 
+    @Test
+    public void testHashcode() throws Exception {
+        Attr at1 = new Attr("test");
+        Attr at2 = new Attr("test");
+        Attr at3 = new Attr("hoge");
+
+        assertEquals(at1.hashCode(), at2.hashCode());
+        assertNotSame(at1.hashCode(), at3.hashCode());
+    }
 }

@@ -74,5 +74,25 @@ public class ColorAttrTest {
         
         assertEquals("red", at.getColor().toString());
     }
+    
+    @Test
+    public void testEquals() throws Exception {
+        ColorAttr at1 = new ColorAttr("name", red);
+        ColorAttr at2 = new ColorAttr("name", red);
+        ColorAttr at3 = new ColorAttr("name", green);
+        
+        assertTrue(at1.equals(at2));
+        assertFalse(at1.equals(at3));
+    }
+    
+    @Test
+    public void testHashcode() throws Exception {
+        ColorAttr at1 = new ColorAttr("name", red);
+        ColorAttr at2 = new ColorAttr("name", red);
+        ColorAttr at3 = new ColorAttr("name", green);
+
+        assertEquals(at1.hashCode(), at2.hashCode());
+        assertNotSame(at1.hashCode(), at3.hashCode());
+    }
 
 }
