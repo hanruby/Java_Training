@@ -2,7 +2,7 @@ package ex03_10;
 
 import ex03_08.Vehicle;
 
-public class LinkedList {
+public class LinkedList implements Cloneable {
 	private Object obj;
 	private LinkedList next;
 	
@@ -65,6 +65,20 @@ public class LinkedList {
 		l.next.next = new LinkedList(new Vehicle(28, 210, "3号"));
 		
 		System.out.println(l);
+	}
+	
+	/**
+	 * ex.3.10 clone
+	 * 値の複製でなく、元のリストと同じ値を参照している新たなリストを返す。
+	 * ひとつのリストに対する変更は、他方のリストには影響しないが、リストが参照しているオブジェクトに対する変更は、他方のリストから見える。
+	 */
+	@Override
+	protected LinkedList clone() {
+	    LinkedList newList = new LinkedList(this.obj);
+	    if (this.next != null) {
+	        newList.setNext(this.next.clone());	        
+	    }
+	    return newList;
 	}
 }
 
