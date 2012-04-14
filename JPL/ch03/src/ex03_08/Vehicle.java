@@ -169,7 +169,7 @@ public class Vehicle implements Cloneable {
 	 * CloneNotSupportedException はスローしない
 	 */
 	@Override
-	protected Vehicle clone(){
+	public Vehicle clone(){
 	    Vehicle newV = new Vehicle(this.currentSpeed,this.currentDirection,this.getOwnerName());
 	    return newV;
 	}

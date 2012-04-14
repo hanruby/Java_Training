@@ -24,6 +24,19 @@ public class PassengerVehicle extends Vehicle{
 								+ " occupied:" + this.occupiedNum;
 	}
 	
+	/**
+	 * ex.3.8 clone
+	 * すべての要素をコピーする
+	 * ただし、idは新規の値を設定する
+	 * CloneNotSupportedException はスローしない
+	 */
+	@Override
+	public PassengerVehicle clone() {
+	    PassengerVehicle newV = new PassengerVehicle(super.getOwnerName(), this.seatNum, this.occupiedNum);
+	    newV.setValue(this.getCurrentSpeed(),this.getCurrentDirection());
+	    return newV;
+	}
+	
 	public static void main(String[] args) {
 		PassengerVehicle familyCar = new PassengerVehicle("Hadson", 4, 3);
 		familyCar.setCurrentSpeed(100);
