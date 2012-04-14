@@ -1,6 +1,6 @@
 package ex03_08;
 
-public class Vehicle {
+public class Vehicle implements Cloneable {
 	private int currentSpeed;
 	private int currentDirection;
 	private String ownerName;
@@ -161,4 +161,16 @@ public class Vehicle {
 		Vehicle v = new Vehicle(args[0]);
 		System.out.println(v.toString());
  	}
+
+	/**
+	 * ex.3.8 clone
+	 * すべての要素をコピーする
+	 * ただし、idは新規の値を設定する
+	 * CloneNotSupportedException はスローしない
+	 */
+	@Override
+	protected Vehicle clone(){
+	    Vehicle newV = new Vehicle(this.currentSpeed,this.currentDirection,this.getOwnerName());
+	    return newV;
+	}
 }

@@ -80,4 +80,17 @@ public class VehicleTest {
 		assertEquals(true, result);
 		assertEquals(270, v.getCurrentDirection());
 	}
+	
+	@Test
+    public void testClone() throws Exception {
+		Vehicle fathersCar1 = new Vehicle(150, 50, "Father");
+		Vehicle fathersCar2 = fathersCar1.clone();
+		Vehicle fathersCar3 = fathersCar1.clone();
+		
+		assertEquals(fathersCar1.getOwnerName(), fathersCar2.getOwnerName());
+		assertEquals(fathersCar1.getId() + 1, fathersCar2.getId());
+		assertEquals(fathersCar1.getId() + 2, fathersCar3.getId());
+		assertEquals(fathersCar1.getCurrentSpeed(), fathersCar2.getCurrentSpeed());
+		assertEquals(fathersCar1.getCurrentDirection(), fathersCar2.getCurrentDirection());
+    }
 }
