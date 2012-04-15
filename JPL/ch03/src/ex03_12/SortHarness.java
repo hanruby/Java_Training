@@ -1,23 +1,23 @@
-package ex03_11;
+package ex03_12;
+
+import java.util.Arrays;
 
 /**
- * P.95 
- * doubleの値の配列をソートするクラス。
- * このクラスは、データの交換、比較、および、値の検査の回数を SortMetrics クラスの中に記憶する。
+ * ex3.12 どのようなオブジェクト型でもソートできる一般的なクラス。
+ * オブジェクトの順序の比較は toString の結果を利用する。
  * @author ato
- *
  */
-abstract class SortDouble {
-    private double[] values; // ソートされる配列
+abstract class SortHarness {
+    private Object[] values; // ソートされる配列
     private final SortMetrics curMetrics = new SortMetrics(); // 測定された操作を記録するためのメトリクスオブジェクトへの参照を保持する
 
     /** 全ソートするために呼び出される */
-    public final SortMetrics sort(double[] data) {
+    public final SortMetrics sort(Object[] data) {
         values = data;
         curMetrics.init();
         doSort();
         return getMetrics();
-    }
+    }   
 
     /**
      * メトリクスデータのコピーを返す。
@@ -33,7 +33,7 @@ abstract class SortDouble {
     }
 
     /** 拡張したクラスが要素を調べるため */
-    protected final double probe(int i) {
+    protected final Object probe(int i) {
         curMetrics.probeCnt++;
         return values[i];
     }
@@ -41,18 +41,24 @@ abstract class SortDouble {
     /** 拡張したクラスが要素を比較するため */
     protected final int compare(int i, int j) {
         curMetrics.compareCnt++;
-        double d1 = values[i];
-        double d2 = values[j];
-        if (d1 == d2)
-            return 0;
-        else
-            return (d1 < d2 ? -1 : 1);
+        Object o1 = values[i];
+        Object o2 = values[j];
+        return compMethod(o1, o2);
     }
 
+    /**
+     * ex3.12 オブジェクトの比較をおこなう。
+     * 拡張したクラスが実装するのが望ましい。
+     * @param o1 オブジェクト1
+     * @param o2 オブジェクト2
+     * @return 等しい場合:0, 右辺が小さい場合:負, 右辺が大きい場合:正 を返すこと。
+     */
+    protected abstract int compMethod(Object o1, Object o2);
+    
     /** 拡張したクラスが要素を交換するため */
     protected final void swap(int i, int j) {
         curMetrics.swapCnt++;
-        double tmp = values[i];
+        Object tmp = values[i];
         values[i] = values[j];
         values[j] = tmp;
     }
@@ -60,4 +66,3 @@ abstract class SortDouble {
     /** 拡張したクラスが実装する -- ソートするのに使用される */
     protected abstract void doSort();
 }
-
