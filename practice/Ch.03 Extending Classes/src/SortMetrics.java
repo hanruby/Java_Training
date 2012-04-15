@@ -14,7 +14,7 @@ final class SortMetrics implements Cloneable {
                swapCnt + " swaps";
     }
 
-    /** This class supports clone */
+    /** clone */
     public SortMetrics clone() {
         try {
             // デフォルトの仕組みで十分
