@@ -1,6 +1,7 @@
 *.class
 .DS_Store
 bin/
+debug.txt
 
 # Package Files #
 *.jar
