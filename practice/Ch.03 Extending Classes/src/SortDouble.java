@@ -1,7 +1,14 @@
 
+/**
+ * P.95 
+ * doubleの値の配列をソートするクラス。
+ * このクラスは、データの交換、比較、および、値の検査の回数を SortMetrics クラスの中に記憶する。
+ * @author ato
+ *
+ */
 abstract class SortDouble {
-    private double[] values;
-    private final SortMetrics curMetrics = new SortMetrics();
+    private double[] values; // ソートされる配列
+    private final SortMetrics curMetrics = new SortMetrics(); // 測定された操作を記録するためのメトリクスオブジェクトへの参照を保持する
 
     /** 全ソートするために呼び出される */
     public final SortMetrics sort(double[] data) {
@@ -11,6 +18,10 @@ abstract class SortDouble {
         return getMetrics();
     }
 
+    /**
+     * メトリクスデータのコピーを返す。
+     * @return メトリクスデータのコピー
+     */
     public final SortMetrics getMetrics() {
         return curMetrics.clone();
     }

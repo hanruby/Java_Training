@@ -1,4 +1,12 @@
 
+/**
+ * P.96 
+ * 特定のソートの実行のコストを記述する。
+ * 唯一の役割は、データを保持することであり、アクセッサーメソッドを要してデータのアクセスする必要はない。
+ * 
+ * @author ato
+ *
+ */
 final class SortMetrics implements Cloneable {
     public long probeCnt,       // 単純なデータの値調査
                 compareCnt,     // ２つの要素の比較
