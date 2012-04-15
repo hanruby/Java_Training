@@ -1,7 +1,5 @@
 package ex03_12;
 
-import java.util.Arrays;
-
 /**
  * ex3.12 どのようなオブジェクト型でもソートできる一般的なクラス。
  * オブジェクトの順序の比較は toString の結果を利用する。
