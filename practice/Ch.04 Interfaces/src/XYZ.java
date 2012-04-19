@@ -32,8 +32,11 @@ class XYZ {
     }
 }
 
+
+// P.107
 interface C {
     String val = "Interface C";
 }
 
 interface D extends X, C {}
+// この場合、 D.valは曖昧になる。
