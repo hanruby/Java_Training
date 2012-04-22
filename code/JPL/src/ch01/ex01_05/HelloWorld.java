@@ -1,3 +1,5 @@
+package ch01.ex01_05;
+
 
 class HelloWorld {
 	static final String SAY = "こんにちは！世界！";

@@ -1,3 +1,5 @@
+package ch02.ex02_07;
+
 
 public class Vehicle {
 	private int currentSpeed;

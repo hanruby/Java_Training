@@ -1,3 +1,5 @@
+package ch01.ex01_08;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;

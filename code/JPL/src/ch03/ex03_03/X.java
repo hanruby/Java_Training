@@ -1,4 +1,4 @@
-package ex03_03;
+package ch03.ex03_03;
 
 public class X {
 	protected int xMask = getxMask();

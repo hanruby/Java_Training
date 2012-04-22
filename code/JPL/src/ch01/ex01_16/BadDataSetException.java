@@ -1,3 +1,5 @@
+package ch01.ex01_16;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 

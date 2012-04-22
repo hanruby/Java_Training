@@ -1,4 +1,4 @@
-package ex03_05;
+package ch03.ex03_05;
 
 public abstract class Benchmark {
     abstract void benchmark();

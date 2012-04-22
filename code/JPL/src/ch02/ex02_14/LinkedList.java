@@ -1,3 +1,6 @@
+package ch02.ex02_14;
+
+import ch02.ex02_13.Vehicle;
 
 public class LinkedList {
 	private Object obj;

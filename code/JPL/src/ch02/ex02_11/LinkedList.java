@@ -1,3 +1,6 @@
+package ch02.ex02_11;
+
+import ch02.ex02_10.*;
 
 public class LinkedList {
 	public Object obj;

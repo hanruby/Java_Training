@@ -1,3 +1,4 @@
+package ch02.ex02_13;
 
 public class Vehicle {
 	private int currentSpeed; // 値が変更された場合の処理を入れることが出来なくなるため、privateにすべき

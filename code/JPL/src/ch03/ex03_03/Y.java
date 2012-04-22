@@ -1,4 +1,4 @@
-package ex03_03;
+package ch03.ex03_03;
 
 public class Y extends X{
 	protected int yMask = getyMask(); // maskを取り出すメソッドを追加して、それを使ってmaskする 

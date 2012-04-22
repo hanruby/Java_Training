@@ -1,3 +1,6 @@
+package ch02.ex02_12;
+
+import ch02.ex02_10.Vehicle;
 
 public class LinkedList {
 	public Object obj;

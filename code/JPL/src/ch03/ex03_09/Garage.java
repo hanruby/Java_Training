@@ -1,6 +1,6 @@
-package ex03_09;
+package ch03.ex03_09;
 
-import ex03_08.Vehicle;
+import ch03.ex03_08.Vehicle;
 
 public class Garage implements Cloneable{
     Vehicle[] vehicles;

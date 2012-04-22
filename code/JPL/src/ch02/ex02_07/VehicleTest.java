@@ -1,3 +1,5 @@
+package ch02.ex02_07;
+
 import static org.junit.Assert.*;
 //import junit.framework.Assert;
 

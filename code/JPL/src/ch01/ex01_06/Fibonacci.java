@@ -1,3 +1,5 @@
+package ch01.ex01_06;
+
 
 public class Fibonacci {
    	static final String タイトル = "This is Fibonacci プログラム";

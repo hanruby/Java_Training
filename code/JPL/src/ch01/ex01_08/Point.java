@@ -1,3 +1,5 @@
+package ch01.ex01_08;
+
 
 public class Point {
 	public double x, y;

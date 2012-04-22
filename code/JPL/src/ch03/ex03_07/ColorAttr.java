@@ -1,4 +1,4 @@
-package ex03_07;
+package ch03.ex03_07;
 /**
  * P.67 色を特定あるいは記述する文字列として色属性を保存するために、Attrを拡張したクラス
  * @author ato

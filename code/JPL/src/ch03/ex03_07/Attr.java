@@ -1,4 +1,4 @@
-package ex03_07;
+package ch03.ex03_07;
 /**
  * P66. 名前と値の組を保持するクラス
  * @author ato

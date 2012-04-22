@@ -1,4 +1,4 @@
-package ex03_11;
+package ch03.ex03_11;
 
 public class HackSortDouble extends SortDouble implements Cloneable{
     

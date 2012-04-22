@@ -1,4 +1,4 @@
-package ex03_05;
+package ch03.ex03_05;
 
 class CreateObjectBenchmark extends Benchmark {
     /** Objectを作成する */

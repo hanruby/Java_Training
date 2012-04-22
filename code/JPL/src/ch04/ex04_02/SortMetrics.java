@@ -1,4 +1,4 @@
-package ex04_02;
+package ch04.ex04_02;
 
 /**
  * P.96 

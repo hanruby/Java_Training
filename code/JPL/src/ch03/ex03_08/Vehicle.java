@@ -1,4 +1,4 @@
-package ex03_08;
+package ch03.ex03_08;
 
 public class Vehicle implements Cloneable {
 	private int currentSpeed;

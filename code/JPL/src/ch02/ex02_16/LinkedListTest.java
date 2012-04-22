@@ -1,7 +1,11 @@
+package ch02.ex02_16;
+
 import static org.junit.Assert.*;
 //import junit.framework.Assert;
 
 import org.junit.Test;
+
+import ch02.ex02_15.Vehicle;
 
 
 public class LinkedListTest {

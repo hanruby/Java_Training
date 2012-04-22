@@ -1,3 +1,5 @@
+package ch01.ex01_02;
+
 
 //class HelloJava { /// Exception in thread "main" java.lang.NoClassDefFoundError: HelloWorld
 class HelloWorld {

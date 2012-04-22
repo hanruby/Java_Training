@@ -1,11 +1,11 @@
-package ex03_10;
+package ch03.ex03_10;
 
 import static org.junit.Assert.*;
 //import junit.framework.Assert;
 
 import org.junit.Test;
 
-import ex03_08.Vehicle;
+import ch03.ex03_08.Vehicle;
 
 
 public class LinkedListTest {

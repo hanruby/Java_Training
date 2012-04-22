@@ -1,11 +1,11 @@
-package ex03_09;
+package ch03.ex03_09;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ex03_08.Vehicle;
+import ch03.ex03_08.Vehicle;
 
 public class GarageTest {
 

@@ -1,4 +1,4 @@
-package ex04_02;
+package ch04.ex04_02;
 
 public interface SortHarness {
     SortMetrics sort(Object[] data);

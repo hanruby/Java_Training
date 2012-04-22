@@ -1,3 +1,5 @@
+package ch01.ex01_09;
+
 public class Fibonacci {
 	static final int MAX = 50;
 

@@ -1,4 +1,5 @@
-package ex03_01;
+package ch03.ex03_01;
+
 import static org.junit.Assert.*;
 //import junit.framework.Assert;
 

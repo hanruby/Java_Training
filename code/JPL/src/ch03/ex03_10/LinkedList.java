@@ -1,6 +1,6 @@
-package ex03_10;
+package ch03.ex03_10;
 
-import ex03_08.Vehicle;
+import ch03.ex03_08.Vehicle;
 
 public class LinkedList implements Cloneable {
 	private Object obj;

@@ -1,3 +1,5 @@
+package ch01.ex01_14;
+
 
 public class iPhoneClass extends iPodClass{
 	private String name;
