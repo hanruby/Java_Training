@@ -7,7 +7,7 @@ package ex04_02;
  * @author ato
  *
  */
-class SimpleSortObject extends SortHarness {
+class SimpleSortObject extends SortHarnessImpl {
     protected void doSort() {
         for (int i = 0; i < getDataLength(); i++) {
             for (int j = i + 1; j < getDataLength(); j++) {

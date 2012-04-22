@@ -27,7 +27,7 @@ public class SimpleSortObjectTest {
         };
 
         {
-            SortHarness bsort = new SimpleSortObject();
+            SortHarnessImpl bsort = new SimpleSortObject();
             SortMetrics metrics = bsort.sort(testData);
             System.out.println("Metrics: " + metrics);
             for (int i = 0; i < testData.length; i++) {
