@@ -1,3 +1,5 @@
+package practice.ch02_Class;
+
 /**
  * JPL chapter 2
  * 彗星、小惑星、惑星、星などの宇宙の天体に関するデータを保持するクラス

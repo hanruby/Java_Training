@@ -1,4 +1,4 @@
-package Attr;
+package practice.ch04_Interfaces.Attr;
 
 public interface Attributed {
     void add(Attr newAttr);

@@ -1,3 +1,5 @@
+package practice.ch02_Class;
+
 import static java.lang.System.out;
 
 public class InitExperiment {

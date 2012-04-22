@@ -1,4 +1,4 @@
-package Attr;
+package practice.ch04_Interfaces.Attr;
 /**
  * P66. 名前と値の組を保持するクラス
  * @author ato

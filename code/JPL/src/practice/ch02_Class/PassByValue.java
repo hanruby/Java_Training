@@ -1,3 +1,5 @@
+package practice.ch02_Class;
+
 /**
  * 値渡し P.54
  * @author ato

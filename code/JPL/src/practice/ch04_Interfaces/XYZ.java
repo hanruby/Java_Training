@@ -1,3 +1,4 @@
+package practice.ch04_Interfaces;
 
 interface X {
     int val = 1;

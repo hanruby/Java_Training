@@ -1,3 +1,4 @@
+package practice.ch02_Static_Initialization;
 
 public class Y {
 	static int num;

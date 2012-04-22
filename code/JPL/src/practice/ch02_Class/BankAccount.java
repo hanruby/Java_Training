@@ -1,3 +1,4 @@
+package practice.ch02_Class;
 
 public class BankAccount {
 	public class Person {

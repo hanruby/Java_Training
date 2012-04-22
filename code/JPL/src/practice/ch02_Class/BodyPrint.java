@@ -1,3 +1,4 @@
+package practice.ch02_Class;
 
 class BodyPrint {
 	

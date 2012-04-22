@@ -1,3 +1,5 @@
+package practice.ch03_Extending_Classes;
+
 /**
  * P.67 色を特定あるいは記述する文字列として色属性を保存するために、Attrを拡張したクラス
  * @author ato

@@ -1,3 +1,5 @@
+package practice.ch03_Extending_Classes;
+
 /**
  * P66. 名前と値の組を保持するクラス
  * @author ato

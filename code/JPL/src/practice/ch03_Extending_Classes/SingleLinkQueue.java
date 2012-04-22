@@ -1,3 +1,4 @@
+package practice.ch03_Extending_Classes;
 
 public class SingleLinkQueue {
     protected Cell head;
