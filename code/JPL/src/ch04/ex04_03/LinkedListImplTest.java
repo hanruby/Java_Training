@@ -8,11 +8,11 @@ import org.junit.Test;
 import ch03.ex03_08.Vehicle;
 
 
-public class LinkedListTest {
+public class LinkedListImplTest {
 
 	@Test
 	public void testLinkedList() {
-		LinkedList l = new LinkedList("list1");
+		LinkedList l = new LinkedListImpl("list1");
 		
 		assertEquals("list1", l.getObj());
 		assertEquals(null, l.getNext());
@@ -20,8 +20,8 @@ public class LinkedListTest {
 	
 	@Test
 	public void testLinkedList2() throws Exception {
-		LinkedList l = new LinkedList("list1");
-		l.setNext(new LinkedList("list2"));
+		LinkedList l = new LinkedListImpl("list1");
+		l.setNext(new LinkedListImpl("list2"));
 		
 		assertEquals("list1", l.getObj());
 		assertEquals("list2", l.getNext().getObj());
@@ -30,7 +30,7 @@ public class LinkedListTest {
 	
 	@Test
 	public void testSetObjects() throws Exception {
-		LinkedList l = new LinkedList(new Vehicle(12, 90, "1号"));
+		LinkedList l = new LinkedListImpl(new Vehicle(12, 90, "1号"));
 		
 		Vehicle v2 = new Vehicle(22, 180, "2号");
 		Vehicle v3 = new Vehicle(28, 210, "3号");
@@ -44,7 +44,7 @@ public class LinkedListTest {
 	
 	@Test
 	public void testLen() throws Exception {
-		LinkedList l = new LinkedList(new Vehicle(12, 90, "1号"));
+		LinkedList l = new LinkedListImpl(new Vehicle(12, 90, "1号"));
 		
 		Vehicle v2 = new Vehicle(22, 180, "2号");
 		Vehicle v3 = new Vehicle(28, 210, "3号");
@@ -58,7 +58,7 @@ public class LinkedListTest {
 
 	@Test
     public void testClone() throws Exception {
-		LinkedList l1 = new LinkedList(new Vehicle(12, 90, "1号"));
+		LinkedList l1 = new LinkedListImpl(new Vehicle(12, 90, "1号"));
 		
 		Vehicle v2 = new Vehicle(22, 180, "2号");
 		Vehicle v3 = new Vehicle(28, 210, "3号");
@@ -71,7 +71,7 @@ public class LinkedListTest {
 		Vehicle v5 = new Vehicle(69, 20, "5号");
 		
 		// 2号と3号の間に要素を挿入
-		LinkedList tmp = new LinkedList(v5);
+		LinkedListImpl tmp = new LinkedListImpl(v5);
 		tmp.setNext(l1.getNext().getNext());
 		l1.getNext().setNext(tmp);
 
