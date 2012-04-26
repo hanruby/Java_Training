@@ -34,5 +34,11 @@ public class BankAccount {
                        canWithdraw,
                        canClose;
     }
-    // ...
+
+    public void transfer(BankAccount other, long amount) {
+        other.withdraw(amount);
+        deposit(amount);
+        lastAct = this.new Action("transfer", amount);
+        other.lastAct = other.new Action("transfer", amount);
+    }
 }
