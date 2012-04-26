@@ -21,12 +21,12 @@ public class BankAccount {
 
     public void deposit(long amount) {
         balance += amount;
-        lastAct = new Action("deposit", amount);
+        lastAct = this.new Action("deposit", amount);
     }
 
     public void withdraw(long amount) {
         balance -= amount;
-        lastAct = new Action("withdraw", amount);
+        lastAct = this.new Action("withdraw", amount);
     }
     
     public static class Permissions {
