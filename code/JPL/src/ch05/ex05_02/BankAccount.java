@@ -5,7 +5,6 @@ package ch05.ex05_02;
  * @author ato
  *
  */
-@SuppressWarnings("unused")
 public class BankAccount {
     private long number;    // 口座番号
     private long balance;   // 現在の残高（セント）
@@ -32,18 +31,5 @@ public class BankAccount {
     public void withdraw(long amount) {
         balance -= amount;
         lastAct = this.new Action("withdraw", amount);
-    }
-    
-    public static class Permissions {
-        public boolean canDeposit,
-                       canWithdraw,
-                       canClose;
-    }
-
-    public void transfer(BankAccount other, long amount) {
-        other.withdraw(amount);
-        deposit(amount);
-        lastAct = this.new Action("transfer", amount);
-        other.lastAct = other.new Action("transfer", amount);
     }
 }
