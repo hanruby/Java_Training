@@ -31,26 +31,17 @@ public class BankAccountTest {
 
     @Test
     public void testHistory() {
-        araki.deposit(1000);
-        araki.deposit(2000);
-        araki.deposit(3000);
-        araki.deposit(4000);
-        araki.deposit(5000);
-        araki.deposit(6000);
-        araki.deposit(7000);
-        araki.deposit(8000);
-        araki.deposit(9000);
-        araki.deposit(10000);
-        araki.deposit(11000);
-        araki.deposit(12000);
-        
-        BankAccount.History history = araki.history();
-        BankAccount.Action action = history.next(); 
-        while (action != null) {
-            System.out.println(action);
-            action = history.next();
+        for(int i = 0; i < 15; i++){
+            araki.deposit(i);
         }
         
+        BankAccount.History history = araki.history();
+        BankAccount.Action action;
+        
+        for (int i = 0; i < 10; i++) {
+            action = history.next();
+            assertEquals("12345: deposit "+(i+5), action.toString());
+        }
+        assertEquals(history.next(), null);
     }
-
 }
