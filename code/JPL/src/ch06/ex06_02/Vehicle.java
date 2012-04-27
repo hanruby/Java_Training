@@ -8,10 +8,12 @@ public class Vehicle {
 	
 	static private long nextVehicleId = 0;
 	
-	private enum TURN {LEFT, RIGHT};
-	public static TURN TURN_LEFT = TURN.LEFT;
-	public static TURN TURN_RIGHT = TURN.RIGHT;
-
+	/* ex06_02 
+	 * 利点：
+	 * enumを利用することで、指定されたTURNのみを受け取ることができる
+	 */
+	public enum Turn {TURN_LEFT, TURN_RIGHT};
+	
 	//! IDを取得するメソッド
 	public long getId() {
 		return id;
@@ -134,12 +136,12 @@ public class Vehicle {
 	 * @param turnDirection
 	 * @return
 	 */
-	public boolean turn(TURN turnDirection) {
+	public boolean turn(Turn turnDirection) {
 		switch (turnDirection) {
-		case LEFT:
+		case TURN_LEFT:
 			this.turn(-90);
 			break;
-		case RIGHT:
+		case TURN_RIGHT:
 			this.turn(90);
 			break;
 		default:

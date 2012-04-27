@@ -69,11 +69,11 @@ public class VehicleTest {
 		Vehicle v = new Vehicle(150,300,"turncar");
 		boolean result;
 		
-		result = v.turn(Vehicle.TURN_LEFT);
+		result = v.turn(Vehicle.Turn.TURN_LEFT);
 		assertEquals(true, result);
 		assertEquals(210, v.getCurrentDirection());
 
-		result = v.turn(Vehicle.TURN_RIGHT);
+		result = v.turn(Vehicle.Turn.TURN_RIGHT);
 		assertEquals(true, result);
 		assertEquals(300, v.getCurrentDirection());
 
