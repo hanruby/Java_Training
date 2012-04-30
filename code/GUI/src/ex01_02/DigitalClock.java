@@ -25,10 +25,11 @@ public class DigitalClock extends Frame implements Runnable{
     
     public DigitalClock() {
         config = new Config();
-
+        
         setSize(config.getWidth(), config.getHeight());
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
+        showMenu();
 
         addWindowListener(new ClockWindowListener());
         setVisible(true);
@@ -36,6 +37,15 @@ public class DigitalClock extends Frame implements Runnable{
         if (SystemTray.isSupported()) {
             showTrayIcon();
         }
+    }
+    
+    private void showMenu() {
+        MenuBar menu = new MenuBar();
+		Menu properties = menu.add(new Menu("File"));
+		properties.add("Properties");
+		properties.add(new MenuItem("Properties"));
+		
+		setMenuBar(menu);
     }
     
     @Override
@@ -55,6 +65,7 @@ public class DigitalClock extends Frame implements Runnable{
     public static void main (String args[]) {
         DigitalClock clock = new DigitalClock();
         new Thread(clock).start();
+        PropertiesDialog properties = new PropertiesDialog(clock);
     }
 
     // Runnable : JPL P.297 
