@@ -11,11 +11,11 @@ import java.util.GregorianCalendar;
  */
 public class DigitalClock extends Frame implements Runnable{
 
-    private DigitalClockSettings settings;
+    private Config settings;
     private Font font;
     
     public DigitalClock() {
-        settings = new DigitalClockSettings();
+        settings = new Config();
         font =  new Font("Consolas",Font.CENTER_BASELINE,30);
         
         setTitle("Digital Clock");

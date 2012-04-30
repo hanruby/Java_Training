@@ -4,10 +4,10 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class DigitalClockSettings {
+public class Config {
     private Format format;
     
-    public DigitalClockSettings() {
+    public Config() {
         format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     }
     
