@@ -2,7 +2,11 @@ package ex01_01;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.GregorianCalendar;
+
+import javax.imageio.ImageIO;
 
 /**
  * デジタル時計
@@ -15,6 +19,9 @@ public class DigitalClock extends Frame implements Runnable{
 
     private Config config;
     
+    private Image clockImage;
+    private Graphics canvas;
+    
     public DigitalClock() {
         config = new Config();
 
@@ -25,12 +32,17 @@ public class DigitalClock extends Frame implements Runnable{
 
         addWindowListener(new ClockWindowListener());
         setVisible(true);
+        showTrayIcon();
     }
     
     @Override
     public void paint(Graphics g) {
-        g.setColor(config.getFontColor());
-        g.drawString(config.dateFormat(new GregorianCalendar()), 10, 50);
+        clockImage = createImage(this.getWidth(), this.getHeight());
+        canvas = clockImage.getGraphics();
+        canvas.setColor(config.getFontColor());
+        canvas.drawString(config.dateFormat(new GregorianCalendar()), 10, 50);
+        g.drawImage(clockImage, 0, 0, this);
+        //setIconImage(clockImage);
     }
 
     public static void main (String args[]) {
@@ -50,6 +62,23 @@ public class DigitalClock extends Frame implements Runnable{
             return;
         }
     }
+    
+    private void showTrayIcon() {
+        SystemTray tray = SystemTray.getSystemTray();
+        Image trayImage;
+        try {
+            trayImage = ImageIO.read(new File("src/ex01_01/clock.png"));
+            try {
+                tray.add(new TrayIcon(trayImage,"test"));
+            } catch (AWTException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
 }
 
 /**
@@ -58,6 +87,7 @@ public class DigitalClock extends Frame implements Runnable{
  *
  */
 class ClockWindowListener extends WindowAdapter {
+    @Override
     public void windowClosing (WindowEvent event) {
         System.exit (0);
     }
