@@ -12,19 +12,19 @@ import java.util.GregorianCalendar;
  */
 public class DigitalClock extends Frame implements Runnable{
 
-    private Closer handler;
+    private ClockWindowListener windowHandler;
     private Calendar cal;
     private DigitalClockSettings settings;
     private Font font;
     
     public DigitalClock() {
-        handler = new Closer();
+        windowHandler = new ClockWindowListener();
         settings = new DigitalClockSettings();
         font =  new Font("Consolas",Font.CENTER_BASELINE,30);
         
         setTitle("Digital Clock");
         setSize(500,120);
-        addWindowListener(handler);
+        addWindowListener(windowHandler);
         setVisible(true);
     }
     
@@ -59,7 +59,7 @@ public class DigitalClock extends Frame implements Runnable{
  * @author ato
  *
  */
-class Closer extends WindowAdapter {
+class ClockWindowListener extends WindowAdapter {
     public void windowClosing (WindowEvent event) {
         System.exit (0);
     }
