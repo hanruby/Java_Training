@@ -43,7 +43,7 @@ public class DigitalClock extends Frame implements Runnable{
         canvas.setColor(config.getFontColor());
         canvas.drawString(config.dateFormat(cal), 10, 50);
         g.drawImage(clockImage, 0, 0, this);
-        //setIconImage(clockImage);
+        setIconImage(clockImage);
 
         setTitle(config.dateFormat(cal));
     }
