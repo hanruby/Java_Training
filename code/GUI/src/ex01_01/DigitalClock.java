@@ -2,7 +2,8 @@ package ex01_01;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * デジタル時計
@@ -12,7 +13,7 @@ import java.util.Date;
 public class DigitalClock extends Frame implements Runnable{
 
     private Closer handler;
-    private Date date;
+    private Calendar cal;
     private DigitalClockSettings settings;
     private Font font;
     
@@ -29,9 +30,9 @@ public class DigitalClock extends Frame implements Runnable{
     
     @Override
     public void paint(Graphics g) {
-        date = new Date();
+        cal = new GregorianCalendar(); // JPL : P.611
         g.setFont(font);
-        g.drawString(settings.dateFormat(date), 10, 50);
+        g.drawString(settings.dateFormat(cal), 10, 50);
     }
 
     public static void main (String args[]) {
@@ -39,6 +40,7 @@ public class DigitalClock extends Frame implements Runnable{
         new Thread(clock).start();
     }
 
+    // Runnable : JPL P.297 
     @Override
     public void run() {
         try {
