@@ -11,6 +11,8 @@ import java.util.GregorianCalendar;
  */
 public class DigitalClock extends Frame implements Runnable{
 
+    private static final long serialVersionUID = 248840136722015507L;
+
     private Config config;
     
     public DigitalClock() {
