@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
@@ -25,7 +26,6 @@ public class DigitalClock extends Frame implements Runnable{
     public DigitalClock() {
         config = new Config();
 
-        setTitle("Digital Clock");
         setSize(config.getWidth(), config.getHeight());
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
@@ -37,12 +37,15 @@ public class DigitalClock extends Frame implements Runnable{
     
     @Override
     public void paint(Graphics g) {
+        Calendar cal = new GregorianCalendar();
         clockImage = createImage(this.getWidth(), this.getHeight());
         canvas = clockImage.getGraphics();
         canvas.setColor(config.getFontColor());
-        canvas.drawString(config.dateFormat(new GregorianCalendar()), 10, 50);
+        canvas.drawString(config.dateFormat(cal), 10, 50);
         g.drawImage(clockImage, 0, 0, this);
         //setIconImage(clockImage);
+
+        setTitle(config.dateFormat(cal));
     }
 
     public static void main (String args[]) {
@@ -69,7 +72,7 @@ public class DigitalClock extends Frame implements Runnable{
         try {
             trayImage = ImageIO.read(new File("src/ex01_01/clock.png"));
             try {
-                tray.add(new TrayIcon(trayImage,"test"));
+                tray.add(new TrayIcon(trayImage,"Digital Clock"));
             } catch (AWTException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
