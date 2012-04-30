@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.util.Date;
 
 /**
- * 時計用のフレーム
+ * デジタル時計
  * @author ato
  *
  */
@@ -27,7 +27,7 @@ public class DigitalClock extends Frame implements Runnable{
         setVisible(true);
     }
     
-
+    @Override
     public void paint(Graphics g) {
         date = new Date();
         g.setFont(font);
