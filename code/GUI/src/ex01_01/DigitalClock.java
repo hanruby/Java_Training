@@ -9,7 +9,7 @@ import java.util.Date;
  * @author ato
  *
  */
-public class DigitalClock extends Frame {
+public class DigitalClock extends Frame implements Runnable{
 
     private Closer handler;
     private Date date;
@@ -35,7 +35,20 @@ public class DigitalClock extends Frame {
     }
 
     public static void main (String args[]) {
-        new DigitalClock();
+        DigitalClock clock = new DigitalClock();
+        new Thread(clock).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            for(;;) {
+                repaint();
+                Thread.sleep(1000); // wait for 1 second
+            }
+        } catch (InterruptedException e){
+            return;
+        }
     }
 }
 
