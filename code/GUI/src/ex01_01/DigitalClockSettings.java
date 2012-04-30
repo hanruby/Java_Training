@@ -1,17 +1,19 @@
 package ex01_01;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class DigitalClockSettings {
-    private SimpleDateFormat dateFormat;
+    private Format format;
     
     public DigitalClockSettings() {
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); //
+        format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.JAPAN);
     }
     
     public String dateFormat(Calendar cal) {
-        return dateFormat.format(cal.getTime());
+        return format.format(cal.getTime());
     }
     
 }
