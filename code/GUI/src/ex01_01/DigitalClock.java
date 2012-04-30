@@ -11,23 +11,21 @@ import java.util.GregorianCalendar;
  */
 public class DigitalClock extends Frame implements Runnable{
 
-    private Config settings;
-    private Font font;
+    private Config config;
     
     public DigitalClock() {
-        settings = new Config();
-        font =  new Font("Consolas",Font.CENTER_BASELINE,30);
-        
+        config = new Config();
+
         setTitle("Digital Clock");
-        setSize(500,120);
+        setSize(config.getWidth(), config.getHeight());
+        setFont(config.getFont());
         addWindowListener(new ClockWindowListener());
         setVisible(true);
     }
     
     @Override
     public void paint(Graphics g) {
-        g.setFont(font);
-        g.drawString(settings.dateFormat(new GregorianCalendar()), 10, 50);
+        g.drawString(config.dateFormat(new GregorianCalendar()), 10, 50);
     }
 
     public static void main (String args[]) {
