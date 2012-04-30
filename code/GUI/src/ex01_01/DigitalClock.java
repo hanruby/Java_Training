@@ -2,7 +2,6 @@ package ex01_01;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -12,27 +11,23 @@ import java.util.GregorianCalendar;
  */
 public class DigitalClock extends Frame implements Runnable{
 
-    private ClockWindowListener windowHandler;
-    private Calendar cal;
     private DigitalClockSettings settings;
     private Font font;
     
     public DigitalClock() {
-        windowHandler = new ClockWindowListener();
         settings = new DigitalClockSettings();
         font =  new Font("Consolas",Font.CENTER_BASELINE,30);
         
         setTitle("Digital Clock");
         setSize(500,120);
-        addWindowListener(windowHandler);
+        addWindowListener(new ClockWindowListener());
         setVisible(true);
     }
     
     @Override
     public void paint(Graphics g) {
-        cal = new GregorianCalendar(); // JPL : P.611
         g.setFont(font);
-        g.drawString(settings.dateFormat(cal), 10, 50);
+        g.drawString(settings.dateFormat(new GregorianCalendar()), 10, 50);
     }
 
     public static void main (String args[]) {
