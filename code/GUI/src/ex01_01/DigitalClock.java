@@ -19,12 +19,15 @@ public class DigitalClock extends Frame implements Runnable{
         setTitle("Digital Clock");
         setSize(config.getWidth(), config.getHeight());
         setFont(config.getFont());
+        setBackground(config.getBackgroundColor());
+
         addWindowListener(new ClockWindowListener());
         setVisible(true);
     }
     
     @Override
     public void paint(Graphics g) {
+        g.setColor(config.getFontColor());
         g.drawString(config.dateFormat(new GregorianCalendar()), 10, 50);
     }
 
