@@ -32,7 +32,10 @@ public class DigitalClock extends Frame implements Runnable{
 
         addWindowListener(new ClockWindowListener());
         setVisible(true);
-        showTrayIcon();
+
+        if (SystemTray.isSupported()) {
+            showTrayIcon();
+        }
     }
     
     @Override
@@ -43,9 +46,10 @@ public class DigitalClock extends Frame implements Runnable{
         canvas.setColor(config.getFontColor());
         canvas.drawString(config.dateFormat(cal), 10, 50);
         g.drawImage(clockImage, 0, 0, this);
-        setIconImage(clockImage);
 
-        setTitle(config.dateFormat(cal));
+        setIconImage(clockImage); // 時計の画像をアイコンとして表示する
+
+        setTitle(config.dateFormat(cal)); // 時刻をタイトルへ表示する
     }
 
     public static void main (String args[]) {
@@ -66,6 +70,9 @@ public class DigitalClock extends Frame implements Runnable{
         }
     }
     
+    /**
+     * トレイアイコンを表示する
+     */
     private void showTrayIcon() {
         SystemTray tray = SystemTray.getSystemTray();
         Image trayImage;
