@@ -6,7 +6,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Config {
+public class Config implements Cloneable {
     private Format format;
 
     private Font font;
@@ -25,6 +25,28 @@ public class Config {
         backgroundColor = Color.BLACK;
         fontColor = Color.WHITE;
     }
+
+    public Config(Font font, Color bgcolor, Color fontColor) {
+        this();
+        this.font =  font;
+        this.backgroundColor = bgcolor;
+        this.fontColor = fontColor;
+    }
+
+    public Config(Config conf) {
+        this.format = conf.format;
+        this.font =  conf.font;
+        this.backgroundColor = conf.backgroundColor;
+        this.fontColor = conf.fontColor;
+        this.width = conf.width;
+        this.height = conf.height;
+    }
+    
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Config newConf = new Config(this);
+        return newConf;
+    }
     
     public String dateFormat(Calendar cal) {
         return format.format(cal.getTime());
@@ -34,20 +56,39 @@ public class Config {
         return font;
     }
     
+    public void setFont(Font font) {
+        this.font = font;
+    }
+    
     public int getWidth() {
         return width;
     }
     
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    
     public int getHeight() {
         return height;
+    }
+    
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public Color getBackgroundColor() {
         return backgroundColor;
     }
     
+    public void setBackgroundColor(Color color) {
+        backgroundColor = color;
+    }
+    
     public Color getFontColor() {
         return fontColor;
     }
     
+    public void setFontColor(Color color) {
+        fontColor = color;
+    }
 }

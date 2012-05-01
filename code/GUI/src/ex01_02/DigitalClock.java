@@ -31,7 +31,7 @@ public class DigitalClock extends Frame implements Runnable{
         setVisible(true);
     }
     
-    private void setConfig(Config conf) {
+    public void setConfig(Config conf) {
         this.config = conf;
 /* フォントの指定
 フォントサイズの指定
@@ -42,6 +42,10 @@ public class DigitalClock extends Frame implements Runnable{
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
         repaint();
+    }
+    
+    public Config getConfig() {
+        return this.config;
     }
     
     @Override
