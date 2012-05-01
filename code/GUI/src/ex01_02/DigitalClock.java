@@ -2,12 +2,8 @@ package ex01_02;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import javax.imageio.ImageIO;
 
 /**
  * デジタル時計
@@ -22,30 +18,30 @@ public class DigitalClock extends Frame implements Runnable{
     
     private Image clockImage;
     private Graphics canvas;
+    private DigitalClock clock;
     
     public DigitalClock() {
         config = new Config();
-        
-        setSize(config.getWidth(), config.getHeight());
-        setFont(config.getFont());
-        setBackground(config.getBackgroundColor());
-        showMenu();
+        this.clock = this;
+
+        setConfig(config);
+        createMenuBar();
 
         addWindowListener(new ClockWindowListener());
         setVisible(true);
-
-        if (SystemTray.isSupported()) {
-            showTrayIcon();
-        }
     }
     
-    private void showMenu() {
-        MenuBar menu = new MenuBar();
-		Menu properties = menu.add(new Menu("File"));
-		properties.add("Properties");
-		properties.add(new MenuItem("Properties"));
-		
-		setMenuBar(menu);
+    private void setConfig(Config conf) {
+        this.config = conf;
+/* フォントの指定
+フォントサイズの指定
+文字色の指定
+時計の背景色の指定 
+*/
+        setSize(config.getWidth(), config.getHeight());
+        setFont(config.getFont());
+        setBackground(config.getBackgroundColor());
+        repaint();
     }
     
     @Override
@@ -65,7 +61,25 @@ public class DigitalClock extends Frame implements Runnable{
     public static void main (String args[]) {
         DigitalClock clock = new DigitalClock();
         new Thread(clock).start();
-        PropertiesDialog properties = new PropertiesDialog(clock);
+    }
+
+    /** 
+     * メニューバーを作成する
+     */
+    private void createMenuBar() {
+        MenuBar menu = new MenuBar();
+		Menu properties = menu.add(new Menu("File"));
+
+		// プロパティ
+		properties.add("Properties");
+		properties.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PropertiesDialog(clock);
+            }
+        });
+
+		setMenuBar(menu);
     }
 
     // Runnable : JPL P.297 
@@ -78,26 +92,6 @@ public class DigitalClock extends Frame implements Runnable{
             }
         } catch (InterruptedException e){
             return;
-        }
-    }
-    
-    /**
-     * トレイアイコンを表示する
-     */
-    private void showTrayIcon() {
-        SystemTray tray = SystemTray.getSystemTray();
-        Image trayImage;
-        try {
-            trayImage = ImageIO.read(new File("src/ex01_01/clock.png"));
-            try {
-                tray.add(new TrayIcon(trayImage,"Digital Clock"));
-            } catch (AWTException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
         }
     }
 }
