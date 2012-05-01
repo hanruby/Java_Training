@@ -23,11 +23,14 @@ public class PropertiesDialog extends Dialog {
     private static final long serialVersionUID = 210549325687453262L;
     
     DigitalClock clock;
+    Config defaultConf;
     
     public PropertiesDialog(Frame owner) {
         super(owner, true);
 
         clock = (DigitalClock)owner;
+        defaultConf = new Config(clock.getConfig());
+
         createPropertiesDialog();
         
         setTitle("Properties");
@@ -39,6 +42,7 @@ public class PropertiesDialog extends Dialog {
     }
     
     private void createPropertiesDialog() {
+        
         setFont(new Font("Arial",Font.PLAIN,12));
         
         setLayout(new GridLayout(2, 1));
@@ -75,6 +79,7 @@ public class PropertiesDialog extends Dialog {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                clock.setConfig(defaultConf); // もとに戻す
                 dispose();
             }
         });
