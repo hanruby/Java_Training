@@ -38,7 +38,6 @@ public class PropertiesDialog extends Dialog {
         setTitle("Properties");
         //setSize(400, 400);
         Rectangle bounds = this.getGraphicsConfiguration().getBounds();
-        System.out.println(bounds);
         setBounds((int)(bounds.width/2)-200,((int)bounds.height/2-200),400,400);
         
         addWindowListener(new PropertiesDialogListener());
@@ -59,7 +58,7 @@ public class PropertiesDialog extends Dialog {
         add(controlPanel);
 
         {
-            propertiesPanel.setLayout(new GridLayout(2, 2));
+            propertiesPanel.setLayout(new GridLayout(3, 2));
             
             Choice font_name_list, font_size_list, font_color_list, bg_color_list;
             
@@ -98,6 +97,42 @@ public class PropertiesDialog extends Dialog {
                     }
                 });
                 propertiesPanel.add(font_size_list);
+            }
+            {
+                // Font color
+                propertiesPanel.add(new Label("Font color",Label.RIGHT));
+                font_color_list = new Choice();
+                font_color_list.add("BLACK"); 
+                font_color_list.add("GREEN"); 
+                font_color_list.add("ORANGE");
+                font_color_list.add("WHITE");
+                font_color_list.select(clock.getConfig().getFontColor().toString());                
+                font_color_list.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        try {
+                            conf.setFontColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
+                        } catch (IllegalArgumentException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (SecurityException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (IllegalAccessException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (NoSuchFieldException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                        clock.setConfig(conf);
+                    }
+                });
+                propertiesPanel.add(font_color_list);
+            }
+            {
+                
             }
         }
         {

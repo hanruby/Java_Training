@@ -53,6 +53,7 @@ public class DigitalClock extends Frame implements Runnable{
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
         repaint();
+        
     }
     
     private Rectangle2D getClockSize() {
