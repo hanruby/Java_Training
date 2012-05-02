@@ -78,10 +78,6 @@ public class PropertiesDialog extends Dialog {
                 public void itemStateChanged(ItemEvent e) {
                     Config conf = new Config(clock.getConfig());
                     conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
-                    Rectangle2D rect = new TextLayout("0000/00/00 00:00:00", conf.getFont(), ((Graphics2D)clock.getGraphics()).getFontRenderContext()).getBounds();
-                    conf.setHeight((int)rect.getHeight());
-                    conf.setWidth((int)rect.getWidth());
-                    System.out.println(rect);
                     clock.setConfig(conf);
                 }
             });

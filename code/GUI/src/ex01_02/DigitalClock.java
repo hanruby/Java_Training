@@ -2,6 +2,7 @@ package ex01_02;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -46,12 +47,17 @@ public class DigitalClock extends Frame implements Runnable{
 */
         Insets insets = this.getInsets();
         System.out.println(insets);
+        Rectangle2D clockSize = getClockSize();
         // 描画に必要なサイズ + Insets + 描画のmargin
-        setSize(config.getWidth() + (insets.left + insets.right) +  (conf.getMargin().left + conf.getMargin().right),
-                config.getHeight() + (insets.top + insets.bottom) + (conf.getMargin().top + conf.getMargin().bottom));
+        setSize((int)clockSize.getWidth() + (insets.left + insets.right) +  (conf.getMargin().left + conf.getMargin().right),
+                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (conf.getMargin().top + conf.getMargin().bottom));
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
         repaint();
+    }
+    
+    private Rectangle2D getClockSize() {
+        return new TextLayout("0000/00/00 00:00:00", config.getFont(), ((Graphics2D)clock.getGraphics()).getFontRenderContext()).getBounds();
     }
     
     @Override

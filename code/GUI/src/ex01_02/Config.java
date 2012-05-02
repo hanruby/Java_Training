@@ -12,9 +12,6 @@ public class Config implements Cloneable {
     private Insets margin;
 
     private Font font;
-    
-    private int width;
-    private int height;
 
     private Color backgroundColor;
     private Color fontColor;
@@ -22,8 +19,6 @@ public class Config implements Cloneable {
     public Config() {
         format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         font =  new Font("Consolas",Font.PLAIN,30);
-        width = 500;
-        height = 150;
         backgroundColor = Color.BLACK;
         fontColor = Color.WHITE;
         margin = new Insets(10, 10, 10, 10);
@@ -41,8 +36,6 @@ public class Config implements Cloneable {
         this.font =  conf.font;
         this.backgroundColor = conf.backgroundColor;
         this.fontColor = conf.fontColor;
-        this.width = conf.width;
-        this.height = conf.height;
         this.margin = conf.margin;
     }
     
@@ -62,22 +55,6 @@ public class Config implements Cloneable {
     
     public void setFont(Font font) {
         this.font = font;
-    }
-    
-    public int getWidth() {
-        return width;
-    }
-    
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
-    public int getHeight() {
-        return height;
-    }
-    
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public Color getBackgroundColor() {
