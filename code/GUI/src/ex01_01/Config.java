@@ -20,8 +20,8 @@ public class Config {
     public Config() {
         format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         font =  new Font("Consolas",Font.CENTER_BASELINE,30);
-        width = 500;
-        height = 150;
+        width = 350;
+        height = 55;
         backgroundColor = Color.BLACK;
         fontColor = Color.WHITE;
     }

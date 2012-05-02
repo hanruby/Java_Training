@@ -31,6 +31,8 @@ public class DigitalClock extends Frame implements Runnable{
         setBackground(config.getBackgroundColor());
 
         addWindowListener(new ClockWindowListener());
+
+        setResizable(false);
         setVisible(true);
 
         if (SystemTray.isSupported()) {
