@@ -58,7 +58,7 @@ public class PropertiesDialog extends Dialog {
         add(controlPanel);
 
         {
-            propertiesPanel.setLayout(new GridLayout(3, 2));
+            propertiesPanel.setLayout(new GridLayout(4, 2));
             
             Choice font_name_list, font_size_list, font_color_list, bg_color_list;
             
@@ -106,7 +106,8 @@ public class PropertiesDialog extends Dialog {
                 font_color_list.add("GREEN"); 
                 font_color_list.add("ORANGE");
                 font_color_list.add("WHITE");
-                font_color_list.select(clock.getConfig().getFontColor().toString());                
+                font_color_list.select(clock.getConfig().getFontColor().toString()); // TODO fix
+                System.out.println(clock.getConfig().getFontColor().getClass().getName());
                 font_color_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
@@ -132,7 +133,37 @@ public class PropertiesDialog extends Dialog {
                 propertiesPanel.add(font_color_list);
             }
             {
-                
+                // Background color
+                propertiesPanel.add(new Label("Background color",Label.RIGHT));
+                bg_color_list = new Choice();
+                bg_color_list.add("BLACK"); 
+                bg_color_list.add("GREEN"); 
+                bg_color_list.add("ORANGE");
+                bg_color_list.add("WHITE");
+                bg_color_list.select(clock.getConfig().getBackgroundColor().toString());        // TODO fix        
+                bg_color_list.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        try {
+                            conf.setBackgroundColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
+                        } catch (IllegalArgumentException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (SecurityException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (IllegalAccessException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        } catch (NoSuchFieldException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                        clock.setConfig(conf);
+                    }
+                });
+                propertiesPanel.add(bg_color_list);
             }
         }
         {
