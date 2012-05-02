@@ -46,11 +46,10 @@ public class DigitalClock extends Frame implements Runnable{
 時計の背景色の指定 
 */
         Insets insets = this.getInsets();
-        System.out.println(insets);
         Rectangle2D clockSize = getClockSize();
         // 描画に必要なサイズ + Insets + 描画のmargin
-        setSize((int)clockSize.getWidth() + (insets.left + insets.right) +  (conf.getMargin().left + conf.getMargin().right),
-                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (conf.getMargin().top + conf.getMargin().bottom));
+        setSize((int)clockSize.getWidth() + (insets.left + insets.right) + (config.getMargin().left + config.getMargin().right),
+                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (config.getMargin().top + config.getMargin().bottom));
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
         repaint();
