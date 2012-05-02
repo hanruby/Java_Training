@@ -2,6 +2,7 @@ package ex01_02;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -21,6 +22,10 @@ public class DigitalClock extends Frame implements Runnable{
     private DigitalClock clock;
     
     public DigitalClock() {
+        super();
+        addNotify();
+        pack();
+        
         config = new Config();
         this.clock = this;
 
@@ -28,6 +33,7 @@ public class DigitalClock extends Frame implements Runnable{
         createMenuBar();
 
         addWindowListener(new ClockWindowListener());
+        setResizable(false);
         setVisible(true);
     }
     
@@ -38,14 +44,31 @@ public class DigitalClock extends Frame implements Runnable{
 文字色の指定
 時計の背景色の指定 
 */
-        setSize(config.getWidth(), config.getHeight());
+        Insets insets = this.getInsets();
+        System.out.println(insets);
+        // 描画に必要なサイズ + Insets + 描画のmargin
+        setSize(config.getWidth() + (insets.left + insets.right) +  (conf.getMargin().left + conf.getMargin().right),
+                config.getHeight() + (insets.top + insets.bottom) + (conf.getMargin().top + conf.getMargin().bottom));
         setFont(config.getFont());
         setBackground(config.getBackgroundColor());
         repaint();
     }
     
+    @Override
+    public Insets getInsets() {
+        // TODO Auto-generated method stub
+        return super.getInsets();
+        //return new Insets(10,10,10,10);
+    }
+    
     public Config getConfig() {
         return this.config;
+    }
+    
+    @Override
+    public void pack() {
+        // TODO Auto-generated method stub
+        super.pack();
     }
     
     @Override
@@ -54,8 +77,8 @@ public class DigitalClock extends Frame implements Runnable{
         clockImage = createImage(this.getWidth(), this.getHeight());
         canvas = clockImage.getGraphics();
         canvas.setColor(config.getFontColor());
-        canvas.drawString(config.dateFormat(cal), 10, 50);
-        g.drawImage(clockImage, 0, 0, this);
+        canvas.drawString(config.dateFormat(cal), this.getInsets().left + config.getMargin().left, this.getInsets().top + config.getMargin().top);
+        g.drawImage(clockImage, this.getInsets().left, this.getInsets().top, this);
 
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
 

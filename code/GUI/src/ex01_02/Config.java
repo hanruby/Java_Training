@@ -2,12 +2,14 @@ package ex01_02;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Config implements Cloneable {
     private Format format;
+    private Insets margin;
 
     private Font font;
     
@@ -19,11 +21,12 @@ public class Config implements Cloneable {
     
     public Config() {
         format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        font =  new Font("Consolas",Font.CENTER_BASELINE,30);
+        font =  new Font("Consolas",Font.PLAIN,30);
         width = 500;
         height = 150;
         backgroundColor = Color.BLACK;
         fontColor = Color.WHITE;
+        margin = new Insets(10, 10, 10, 10);
     }
 
     public Config(Font font, Color bgcolor, Color fontColor) {
@@ -40,6 +43,7 @@ public class Config implements Cloneable {
         this.fontColor = conf.fontColor;
         this.width = conf.width;
         this.height = conf.height;
+        this.margin = conf.margin;
     }
     
     @Override
@@ -90,5 +94,9 @@ public class Config implements Cloneable {
     
     public void setFontColor(Color color) {
         fontColor = color;
+    }
+    
+    public Insets getMargin() {
+        return this.margin;
     }
 }

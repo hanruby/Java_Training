@@ -5,18 +5,23 @@ import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
 
 public class PropertiesDialog extends Dialog {
 
@@ -34,7 +39,10 @@ public class PropertiesDialog extends Dialog {
         createPropertiesDialog();
         
         setTitle("Properties");
-        setSize(400, 400);
+        //setSize(400, 400);
+        Rectangle bounds = this.getGraphicsConfiguration().getBounds();
+        System.out.println(bounds);
+        setBounds((int)(bounds.width/2)-200,((int)bounds.height/2-200),400,400);
         
         addWindowListener(new PropertiesDialogListener());
                 
@@ -43,52 +51,69 @@ public class PropertiesDialog extends Dialog {
     
     private void createPropertiesDialog() {
         
-        setFont(new Font("Arial",Font.PLAIN,12));
+        setFont(new Font("Arial",Font.PLAIN,12)); // font set for properties dialog.
         
         setLayout(new GridLayout(2, 1));
         
         Panel propertiesPanel = new Panel(); 
-        Panel cancelPanel = new Panel();
+        Panel controlPanel = new Panel();
         
         add(propertiesPanel);
-        add(cancelPanel);
-        
-        propertiesPanel.setLayout(new GridLayout(1, 2));
-        
-        Choice font_name_list, font_size_list, font_color_list, bg_color_list;
-        
-        // Font type
-        propertiesPanel.add(new Label("Font Type",Label.RIGHT));
-        font_name_list = new Choice();
-        font_name_list.add("Monaco");
-        font_name_list.add("Consolas");
-        font_name_list.add("Times");
-        font_name_list.select(clock.getConfig().getFont().getName());
-        font_name_list.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Config conf = new Config(clock.getConfig());
-                conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
-                clock.setConfig(conf);
-            }
-        });
-        propertiesPanel.add(font_name_list);
+        add(controlPanel);
 
-        // cancel 
-        Button cancel = new Button("cancel");
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clock.setConfig(defaultConf); // もとに戻す
-                dispose();
-            }
-        });
-        cancelPanel.add(cancel , BorderLayout.CENTER);
+        {
+            propertiesPanel.setLayout(new GridLayout(1, 2));
+            
+            Choice font_name_list, font_size_list, font_color_list, bg_color_list;
+            
+            // Font name
+            propertiesPanel.add(new Label("Font Type",Label.RIGHT));
+            font_name_list = new Choice();
+            font_name_list.add("Monaco");
+            font_name_list.add("Consolas");
+            font_name_list.add("Times");
+            font_name_list.select(clock.getConfig().getFont().getName());
+            font_name_list.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    Config conf = new Config(clock.getConfig());
+                    conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
+                    Rectangle2D rect = new TextLayout("0000/00/00 00:00:00", conf.getFont(), ((Graphics2D)clock.getGraphics()).getFontRenderContext()).getBounds();
+                    conf.setHeight((int)rect.getHeight());
+                    conf.setWidth((int)rect.getWidth());
+                    System.out.println(rect);
+                    clock.setConfig(conf);
+                }
+            });
+            propertiesPanel.add(font_name_list);
+        }
+        {
+            controlPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            // cancel 
+            Button cancel = new Button("Cancel");
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    clock.setConfig(defaultConf); // もとに戻す
+                    dispose();
+                }
+            });
+            // ok
+            Button ok = new Button("OK");
+            ok.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                }
+            });
+            
+            controlPanel.add(cancel , BorderLayout.CENTER);
+            controlPanel.add(ok , BorderLayout.CENTER);
+        }
     }
     
     @Override
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
         super.paint(g);
     }
     
