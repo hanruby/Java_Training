@@ -62,26 +62,46 @@ public class PropertiesDialog extends Dialog {
         add(controlPanel);
 
         {
-            propertiesPanel.setLayout(new GridLayout(1, 2));
+            propertiesPanel.setLayout(new GridLayout(2, 2));
             
             Choice font_name_list, font_size_list, font_color_list, bg_color_list;
             
-            // Font name
-            propertiesPanel.add(new Label("Font Type",Label.RIGHT));
-            font_name_list = new Choice();
-            font_name_list.add("Monaco");
-            font_name_list.add("Consolas");
-            font_name_list.add("Times");
-            font_name_list.select(clock.getConfig().getFont().getName());
-            font_name_list.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    Config conf = new Config(clock.getConfig());
-                    conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
-                    clock.setConfig(conf);
-                }
-            });
-            propertiesPanel.add(font_name_list);
+            {
+                // Font name
+                propertiesPanel.add(new Label("Font name",Label.RIGHT));
+                font_name_list = new Choice();
+                font_name_list.add("Monaco");
+                font_name_list.add("Consolas");
+                font_name_list.add("Times");
+                font_name_list.select(clock.getConfig().getFont().getName());
+                font_name_list.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
+                        clock.setConfig(conf);
+                    }
+                });
+                propertiesPanel.add(font_name_list);
+            }
+            {
+                // Font size
+                propertiesPanel.add(new Label("Font size",Label.RIGHT));
+                font_size_list = new Choice();
+                font_size_list.add("12"); 
+                font_size_list.add("20"); 
+                font_size_list.add("30");
+                font_size_list.select(Integer.toString(clock.getConfig().getFont().getSize()));
+                font_size_list.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        conf.setFont(new Font(conf.getFont().getFontName(),conf.getFont().getStyle(),Integer.parseInt((String)e.getItem())));
+                        clock.setConfig(conf);
+                    }
+                });
+                propertiesPanel.add(font_size_list);
+            }
         }
         {
             controlPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
