@@ -82,8 +82,10 @@ public class DigitalClock extends Frame implements Runnable{
         clockImage = createImage(this.getWidth(), this.getHeight());
         canvas = clockImage.getGraphics();
         canvas.setColor(config.getFontColor());
-        canvas.drawString(config.dateFormat(cal), this.getInsets().left + config.getMargin().left, this.getInsets().top + config.getMargin().top);
-        g.drawImage(clockImage, this.getInsets().left, this.getInsets().top, this);
+        // 時計文字列の表示（Inset + maegin）
+        canvas.drawString(config.dateFormat(cal), this.getInsets().left + config.getMargin().left, 
+                                                  this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
+        g.drawImage(clockImage, 0, 0, this);
 
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
 
