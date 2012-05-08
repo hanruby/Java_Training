@@ -43,4 +43,9 @@ public class BatteryTest {
         assertEquals(100, battery.remain());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testChargeException() throws Exception {
+        Battery battery = new Battery();
+        battery.charge(-1);
+    }
 }

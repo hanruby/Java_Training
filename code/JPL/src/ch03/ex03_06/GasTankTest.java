@@ -43,9 +43,15 @@ public class GasTankTest {
         assertEquals(120, gas.remain());
     }
     
-    @Test
-    public void testError() throws Exception {
-        
+    @Test(expected = IllegalArgumentException.class)
+    public void testGasTankException() throws Exception {
+        @SuppressWarnings("unused")
+        GasTank gas = new GasTank(0);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testChargeException() throws Exception {
+        GasTank gas = new GasTank(10);
+        gas.charge(-1);
+    }
 }

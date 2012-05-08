@@ -6,6 +6,9 @@ public class GasTank extends EnergySource {
     private int tank = 0;
     
     public GasTank(int tankmax) {
+        if (tankmax <= 0) {
+            throw new IllegalArgumentException("The charge amount should not be negative value");
+        }
         TANK_MAX = tankmax;
     }
 
