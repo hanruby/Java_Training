@@ -12,6 +12,8 @@ public class Vehicle {
 	public static TURN TURN_LEFT = TURN.LEFT;
 	public static TURN TURN_RIGHT = TURN.RIGHT;
 
+	private EnergySource energy; // ex03_06
+	
 	//! IDを取得するメソッド
 	public long getId() {
 		return id;
@@ -161,4 +163,11 @@ public class Vehicle {
 		Vehicle v = new Vehicle(args[0]);
 		System.out.println(v.toString());
  	}
+	
+	/**
+	 * ex03_06 動力源が空でないことを保証するstartメソッド
+	 */
+	public void start() {
+	    
+	}
 }
