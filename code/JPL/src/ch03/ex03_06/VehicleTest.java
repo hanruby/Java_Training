@@ -81,4 +81,14 @@ public class VehicleTest {
 		assertEquals(true, result);
 		assertEquals(270, v.getCurrentDirection());
 	}
+	
+	@Test
+    public void testEnergy() throws Exception {
+		Vehicle v = new Vehicle();
+	    assertEquals(true, v.getEnergy().empty());
+	    v.setEnergy(new Battery());
+	    v.start();
+	    // ex03_06 start() で動力が空でないことを確認する
+	    assertEquals(false, v.getEnergy().empty());
+    }
 }

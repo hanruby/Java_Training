@@ -42,5 +42,10 @@ public class GasTankTest {
         assertEquals(true, gas.fullness());
         assertEquals(120, gas.remain());
     }
+    
+    @Test
+    public void testError() throws Exception {
+        
+    }
 
 }

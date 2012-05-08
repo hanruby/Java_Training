@@ -50,31 +50,37 @@ public class Vehicle {
 	}
 
 	/**
-	 * 初期化ブロック(P47)
-	 */
-	{
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
-		nextVehicleId++;
-		this.id = nextVehicleId;
-	}
-	
-	/**
 	 * 引数なしコンストラクタ
 	 */
 	public Vehicle() {
+		this.setCurrentSpeed(0);
+		this.setCurrentDirection(0);
 		this.setOwnerName("none");
+		nextVehicleId++;
+		this.id = nextVehicleId;
+		this.energy = new GasTank(100);
 	}
 	
 	/**
 	 * 所有者の名前を引数にとるコンストラクタ
 	 */
 	public Vehicle(String name) {
+	    this();
 		this.setOwnerName(name);
 	}
 
 	public Vehicle(int speed, int direction, String name) {
-		this.setValue(speed, direction, name);
+	    this(name);
+		this.setValue(speed, direction);
+	}
+
+	/**
+	 * ex03_06 燃料付きコンストラクタ
+	 */
+	public Vehicle(String name, EnergySource energy) {
+	    this();
+	    this.energy = energy;
+		this.ownerName = name;
 	}
 	
 	public void setValue(int speed, int direction, String name) {
@@ -168,6 +174,24 @@ public class Vehicle {
 	 * ex03_06 動力源が空でないことを保証するstartメソッド
 	 */
 	public void start() {
-	    
+	    if(energy.empty()) {
+	        energy.charge(80);
+	    }
 	}
+
+	/**
+	 * ex03_06
+	 * @return
+	 */
+    public EnergySource getEnergy() {
+        return energy;
+    }
+
+	/**
+	 * ex03_06
+	 * @return
+	 */
+    public void setEnergy(EnergySource energy) {
+        this.energy = energy;
+    }
 }
