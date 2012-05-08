@@ -1,6 +1,6 @@
 package ch04.ex04_01;
 
-public class GasTank extends EnergySource {
+public class GasTank implements EnergySource {
 
     private int TANK_MAX;
     private int tank = 0;

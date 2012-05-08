@@ -1,6 +1,6 @@
 package ch04.ex04_01;
 
-public class Battery extends EnergySource {
+public class Battery implements EnergySource {
 
     private static int MAX = 100;
     private int percentage = 0;
