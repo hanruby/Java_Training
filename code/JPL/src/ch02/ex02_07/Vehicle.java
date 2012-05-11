@@ -31,25 +31,21 @@ public class Vehicle {
 	private String ownerName;
 	
 	/**
-	 * 初期化ブロック(P47)
-	 */
-	{
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
-	}
-	
-	/**
 	 * 引数なしコンストラクタ
 	 */
 	public Vehicle() {
-		this.setOwnerName("none");
+		this.ownerName = "none";
+		this.currentSpeed = 0;
+		this.currentDirection =0;
 	}
 	
 	/**
 	 * 所有者の名前を引数にとるコンストラクタ
 	 */
 	public Vehicle(String name) {
-		this.setOwnerName(name);
+		this.ownerName = name;
+		this.currentSpeed = 0;
+		this.currentDirection =0;
 	}
 	
 	public void setValue(int speed, int direction, String name) {
