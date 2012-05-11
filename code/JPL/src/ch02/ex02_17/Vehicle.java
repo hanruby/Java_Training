@@ -70,7 +70,13 @@ public class Vehicle {
 	public Vehicle(String name) {
 		this.setOwnerName(name);
 	}
-
+	
+	/**
+	 * 所有者、スピード、進行方向を引数にとるコンストラクタ
+	 * @param speed
+	 * @param direction
+	 * @param name
+	 */
 	public Vehicle(int speed, int direction, String name) {
 		this.setValue(speed, direction, name);
 	}
