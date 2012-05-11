@@ -53,9 +53,9 @@ public class Vehicle {
 	 * 引数なしコンストラクタ
 	 */
 	public Vehicle() {
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
-		this.setOwnerName("none");
+		this.ownerName = "none";
+		this.currentSpeed = 0;
+		this.currentDirection = 0;
 		nextVehicleId++;
 		this.id = nextVehicleId;
 		this.energy = new GasTank(100);
@@ -63,15 +63,24 @@ public class Vehicle {
 	
 	/**
 	 * 所有者の名前を引数にとるコンストラクタ
+	 * @param name
 	 */
 	public Vehicle(String name) {
 	    this();
-		this.setOwnerName(name);
+		this.ownerName = name;
 	}
-
+	
+	/**
+	 * 所有者、スピード、進行方向を引数にとるコンストラクタ
+	 * @param speed
+	 * @param direction
+	 * @param name
+	 */
 	public Vehicle(int speed, int direction, String name) {
-	    this(name);
-		this.setValue(speed, direction);
+	    this();
+		this.ownerName = name;
+		this.currentSpeed = speed;
+		this.currentDirection = direction;
 	}
 
 	/**
