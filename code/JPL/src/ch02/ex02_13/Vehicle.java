@@ -47,31 +47,39 @@ public class Vehicle {
 	}
 
 	/**
-	 * 初期化ブロック(P47)
-	 */
-	{
-		this.setCurrentSpeed(0);
-		this.setCurrentDirection(0);
-		nextVehicleId++;
-		this.id = nextVehicleId;
-	}
-	
-	/**
 	 * 引数なしコンストラクタ
 	 */
 	public Vehicle() {
-		this.setOwnerName("none");
+		this.ownerName = "none";
+		this.currentSpeed = 0;
+		this.currentDirection = 0;
 	}
 	
 	/**
 	 * 所有者の名前を引数にとるコンストラクタ
+	 * @param name
 	 */
 	public Vehicle(String name) {
-		this.setOwnerName(name);
+		this.ownerName = name;
+		this.currentSpeed = 0;
+		this.currentDirection = 0;
+	}
+	
+	/**
+	 * 所有者、スピード、進行方向を引数にとるコンストラクタ
+	 * @param speed
+	 * @param direction
+	 * @param name
+	 */
+	public Vehicle(int speed, int direction, String name) {
+		this.ownerName = name;
+		this.currentSpeed = speed;
+		this.currentDirection = direction;
 	}
 
-	public Vehicle(int speed, int direction, String name) {
-		this.setValue(speed, direction, name);
+	{
+		nextVehicleId++;
+		this.id = nextVehicleId;
 	}
 	
 	public void setValue(int speed, int direction, String name) {

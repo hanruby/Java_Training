@@ -46,7 +46,7 @@ public class Vehicle {
 	public Vehicle() {
 		this.ownerName = "none";
 		this.currentSpeed = 0;
-		this.currentDirection =0;
+		this.currentDirection = 0;
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class Vehicle {
 	public Vehicle(String name) {
 		this.ownerName = name;
 		this.currentSpeed = 0;
-		this.currentDirection =0;
+		this.currentDirection = 0;
 	}
 	
 	/**
