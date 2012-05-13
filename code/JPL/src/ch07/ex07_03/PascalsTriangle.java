@@ -20,11 +20,18 @@ public class PascalsTriangle {
         createPascalsTriangle(DEFAULT_DEPTH);
     }
     
+    public PascalsTriangle(int triangleDepth) {
+        if (triangleDepth < 1) {
+            throw new IllegalArgumentException("The triangle depth should not be negative value");
+        }
+        createPascalsTriangle(triangleDepth);
+    }
+    
     /**
      * パスカルの三角形を作成する
      */
     private void createPascalsTriangle(int triangleDepth) {
-        triangle = new int[DEFAULT_DEPTH][];
+        triangle = new int[triangleDepth][];
         for (int depth = 0; depth < triangle.length; depth++) {
             triangle[depth] = new int[depth + 1];
             for (int k = 0; k < triangle[depth].length; k++) {

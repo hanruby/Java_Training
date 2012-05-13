@@ -51,4 +51,15 @@ public class PascalsTriangleTest {
         // 配列を無理やり表示する　
         System.out.println(Arrays.deepToString(triangle));
     }
+    
+    @Test
+    public void testCreateOtherTriangle() throws Exception {
+        pascalsTriangle = new PascalsTriangle(15);
+        assertEquals(15, pascalsTriangle.getPascalsTriangle().length);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalArg() throws Exception {
+        pascalsTriangle = new PascalsTriangle(0);
+    }
 }
