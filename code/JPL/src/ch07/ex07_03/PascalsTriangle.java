@@ -68,10 +68,16 @@ public class PascalsTriangle {
     public String toString() {
         String desc = "";
         for (int depth = 0; depth < triangle.length; depth++) {
+            desc += "{ ";
             for (int k = 0; k < triangle[depth].length; k++) {
                 desc += triangle[depth][k];
+                
+                if(k == triangle[depth].length -1 ) {
+                    desc += " },\n";
+                }
+                else
+                    desc += ", ";
             }
-            desc += "\n";
         }
         return desc;
     }
