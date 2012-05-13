@@ -3,6 +3,8 @@ package ch07.ex07_03;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +47,8 @@ public class PascalsTriangleTest {
                 assertEquals(correctPascalsTriangle[depth][k], triangle[depth][k]);
             }
         }
-        
+
+        // 配列を無理やり表示する　
+        System.out.println(Arrays.deepToString(triangle));
     }
 }

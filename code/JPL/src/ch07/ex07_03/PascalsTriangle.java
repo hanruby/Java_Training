@@ -10,6 +10,11 @@ public class PascalsTriangle {
     
     private int[][] triangle; // 三角形を格納する２次元配列
     
+    public static void main(String[] args) {
+        PascalsTriangle pt = new PascalsTriangle();
+        System.out.println(pt);
+    }
+    
     public PascalsTriangle() {
         // パスカルの三角形を格納する配列を初期化する
         triangle = new int[DEPTH][];
@@ -57,5 +62,17 @@ public class PascalsTriangle {
      */
     public int[][] getPascalsTriangle() {
         return triangle.clone();
+    }
+    
+    @Override
+    public String toString() {
+        String desc = "";
+        for (int depth = 0; depth < triangle.length; depth++) {
+            for (int k = 0; k < triangle[depth].length; k++) {
+                desc += triangle[depth][k];
+            }
+            desc += "\n";
+        }
+        return desc;
     }
 }
