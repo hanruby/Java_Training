@@ -6,9 +6,9 @@ package ch07.ex07_03;
  *
  */
 public class PascalsTriangle {
-    static int DEPTH = 12; // 深さ
+    private static int DEPTH = 12; // 深さ
     
-    private int[][] triangle; // 三角形を格納する２次元配列
+    private int[][] triangle = new int[DEPTH][]; // 三角形を格納する２次元配列
     
     public static void main(String[] args) {
         PascalsTriangle pt = new PascalsTriangle();
@@ -16,12 +16,7 @@ public class PascalsTriangle {
     }
     
     public PascalsTriangle() {
-        // パスカルの三角形を格納する配列を初期化する
-        triangle = new int[DEPTH][];
-        for(int depth = 0; depth < DEPTH; depth++) {
-            triangle[depth] = new int[depth + 1];
-        }
-        
+        // パスカルの三角形を作成する
         createPascalsTriangle();
     }
     
@@ -30,6 +25,7 @@ public class PascalsTriangle {
      */
     private void createPascalsTriangle() {
         for (int depth = 0; depth < triangle.length; depth++) {
+            triangle[depth] = new int[depth + 1];
             for (int k = 0; k < triangle[depth].length; k++) {
                 triangle[depth][k] = rule(depth,k);
             }
