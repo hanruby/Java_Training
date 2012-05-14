@@ -1,4 +1,4 @@
-package ch07.ex07_03;
+package ch09.ex09_03;
 
 /**
  * パスカルの三角形を生成する
@@ -53,11 +53,7 @@ public class PascalsTriangle {
         }
         
         // 深さ１、先頭、または、最後の要素はすべて1を返す
-        if ((n == 0) || (n == k) || (k == 0)) {
-            return 1;
-        }
-
-        return triangle[n-1][k-1] + triangle[n-1][k];
+        return ((n == 0) || (n == k) || (k == 0) ? 1 : triangle[n-1][k-1] + triangle[n-1][k] ); // ex09_03 条件演算子（三項演算子）を用いて書きなおした。分かりやすくなったかといえば、分かりにくくなった気がする。。。
     }
     
     /**
@@ -75,12 +71,7 @@ public class PascalsTriangle {
             desc += "{ ";
             for (int k = 0; k < triangle[depth].length; k++) {
                 desc += triangle[depth][k];
-                
-                if(k == triangle[depth].length -1 ) {
-                    desc += " },\n";
-                }
-                else
-                    desc += ", ";
+                desc += (k == triangle[depth].length -1 ? " },\n" : ", ");  // ex09_03 条件演算子（三項演算子）を用いて書きなおした。分かりやすくはなってない。。
             }
         }
         return desc;
