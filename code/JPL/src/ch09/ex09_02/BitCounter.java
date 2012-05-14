@@ -32,6 +32,7 @@ public class BitCounter {
      */
     public static int bitCount2(int val) {
         int count = 0;
+        // x & (x - 1) により、xの右端の1ビットが消えるしくみを利用している
         for(; val!=0; val&=val-1 ){  
             count++;
         }
