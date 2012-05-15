@@ -26,19 +26,26 @@ public class BitCounter {
     }
     
     /**
-     *  
+     * プログラミング言語C 
+     * P.63 演習2-9
      * @param val
      * @return
      */
     public static int bitCount2(int val) {
         int count = 0;
-        // x & (x - 1) により、xの右端の1ビットが消えるしくみを利用している
+        // x & (x - 1) により、xの右端に1になっているビットが消えるしくみを利用している
         for(; val!=0; val&=val-1 ){  
             count++;
         }
         return count;
     }
 
+    /**
+     * ハッカーのたのしみ
+     * 注意：上位２ビットは利用不可
+     * @param val
+     * @return
+     */
     public static int bitCount3(int val) {
         int num;
         num = (val >> 1) & 03333333333;
@@ -47,6 +54,11 @@ public class BitCounter {
         return num;
     }
     
+    /**
+     * 
+     * @param val
+     * @return
+     */
     public static int bitCount4(int val) {
         val = (val & 0x55555555) + (val >> 1 & 0x55555555);
         val = (val & 0x33333333) + (val >> 2 & 0x33333333);
