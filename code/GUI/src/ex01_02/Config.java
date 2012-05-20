@@ -8,7 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Config implements Cloneable {
-    private Format format;
+    private Format clockFormat;
+    private Format simpleClockFormat;
     private Insets margin;
 
     private Font font;
@@ -17,7 +18,8 @@ public class Config implements Cloneable {
     private Color fontColor;
     
     public Config() {
-        format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        clockFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        simpleClockFormat = new SimpleDateFormat("HH:mm:ss");
         font =  new Font("Consolas",Font.PLAIN,30);
         backgroundColor = Color.BLACK;
         fontColor = Color.WHITE;
@@ -32,7 +34,7 @@ public class Config implements Cloneable {
     }
 
     public Config(Config conf) {
-        this.format = conf.format;
+        this.clockFormat = conf.clockFormat;
         this.font =  conf.font;
         this.backgroundColor = conf.backgroundColor;
         this.fontColor = conf.fontColor;
@@ -45,8 +47,12 @@ public class Config implements Cloneable {
         return newConf;
     }
     
-    public String dateFormat(Calendar cal) {
-        return format.format(cal.getTime());
+    public String clock(Calendar cal) {
+        return clockFormat.format(cal.getTime());
+    }
+    
+    public String simpleClock(Calendar cal) {
+        return simpleClockFormat.format(cal.getTime());
     }
     
     public Font getFont() {
