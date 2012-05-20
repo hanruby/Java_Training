@@ -1,4 +1,4 @@
-package ch10.ex10_02;
+package ch10.ex10_04;
 
 /* P.201 */
 
