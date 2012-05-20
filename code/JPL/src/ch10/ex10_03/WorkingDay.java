@@ -4,6 +4,12 @@ import ch06.ex06_01.DayOfWeek;
 
 public class WorkingDay{
 
+    /**
+     * 曜日を受けて、働く日であれば true そうでなければ false を返す
+     * if-else版
+     * @param w
+     * @return
+     */
     static boolean isWorkingDay_usingIf(DayOfWeek w) {
         
         if (w == DayOfWeek.SUNDAY || w == DayOfWeek.SATURDAY) {
@@ -14,6 +20,12 @@ public class WorkingDay{
         }
     }
     
+    /**
+     * 曜日を受けて、働く日であれば true そうでなければ false を返す。
+     * switch版
+     * @param w
+     * @return
+     */
     static boolean isWorkingDay_usingSwitch(DayOfWeek w) {
         
         switch (w) {
@@ -24,4 +36,8 @@ public class WorkingDay{
             return true;
         }
     }
+    
+    /*
+     * switchで記載したほうが分かりやすい
+     * */
 }
