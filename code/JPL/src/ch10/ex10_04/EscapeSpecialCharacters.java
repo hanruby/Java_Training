@@ -25,6 +25,10 @@ public class EscapeSpecialCharacters {
     public static String escape(String str) {
         String escapedStr = "";
         
+        /* do-whileでは書きなおすことができない。
+         * 理由：
+         * ループ本体が一度も実行されないケースも存在するため、do-whileは不適切。
+         */
         int i = 0;
         while(i < str.length()) {
             escapedStr += escapeChar(str.charAt(i));
