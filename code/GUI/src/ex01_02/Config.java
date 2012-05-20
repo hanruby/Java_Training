@@ -35,6 +35,7 @@ public class Config implements Cloneable {
 
     public Config(Config conf) {
         this.clockFormat = conf.clockFormat;
+        this.simpleClockFormat = conf.simpleClockFormat;
         this.font =  conf.font;
         this.backgroundColor = conf.backgroundColor;
         this.fontColor = conf.fontColor;
