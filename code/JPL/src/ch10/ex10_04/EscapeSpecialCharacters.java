@@ -25,8 +25,10 @@ public class EscapeSpecialCharacters {
     public static String escape(String str) {
         String escapedStr = "";
         
-        for (int i = 0; i < str.length(); i++) {
+        int i = 0;
+        while(i < str.length()) {
             escapedStr += escapeChar(str.charAt(i));
+            i++;
         }
         
         return escapedStr;
