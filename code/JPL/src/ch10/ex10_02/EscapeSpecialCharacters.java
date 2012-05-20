@@ -38,33 +38,25 @@ public class EscapeSpecialCharacters {
      * @return
      */
     protected static String escapeChar(char c) {
-        if (c == '\n') {
+        switch (c) {
+        case '\n':
             return "\\n";
-        }
-        else if (c == '\t') {
+        case '\t':
             return "\\t";
-        } 
-        else if (c == '\b') {
+        case '\b':
             return "\\b";
-        } 
-        else if (c == '\r') {
+        case '\r':
             return "\\r";
-        } 
-        else if (c == '\f') {
+        case '\f':
             return "\\f";
-        } 
-        else if (c == '\\') {
+        case '\\':
             return "\\\\";
-        } 
-        else if (c == '\'') {
+        case '\'':
             return "\\'";
-        } 
-        else if (c == '\"') {
+        case '\"':
             return "\\\"";
-        } 
-        else {
+        default:
             return String.valueOf(c);
         }
-        
     }
 }
