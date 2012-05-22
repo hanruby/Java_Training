@@ -21,6 +21,8 @@ public class DigitalClock extends Frame implements Runnable{
     private Image clockImage;
     private Graphics canvas;
     private DigitalClock clock;
+
+    private PopupMenu popupmenu;
     
     public DigitalClock() {
         super();
@@ -124,9 +126,10 @@ public class DigitalClock extends Frame implements Runnable{
      * メニューバーを作成する
      */
     private void createPopupMenu() {
-        PopupMenu menu = new PropertiesPopupMenu();
+        popupmenu = new PropertiesPopupMenu();
 
-		add(menu);
+		add(popupmenu);
+
     }
 
     // Runnable : JPL P.297 
@@ -139,6 +142,23 @@ public class DigitalClock extends Frame implements Runnable{
             }
         } catch (InterruptedException e){
             return;
+        }
+    }
+
+    /**
+     * マウスイベント
+     * @author ato
+     *
+     */
+    class ClockMouseListener extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            // 右クリックでポップアップメニューを開く
+            if ( e.getButton() == MouseEvent.BUTTON3) {
+                popupmenu.show(e.getComponent(), e.getX(), e.getY());
+            }
+            super.mouseClicked(e);
         }
     }
 }
@@ -154,13 +174,3 @@ class ClockWindowListener extends WindowAdapter {
         System.exit (0);
     }
 }
-
-class ClockMouseListener extends MouseAdapter {
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("x:" + e.getX() + ", y:"+ e.getY());
-        // TODO Auto-generated method stub
-        super.mouseClicked(e);
-    }
-}
-
