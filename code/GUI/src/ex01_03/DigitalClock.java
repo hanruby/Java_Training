@@ -35,6 +35,8 @@ public class DigitalClock extends Frame implements Runnable{
         createPopupMenu();
         
         addWindowListener(new ClockWindowListener());
+        addMouseListener(new ClockMouseListener());
+
         setResizable(false);
         setVisible(true);
     }
@@ -154,6 +156,11 @@ class ClockWindowListener extends WindowAdapter {
 }
 
 class ClockMouseListener extends MouseAdapter {
-    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("x:" + e.getX() + ", y:"+ e.getY());
+        // TODO Auto-generated method stub
+        super.mouseClicked(e);
+    }
 }
 
