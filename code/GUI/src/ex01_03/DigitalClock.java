@@ -32,7 +32,8 @@ public class DigitalClock extends Frame implements Runnable{
 
         setConfig(config);
         createMenuBar();
-
+        createPopupMenu();
+        
         addWindowListener(new ClockWindowListener());
         setResizable(false);
         setVisible(true);
@@ -117,6 +118,15 @@ public class DigitalClock extends Frame implements Runnable{
 		setMenuBar(menu);
     }
 
+    /** 
+     * メニューバーを作成する
+     */
+    private void createPopupMenu() {
+        PopupMenu menu = new PropertiesPopupMenu();
+
+		add(menu);
+    }
+
     // Runnable : JPL P.297 
     @Override
     public void run() {
@@ -141,5 +151,9 @@ class ClockWindowListener extends WindowAdapter {
     public void windowClosing (WindowEvent event) {
         System.exit (0);
     }
+}
+
+class ClockMouseListener extends MouseAdapter {
+    
 }
 
