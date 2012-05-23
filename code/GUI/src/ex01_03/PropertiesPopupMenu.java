@@ -16,8 +16,6 @@ public class PropertiesPopupMenu extends PopupMenu{
     public PropertiesPopupMenu(Frame owner) {
         clock = (DigitalClock)owner;
 
-        Menu properties_menu = new Menu("Properties");
-
         {
             // Ref: http://www.java2s.com/Code/Java/Swing-JFC/AsimpleexampleofJPopupMenu.htm
 
@@ -45,7 +43,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             item.addActionListener(menuListener);
             menu.add(item);
 
-            properties_menu.add(menu);
+            add(menu);
         }
         {
             // Font size
@@ -72,10 +70,8 @@ public class PropertiesPopupMenu extends PopupMenu{
             item.addActionListener(menuListener);
             menu.add(item);
             
-            properties_menu.add(menu);
+            add(menu);
         }
-
-        add(properties_menu);
         
     }
 
