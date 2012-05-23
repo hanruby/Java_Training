@@ -24,8 +24,8 @@ public class PropertiesDialog extends Dialog {
 
     private static final long serialVersionUID = 210549325687453262L;
     
-    DigitalClock clock;
-    Config defaultConf;
+    private DigitalClock clock;
+    private Config defaultConf;
     
     public PropertiesDialog(Frame owner) {
         super(owner, true);

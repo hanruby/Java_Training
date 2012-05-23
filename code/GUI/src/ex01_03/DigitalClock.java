@@ -126,7 +126,7 @@ public class DigitalClock extends Frame implements Runnable{
      * メニューバーを作成する
      */
     private void createPopupMenu() {
-        popupmenu = new PropertiesPopupMenu();
+        popupmenu = new PropertiesPopupMenu(clock);
 
 		add(popupmenu);
 

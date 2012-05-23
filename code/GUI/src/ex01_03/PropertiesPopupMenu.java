@@ -1,6 +1,7 @@
 package ex01_03;
 
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -10,9 +11,10 @@ import java.awt.event.ActionListener;
 public class PropertiesPopupMenu extends PopupMenu{
 
     private static final long serialVersionUID = 1L;
+    private DigitalClock clock;
 
-    public PropertiesPopupMenu() {
-        
+    public PropertiesPopupMenu(Frame owner) {
+        clock = (DigitalClock)owner;
 
         Menu properties_menu = new Menu("Properties");
 
@@ -25,8 +27,9 @@ public class PropertiesPopupMenu extends PopupMenu{
  
             ActionListener menuListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Popup menu item ["
-                            + e.getActionCommand() + "] was pressed.");
+                    Config conf = new Config(clock.getConfig());
+                    conf.setFont(new Font((String)e.getActionCommand(),conf.getFont().getStyle(),conf.getFont().getSize()));
+                    clock.setConfig(conf);
                 }
             };
 
