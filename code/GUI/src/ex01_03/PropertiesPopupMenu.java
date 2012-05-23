@@ -1,5 +1,6 @@
 package ex01_03;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Menu;
@@ -67,6 +68,96 @@ public class PropertiesPopupMenu extends PopupMenu{
             menu.add(item);
 
             item = new MenuItem("30");
+            item.addActionListener(menuListener);
+            menu.add(item);
+            
+            add(menu);
+        }
+        {
+            // Font color
+            Menu menu = new Menu("Font color");
+            MenuItem item;
+            
+            ActionListener menuListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Config conf = new Config(clock.getConfig());
+                    try {
+                        conf.setFontColor((Color)(Color.class.getField((String)e.getActionCommand()).get(null)));
+                    } catch (IllegalArgumentException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (SecurityException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (IllegalAccessException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (NoSuchFieldException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    clock.setConfig(conf);
+                }
+            };
+
+            item = new MenuItem("BLACK"); 
+            item.addActionListener(menuListener);
+            menu.add(item);
+
+            item = new MenuItem("GREEN"); 
+            item.addActionListener(menuListener);
+            menu.add(item);
+
+            item = new MenuItem("ORANGE");
+            item.addActionListener(menuListener);
+            menu.add(item);
+            
+            item = new MenuItem("WHITE");
+            item.addActionListener(menuListener);
+            menu.add(item);
+            
+            add(menu);
+        }
+        {
+            // Background color
+            Menu menu = new Menu("Background color");
+            MenuItem item;
+            
+            ActionListener menuListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Config conf = new Config(clock.getConfig());
+                    try {
+                        conf.setBackgroundColor((Color)(Color.class.getField((String)e.getActionCommand()).get(null)));
+                    } catch (IllegalArgumentException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (SecurityException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (IllegalAccessException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    } catch (NoSuchFieldException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    clock.setConfig(conf);
+                }
+            };
+
+            item = new MenuItem("BLACK"); 
+            item.addActionListener(menuListener);
+            menu.add(item);
+
+            item = new MenuItem("GREEN"); 
+            item.addActionListener(menuListener);
+            menu.add(item);
+
+            item = new MenuItem("ORANGE");
+            item.addActionListener(menuListener);
+            menu.add(item);
+            
+            item = new MenuItem("WHITE");
             item.addActionListener(menuListener);
             menu.add(item);
             
