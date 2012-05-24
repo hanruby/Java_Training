@@ -21,14 +21,11 @@ public class DigitalClock extends Window implements Runnable{
     private Image clockImage;
     private Graphics canvas;
     private DigitalClock clock;
-    private Frame owner;
 
     private PopupMenu popupmenu;
     
     public DigitalClock(Frame owner) {
         super(owner);
-        
-        this.owner = owner;
         
         addNotify();
         pack();
@@ -125,7 +122,7 @@ public class DigitalClock extends Window implements Runnable{
     }
 
     /** 
-     * メニューバーを作成する
+     * ポップアップメニューを作成する
      */
     private void createPopupMenu() {
         popupmenu = new PropertiesPopupMenu(clock);
