@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  * @author ato
  *
  */
-public class DigitalClock extends Frame implements Runnable{
+public class DigitalClock extends Window implements Runnable{
 
     private static final long serialVersionUID = 248840136722015507L;
 
@@ -21,11 +21,15 @@ public class DigitalClock extends Frame implements Runnable{
     private Image clockImage;
     private Graphics canvas;
     private DigitalClock clock;
+    private Frame owner;
 
     private PopupMenu popupmenu;
     
-    public DigitalClock() {
-        super();
+    public DigitalClock(Frame owner) {
+        super(owner);
+        
+        this.owner = owner;
+        
         addNotify();
         pack();
         
@@ -39,7 +43,6 @@ public class DigitalClock extends Frame implements Runnable{
         addWindowListener(new ClockWindowListener());
         addMouseListener(new ClockMouseListener());
 
-        setResizable(false);
         setVisible(true);
     }
     
@@ -94,12 +97,11 @@ public class DigitalClock extends Frame implements Runnable{
         g.drawImage(clockImage, 0, 0, this);
 
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
-
-        setTitle(config.simpleClock(cal)); // 時刻をタイトルへ表示する
     }
 
     public static void main (String args[]) {
-        DigitalClock clock = new DigitalClock();
+        Frame f = new Frame();
+        DigitalClock clock = new DigitalClock(f);
         new Thread(clock).start();
     }
 
@@ -119,7 +121,7 @@ public class DigitalClock extends Frame implements Runnable{
             }
         });
 
-		setMenuBar(menu);
+		//setMenuBar(menu);
     }
 
     /** 

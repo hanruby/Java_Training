@@ -7,12 +7,12 @@ import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -27,8 +27,8 @@ public class PropertiesDialog extends Dialog {
     private DigitalClock clock;
     private Config defaultConf;
     
-    public PropertiesDialog(Frame owner) {
-        super(owner, true);
+    public PropertiesDialog(Window owner) {
+        super(owner);
 
         clock = (DigitalClock)owner;
         defaultConf = new Config(clock.getConfig());

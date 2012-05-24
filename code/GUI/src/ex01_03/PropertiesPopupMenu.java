@@ -2,10 +2,10 @@ package ex01_03;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,7 @@ public class PropertiesPopupMenu extends PopupMenu{
     private static final long serialVersionUID = 1L;
     private DigitalClock clock;
 
-    public PropertiesPopupMenu(Frame owner) {
+    public PropertiesPopupMenu(Window owner) {
         clock = (DigitalClock)owner;
 
         {
