@@ -3,13 +3,13 @@ package ex01_03;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import java.text.Format;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Config implements Cloneable {
-    private Format clockFormat;
-    private Format simpleClockFormat;
+    private DateFormat clockFormat;
+    private DateFormat simpleClockFormat;
     private Insets margin;
 
     private Font font;
@@ -49,6 +49,7 @@ public class Config implements Cloneable {
     }
     
     public String clock(Calendar cal) {
+        clockFormat.setTimeZone(cal.getTimeZone());
         return clockFormat.format(cal.getTime());
     }
     

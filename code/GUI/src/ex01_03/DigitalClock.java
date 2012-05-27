@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.imageio.ImageIO;
 
@@ -102,8 +104,6 @@ public class DigitalClock extends Window implements Runnable{
     
     @Override
     public void paint(Graphics g) {
-        Calendar cal = new GregorianCalendar();
-
         clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);;
         bufGraphics = (Graphics2D) clockImage.getGraphics();
         
@@ -116,8 +116,11 @@ public class DigitalClock extends Window implements Runnable{
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
         // 時計文字列の表示（Insets + margin）
-        bufGraphics.drawString(config.clock(cal), this.getInsets().left + config.getMargin().left, 
-                                             this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left, 
+                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
+
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left + config.getMargin().left + 100, 
+                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 100);
 
         //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
 
