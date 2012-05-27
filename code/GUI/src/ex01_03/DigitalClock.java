@@ -4,8 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import javax.imageio.ImageIO;
 
 /**
  * デジタル時計
@@ -18,18 +23,25 @@ public class DigitalClock extends Window implements Runnable{
 
     private Config config;
     
-    private Image clockImage;
-    private Graphics canvas;
+    private BufferedImage clockImage;
+    private Graphics2D bufGraphics;
     private DigitalClock clock;
 
     private PopupMenu popupmenu;
+
+    private Image backgroundImage = null;
     
     public DigitalClock(Frame owner) {
         super(owner);
         
         addNotify();
         pack();
+
+        loadImage();
+        setSize(backgroundImage.getWidth(this),backgroundImage.getHeight(this));
         
+        setBackground(new Color(0,0,0,0));
+
         config = new Config();
         this.clock = this;
 
@@ -53,12 +65,18 @@ public class DigitalClock extends Window implements Runnable{
         Insets insets = this.getInsets();
         Rectangle2D clockSize = getClockSize();
         // 描画に必要なサイズ + Insets + 描画のmargin
-        setSize((int)clockSize.getWidth() + (insets.left + insets.right) + (config.getMargin().left + config.getMargin().right),
-                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (config.getMargin().top + config.getMargin().bottom));
-        setFont(config.getFont());
-        setBackground(config.getBackgroundColor());
-        repaint();
+//        setSize((int)clockSize.getWidth() + (insets.left + insets.right) + (config.getMargin().left + config.getMargin().right),
+//                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (config.getMargin().top + config.getMargin().bottom));
+
+    }
         
+    private void loadImage() {
+        try {
+            backgroundImage = ImageIO.read(new File("image/1000px-BlankMap-World-162E.svg.png"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     private Rectangle2D getClockSize() {
@@ -85,21 +103,41 @@ public class DigitalClock extends Window implements Runnable{
     @Override
     public void paint(Graphics g) {
         Calendar cal = new GregorianCalendar();
-        clockImage = createImage(this.getWidth(), this.getHeight());
-        canvas = clockImage.getGraphics();
-        canvas.setColor(config.getFontColor());
-        // 時計文字列の表示（Insets + margin）
-        canvas.drawString(config.clock(cal), this.getInsets().left + config.getMargin().left, 
-                                             this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
-        g.drawImage(clockImage, 0, 0, this);
 
+        setConfig(this.config);
+
+        clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);;
+        bufGraphics = (Graphics2D) clockImage.getGraphics();
+        
+        bufGraphics.setBackground(new Color(0,0,0,0));
+        bufGraphics.setFont(config.getFont());
+        bufGraphics.setColor(config.getFontColor());
+
+        //clockImage = (BufferedImage) createImage(this.getWidth(), this.getHeight());
+
+        //clockImage = createImage(this.getWidth(), this.getHeight());
+        //clockImage = createImage(backgroundImage.getWidth(this), backgroundImage.getHeight(this));
+
+        // 背景画像の表示
+        //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
+        bufGraphics.drawImage(backgroundImage, 0, 0, this);
+        
+        // 時計文字列の表示（Insets + margin）
+        bufGraphics.drawString(config.clock(cal), this.getInsets().left + config.getMargin().left, 
+                                             this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
+
+        //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
+
+        g.drawImage(clockImage, 0, 0, this);
+        
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
+        super.paint(g);
     }
 
     public static void main (String args[]) {
         Frame f = new Frame();
-        DigitalClock clock = new DigitalClock(f);
-        new Thread(clock).start();
+        DigitalClock digitalclock = new DigitalClock(f);
+        new Thread(digitalclock).start();
     }
 
     /** 
