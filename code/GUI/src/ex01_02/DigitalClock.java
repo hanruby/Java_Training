@@ -19,7 +19,7 @@ public class DigitalClock extends Frame implements Runnable{
     private Config config;
     
     private Image clockImage;
-    private Graphics canvas;
+    private Graphics imageBuf;
     private DigitalClock clock;
     
     public DigitalClock() {
@@ -81,10 +81,10 @@ public class DigitalClock extends Frame implements Runnable{
     public void paint(Graphics g) {
         Calendar cal = new GregorianCalendar();
         clockImage = createImage(this.getWidth(), this.getHeight());
-        canvas = clockImage.getGraphics();
-        canvas.setColor(config.getFontColor());
+        imageBuf = clockImage.getGraphics();
+        imageBuf.setColor(config.getFontColor());
         // 時計文字列の表示（Insets + margin）
-        canvas.drawString(config.clock(cal), this.getInsets().left + config.getMargin().left, 
+        imageBuf.drawString(config.clock(cal), this.getInsets().left + config.getMargin().left, 
                                                   this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
         g.drawImage(clockImage, 0, 0, this);
 
