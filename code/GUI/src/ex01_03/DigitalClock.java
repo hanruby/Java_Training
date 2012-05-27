@@ -67,7 +67,7 @@ public class DigitalClock extends Window implements Runnable{
         // 描画に必要なサイズ + Insets + 描画のmargin
 //        setSize((int)clockSize.getWidth() + (insets.left + insets.right) + (config.getMargin().left + config.getMargin().right),
 //                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (config.getMargin().top + config.getMargin().bottom));
-
+        repaint();
     }
         
     private void loadImage() {
@@ -104,19 +104,12 @@ public class DigitalClock extends Window implements Runnable{
     public void paint(Graphics g) {
         Calendar cal = new GregorianCalendar();
 
-        setConfig(this.config);
-
         clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);;
         bufGraphics = (Graphics2D) clockImage.getGraphics();
         
         bufGraphics.setBackground(new Color(0,0,0,0));
         bufGraphics.setFont(config.getFont());
         bufGraphics.setColor(config.getFontColor());
-
-        //clockImage = (BufferedImage) createImage(this.getWidth(), this.getHeight());
-
-        //clockImage = createImage(this.getWidth(), this.getHeight());
-        //clockImage = createImage(backgroundImage.getWidth(this), backgroundImage.getHeight(this));
 
         // 背景画像の表示
         //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
