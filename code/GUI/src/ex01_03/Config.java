@@ -21,8 +21,8 @@ public class Config implements Cloneable {
         clockFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         simpleClockFormat = new SimpleDateFormat("HH:mm:ss");
         font =  new Font("Consolas",Font.PLAIN,30);
-        backgroundColor = Color.BLACK;
-        fontColor = Color.WHITE;
+        backgroundColor = Color.GRAY;
+        fontColor = Color.BLACK;
         margin = new Insets(10, 10, 10, 10);
     }
 
