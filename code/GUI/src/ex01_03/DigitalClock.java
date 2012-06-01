@@ -116,10 +116,10 @@ public class DigitalClock extends Window implements Runnable{
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
         // 時計文字列の表示（Insets + margin）
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left, 
-                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight());
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left + 270, 
+                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 130);
 
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left + config.getMargin().left + 100, 
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left + config.getMargin().left + 600, 
                                 this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 100);
 
         //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
