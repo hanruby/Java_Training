@@ -117,14 +117,11 @@ public class DigitalClock extends Window implements Runnable{
         //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
-        // 時計文字列の表示（Insets + margin）
-        Point japan = new Point(370, 130);
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left - (int)this.getClockSize().getWidth() / 2 + japan.x, 
-                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + japan.y);
-        bufGraphics.drawImage(clockiconImage, this.getInsets().left + config.getMargin().left + japan.x, this.getInsets().top + config.getMargin().top + japan.y - 10, this);
+        Point japan = new Point(430, 140);
+        drawClock(TimeZone.getTimeZone("Japan"), japan);
         
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left - (int)this.getClockSize().getWidth() / 2 + config.getMargin().left + 700, 
-                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 100);
+        Point boulder = new Point(700, 130);
+        drawClock(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"), boulder);
 
         //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
 
@@ -134,6 +131,16 @@ public class DigitalClock extends Window implements Runnable{
         super.paint(g);
     }
     
+    private void drawClock(TimeZone tz, Point pt) {
+        // 時計文字列の表示（Insets + margin）
+        bufGraphics.drawString(config.clock(new GregorianCalendar(tz)), this.getInsets().left + config.getMargin().left - (int)this.getClockSize().getWidth() / 2 + pt.x, 
+                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + pt.y);
+        
+        // アイコンの表示
+        bufGraphics.drawImage(clockiconImage, this.getInsets().left + config.getMargin().left + pt.x, this.getInsets().top + config.getMargin().top + pt.y - 10, this);
+        
+    }
+
     public static void main (String args[]) {
         Frame f = new Frame();
         DigitalClock digitalclock = new DigitalClock(f);
