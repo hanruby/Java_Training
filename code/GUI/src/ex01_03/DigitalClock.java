@@ -32,6 +32,7 @@ public class DigitalClock extends Window implements Runnable{
     private PopupMenu popupmenu;
 
     private Image backgroundImage = null;
+    private Image clockiconImage = null;
     
     public DigitalClock(Frame owner) {
         super(owner);
@@ -75,6 +76,7 @@ public class DigitalClock extends Window implements Runnable{
     private void loadImage() {
         try {
             backgroundImage = ImageIO.read(new File("image/1000px-BlankMap-World-162E.svg.png"));
+            clockiconImage = ImageIO.read(new File("image/clock.png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -116,10 +118,12 @@ public class DigitalClock extends Window implements Runnable{
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
         // 時計文字列の表示（Insets + margin）
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left + 270, 
-                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 130);
-
-        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left + config.getMargin().left + 600, 
+        Point japan = new Point(370, 130);
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), this.getInsets().left + config.getMargin().left - (int)this.getClockSize().getWidth() / 2 + japan.x, 
+                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + japan.y);
+        bufGraphics.drawImage(clockiconImage, this.getInsets().left + config.getMargin().left + japan.x, this.getInsets().top + config.getMargin().top + japan.y - 10, this);
+        
+        bufGraphics.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"))), this.getInsets().left - (int)this.getClockSize().getWidth() / 2 + config.getMargin().left + 700, 
                                 this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + 100);
 
         //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
@@ -129,7 +133,7 @@ public class DigitalClock extends Window implements Runnable{
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
         super.paint(g);
     }
-
+    
     public static void main (String args[]) {
         Frame f = new Frame();
         DigitalClock digitalclock = new DigitalClock(f);
