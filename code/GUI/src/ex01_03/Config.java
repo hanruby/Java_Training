@@ -20,7 +20,7 @@ public class Config implements Cloneable {
     public Config() {
         clockFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         simpleClockFormat = new SimpleDateFormat("HH:mm:ss");
-        font =  new Font("Consolas",Font.PLAIN,30);
+        font =  new Font("Consolas",Font.PLAIN,20);
         backgroundColor = Color.GRAY;
         fontColor = Color.BLACK;
         margin = new Insets(10, 10, 10, 10);

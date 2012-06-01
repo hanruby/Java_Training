@@ -117,8 +117,8 @@ public class DigitalClock extends Window implements Runnable{
         //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
-        Point japan = new Point(430, 140);
-        drawClock(TimeZone.getTimeZone("Japan"), japan);
+        Point tokyo = new Point(430, 140);
+        drawClock(TimeZone.getTimeZone("Japan"), tokyo);
         
         Point boulder = new Point(700, 130);
         drawClock(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"), boulder);
