@@ -122,8 +122,6 @@ public class DigitalClock extends Window implements Runnable{
         Point boulder = new Point(710, 140);
         drawClock(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"), boulder);
 
-        //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
-
         g.drawImage(clockImage, 0, 0, this);
         
         setIconImage(clockImage); // 時計の画像をアイコンとして表示する
@@ -131,8 +129,8 @@ public class DigitalClock extends Window implements Runnable{
     }
     
     private void drawClock(TimeZone tz, Point pt) {
-        Rectangle2D clockSize = this.getClockSize();
         
+        Rectangle2D clockSize = this.getClockSize();
         Point clockPosition = new Point(pt.x - (int)clockSize.getWidth() / 2, pt.y + 6);
         
         // バックグラウンドの表示
