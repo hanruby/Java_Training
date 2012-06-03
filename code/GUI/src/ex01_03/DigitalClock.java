@@ -111,16 +111,15 @@ public class DigitalClock extends Window implements Runnable{
         
         bufGraphics.setBackground(new Color(0,0,0,0));
         bufGraphics.setFont(config.getFont());
-        bufGraphics.setColor(config.getFontColor());
 
         // 背景画像の表示
         //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
-        Point tokyo = new Point(430, 140);
+        Point tokyo = new Point(440, 155);
         drawClock(TimeZone.getTimeZone("Japan"), tokyo);
         
-        Point boulder = new Point(700, 130);
+        Point boulder = new Point(710, 140);
         drawClock(TimeZone.getTimeZone("Mountain Standard Time, America/Denver"), boulder);
 
         //setSize(clockImage.getWidth(this),clockImage.getHeight(this));
@@ -132,12 +131,25 @@ public class DigitalClock extends Window implements Runnable{
     }
     
     private void drawClock(TimeZone tz, Point pt) {
-        // 時計文字列の表示（Insets + margin）
-        bufGraphics.drawString(config.clock(new GregorianCalendar(tz)), this.getInsets().left + config.getMargin().left - (int)this.getClockSize().getWidth() / 2 + pt.x, 
-                                this.getInsets().top + config.getMargin().top + (int)this.getClockSize().getHeight() + pt.y);
+        Rectangle2D clockSize = this.getClockSize();
+        
+        Point clockPosition = new Point(pt.x - (int)clockSize.getWidth() / 2, pt.y + 6);
+        
+        // バックグラウンドの表示
+        bufGraphics.setColor(config.getBackgroundColor());
+        bufGraphics.fillRoundRect(clockPosition.x - 3,
+                                  clockPosition.y - 3,
+                                  (int)clockSize.getWidth() + 6,
+                                  (int)clockSize.getHeight() + 6, 6, 6);
+        
+        // 時計文字列の表示
+        bufGraphics.setColor(config.getFontColor());
+        bufGraphics.drawString(config.clock(new GregorianCalendar(tz)),
+                               clockPosition.x, 
+                               clockPosition.y + (int)clockSize.getHeight() );
         
         // アイコンの表示
-        bufGraphics.drawImage(clockiconImage, this.getInsets().left + config.getMargin().left + pt.x, this.getInsets().top + config.getMargin().top + pt.y - 10, this);
+        bufGraphics.drawImage(clockiconImage, pt.x, pt.y - 10, this);
         
     }
 
