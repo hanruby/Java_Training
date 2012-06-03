@@ -23,7 +23,6 @@ public class DataType {
         //bool = 1; // int
 
         // ---------------
-        bool = bool; // boolean
         //bool = c; // char
         //bool = b; // byte
         //bool = s; // short
@@ -46,7 +45,6 @@ public class DataType {
 
         // ---------------
         //c = bool; // boolean
-        c = c; // char
         //c = b; // byte
         //c = s; // short
         //c = i; // int
@@ -70,7 +68,6 @@ public class DataType {
         // ---------------
         //b = bool; // boolean
         //b = c; // char
-        b = b; // byte
         //b = s; // short
         //b = i; // int
         //b = l; // long 
@@ -95,7 +92,6 @@ public class DataType {
         //s = bool; // boolean
         //s = c; // char
         s = b; // byte
-        s = s; // short
         //s = i; // int
         //s = l; // long 
         //s = f; // float
@@ -130,7 +126,6 @@ public class DataType {
         i = c; // char
         i = b; // byte
         i = s; // short
-        i = i; // int
         //i = l; // long 
         //i = f; // float
         //i = d; // double
@@ -157,7 +152,6 @@ public class DataType {
         l = b; // byte
         l = s; // short
         l = i; // int
-        l = l; // long 
         //l = f; // float
         //l = d; // double
     }
@@ -175,7 +169,6 @@ public class DataType {
         f = s; // short
         f = i; // int
         f = l; // long 
-        f = f; // float
         //f = d; // double
     }
 
@@ -193,7 +186,6 @@ public class DataType {
         d = i; // int
         d = l; // long 
         d = f; // float
-        d = d; // double
     }
 }
 

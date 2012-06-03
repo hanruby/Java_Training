@@ -7,9 +7,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.imageio.ImageIO;
@@ -60,16 +58,7 @@ public class DigitalClock extends Window implements Runnable{
     
     public void setConfig(Config conf) {
         this.config = conf;
-/* フォントの指定
-フォントサイズの指定
-文字色の指定
-時計の背景色の指定 
-*/
-        Insets insets = this.getInsets();
-        Rectangle2D clockSize = getClockSize();
-        // 描画に必要なサイズ + Insets + 描画のmargin
-//        setSize((int)clockSize.getWidth() + (insets.left + insets.right) + (config.getMargin().left + config.getMargin().right),
-//                (int)clockSize.getHeight() + (insets.top + insets.bottom) + (config.getMargin().top + config.getMargin().bottom));
+
         repaint();
     }
         
