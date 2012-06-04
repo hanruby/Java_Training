@@ -2,32 +2,32 @@ package ch11.ex11_01;
 
 import ch03.ex03_08.Vehicle;
 
-public class LinkedListImpl implements LinkedList {
-	private Object obj;
-	private LinkedListImpl next;
+public class LinkedListImpl<E> implements LinkedList<E> {
+	private E obj;
+	private LinkedListImpl<E> next;
 	
-	public LinkedListImpl(Object obj) {
+	public LinkedListImpl(E obj) {
 		this.obj = obj;
 	}
 
 	@Override
-    public Object getObj() {
+    public E getObj() {
 		return obj;
 	}
 
 	@Override
-    public void setObj(Object obj) {
+    public void setObj(E obj) {
 		this.obj = obj;
 	}
 
 	@Override
-    public LinkedListImpl getNext() {
+    public LinkedListImpl<E> getNext() {
 		return next;
 	}
 
 	@Override
-    public void setNext(LinkedList next) {
-		this.next = (LinkedListImpl)next;
+    public void setNext(LinkedList<E> next) {
+		this.next = (LinkedListImpl<E>)next;
 	}
 
 	@Override
@@ -40,10 +40,10 @@ public class LinkedListImpl implements LinkedList {
 	}
 	
 	@Override
-    public void setObjects(Object... objs) {
-		LinkedListImpl l = this;
-		for (Object object : objs) {
-			l.next = new LinkedListImpl(object);
+    public void setObjects(E... objs) {
+		LinkedListImpl<E> l = this;
+		for (E object : objs) {
+			l.next = new LinkedListImpl<E>(object);
 			l = l.next; 
 		}
 	}
@@ -58,18 +58,18 @@ public class LinkedListImpl implements LinkedList {
 	}
 	
 	public static void main(String[] args) {
-		LinkedListImpl l;
+		LinkedListImpl<Vehicle> l;
 		
-		l = new LinkedListImpl(new Vehicle(12, 90, "1号"));
-		l.next = new LinkedListImpl(new Vehicle(22, 180, "2号"));
-		l.next.next = new LinkedListImpl(new Vehicle(28, 210, "3号"));
+		l = new LinkedListImpl<Vehicle>(new Vehicle(12, 90, "1号"));
+		l.next = new LinkedListImpl<Vehicle>(new Vehicle(22, 180, "2号"));
+		l.next.next = new LinkedListImpl<Vehicle>(new Vehicle(28, 210, "3号"));
 		
 		System.out.println(l);
 	}
 	
 	@Override
-	public LinkedListImpl clone() {
-	    LinkedListImpl newList = new LinkedListImpl(this.obj);
+	public LinkedListImpl<E> clone() {
+	    LinkedListImpl<E> newList = new LinkedListImpl<E>(this.obj);
 	    if (this.next != null) {
 	        newList.setNext(this.next.clone());	        
 	    }
