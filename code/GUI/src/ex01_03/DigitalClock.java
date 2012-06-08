@@ -140,6 +140,12 @@ public class DigitalClock extends Window implements Runnable{
         
     }
 
+    @Override
+    public void update(Graphics g) {
+        // clearは呼ばない
+        this.paint(g);
+    }
+
     public static void main (String args[]) {
         Frame f = new Frame();
         DigitalClock digitalclock = new DigitalClock(f);

@@ -93,6 +93,12 @@ public class DigitalClock extends Frame implements Runnable{
         setTitle(config.simpleClock(cal)); // 時刻をタイトルへ表示する
     }
 
+    @Override
+    public void update(Graphics g) {
+        // clearは呼ばない
+        this.paint(g);
+    }
+
     public static void main (String args[]) {
         DigitalClock clock = new DigitalClock();
         new Thread(clock).start();
