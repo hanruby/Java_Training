@@ -31,4 +31,12 @@ public interface LinkedList<E> extends Cloneable {
 	 * ひとつのリストに対する変更は、他方のリストには影響しないが、リストが参照しているオブジェクトに対する変更は、他方のリストから見える。
 	 */
     public abstract LinkedList<E> clone();
+    
+    /**
+     * ex12_01 リスト中のオブジェクトを探すメソッド
+     * @param obj 検索するオブジェクト
+     * @return 検索したオブジェクトを含むLinkedList
+     * @throws ObjectNotFoundException オブジェクトが発見されなかった場合
+     */
+    public abstract LinkedList<E> find(E obj) throws ObjectNotFoundException;
 }

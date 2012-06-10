@@ -92,4 +92,23 @@ public class LinkedListImplTest {
 	    }
 	    assertEquals(" 1号 2号 3号改 4号", result2);
     }
+	
+	@Test
+	public void testFind() throws Exception {
+		LinkedList<Vehicle> l = new LinkedListImpl<Vehicle>(new Vehicle(12, 90, "1号"));
+		
+		Vehicle v2 = new Vehicle(22, 180, "2号");
+		Vehicle v3 = new Vehicle(28, 210, "3号");
+		Vehicle v4 = new Vehicle(28, 210, "4号");
+		
+		l.setObjects(v2,v3,v4);
+		
+		assertEquals(l.find(v3),l);
+
+	}
+	
+	@Test(expected = ObjectNotFoundException.class)
+    public void testNotFound() throws Exception {
+        
+    }
 }

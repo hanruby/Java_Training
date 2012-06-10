@@ -75,5 +75,11 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 	    }
 	    return newList;
 	}
+
+    @Override
+    public LinkedList<E> find(E obj) throws ObjectNotFoundException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
 
