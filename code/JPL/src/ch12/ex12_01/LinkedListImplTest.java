@@ -95,20 +95,38 @@ public class LinkedListImplTest {
 	
 	@Test
 	public void testFind() throws Exception {
+		Vehicle v1 = new Vehicle(12, 90, "1号");
+		Vehicle v2 = new Vehicle(22, 180, "2号");
+		Vehicle v3 = new Vehicle(28, 210, "3号");
+		Vehicle v4 = new Vehicle(28, 210, "4号");
+
+		LinkedList<Vehicle> l = new LinkedListImpl<Vehicle>(v1);
+		
+		l.setObjects(v2,v3,v4);
+
+		LinkedList<Vehicle> foundList;
+
+		foundList = l.find(v1);
+		assertTrue(foundList.getObj().equals(v1));
+
+		foundList = l.find(v3);
+		assertTrue(foundList.getObj().equals(v3));
+		assertTrue(foundList.getNext().getObj().equals(v4));
+
+		foundList = l.find(v4);
+		assertTrue(foundList.getObj().equals(v4));
+	}
+	
+	@Test(expected = ObjectNotFoundException.class)
+    public void testNotFound() throws Exception {
 		LinkedList<Vehicle> l = new LinkedListImpl<Vehicle>(new Vehicle(12, 90, "1号"));
 		
 		Vehicle v2 = new Vehicle(22, 180, "2号");
 		Vehicle v3 = new Vehicle(28, 210, "3号");
 		Vehicle v4 = new Vehicle(28, 210, "4号");
 		
-		l.setObjects(v2,v3,v4);
+		l.setObjects(v2,v3);
 		
-		assertEquals(l.find(v3),l);
-
-	}
-	
-	@Test(expected = ObjectNotFoundException.class)
-    public void testNotFound() throws Exception {
-        
+		l.find(v4);
     }
 }

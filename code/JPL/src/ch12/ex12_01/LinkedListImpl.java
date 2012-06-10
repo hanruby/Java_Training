@@ -78,8 +78,14 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 
     @Override
     public LinkedList<E> find(E obj) throws ObjectNotFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        LinkedListImpl<E> l = this.clone();
+        while(l != null) {
+            if( l.obj.equals(obj) ) {
+                return l;
+            }
+            l = l.next;
+        }
+        throw new ObjectNotFoundException(obj.toString());
     }
 }
 
