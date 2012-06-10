@@ -13,38 +13,38 @@ public class AttrTest {
 
     @Test
     public void testAttrString() {
-        Attr at = new Attr("test");
+        Attr<String> at = new Attr<String>("test");
         assertEquals("test", at.getName());
     }
 
     @Test
     public void testAttrStringObject() {
-        Object obj = new Object();
-        Attr at = new Attr("test", obj);
-        assertEquals(obj, at.getValue());
+        String str = new String();
+        Attr<String> at = new Attr<String>("test", str);
+        assertEquals(str, at.getValue());
     }
 
     @Test
     public void testGetName() {
-        Attr at = new Attr("test");
+        Attr<String> at = new Attr<String>("test");
         assertEquals("test", at.getName());
     }
 
     @Test
     public void testGetValue1() {
-        Attr at = new Attr("test");
+        Attr<String> at = new Attr<String>("test");
         assertEquals(null, at.getValue());
     }
     @Test
     public void testGetValue2() {
-        Object obj = new Object();
-        Attr at = new Attr("test", obj);
-        assertEquals(obj, at.getValue());
+        String str = new String();
+        Attr<String> at = new Attr<String>("test", str);
+        assertEquals(str, at.getValue());
     }
 
     @Test
     public void testSetValue1() {
-        Attr at = new Attr("test");
+        Attr<Object> at = new Attr<Object>("test");
         Object obj = new Object();
         Object ret = at.setValue(obj);
         assertEquals(obj, at.getValue());
@@ -55,7 +55,7 @@ public class AttrTest {
         Object obj1 = new Object();
         Object obj2 = new Object();
         
-        Attr at = new Attr("test", obj1);
+        Attr<Object> at = new Attr<Object>("test", obj1);
         Object ret = at.setValue(obj2);
         assertEquals(obj2, at.getValue());
         assertEquals(ret, obj1);
@@ -64,7 +64,7 @@ public class AttrTest {
     @Test
     public void testToString() {
         String str = "string";
-        Attr at = new Attr("test", str);
+        Attr<String> at = new Attr<String>("test", str);
         assertEquals("test='string'", at.toString());
     }
 }

@@ -5,15 +5,15 @@ package ch11.ex11_02;
  * @author ato
  *
  */
-public class Attr {
+public class Attr<E> {
 	private final String name;
-	private Object value = null;
+	private E value = null;
 	
 	public Attr(String name) {
 		this.name = name;
 	}
 	
-	public Attr(String name, Object value) {
+	public Attr(String name, E value) {
 		this.name = name;
 		this.value = value;
 	}
@@ -22,12 +22,12 @@ public class Attr {
 		return name;
 	}
 	
-	public Object getValue() {
+	public E getValue() {
 		return value;
 	}
 	
-	public Object setValue(Object newValue) {
-		Object oldVal = value;
+	public E setValue(E newValue) {
+		E oldVal = value;
 		value = newValue;
 		return oldVal;
 	}
