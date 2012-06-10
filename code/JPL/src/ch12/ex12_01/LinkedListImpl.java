@@ -76,7 +76,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 	    return newList;
 	}
 
-    @Override
+	@Override
     public LinkedList<E> find(E obj) throws ObjectNotFoundException {
         LinkedListImpl<E> l = this.clone();
         while(l != null) {
@@ -85,6 +85,12 @@ public class LinkedListImpl<E> implements LinkedList<E> {
             }
             l = l.next;
         }
+        /* ex12_01
+         * オブジェクトが発見できなかった場合は例外をスローする。
+         * オブジェクトが発見されなかったときに、nullを返すより、例外をスローする方が良い点：
+         * - 利用者がnullの処理を漏らした場合のデバッグが大変。
+         * - 例外であれば、理由を上に投げることができる。
+         */
         throw new ObjectNotFoundException(obj.toString());
     }
 }
