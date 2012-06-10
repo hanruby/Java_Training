@@ -2,6 +2,8 @@ package ch03.ex03_11;
 
 public class HackSortDouble extends SortDouble implements Cloneable{
     
+    boolean flag = false;
+    
     @Override
     protected SortDouble clone(){
         System.out.println("clone!!");
@@ -15,10 +17,16 @@ public class HackSortDouble extends SortDouble implements Cloneable{
     
     @Override
     protected void doSort() {
-        // cloneしても問題ない。。
+        
+        /////////////////////////////////
+        // probeを使う
+        
+        /////////////////////////////////
+        // cloneは問題ない。。
         SortDouble c = this.clone();
         HackSortDouble n = (HackSortDouble)this.clone();
         
+        ////////////////////////////////
         // オーバーフローさせるしかない？？
         // for (long j = 0; j < 0x7FFFFFFF; j++) {
         //     compare(0,0); //...... さらに繰り返す必要がある。
@@ -31,10 +39,13 @@ public class HackSortDouble extends SortDouble implements Cloneable{
                 }
             }
         }
-        
-        // 結論、セキュリティホールはない・・・
-        
-        
+        //////////////////////////////////
+        // ２回呼ぶ
+        if(!flag) {
+            flag = true;
+            sort(new double[]{1,1});
+        }
+
     }
 
             
