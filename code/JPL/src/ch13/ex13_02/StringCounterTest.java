@@ -46,6 +46,20 @@ public class StringCounterTest {
     }
 
     @Test
+    public void testCountChar_5() {
+
+        result = StringCounter.countStr("あいうえおああいいうえお","a");
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void testCountChar_6() {
+
+        result = StringCounter.countStr("あいうえおああいいうえお","あ");
+        assertEquals(3, result);
+    }
+
+    @Test
     public void testCountStr_1() {
 
         result = StringCounter.countStr("aaaa","aa");
@@ -71,6 +85,20 @@ public class StringCounterTest {
 
         result = StringCounter.countStr("abcabcabee","ee");
         assertEquals(1, result);
+    }
+
+    @Test
+    public void testCountStr_5() {
+
+        result = StringCounter.countStr("abcabcabee","345");
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void testCountStr_6() {
+
+        result = StringCounter.countStr("いろはにほへといろはにほへといろはにほへといろはにほへと","いろは");
+        assertEquals(4, result);
     }
 
     @Test(expected = NullPointerException.class)
