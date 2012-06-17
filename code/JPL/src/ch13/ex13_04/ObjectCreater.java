@@ -24,10 +24,6 @@ public class ObjectCreater {
             
             String type = pair.split(" ")[0];
             String value = pair.split(" ")[1];
-
-            if(type == null || value == null) {
-                throw new IllegalArgumentException("Format error. \"" + pair + "\" is incorrect format.");
-            }
             
             for (Type supporttype : Type.values()) {
                 if(supporttype.name.equals(type)) {
@@ -37,8 +33,7 @@ public class ObjectCreater {
                 }
             }
             
-            System.out.println("no support");
-            throw new IllegalArgumentException("Format error. \"" + pair + "\" is incorrect format.");
+            throw new IllegalArgumentException("Format error. \"" + type + "\" is not support.");
         }
         
         return result;

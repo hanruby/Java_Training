@@ -61,6 +61,18 @@ public class ObjectCreaterTest {
         ObjectCreater.parse("hoge\n");
     }
     
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalData2() throws Exception {
+
+        ObjectCreater.parse("hoge 222\n");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalData3() throws Exception {
+
+        ObjectCreater.parse(" \n");
+    }
+    
     @Test(expected = NumberFormatException.class)
     public void testIllegalNum() throws Exception {
 
