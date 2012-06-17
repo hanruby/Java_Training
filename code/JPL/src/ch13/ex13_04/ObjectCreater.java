@@ -15,22 +15,30 @@ public class ObjectCreater {
         
         String[] type_value_pairs = str.split("\n");
         
+        search:
         for (String pair : type_value_pairs) {
+            
+            if( pair.split(" ").length != 2) {
+                throw new IllegalArgumentException("Format error. \"" + pair + "\" is incorrect format.");
+            }
             
             String type = pair.split(" ")[0];
             String value = pair.split(" ")[1];
 
             if(type == null || value == null) {
-                throw new IllegalArgumentException("Format error. Please check the input format.");
+                throw new IllegalArgumentException("Format error. \"" + pair + "\" is incorrect format.");
             }
             
             for (Type supporttype : Type.values()) {
                 if(supporttype.name.equals(type)) {
                     result.add(supporttype.createObject(value));
                     System.out.println(type + " " + value);
-                    break;
+                    continue search;
                 }
             }
+            
+            System.out.println("no support");
+            throw new IllegalArgumentException("Format error. \"" + pair + "\" is incorrect format.");
         }
         
         return result;
@@ -39,49 +47,49 @@ public class ObjectCreater {
     private enum Type {
         BOOLEAN("Boolean") {
             Object createObject(String value) {
-                return null;
+                return Boolean.parseBoolean(value);
             }
         },
         
         BYTE("Byte") {
             Object createObject(String value) {
-                return null;
+                return Byte.parseByte(value, 10);
             }
         },
         
-        CHAR("Char") {
+        CHAR("Character") {
             Object createObject(String value) {
-                return null;
+                return value.charAt(0);
             }
         },
         
         SHORT("Short") {
             Object createObject(String value) {
-                return null;
+                return Short.parseShort(value, 10);
             }
         },
         
         INTEGER("Integer") {
             Object createObject(String value) {
-                return null;
+                return Integer.parseInt(value, 10);
             }
         },
         
         LONG("Long") {
             Object createObject(String value) {
-                return null;
+                return Long.parseLong(value, 10);
             }
         },
 
         FLOAT("Float") {
             Object createObject(String value) {
-                return null;
+                return Float.parseFloat(value);
             }
         },
 
         DOUBLE("Double") {
             Object createObject(String value) {
-                return null;
+                return Double.parseDouble(value);
             }
         };
         

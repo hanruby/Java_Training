@@ -30,7 +30,7 @@ public class ObjectCreaterTest {
 
         String testData = 
             "Boolean true\n" +
-            "Byte 34" +
+            "Byte 34\n" +
             "Character a\n" +
             "Short 98\n" +
             "Integer 1234\n" +
@@ -57,6 +57,12 @@ public class ObjectCreaterTest {
     public void testIllegalData() throws Exception {
 
         ObjectCreater.parse("hoge\n");
+    }
+    
+    @Test(expected = NumberFormatException.class)
+    public void testIllegalNum() throws Exception {
+
+        ObjectCreater.parse("Double 2345lfdg\n");
     }
 
 }
