@@ -41,10 +41,12 @@ public class ObjectCreaterTest {
         List<Object> result = ObjectCreater.parse(testData);
         
         assertTrue(result != null);
+        assertEquals(expectedResult.size(), result.size());
 
         for (int i = 0; i < expectedResult.size(); i++) {
             assertEquals(expectedResult.get(i), result.get(i));
         }
+        
     }
     
     @Test(expected = NullPointerException.class)
