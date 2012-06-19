@@ -30,8 +30,8 @@ public class DigitalClock extends Frame implements Runnable{
         config = new Config();
         this.clock = this;
 
-        setConfig(config);
         createMenuBar();
+        setConfig(config);
 
         addWindowListener(new ClockWindowListener());
         setResizable(false);
