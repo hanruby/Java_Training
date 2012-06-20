@@ -47,4 +47,13 @@ public class NumberUtilTest {
         assertTrue(resultStr.equals("23,984,573,201,948,018,256,361,539,801,256,361,539"));
     }
 
+    @Test
+    public void testNumberFormatter5() {
+        String resultStr = NumberUtil.numberFormatter("23984573201948018256361539801256361539", 5, "/");
+        
+        assertEquals(resultStr, "239/84573/20194/80182/56361/53980/12563/61539");
+
+        assertTrue(resultStr.equals("239/84573/20194/80182/56361/53980/12563/61539"));
+    }
+
 }
