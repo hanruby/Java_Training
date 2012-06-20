@@ -46,9 +46,9 @@ public class DigitalClock extends Window implements Runnable{
         config = new Config();
         this.clock = this;
 
-        setConfig(config);
         createMenuBar();
         createPopupMenu();
+        setConfig(config);
         
         addWindowListener(new ClockWindowListener());
         addMouseListener(new ClockMouseListener());
