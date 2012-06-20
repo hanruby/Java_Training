@@ -2,8 +2,16 @@ package ch13.ex13_05;
 
 public class NumberUtil {
     
+    private final static int PLACE = 3;
+    
     static String numberFormatter(String numberString) {
         
-        return null;
+        StringBuilder buf = new StringBuilder(numberString);
+        
+        for (int place = buf.length() - PLACE; place > 0; place-= PLACE) {
+            buf.insert(place,",");
+        }
+        
+        return buf.toString();
     }
 }
