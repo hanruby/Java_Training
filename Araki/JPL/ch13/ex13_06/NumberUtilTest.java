@@ -29,4 +29,22 @@ public class NumberUtilTest {
         assertTrue(resultStr.equals("23,984,573,201,948,018,256,361,539,801,256,361,539"));
     }
 
+    @Test
+    public void testNumberFormatter3() {
+        String resultStr = NumberUtil.numberFormatter("1543729", 3, ",");
+        
+        assertEquals(resultStr, "1,543,729");
+
+        assertTrue(resultStr.equals("1,543,729"));
+    }
+
+    @Test
+    public void testNumberFormatter4() {
+        String resultStr = NumberUtil.numberFormatter("23984573201948018256361539801256361539", 3, ",");
+        
+        assertEquals(resultStr, "23,984,573,201,948,018,256,361,539,801,256,361,539");
+
+        assertTrue(resultStr.equals("23,984,573,201,948,018,256,361,539,801,256,361,539"));
+    }
+
 }
