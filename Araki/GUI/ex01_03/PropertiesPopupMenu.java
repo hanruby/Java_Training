@@ -163,6 +163,20 @@ public class PropertiesPopupMenu extends PopupMenu{
             
             add(menu);
         }
+        {
+            // Quit
+            MenuItem item = new MenuItem("Quit");
+            
+            ActionListener menuListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.exit (0);
+                }
+            };
+
+            item.addActionListener(menuListener);
+
+            add(item);
+        }
         
     }
 
