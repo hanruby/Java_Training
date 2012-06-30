@@ -68,7 +68,7 @@ public class PropertiesDialog extends Dialog {
                 font_name_list = new Choice();
 
                 // Load System fonts.
-                String fonts[] = PropertiesContents.getFonts();
+                String fonts[] = PropertiesContents.supportedFonts();
 
                 for (String font : fonts) {
                     font_name_list.add(font);
@@ -91,7 +91,7 @@ public class PropertiesDialog extends Dialog {
                 font_size_list = new Choice();
 
                 // Load Supported size
-                int[] sizes = PropertiesContents.getFontSizes();
+                int[] sizes = PropertiesContents.supportedFontSizes();
 
                 for (int size : sizes) {
                     font_size_list.add(String.valueOf(size)); 
@@ -114,7 +114,7 @@ public class PropertiesDialog extends Dialog {
                 font_color_list = new Choice();
 
                 // Load supported colors
-                String[] colors = PropertiesContents.getColor();
+                String[] colors = PropertiesContents.supportedColors();
 
                 for (String color : colors) {
                     font_color_list.add(color); 
@@ -152,7 +152,7 @@ public class PropertiesDialog extends Dialog {
                 bg_color_list = new Choice();
 
                 // Load supported colors
-                String[] colors = PropertiesContents.getColor();
+                String[] colors = PropertiesContents.supportedColors();
 
                 for (String color : colors) {
                     font_color_list.add(color); 
