@@ -33,7 +33,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             };
 
             // Load Supported fonts.
-            String fonts[] = PropertiesContents.supportedFonts();
+            String fonts[] = SupportedProperties.supportedFonts();
 
             for (String font : fonts) {
                 item = new MenuItem(font);
@@ -57,7 +57,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             };
 
             // Load Supported size
-            int[] sizes = PropertiesContents.supportedFontSizes();
+            int[] sizes = SupportedProperties.supportedFontSizes();
             
             for (int size : sizes) {
                 item = new MenuItem(String.valueOf(size)); 
@@ -95,7 +95,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             };
 
             // Load supported colors
-            String[] colors = PropertiesContents.supportedColors();
+            String[] colors = SupportedProperties.supportedColors();
             
             for (String color : colors) {
                 item = new MenuItem(color); 
@@ -133,7 +133,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             };
 
             // Load supported colors
-            String[] colors = PropertiesContents.supportedColors();
+            String[] colors = SupportedProperties.supportedColors();
             
             for (String color : colors) {
                 item = new MenuItem(color); 

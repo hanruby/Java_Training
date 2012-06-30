@@ -2,7 +2,7 @@ package ex01_03;
 
 import java.awt.GraphicsEnvironment;
 
-public class PropertiesContents {
+public class SupportedProperties {
 
     static private String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
