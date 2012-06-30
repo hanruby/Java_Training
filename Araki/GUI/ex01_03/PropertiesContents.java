@@ -4,28 +4,29 @@ import java.awt.GraphicsEnvironment;
 
 public class PropertiesContents {
 
-    static String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    
-    // Supported fonts
+    static private String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+
+    static private int[] sizes = {12, 24, 30, 45};
+    static private String[] colors = {
+        "BLACK",
+        "GREEN",
+        "ORANGE",
+        "WHITE",
+    };
+
+    // Retuen supported fonts
     public static String[] supportedFonts() {
         // Load System fonts.
         return fonts;
     }
 
-    // Supported sizes
+    // Return supported sizes
     public static int[] supportedFontSizes() {
-        int[] sizes = {12, 24, 30, 45};
         return sizes;
     }
     
-    // Supported colors
+    // Return supported colors
     public static String[] supportedColors() {
-        String[] colors = {
-               "BLACK",
-               "GREEN",
-               "ORANGE",
-               "WHITE",
-        };
         return colors;
     }
     
