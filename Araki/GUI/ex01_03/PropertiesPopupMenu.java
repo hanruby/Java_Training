@@ -2,7 +2,6 @@ package ex01_03;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -33,8 +32,8 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
-            // Load System fonts.
-            String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+            // Load Supported fonts.
+            String fonts[] = PropertiesContents.getFonts();
 
             for (String font : fonts) {
                 item = new MenuItem(font);
@@ -57,17 +56,14 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
-            item = new MenuItem("12"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("20"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("30");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            // Load Supported size
+            int[] sizes = PropertiesContents.getFontSizes();
+            
+            for (int size : sizes) {
+                item = new MenuItem(String.valueOf(size)); 
+                item.addActionListener(menuListener);
+                menu.add(item);
+            }
             
             add(menu);
         }
@@ -98,22 +94,15 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
-            item = new MenuItem("BLACK"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("GREEN"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("ORANGE");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            // Load supported colors
+            String[] colors = PropertiesContents.getColor();
             
-            item = new MenuItem("WHITE");
-            item.addActionListener(menuListener);
-            menu.add(item);
-            
+            for (String color : colors) {
+                item = new MenuItem(color); 
+                item.addActionListener(menuListener);
+                menu.add(item);
+            }
+
             add(menu);
         }
         {
@@ -143,21 +132,14 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
-            item = new MenuItem("BLACK"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("GREEN"); 
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("ORANGE");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            // Load supported colors
+            String[] colors = PropertiesContents.getColor();
             
-            item = new MenuItem("WHITE");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            for (String color : colors) {
+                item = new MenuItem(color); 
+                item.addActionListener(menuListener);
+                menu.add(item);
+            }
             
             add(menu);
         }

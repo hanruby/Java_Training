@@ -8,7 +8,6 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
@@ -69,7 +68,7 @@ public class PropertiesDialog extends Dialog {
                 font_name_list = new Choice();
 
                 // Load System fonts.
-                String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+                String fonts[] = PropertiesContents.getFonts();
 
                 for (String font : fonts) {
                     font_name_list.add(font);
@@ -90,9 +89,14 @@ public class PropertiesDialog extends Dialog {
                 // Font size
                 propertiesPanel.add(new Label("Font size",Label.RIGHT));
                 font_size_list = new Choice();
-                font_size_list.add("12"); 
-                font_size_list.add("20"); 
-                font_size_list.add("30");
+
+                // Load Supported size
+                int[] sizes = PropertiesContents.getFontSizes();
+
+                for (int size : sizes) {
+                    font_size_list.add(String.valueOf(size)); 
+                }
+                
                 font_size_list.select(Integer.toString(clock.getConfig().getFont().getSize()));
                 font_size_list.addItemListener(new ItemListener() {
                     @Override
@@ -108,10 +112,14 @@ public class PropertiesDialog extends Dialog {
                 // Font color
                 propertiesPanel.add(new Label("Font color",Label.RIGHT));
                 font_color_list = new Choice();
-                font_color_list.add("BLACK"); 
-                font_color_list.add("GREEN"); 
-                font_color_list.add("ORANGE");
-                font_color_list.add("WHITE");
+
+                // Load supported colors
+                String[] colors = PropertiesContents.getColor();
+
+                for (String color : colors) {
+                    font_color_list.add(color); 
+                }
+                
                 font_color_list.select(clock.getConfig().getFontColor().toString()); // TODO fix
                 System.out.println(clock.getConfig().getFontColor().getClass().getName());
                 font_color_list.addItemListener(new ItemListener() {
@@ -142,10 +150,14 @@ public class PropertiesDialog extends Dialog {
                 // Background color
                 propertiesPanel.add(new Label("Background color",Label.RIGHT));
                 bg_color_list = new Choice();
-                bg_color_list.add("BLACK"); 
-                bg_color_list.add("GREEN"); 
-                bg_color_list.add("ORANGE");
-                bg_color_list.add("WHITE");
+
+                // Load supported colors
+                String[] colors = PropertiesContents.getColor();
+
+                for (String color : colors) {
+                    font_color_list.add(color); 
+                }
+
                 bg_color_list.select(clock.getConfig().getBackgroundColor().toString());        // TODO fix        
                 bg_color_list.addItemListener(new ItemListener() {
                     @Override
