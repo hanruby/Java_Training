@@ -224,8 +224,6 @@ public class DigitalClock extends Window implements Runnable{
             // 左ドラッグ開始
             if ( e.getButton() == MouseEvent.BUTTON1) {
 
-                System.out.println("pressed");
-
                 // save drag start position.
                 dragStartPos = e.getPoint();
             }
@@ -234,10 +232,6 @@ public class DigitalClock extends Window implements Runnable{
         
         @Override
         public void mouseDragged(MouseEvent e) {
-
-            System.out.println("dragged");
-            
-            System.out.println(e.getButton());
 
             // 左ドラッグ中
             if ( e.getButton() == MouseEvent.BUTTON1 || mouseButton == MouseEvent.BUTTON1) {
