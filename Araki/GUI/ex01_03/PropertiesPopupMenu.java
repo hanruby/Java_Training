@@ -2,6 +2,7 @@ package ex01_03;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -23,7 +24,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             // Font name
             Menu menu = new Menu("Font");
             MenuItem item;
- 
+            
             ActionListener menuListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Config conf = new Config(clock.getConfig());
@@ -32,17 +33,14 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
-            item = new MenuItem("Monaco");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            // Load System fonts.
+            String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
-            item = new MenuItem("Console");
-            item.addActionListener(menuListener);
-            menu.add(item);
-
-            item = new MenuItem("Times");
-            item.addActionListener(menuListener);
-            menu.add(item);
+            for (String font : fonts) {
+                item = new MenuItem(font);
+                item.addActionListener(menuListener);
+                menu.add(item);
+            }
 
             add(menu);
         }

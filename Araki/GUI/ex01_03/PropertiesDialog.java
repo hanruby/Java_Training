@@ -8,6 +8,7 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
@@ -66,9 +67,14 @@ public class PropertiesDialog extends Dialog {
                 // Font name
                 propertiesPanel.add(new Label("Font name",Label.RIGHT));
                 font_name_list = new Choice();
-                font_name_list.add("Monaco");
-                font_name_list.add("Consolas");
-                font_name_list.add("Times");
+
+                // Load System fonts.
+                String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+
+                for (String font : fonts) {
+                    font_name_list.add(font);
+                }
+                
                 font_name_list.select(clock.getConfig().getFont().getName());
                 font_name_list.addItemListener(new ItemListener() {
                     @Override
