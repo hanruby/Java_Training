@@ -9,9 +9,11 @@ public class SupportedProperties {
     static private int[] sizes = {12, 24, 30, 45};
     static private String[] colors = {
         "BLACK",
+        "WHITE",
+        "RED",
+        "BLUE",
         "GREEN",
         "ORANGE",
-        "WHITE",
     };
 
     // Retuen supported fonts
