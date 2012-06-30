@@ -4,10 +4,12 @@ import java.awt.GraphicsEnvironment;
 
 public class PropertiesContents {
 
+    static String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+    
     // Supported fonts
     public static String[] supportedFonts() {
         // Load System fonts.
-        return GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        return fonts;
     }
 
     // Supported sizes
