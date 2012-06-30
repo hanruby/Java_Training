@@ -204,6 +204,7 @@ public class DigitalClock extends Window implements Runnable{
     class ClockMouseListener extends MouseAdapter {
         
         Point dragStartPos, draggingPos, currentPos;
+        int mouseButton;
         
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -217,6 +218,8 @@ public class DigitalClock extends Window implements Runnable{
         
         @Override
         public void mousePressed(MouseEvent e) {
+            
+            mouseButton = e.getButton();
 
             // 左ドラッグ開始
             if ( e.getButton() == MouseEvent.BUTTON1) {
@@ -237,7 +240,7 @@ public class DigitalClock extends Window implements Runnable{
             System.out.println(e.getButton());
 
             // 左ドラッグ中
-            if ( e.getButton() == MouseEvent.BUTTON1) {
+            if ( e.getButton() == MouseEvent.BUTTON1 || mouseButton == MouseEvent.BUTTON1) {
                 draggingPos = e.getPoint();
                 currentPos = clock.getLocation();
                 Point newPos = new Point(currentPos.x + draggingPos.x - dragStartPos.x, currentPos.y + draggingPos.y - dragStartPos.y);
