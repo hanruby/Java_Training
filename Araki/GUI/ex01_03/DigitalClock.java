@@ -37,13 +37,22 @@ public class DigitalClock extends Window implements Runnable{
         
         addNotify();
         pack();
-        setBackground(new Color(100,0,0,0));
         
         loadImage();
         setSize(backgroundImage.getWidth(this),backgroundImage.getHeight(this));
         
         config = new Config();
         this.clock = this;
+
+        // If running on the Windows XP, transparent does not support.
+        if (System.getProperty("os.name").indexOf("Windows XP") != -1) {
+            System.out.println("Running on Windows XP");
+            clock.setBackground(new Color(100,0,0));
+        }
+        else {
+            // Transparent
+            clock.setBackground(new Color(0,0,0,0));
+        }
 
         createMenuBar();
         createPopupMenu();
@@ -97,14 +106,12 @@ public class DigitalClock extends Window implements Runnable{
     
     @Override
     public void paint(Graphics g) {
-        clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);;
+        clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         bufGraphics = (Graphics2D) clockImage.getGraphics();
-        
-        bufGraphics.setBackground(new Color(100,0,0,0));
-        bufGraphics.setFont(config.getFont());
 
+        bufGraphics.setFont(config.getFont());
+        
         // 背景画像の表示
-        //bufGraphics.drawImage(backgroundImage.getScaledInstance(100, 300, Image.SCALE_DEFAULT), 0, 0, new Color(0,0,0,0), this);
         bufGraphics.drawImage(backgroundImage, 0, 0, this);
         
         Point tokyo = new Point(440, 155);
