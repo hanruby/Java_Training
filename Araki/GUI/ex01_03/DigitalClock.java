@@ -37,12 +37,11 @@ public class DigitalClock extends Window implements Runnable{
         
         addNotify();
         pack();
-
+        setBackground(new Color(100,0,0,0));
+        
         loadImage();
         setSize(backgroundImage.getWidth(this),backgroundImage.getHeight(this));
         
-        setBackground(new Color(0,0,0,0));
-
         config = new Config();
         this.clock = this;
 
@@ -51,7 +50,10 @@ public class DigitalClock extends Window implements Runnable{
         setConfig(config);
         
         addWindowListener(new ClockWindowListener());
-        addMouseListener(new ClockMouseListener());
+        // refer : http://stackoverflow.com/questions/5577619/why-are-mousedragged-events-not-received-when-using-mouseadapter
+        ClockMouseListener mouseEvent = new ClockMouseListener(); 
+        addMouseListener(mouseEvent);
+        addMouseMotionListener(mouseEvent);
 
         setVisible(true);
     }
@@ -98,7 +100,7 @@ public class DigitalClock extends Window implements Runnable{
         clockImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);;
         bufGraphics = (Graphics2D) clockImage.getGraphics();
         
-        bufGraphics.setBackground(new Color(0,0,0,0));
+        bufGraphics.setBackground(new Color(100,0,0,0));
         bufGraphics.setFont(config.getFont());
 
         // 背景画像の表示
@@ -200,6 +202,9 @@ public class DigitalClock extends Window implements Runnable{
      *
      */
     class ClockMouseListener extends MouseAdapter {
+        
+        Point dragStartPos, draggingPos, currentPos;
+        
         @Override
         public void mouseClicked(MouseEvent e) {
 
@@ -208,6 +213,39 @@ public class DigitalClock extends Window implements Runnable{
                 popupmenu.show(e.getComponent(), e.getX(), e.getY());
             }
             super.mouseClicked(e);
+        }
+        
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+            // 左ドラッグ開始
+            if ( e.getButton() == MouseEvent.BUTTON1) {
+
+                System.out.println("pressed");
+
+                // save drag start position.
+                dragStartPos = e.getPoint();
+            }
+            super.mousePressed(e);
+        }
+        
+        @Override
+        public void mouseDragged(MouseEvent e) {
+
+            System.out.println("dragged");
+            
+            System.out.println(e.getButton());
+
+            // 左ドラッグ中
+            if ( e.getButton() == MouseEvent.BUTTON1) {
+                draggingPos = e.getPoint();
+                currentPos = clock.getLocation();
+                Point newPos = new Point(currentPos.x + draggingPos.x - dragStartPos.x, currentPos.y + draggingPos.y - dragStartPos.y);
+                // set new window position
+                clock.setLocation(newPos);
+            }
+            
+            super.mouseDragged(e);
         }
     }
 }
