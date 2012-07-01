@@ -155,7 +155,7 @@ public class PropertiesDialog extends Dialog {
                 String[] colors = SupportedProperties.supportedColors();
 
                 for (String color : colors) {
-                    font_color_list.add(color); 
+                    bg_color_list.add(color); 
                 }
 
                 bg_color_list.select(clock.getConfig().getBackgroundColor().toString());        // TODO fix        
