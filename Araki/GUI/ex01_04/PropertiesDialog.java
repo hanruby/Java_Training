@@ -27,10 +27,10 @@ public class PropertiesDialog extends Dialog {
     private DigitalClock clock;
     private Config defaultConf;
     
-    public PropertiesDialog(Window owner) {
-        super(owner);
+    public PropertiesDialog(Window owner, DigitalClock clock) {
+        super(owner, ModalityType.APPLICATION_MODAL);
 
-        clock = (DigitalClock)owner;
+        this.clock = clock;
         defaultConf = new Config(clock.getConfig());
 
         createPropertiesDialog();

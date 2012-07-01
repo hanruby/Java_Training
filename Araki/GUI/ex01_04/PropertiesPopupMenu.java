@@ -18,6 +18,22 @@ public class PropertiesPopupMenu extends PopupMenu{
         clock = (DigitalClock)owner;
 
         {
+            // Properties Dialog
+            MenuItem item = new MenuItem("Properties");
+            item.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new PropertiesDialog(clock.getOwner(), clock);
+                }
+            });
+            add(item);
+        }
+        {
+            // bar
+            add(new MenuItem("-"));
+        }
+        {
             // Ref: http://www.java2s.com/Code/Java/Swing-JFC/AsimpleexampleofJPopupMenu.htm
 
             // Font name
@@ -178,7 +194,6 @@ public class PropertiesPopupMenu extends PopupMenu{
         {
             // bar
             add(new MenuItem("-"));
-            
         }
         {
             // Quit
