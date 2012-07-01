@@ -142,12 +142,35 @@ public class ColorDialog extends Dialog{
         gr.fillRect(10, 10, 60, 40);
         
     }
-        
+     
+    @Override
+    public void update(Graphics g) {
+        // clearは呼ばない
+        this.paint(g);
+    }
+    
+    @Override
+    public void repaint() {
+        super.repaint();
+    }
+   
     class LocalWindowListener extends WindowAdapter {
         @Override
         public void windowClosing (WindowEvent event) {
             // Dialogを閉じる
             dispose();
+        }
+        
+        @Override
+        public void windowActivated(WindowEvent e) {
+            repaint();
+            super.windowActivated(e);
+        }
+        
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+            repaint();
+            super.windowDeactivated(e);
         }
     }
     
