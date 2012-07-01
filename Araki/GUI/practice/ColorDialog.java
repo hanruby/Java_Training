@@ -6,8 +6,10 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -37,7 +39,7 @@ public class ColorDialog extends Dialog{
         setTitle("Color Picker");
         //setSize(400, 400);
         Rectangle bounds = this.getGraphicsConfiguration().getBounds();
-        setBounds((int)(bounds.width/2)-200,((int)bounds.height/2-200),400,400);
+        setBounds((int)(bounds.width/2)-200,((int)bounds.height/2-200),400,300);
         
         addWindowListener(new LocalWindowListener());
         LocalMouseListener mouseEvent = new LocalMouseListener();
@@ -52,18 +54,64 @@ public class ColorDialog extends Dialog{
         controlPanel = new Panel();
 
         createWindow();
+        setResizable(false);
        
         setVisible(true);
     }
     
     private void createWindow() {
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
         
         setFont(new Font("Arial",Font.PLAIN,12)); // font set for properties dialog.
+        setLayout(gridbag);
         
-        setLayout(new GridLayout(1, 2));
-        
-        add(colorPanel);
-        add(controlPanel);
+        c.fill = GridBagConstraints.BOTH;
+        {
+            c.weightx = 1;
+            c.weighty = 0;
+            c.gridheight = 1;
+            c.gridwidth = 2;
+            {
+                c.gridwidth = GridBagConstraints.REMAINDER;
+                Label label = new Label("Please select a color from the color chart by click.");
+                gridbag.setConstraints(label, c);
+                add(label);
+            }
+        }
+        {
+            c.weightx = 30;
+            c.weighty = 3.0;
+            c.gridheight = 3;
+            c.gridwidth = 1;
+            {
+                gridbag.setConstraints(colorPanel, c);
+                add(colorPanel);
+            }
+        }
+        {
+            c.weightx = 5;
+            c.weighty = 1.0;
+            c.gridheight = 1;
+            c.gridwidth = 1;
+            {
+                c.gridwidth = GridBagConstraints.REMAINDER;
+                Label label = new Label("Selected color : ", Label.LEFT);
+                gridbag.setConstraints(label, c);
+                add(label);
+            }
+            {
+                c.gridwidth = GridBagConstraints.REMAINDER;
+                gridbag.setConstraints(controlPanel, c);
+                add(controlPanel);
+            }
+            {
+                c.weighty = 3.0;
+                Panel panel = new Panel();
+                gridbag.setConstraints(panel, c);
+                add(panel);
+            }
+        }
         
         {
             
@@ -91,7 +139,7 @@ public class ColorDialog extends Dialog{
         
         Graphics2D gr = (Graphics2D) controlPanel.getGraphics();
         gr.setColor(newColor);
-        gr.fillRect(10, 10, 20, 20);
+        gr.fillRect(10, 10, 60, 40);
         
     }
         
