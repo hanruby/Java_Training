@@ -176,6 +176,11 @@ public class PropertiesPopupMenu extends PopupMenu{
             add(menu);
         }
         {
+            // bar
+            add(new MenuItem("-"));
+            
+        }
+        {
             // Quit
             MenuItem item = new MenuItem("Quit");
             
