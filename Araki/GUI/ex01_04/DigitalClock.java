@@ -54,7 +54,6 @@ public class DigitalClock extends Window implements Runnable{
             clock.setBackground(new Color(0,0,0,0));
         }
 
-        createMenuBar();
         createPopupMenu();
         setConfig(config);
         
@@ -159,25 +158,6 @@ public class DigitalClock extends Window implements Runnable{
         Frame f = new Frame();
         DigitalClock digitalclock = new DigitalClock(f);
         new Thread(digitalclock).start();
-    }
-
-    /** 
-     * メニューバーを作成する
-     */
-    private void createMenuBar() {
-        MenuBar menu = new MenuBar();
-		Menu properties = menu.add(new Menu("File"));
-
-		// プロパティ
-		properties.add("Properties");
-		properties.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PropertiesDialog(clock);
-            }
-        });
-
-		//setMenuBar(menu);
     }
 
     /** 
