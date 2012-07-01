@@ -36,13 +36,13 @@ public class ColorDialog extends Dialog{
     private Panel selectedColorPanel = null;   
     private Panel previousColorPanel = null;
     
-    private Color newColor;
-    private Color oldColor;
+    private Color selectedColor;
+    private Color previousColor;
 
     public ColorDialog(Window owner, String title, Color color) {
         super(owner, title, ModalityType.APPLICATION_MODAL);
-        oldColor = color;
-        newColor = color;
+        previousColor = color;
+        selectedColor = color;
         
         //setSize(400, 400);
         Rectangle bounds = this.getGraphicsConfiguration().getBounds();
@@ -141,7 +141,7 @@ public class ColorDialog extends Dialog{
                     public void actionPerformed(ActionEvent e) {
                         // Dialogを閉じる
                         dispose();
-                        newColor = oldColor; // revert
+                        selectedColor = previousColor; // revert
                     }
                 });
                 Button ok = new Button("OK");
@@ -179,11 +179,11 @@ public class ColorDialog extends Dialog{
         colorPanelGraphic.drawImage((Image)colorImage, 0, 0, this);
         
         Graphics2D gr = (Graphics2D) selectedColorPanel.getGraphics();
-        gr.setColor(newColor);
+        gr.setColor(selectedColor);
         gr.fillRect(10, 23, 60, 20);
 
         Graphics2D grd = (Graphics2D) previousColorPanel.getGraphics();
-        grd.setColor(oldColor);
+        grd.setColor(previousColor);
         grd.fillRect(10, 23, 60, 20);
         
     }
@@ -200,7 +200,7 @@ public class ColorDialog extends Dialog{
     }
     
     public Color getColor() {
-        return newColor;
+        return selectedColor;
     }
    
     class LocalWindowListener extends WindowAdapter {
@@ -243,7 +243,7 @@ public class ColorDialog extends Dialog{
                 if (draggedPos.x >= 0 && draggedPos.y >= 0 &&
                         draggedPos.x < colorImage.getWidth() &&
                         draggedPos.y < colorImage.getHeight() ) {
-                    newColor = new Color(colorImage.getRGB(draggedPos.x, draggedPos.y));
+                    selectedColor = new Color(colorImage.getRGB(draggedPos.x, draggedPos.y));
                     repaint();
                 }
             }
