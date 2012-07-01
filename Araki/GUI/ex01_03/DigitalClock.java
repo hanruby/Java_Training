@@ -63,7 +63,7 @@ public class DigitalClock extends Window implements Runnable{
         ClockMouseListener mouseEvent = new ClockMouseListener(); 
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
-
+        
         setVisible(true);
     }
     

@@ -94,6 +94,22 @@ public class PropertiesPopupMenu extends PopupMenu{
                 }
             };
 
+            // color picker
+            {
+                item = new MenuItem("Using color picker");
+                item.addActionListener(new ActionListener() {
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        ColorDialog dialog = new ColorDialog(clock.getOwner(), "Color picker for clock text", conf.getFontColor());
+                        conf.setFontColor(dialog.getColor());
+                        clock.setConfig(conf);
+                    }
+                });
+                menu.add(item);
+            }
+
             // Load supported colors
             String[] colors = SupportedProperties.supportedColors();
             
@@ -131,6 +147,22 @@ public class PropertiesPopupMenu extends PopupMenu{
                     clock.setConfig(conf);
                 }
             };
+
+            // color picker
+            {
+                item = new MenuItem("Using color picker");
+                item.addActionListener(new ActionListener() {
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Config conf = new Config(clock.getConfig());
+                        ColorDialog dialog = new ColorDialog(clock.getOwner(), "Color picker for background", conf.getBackgroundColor());
+                        conf.setBackgroundColor(dialog.getColor());
+                        clock.setConfig(conf);
+                    }
+                });
+                menu.add(item);
+            }
 
             // Load supported colors
             String[] colors = SupportedProperties.supportedColors();
