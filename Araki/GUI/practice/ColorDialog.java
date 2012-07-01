@@ -153,11 +153,20 @@ public class ColorDialog extends Dialog{
     
     class LocalMouseListener extends MouseAdapter {
 
+        int mouseButton;
+        
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mouseButton = e.getButton();
+            
+            super.mousePressed(e);
+        }
+        
         @Override
         public void mouseDragged(MouseEvent e) {
             
             // Left button of mouse
-            if ( e.getButton() == MouseEvent.BUTTON1) {
+            if ( e.getButton() == MouseEvent.BUTTON1 || mouseButton == MouseEvent.BUTTON1) {
                 Point draggedPos = e.getPoint();
                 if (draggedPos.x >= 0 && draggedPos.y >= 0 &&
                         draggedPos.x < colorImage.getWidth() &&
