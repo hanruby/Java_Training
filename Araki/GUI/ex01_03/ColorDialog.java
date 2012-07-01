@@ -33,7 +33,8 @@ public class ColorDialog extends Dialog{
     
     private BufferedImage colorImage = null;
     private Panel colorPanel = null;
-    private Panel controlPanel = null;   
+    private Panel selectedColorPanel = null;   
+    private Panel previousColorPanel = null;
     
     private Color newColor;
     private Color oldColor;
@@ -57,7 +58,8 @@ public class ColorDialog extends Dialog{
         colorPanel.addMouseMotionListener(mouseEvent);
         colorPanel.setSize(colorImage.getWidth(), colorImage.getHeight());
         
-        controlPanel = new Panel();
+        selectedColorPanel = new Panel();
+        previousColorPanel = new Panel();
 
         createWindow();
         setResizable(false);
@@ -102,14 +104,17 @@ public class ColorDialog extends Dialog{
             c.gridwidth = 1;
             {
                 c.gridwidth = GridBagConstraints.REMAINDER;
-                Label label = new Label("Selected color : ", Label.LEFT);
-                gridbag.setConstraints(label, c);
-                add(label);
+                Label label = new Label("Previous color : ", Label.LEFT);
+                previousColorPanel.add(label);
+                gridbag.setConstraints(previousColorPanel, c);
+                add(previousColorPanel);
             }
             {
                 c.gridwidth = GridBagConstraints.REMAINDER;
-                gridbag.setConstraints(controlPanel, c);
-                add(controlPanel);
+                Label label = new Label("Selected color : ", Label.LEFT);
+                selectedColorPanel.add(label);
+                gridbag.setConstraints(selectedColorPanel, c);
+                add(selectedColorPanel);
             }
             {
                 c.weighty = 3.0;
@@ -173,9 +178,13 @@ public class ColorDialog extends Dialog{
         Graphics2D colorPanelGraphic = (Graphics2D) colorPanel.getGraphics();
         colorPanelGraphic.drawImage((Image)colorImage, 0, 0, this);
         
-        Graphics2D gr = (Graphics2D) controlPanel.getGraphics();
+        Graphics2D gr = (Graphics2D) selectedColorPanel.getGraphics();
         gr.setColor(newColor);
-        gr.fillRect(10, 10, 60, 40);
+        gr.fillRect(10, 23, 60, 20);
+
+        Graphics2D grd = (Graphics2D) previousColorPanel.getGraphics();
+        grd.setColor(oldColor);
+        grd.fillRect(10, 23, 60, 20);
         
     }
      
