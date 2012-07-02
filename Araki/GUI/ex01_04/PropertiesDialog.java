@@ -226,19 +226,4 @@ public class PropertiesDialog extends Dialog {
             dispose();
         }
     }
-    
-    /**
-     * プロパティが変更されたとき
-     * @author ato
-     *
-     */
-    public class PropertiesListener implements ItemListener{
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            Config conf = new Config(new Font("Times", Font.CENTER_BASELINE,10), Color.WHITE, Color.DARK_GRAY);
-            clock.setConfig(conf);
-        }
-    }
-
-
 }

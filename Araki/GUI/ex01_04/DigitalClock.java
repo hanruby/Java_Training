@@ -231,17 +231,33 @@ public class DigitalClock extends Window implements Runnable{
             
             super.mouseDragged(e);
         }
+        
+
+    }
+
+    /**
+     * 終了処理
+     */
+    public void exitProcess() {
+        this.config.savePref();
+        System.exit (0);
+    }
+
+    /**
+     * Windowがクローズされた場合
+     * @author ato
+     *
+     */
+    class ClockWindowListener extends WindowAdapter {
+        @Override
+        public void windowClosing (WindowEvent event) {
+            exitProcess();
+        }
+
+        @Override
+        public void windowClosed(WindowEvent arg0) {
+            exitProcess();
+        }
     }
 }
 
-/**
- * Windowがクローズされた場合
- * @author ato
- *
- */
-class ClockWindowListener extends WindowAdapter {
-    @Override
-    public void windowClosing (WindowEvent event) {
-        System.exit (0);
-    }
-}

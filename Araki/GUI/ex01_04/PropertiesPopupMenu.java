@@ -201,7 +201,7 @@ public class PropertiesPopupMenu extends PopupMenu{
             
             ActionListener menuListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.exit (0);
+                    clock.exitProcess();
                 }
             };
 
