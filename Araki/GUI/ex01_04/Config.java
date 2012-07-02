@@ -15,7 +15,7 @@ public class Config implements Cloneable {
     private DateFormat simpleClockFormat;
     private Insets margin;
 
-    private Font font;
+    private String fontname;
     private int fontsize;
 
     private Color backgroundColor;
@@ -29,7 +29,7 @@ public class Config implements Cloneable {
         clockFormat = new SimpleDateFormat(prefs.get("clockFormat", "yyyy/MM/dd HH:mm:ss"));
         simpleClockFormat = new SimpleDateFormat(prefs.get("simpleClockFormat", "HH:mm:ss"));
         fontsize = prefs.getInt("fontsize", 20);
-        font =  new Font(prefs.get("font", "Consolas"),Font.PLAIN, fontsize);
+        fontname =  prefs.get("fontname", "Consolas");
         backgroundColor = new Color(prefs.getInt("backgroundColor", Color.GRAY.getRGB()));
         fontColor = new Color(prefs.getInt("fontColor", Color.BLACK.getRGB()));
 
@@ -39,7 +39,7 @@ public class Config implements Cloneable {
     public Config(Config conf) {
         this.clockFormat = conf.clockFormat;
         this.simpleClockFormat = conf.simpleClockFormat;
-        this.font =  conf.font;
+        this.fontname =  conf.fontname;
         this.fontsize = conf.fontsize;
         this.backgroundColor = conf.backgroundColor;
         this.fontColor = conf.fontColor;
@@ -60,7 +60,7 @@ public class Config implements Cloneable {
         //clockFormat
         //simpleClockFormat
         prefs.putInt("fontsize", fontsize);
-        prefs.put("font", font.getName());
+        prefs.put("fontname", fontname);
         prefs.putInt("backgroundColor", backgroundColor.getRGB());
         prefs.putInt("fontColor", fontColor.getRGB());
     }
@@ -75,11 +75,28 @@ public class Config implements Cloneable {
     }
     
     public Font getFont() {
-        return font;
+        return new Font(fontname,Font.PLAIN, fontsize);
     }
     
     public void setFont(Font font) {
-        this.font = font;
+        this.fontname = font.getName();
+        this.fontsize = font.getSize();
+    }
+    
+    public String getFontName() {
+        return fontname;
+    }
+    
+    public void setFontName(String fontname) {
+        this.fontname = fontname;
+    }
+    
+    public int getFontSize() {
+        return fontsize;
+    }
+    
+    public void setFontSize(int fontsize) {
+        this.fontsize = fontsize;
     }
 
     public Color getBackgroundColor() {

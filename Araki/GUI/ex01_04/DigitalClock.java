@@ -231,8 +231,6 @@ public class DigitalClock extends Window implements Runnable{
             
             super.mouseDragged(e);
         }
-        
-
     }
 
     /**
