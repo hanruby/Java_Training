@@ -30,14 +30,14 @@ public class Calculate {
                 3 << 2L - 1 /*
                 3 <<    1
                    6
-                int OR long ?
+                int
                 */
         );
         System.out.println(
                 (3L << 2) - 1 /*
                     12    - 1
                           11
-                int OR long ?
+                long
                 */ 
         ); 
         System.out.println( 
@@ -100,20 +100,19 @@ public class Calculate {
         System.out.println(
                 (short) 5 * (byte) 10  /*
                           50
-                short
+                int
                 */ 
         );
         System.out.println( 
                 (i < 15 ? 1.72e3f : 0) /*
                     1.72e3f
                     1720
-                int ?
+                float
                 */
         );
         System.out.println(
                 i++ + i++ + --i  /*
-                 4  +  4  + --i
-                 4  +  4  +  3
+                 3  +  4  +  4
                 11
                 int
                 */ 
