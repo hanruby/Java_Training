@@ -19,7 +19,7 @@ public class BankAccount {
 
     /**
      * open a new account at a bank
-     * @param numver 口座番号
+     * @param number 口座番号
      * @param balance 口座開設金額
      */
     public BankAccount(long number, long balance) {
