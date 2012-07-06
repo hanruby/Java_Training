@@ -81,6 +81,7 @@ public class BankAccount {
          */
         public void saveAction(Action lastAct) {
             if(history.size() >= HISTORY_SIZE) {
+                // TODO: 内部ではさらに履歴を持つ
                 history.poll();
             }
             history.add(lastAct);
@@ -125,5 +126,6 @@ public class BankAccount {
      */
     public History history() {
         return this.history;
+        //TODO: clone
     }
 }
