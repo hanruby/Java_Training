@@ -4,5 +4,5 @@
 
 `P.132`
 
-TURN_LEFTとTURN_RIGHTを表すenumを使用して、 ex02_17 をやり直しなさい。
+`TURN_LEFT` と `TURN_RIGHT` を表すenumを使用して、 ex02_17 をやり直しなさい。
 enumを使用することにどのような利点がありますか。
