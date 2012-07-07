@@ -35,6 +35,7 @@ public class BankAccountTest {
             araki.deposit(i);
         }
         
+        // 履歴を取得する
         BankAccount.History history = araki.history();
         BankAccount.Action action;
         
@@ -42,6 +43,17 @@ public class BankAccountTest {
             action = history.next();
             assertEquals("12345: deposit "+(i+5), action.toString());
         }
+        // 最後はnull
+        assertEquals(history.next(), null);
+
+        // もう一度履歴を取得する
+        history = araki.history();
+        
+        for (int i = 0; i < 10; i++) {
+            action = history.next();
+            assertEquals("12345: deposit "+(i+5), action.toString());
+        }
+        // 最後はnull
         assertEquals(history.next(), null);
     }
 }

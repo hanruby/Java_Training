@@ -51,13 +51,13 @@ public class BankAccount {
      * また、staticのネストではない方が良い。
      * （Historyに直接アクセスできないほうが好ましいため）
      */
-    public class History {
+    public class History implements Cloneable {
         /*
          * I learned a example of use of Queue interface from here:
          * http://www.easywayserver.com/blog/java-queue-example/
          * http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Queue.html
          */ 
-        private Queue<Action> history = new LinkedList<Action>();
+        private Queue<Action> historyQue = new LinkedList<Action>();
         private Iterator<Action> it;
 
         /**
@@ -65,7 +65,7 @@ public class BankAccount {
          */
         public Action next() {
             if(it == null) {
-                it = history.iterator();
+                it = historyQue.iterator();
             }
             if(it.hasNext()) {
                 return it.next();
@@ -80,11 +80,24 @@ public class BankAccount {
          * @param lastAct
          */
         public void saveAction(Action lastAct) {
-            if(history.size() >= HISTORY_SIZE) {
+            if(historyQue.size() >= HISTORY_SIZE) {
                 // TODO: 内部ではさらに履歴を持つ
-                history.poll();
+                historyQue.poll();
             }
-            history.add(lastAct);
+            historyQue.add(lastAct);
+        }
+        
+        @Override
+        protected History clone() {
+            try {
+                History nObj = (History) super.clone();
+                nObj.historyQue = new LinkedList<Action>(this.historyQue);
+                nObj.it = null; 
+                return nObj;
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+                throw new InternalError(e.toString());
+            }
         }
     }
 
@@ -125,7 +138,8 @@ public class BankAccount {
      * @return
      */
     public History history() {
-        return this.history;
-        //TODO: clone
+        History history = null;
+        history = this.history.clone();
+        return history;
     }
 }
