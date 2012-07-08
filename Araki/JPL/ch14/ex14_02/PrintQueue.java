@@ -1,15 +1,22 @@
 package ch14.ex14_02;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class PrintQueue {
 
+    private Queue<PrintJob> que;
+    
+    public PrintQueue() {
+        que = new LinkedList<PrintJob>();
+    }
+    
     public void add(PrintJob job) {
-        // TODO Auto-generated method stub
-        
+        que.add(job);
     }
 
     public PrintJob remove() {
-        // TODO Auto-generated method stub
-        return null;
+        return que.remove();
     }
 
 }
