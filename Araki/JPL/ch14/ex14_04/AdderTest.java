@@ -20,8 +20,6 @@ public class AdderTest {
 
     @Test
     public void testAdder() throws Exception {
-        final Adder adder = new Adder();
-
         // Create some threads 
         for (int i = 0; i < THREAD_NUM; i++) {
             new Thread(new Runnable() {
@@ -29,7 +27,7 @@ public class AdderTest {
                 public void run() {
                     System.out.println("Start :" + Thread.currentThread().getName());
                     for (int j = 0; j < COUNT_NUM; j++) {
-                        adder.add(ADD_NUM);
+                        Adder.add(ADD_NUM);
                     }
                     System.out.println("End :" + Thread.currentThread().getName());
                     condition++;
@@ -41,6 +39,6 @@ public class AdderTest {
             Thread.sleep(100);
         }
         // THREAD_NUM threads x COUNT_NUM times
-        assertEquals(THREAD_NUM * COUNT_NUM * ADD_NUM, adder.getNum());
+        assertEquals(THREAD_NUM * COUNT_NUM * ADD_NUM, Adder.getNum());
     }
 }
