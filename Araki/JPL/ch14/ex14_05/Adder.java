@@ -8,15 +8,21 @@ public class Adder {
     }
     
     public static void add(int num) {
-        current_num = current_num + num;
-        //System.out.println(this.current_num);
+        synchronized (Adder.class) {
+            current_num = current_num + num;
+            //System.out.println(this.current_num);
+        }
     }
     
     public static void sub(int num) {
-        current_num = current_num - num;
+        synchronized (Adder.class) {
+            current_num = current_num - num;
+        }
     }
     
     public static int getNum() {
-        return current_num;
+        synchronized (Adder.class) {
+            return current_num;
+        }
     }
 }
