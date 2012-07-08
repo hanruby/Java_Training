@@ -19,4 +19,11 @@ public class PrintServerTest {
             server.print(new PrintJob("job no." + i));
         }
     }
+
+    @Test(expected=IllegalStateException.class)
+    public void testRun() {
+        PrintServer server = new PrintServer();
+
+        server.run();
+    }
 }
