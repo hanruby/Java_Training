@@ -7,9 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AdderTest {
-
+    int condition;
+    
+    final int THREAD_NUM = 4;
+    final int COUNT_NUM = 10000;
+    final int ADD_NUM = 1;
+    
     @Before
     public void setUp() throws Exception {
+        condition = 0;
     }
 
     @Test
@@ -17,18 +23,24 @@ public class AdderTest {
         final Adder adder = new Adder();
 
         // Create some threads 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < THREAD_NUM; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int j = 0; j < 100; j++) {
-                        adder.add(1);
+                    System.out.println("Start :" + Thread.currentThread().getName());
+                    for (int j = 0; j < COUNT_NUM; j++) {
+                        adder.add(ADD_NUM);
                     }
+                    System.out.println("End :" + Thread.currentThread().getName());
+                    condition++;
                 }
             }).start();
         }
         
-        // 10 threads x 100 times = 1000
-        assertEquals(1000, adder.getNum());
+        while(condition != THREAD_NUM) { 
+            Thread.sleep(100);
+        }
+        // THREAD_NUM threads x COUNT_NUM times
+        assertEquals(THREAD_NUM * COUNT_NUM * ADD_NUM, adder.getNum());
     }
 }

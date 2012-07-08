@@ -1,18 +1,18 @@
 package ch14.ex14_03;
 
 public class Adder {
-    private int num = 0;
+    private int current_num = 0;
     
     public Adder() {
-        num = 0;
+        current_num = 0;
     }
     
-    public void add(int num) {
-        this.num = this.num + num;
-        System.out.println(this.num);
+    public synchronized void add(int num) {
+        this.current_num = this.current_num + num;
+        //System.out.println(this.current_num);
     }
     
     public int getNum() {
-        return this.num;
+        return this.current_num;
     }
 }
