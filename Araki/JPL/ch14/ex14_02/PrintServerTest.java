@@ -20,7 +20,7 @@ public class PrintServerTest {
         }
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected=IllegalThreadStateException.class)
     public void testRun() {
         PrintServer server = new PrintServer();
 
