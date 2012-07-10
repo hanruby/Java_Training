@@ -49,21 +49,20 @@ public class TimePrinting {
 
 class MessagePrinting {
     
-    private long counter = 0;
-    private long version_no = 1;
+    private long count = 0;
+    private long count_plus = 1;
     
     public synchronized void count() {
-        counter++;
+        count++;
         notifyAll();
     }
 
     public synchronized void interval(int interval) throws InterruptedException {
         
-        while( counter % interval != 0 || version_no > counter) {
-            //System.out.println("hoge" + version_no);
+        while( count % interval != 0 || count_plus > count) {
             wait();
         }
         System.out.println("Interval : " + interval);
-        version_no = counter+1;
+        count_plus = count + 1;
     }
 }
