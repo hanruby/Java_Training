@@ -11,7 +11,7 @@ public class TimePrinting {
             public void run() {
                 for(;;) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(500);
                         message.count();
                         elapse++;
                         System.out.println("Elapse : " + elapse + " sec");
