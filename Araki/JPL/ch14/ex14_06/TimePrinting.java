@@ -22,13 +22,16 @@ public class TimePrinting {
                 }
             }
         }).start();
+    }
+    
+    public void addInterval(final int interval) {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for(;;) {
                     try {
-                        message.interval(15);
+                        message.interval(interval);
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -38,8 +41,8 @@ public class TimePrinting {
         }).start();
     }
     
-    public static void main(String[] args) {
-        new TimePrinting();
+    public long getElapse() {
+        return elapse;
     }
 }
 
@@ -47,6 +50,7 @@ public class TimePrinting {
 class MessagePrinting {
     
     private long counter = 0;
+    private long version_no = 1;
     
     public synchronized void count() {
         counter++;
@@ -55,11 +59,11 @@ class MessagePrinting {
 
     public synchronized void interval(int interval) throws InterruptedException {
         
-        while( counter < interval ) {
+        while( counter % interval != 0 || version_no > counter) {
+            //System.out.println("hoge" + version_no);
             wait();
         }
         System.out.println("Interval : " + interval);
-
-        counter = 0;
+        version_no = counter+1;
     }
 }
