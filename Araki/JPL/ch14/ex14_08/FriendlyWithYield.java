@@ -12,6 +12,7 @@ public class FriendlyWithYield {
         System.out.println(Thread.currentThread().getName()+
                 " in " + name + ".hug() trying to invoke " +
                 partner.name + ".hugBack()");
+        Thread.yield();
         partner.hugBack();
     }
 
@@ -33,11 +34,15 @@ public class FriendlyWithYield {
         cory.becomeFriend(jareth);
 
         new Thread(new Runnable() {
-            public void run() { jareth.hug(); }
+            public void run() { 
+                jareth.hug(); 
+            }
         }, "Thread1").start();
 
         new Thread(new Runnable() {
-            public void run() { cory.hug(); }
+            public void run() { 
+                cory.hug(); 
+            }
         }, "Thread2").start();
     }
 }
