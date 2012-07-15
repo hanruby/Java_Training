@@ -28,17 +28,14 @@ public class TypeDescTest {
 
     @Test
     public void testMain() {
-        _out.println("class java.util.HashMap<K, V, \b\b>");
-        _out.println("  implements java.util.Map<K, V, \b\b>");
+        _out.println("class ch05.ex05_02.BankAccount.History");
+        _out.println("  class ch05.ex05_02.BankAccount");
         _out.println("  implements java.lang.Cloneable");
-        _out.println("  implements java.io.Serializable");
-        _out.println("  extends java.util.AbstractMap<K, V, \b\b>");
-        _out.println("    implements java.util.Map<K, V, \b\b>");
         _out.flush();
         
         Class<?> startClass;
         try {
-            startClass = Class.forName("java.util.HashMap");
+            startClass = Class.forName("ch05.ex05_02.BankAccount$History");
             td.printType(startClass, 0, TypeDesc.basic);
         
             td.getOut().flush();
@@ -51,5 +48,11 @@ public class TypeDescTest {
             e.printStackTrace();
             fail("Not yet implemented");
         }
+    }
+}
+
+
+class EnclosingClass {
+    public class EnclosedClass {
     }
 }

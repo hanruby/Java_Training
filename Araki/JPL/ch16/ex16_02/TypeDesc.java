@@ -37,8 +37,7 @@ public class TypeDesc {
             cls = (Class<?>) type;
         }
         else if (type instanceof ParameterizedType) {
-            cls = (Class<?>)
-            ((ParameterizedType)type).getRawType();
+            cls = (Class<?>) ((ParameterizedType)type).getRawType();
         }
         else {
             throw new Error("Unexpected non-class type");
@@ -68,16 +67,22 @@ public class TypeDesc {
             }
             out.println("\b\b>");
         }
-        else {
+        else { 
             out.println();
+        }
+
+        // ex16_02 ネストした型に対して再帰
+        Class<?> enclosing = cls.getEnclosingClass();
+        if (enclosing != null) {
+            printType(enclosing, depth + 1, basic);
         }
 
         // このクラスが実装している全てのインターフェースを表示
         Type[] interfaces = cls.getGenericInterfaces();
         for (Type iface : interfaces) {
-            printType(iface, depth + 1,
-                    cls.isInterface() ? iFace : supercl);
+            printType(iface, depth + 1, cls.isInterface() ? iFace : supercl);
         }
+        
         // スーパークラスに対して再帰
         printType(cls.getGenericSuperclass(), depth + 1, supercl);
     }
