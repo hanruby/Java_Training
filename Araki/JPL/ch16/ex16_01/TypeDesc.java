@@ -44,6 +44,11 @@ private void printType(Type type, int depth, String[] labels) {
     else {
         throw new Error("Unexpected non-class type");
     }
+    
+    // ex16_01 Objectクラスに関しては何も表示しない
+    if (cls == java.lang.Object.class) {
+        return;
+    }
 
     // 型を表示
     for (int i = 0; i < depth; i++)
