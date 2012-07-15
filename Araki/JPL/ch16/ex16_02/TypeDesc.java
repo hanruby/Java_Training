@@ -23,7 +23,7 @@ public class TypeDesc {
 
     // 型名にラベル付けする printType() で使用する
     public final static String[]
-                          basic   = { "class",   "interface", "enum",    "annotation"  },
+                          basic   = { "class",   "interface", "enum",    "annotation", "nested class", "nested interface" },
                           supercl = { "extends", "implements" },
                           iFace   = { null,       "extends"  };
 
@@ -51,9 +51,11 @@ public class TypeDesc {
         // 型を表示
         for (int i = 0; i < depth; i++)
             out.print("  ");
-        int kind = cls.isAnnotation() ? 3 :
-            cls.isEnum() ? 2 :
-                cls.isInterface() ? 1 : 0;
+        int kind = cls.isMemberClass() && cls.isInterface() ? 5 :
+                   cls.isMemberClass() ? 4 :
+                   cls.isAnnotation() ? 3 :
+                   cls.isEnum() ? 2 :
+                   cls.isInterface() ? 1 : 0;
         out.print(labels[kind] + " ");
         out.print(cls.getCanonicalName());
 

@@ -27,15 +27,37 @@ public class TypeDescTest {
     }
 
     @Test
-    public void testMain() {
-        _out.println("class ch05.ex05_02.BankAccount.History");
-        _out.println("  class ch05.ex05_02.BankAccount");
-        _out.println("  implements java.lang.Cloneable");
+    public void test1() {
+        _out.println("nested class ch16.ex16_02.TestClass.NestedClass");
+        _out.println("  class ch16.ex16_02.TestClass");
         _out.flush();
         
         Class<?> startClass;
         try {
-            startClass = Class.forName("ch05.ex05_02.BankAccount$History");
+            startClass = Class.forName("ch16.ex16_02.TestClass$NestedClass");
+            td.printType(startClass, 0, TypeDesc.basic);
+        
+            td.getOut().flush();
+            System.out.print(_actual.toString());
+            
+            assertEquals(_expected.toString(), _actual.toString());
+
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            fail("Not yet implemented");
+        }
+    }
+
+    @Test
+    public void test2() {
+        _out.println("nested interface ch16.ex16_02.TestClass.NestedInterface");
+        _out.println("  class ch16.ex16_02.TestClass");
+        _out.flush();
+        
+        Class<?> startClass;
+        try {
+            startClass = Class.forName("ch16.ex16_02.TestClass$NestedInterface");
             td.printType(startClass, 0, TypeDesc.basic);
         
             td.getOut().flush();
@@ -52,7 +74,9 @@ public class TypeDescTest {
 }
 
 
-class EnclosingClass {
-    public class EnclosedClass {
+class TestClass {
+    public class NestedClass {
+    }
+    public interface NestedInterface {
     }
 }
