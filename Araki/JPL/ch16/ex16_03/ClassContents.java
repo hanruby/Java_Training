@@ -29,8 +29,7 @@ public class ClassContents {
         }
     }
 
-    private static char[] strip(String decl, String string) {
-        // TODO Auto-generated method stub
-        return null;
+    protected static String strip(String base, String stripString) {
+        return base.replace(stripString, "");
     }
 }
