@@ -27,6 +27,33 @@ public class TypeDescTest {
     }
 
     @Test
+    public void testMain() {
+        _out.println("class java.util.HashMap<K, V, \b\b>");
+        _out.println("  implements java.util.Map<K, V, \b\b>");
+        _out.println("  implements java.lang.Cloneable");
+        _out.println("  implements java.io.Serializable");
+        _out.println("  extends java.util.AbstractMap<K, V, \b\b>");
+        _out.println("    implements java.util.Map<K, V, \b\b>");
+        _out.flush();
+        
+        Class<?> startClass;
+        try {
+            startClass = Class.forName("java.util.HashMap");
+            td.printType(startClass, 0, TypeDesc.basic);
+        
+            td.getOut().flush();
+            System.out.print(_actual.toString());
+            
+            assertEquals(_expected.toString(), _actual.toString());
+
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            fail("Not yet implemented");
+        }
+    }
+
+    @Test
     public void test1() {
         _out.println("nested class ch16.ex16_02.TestClass.NestedClass");
         _out.println("  class ch16.ex16_02.TestClass");
