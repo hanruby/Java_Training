@@ -31,10 +31,10 @@ public class ClassContentsTest {
     public void test1() throws Exception {
         try {
             Class<?> c = Class.forName("java.util.HashMap");
-            System.out.println(c);
-            ClassContents.printMembers(c.getFields());
-            ClassContents.printMembers(c.getConstructors());
-            ClassContents.printMembers(c.getMethods());
+            ClassContents.outputMembers(c.getFields());
+            ClassContents.outputMembers(c.getConstructors());
+            ClassContents.outputMembers(c.getMethods());
+
         } catch (ClassNotFoundException e) {
             System.out.println("unknown class : " + e);
         }
@@ -46,8 +46,9 @@ public class ClassContentsTest {
     @Test
     public void testSearchType() throws Exception {
         Class<?> startClass = Class.forName("java.util.HashMap");
-        
+
         ClassContents.searchType(startClass);
+        ClassContents.showMembers();
         
         cc.getOut().flush();
         System.out.println(_actual.toString());

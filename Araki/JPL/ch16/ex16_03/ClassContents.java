@@ -1,19 +1,23 @@
 package ch16.ex16_03;
 
 import java.lang.reflect.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * P.358 
  *
  */
 public class ClassContents {
+    
+    private static Set<String> members = new HashSet<String>();
+    
     public static void main(String[] args) {
         try {
-            Class<?> c = Class.forName(args[0]);
-            System.out.println(c);
-            printMembers(c.getFields());
-            printMembers(c.getConstructors());
-            printMembers(c.getMethods());
+            Class<?> cls = Class.forName(args[0]);
+            out.println(cls);
+            searchType(cls);
+            showMembers();
         } catch (ClassNotFoundException e) {
             System.out.println("unknown class: " + args[0]);
         }
@@ -34,26 +38,32 @@ public class ClassContents {
             throw new Error("Unexpected non-class type");
         }
 
-        System.out.println(cls);
-        
-        printMembers(cls.getFields());
-        printMembers(cls.getConstructors());
-        printMembers(cls.getMethods());
+        outputMembers(cls.getFields());
+        outputMembers(cls.getConstructors());
+        outputMembers(cls.getMethods());
 
-                
         searchType(cls.getGenericSuperclass());
     }
 
+    public static void showMembers() {
+        for (String str : members) {
+            out.println("  "+ str);
+        }
+    }
+    
+    
     // 標準出力に表示
     private static java.io.PrintStream out = System.out;
 
-    public static void printMembers(Member[] mems) {
+    public static void outputMembers(Member[] mems) {
         for (Member m : mems) {
             if (m.getDeclaringClass() == Object.class)
                 continue;
             String decl = m.toString();
-            out.print("    ");
-            out.println(strip(decl, "java.lang."));
+            //out.print("    ");
+            //out.println(strip(decl, "java.lang."));
+            
+            members.add(strip(decl, "java.lang."));
         }
     }
 
