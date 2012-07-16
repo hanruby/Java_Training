@@ -46,8 +46,8 @@ public class ClassContents {
     }
 
     public static void showMembers() {
-        for (String str : members) {
-            out.println("  "+ str);
+        for (String member : members) {
+            out.println("  "+ member);
         }
     }
     
