@@ -28,30 +28,20 @@ public class ClassContentsTest {
     }
 
     @Test
-    public void test1() throws Exception {
-        try {
-            Class<?> c = Class.forName("java.util.HashMap");
-            ClassContents.outputMembers(c.getFields());
-            ClassContents.outputMembers(c.getConstructors());
-            ClassContents.outputMembers(c.getMethods());
-
-        } catch (ClassNotFoundException e) {
-            System.out.println("unknown class : " + e);
-        }
-        
-        cc.getOut().flush();
-        //System.out.println(_actual.toString());
-    }
-    
-    @Test
     public void testSearchType() throws Exception {
-        Class<?> startClass = Class.forName("java.util.HashMap");
+
+        // Expected
+        _out.println("  public void ch16.ex16_03.A.methodA()");
+        _out.println("  public void ch16.ex16_03.X.methodX()");
+        _out.flush();
+        
+        Class<?> startClass = Class.forName("ch16.ex16_03.X");
 
         ClassContents.searchType(startClass);
         ClassContents.showMembers();
         
         cc.getOut().flush();
-        System.out.println(_actual.toString());
+        assertEquals(_expected.toString(), _actual.toString());
     }
     
     @Test
@@ -60,4 +50,14 @@ public class ClassContentsTest {
         assertEquals("  HashMap", ClassContents.strip("  java.lang.HashMap", "java.lang."));
         assertEquals("  ", ClassContents.strip("  java.lang.", "java.lang."));
     }
+}
+
+
+
+class A {
+    public void methodA(){};
+}
+
+class X extends A { 
+    public void methodX(){};
 }
