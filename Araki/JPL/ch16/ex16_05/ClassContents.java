@@ -1,5 +1,6 @@
 package ch16.ex16_05;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,8 +61,28 @@ public class ClassContents {
             if (m.getDeclaringClass() == Object.class)
                 continue;
             String decl = m.toString();
-            members.add(strip(decl, "java.lang."));
+            members.add(strip(decl, "java.lang.") + " " + outputAnnotation(m));
         }
+    }
+    
+    public static String outputAnnotation(Member mem) {
+        Annotation[] annotations = new Annotation[0];
+
+        if (mem instanceof Field) {
+            annotations = ((Field)mem).getAnnotations();
+        }
+        if (mem instanceof Constructor) {
+            annotations = ((Constructor<?>)mem).getAnnotations();           
+        }
+        if (mem instanceof Method) {
+            annotations = ((Method)mem).getAnnotations();
+        }
+        
+        String annotationInfo = "";
+        for (Annotation annotation : annotations) {
+            annotationInfo += annotation.toString();
+        }
+        return annotationInfo;
     }
 
     protected static String strip(String base, String stripString) {

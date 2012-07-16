@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,11 +55,23 @@ public class ClassContentsTest {
 }
 
 
-
 class A {
+    @BugsFixed({"112233","123456"})
     public void methodA(){};
 }
 
 class X extends A { 
+    @BugsFixed({"234567","467211"})
     public void methodX(){};
 }
+
+
+/**
+ * P.342
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@interface BugsFixed {
+    String[] value();
+}
+
+
