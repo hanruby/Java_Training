@@ -60,8 +60,6 @@ public class ClassContents {
             if (m.getDeclaringClass() == Object.class)
                 continue;
             String decl = m.toString();
-            //out.print("    ");
-            //out.println(strip(decl, "java.lang."));
             
             members.add(strip(decl, "java.lang."));
         }
