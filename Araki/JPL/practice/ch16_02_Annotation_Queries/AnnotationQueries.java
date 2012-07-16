@@ -19,8 +19,8 @@ public class AnnotationQueries {
 
         Class<Foo> cls = Foo.class;
         BugsFixed bugsFixed = (BugsFixed) cls.getAnnotation(BugsFixed.class);
-        String[] bugsIDs = bugsFixed.value(); // This value of bugsIDs is null. Why?
-        for (String id : bugsIDs) {
+        String[] bugIDs = bugsFixed.value(); // This value of bugsIDs is null. Why?
+        for (String id : bugIDs) {
             System.out.println(id);
         }
     }
