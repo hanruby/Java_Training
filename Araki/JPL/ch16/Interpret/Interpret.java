@@ -1,5 +1,8 @@
 package ch16.Interpret;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.*;
 
 
@@ -9,11 +12,61 @@ import java.lang.reflect.*;
  */
 public class Interpret {
     public static void main(String[] args) {
-        Object obj = createObject("java.util.HashMap");
+        createInterpret();        
+    }
+    
+    static void createInterpret() {
+        System.out.println("Welcome to java interpreter console.");
+         
+        BufferedReader input = new BufferedReader (new InputStreamReader (System.in));
+        String line = null;
         
-        printObjectFields(obj);
-        setField(obj, "threshold", 13);
-        printObjectFields(obj);
+        Object obj = null;
+        
+        for(;;) {
+            System.out.printf("> ");
+            try {
+                line = input.readLine( );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String[] args = line.split(" ");
+
+            switch (args.length) {
+            case 0:
+                break;
+                
+            case 1:
+                if (args[0].equals("ls")) {
+                    if (obj == null) {
+                        System.out.println("none");
+                        break;
+                    }
+                    printObjectFields(obj);
+                }
+                else if (args[0].equals("exit")) {
+                    System.out.println("bye!");
+                    System.exit(0);
+                }
+                break;
+
+            case 2:
+                if (args[0].equals("new")) {
+                    obj = createObject(args[1]);
+                }    
+                break;
+
+            case 3:
+                if (args[0].equals("set")) {
+                    setField(obj, args[1].toString(), args[2]);
+                }    
+                break;
+
+            default:
+                System.out.println(line);
+                break;
+            }
+        }
     }
     
     

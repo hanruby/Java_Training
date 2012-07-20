@@ -26,5 +26,4 @@ public class InterpretTest {
 @SuppressWarnings("unused")
 class TestA {
     private int privateVal = 10;
-    private int privateConstVal = 12;
 }
