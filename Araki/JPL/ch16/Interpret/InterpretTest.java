@@ -3,6 +3,9 @@ package ch16.Interpret;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +23,13 @@ public class InterpretTest {
         Interpret.setField(obj, "privateVal", 13);
         
         assertEquals(13, Interpret.getField(obj, "privateVal"));
+    }
+    
+    @Test
+    public void test_console() throws Exception {
+        
+        Interpret.setReader(new BufferedReader(new FileReader("./JPL/ch16/Interpret/console.txt")));
+        Interpret.createInterpreter();
     }
 }
 

@@ -1,6 +1,8 @@
 package ch16.Interpret;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.*;
@@ -12,15 +14,19 @@ import java.lang.reflect.*;
  */
 public class Interpret {
     public static void main(String[] args) {
-        createInterpret();        
+        createInterpreter();        
     }
     
-    static void createInterpret() {
+    private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    
+    static void setReader(BufferedReader reader) {
+        input = reader;
+    }
+    
+    static void createInterpreter() {
         System.out.println("Welcome to java interpreter console.");
-         
-        BufferedReader input = new BufferedReader (new InputStreamReader (System.in));
-        String line = null;
         
+        String line = null;
         Object obj = null;
         
         for(;;) {
@@ -46,7 +52,7 @@ public class Interpret {
                 }
                 else if (args[0].equals("exit")) {
                     System.out.println("bye!");
-                    System.exit(0);
+                    return;
                 }
                 break;
 
