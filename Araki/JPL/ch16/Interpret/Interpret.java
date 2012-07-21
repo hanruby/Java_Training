@@ -49,7 +49,7 @@ public class Interpret {
                         System.out.println("none");
                         break;
                     }
-                    ObjectUtility.printObjectFields(obj);
+                    FieldUtility.printObjectFields(obj);
                 }
                 else if (args[0].equals("exit")) {
                     return;
@@ -64,7 +64,7 @@ public class Interpret {
 
             case 3:
                 if (args[0].equals("set")) {
-                    ObjectUtility.setField(obj, args[1].toString(), args[2]);
+                    FieldUtility.setField(obj, args[1].toString(), args[2]);
                 }    
                 break;
 
