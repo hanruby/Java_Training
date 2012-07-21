@@ -1,4 +1,4 @@
 new ch16.Interpret.TestA
-set privateVal 123
+set privateInt 123
 exit
 

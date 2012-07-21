@@ -106,14 +106,48 @@ public class Interpret {
         return value;
     }
     
-    public static void setField(Object obj, String name, Object value) {
+    public static void setField(Object obj, String name, String value) {
         Field field;
         try {
             field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
-            field.set(obj, value);
+            Class<?> type = field.get(obj).getClass();
+            field.set(obj, convertObject(type, value));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    public static Object convertObject(Class<?> type, String value) {
+        if (type.equals(Boolean.class)) {
+            return Boolean.valueOf(value);
+        }
+        else if (type.equals(Byte.class)) {
+            return Byte.valueOf(value);
+        }
+        else if (type.equals(Character.class)) {
+            return value.charAt(0);
+        }
+        else if (type.equals(Short.class)) {
+            return Short.valueOf(value);
+        }
+        else if (type.equals(Integer.class)) {
+            return Integer.valueOf(value);
+        }
+        else if (type.equals(Long.class)) {
+            return Long.valueOf(value);
+        }
+        else if (type.equals(Float.class)) {
+            return Float.valueOf(value);
+        }
+        else if (type.equals(Double.class)) {
+            return Double.valueOf(value);
+        }
+        else if (type.equals(String.class)) {
+            return String.valueOf(value);
+        }
+        else {
+            return null;
         }
     }
     
@@ -130,9 +164,11 @@ public class Interpret {
         field.setAccessible(true);
         try{
             System.out.println(
-                    "  " +
-                    field.getName() + " (" + field.get(o) + ") : " + 
-                    field.getType().getCanonicalName() );
+                    "{ name : \"" +
+                    field.getName() + 
+                    "\", value : \"" + field.get(o) + 
+                    "\", type : \"" + field.getType().getCanonicalName() +
+                    "\" },");
         }
         catch(IllegalAccessException e){
             e.printStackTrace();
