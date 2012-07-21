@@ -3,8 +3,6 @@ package ch16.Interpret;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.*;
-
 
 /**
  * Interpret for Java 
@@ -12,16 +10,17 @@ import java.lang.reflect.*;
  */
 public class Interpret {
     public static void main(String[] args) {
-        createInterpreter();        
+        Interpret interpreter = new Interpret();
+        interpreter.createInterpreter();        
     }
     
-    private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     
-    static void setReader(BufferedReader reader) {
+    void setReader(BufferedReader reader) {
         input = reader;
     }
     
-    static void createInterpreter() {
+    public void createInterpreter() {
         System.out.println("Welcome to java interpreter console.");
         
         String line = null;
@@ -46,7 +45,7 @@ public class Interpret {
                         System.out.println("none");
                         break;
                     }
-                    printObjectFields(obj);
+                    ObjectUtility.printObjectFields(obj);
                 }
                 else if (args[0].equals("exit")) {
                     System.out.println("bye!");
@@ -56,13 +55,13 @@ public class Interpret {
 
             case 2:
                 if (args[0].equals("new")) {
-                    obj = createObject(args[1]);
+                    obj = ObjectUtility.createObject(args[1]);
                 }    
                 break;
 
             case 3:
                 if (args[0].equals("set")) {
-                    setField(obj, args[1].toString(), args[2]);
+                    ObjectUtility.setField(obj, args[1].toString(), args[2]);
                 }    
                 break;
 
@@ -70,75 +69,6 @@ public class Interpret {
                 System.out.println(line);
                 break;
             }
-        }
-    }
-    
-    
-    static Object createObject(String str) {
-        Class<?> cls = null;
-        Object obj = null;
-
-        // Create new Object
-        try {
-            cls = (Class<?>)Class.forName(str);
-            obj = cls.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        
-        return obj;
-    }
-    
-    public static Object getField(Object obj, String name) {
-        Field field;
-        Object value = null;
-        try {
-            field = obj.getClass().getDeclaredField(name);
-            field.setAccessible(true);
-            value = field.get(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-    
-    public static void setField(Object obj, String name, String value) {
-        Field field;
-        try {
-            field = obj.getClass().getDeclaredField(name);
-            field.setAccessible(true);
-            Class<?> type = field.get(obj).getClass();
-            field.set(obj, Utility.convertObject(type, value));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void printObjectFields(Object obj){
-        System.out.println("Class : " + obj.getClass().getCanonicalName() );
-        // find all fields
-        Field[] fieldArr = obj.getClass().getDeclaredFields();
-        for(Field field : fieldArr){
-            printObjectField(obj, field);
-        }
-    }
-        
-    public static void printObjectField(Object o, Field field){
-        field.setAccessible(true);
-        try{
-            System.out.println(
-                    "{ \"name\" : \"" +
-                    field.getName() + 
-                    "\", \"value\" : \"" + field.get(o) + 
-                    "\", \"type\" : \"" + field.getType().getCanonicalName() +
-                    "\" },");
-        }
-        catch(IllegalAccessException e){
-            e.printStackTrace();
         }
     }
 }
