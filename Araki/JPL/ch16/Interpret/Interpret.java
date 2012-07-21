@@ -112,45 +112,12 @@ public class Interpret {
             field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
             Class<?> type = field.get(obj).getClass();
-            field.set(obj, convertObject(type, value));
+            field.set(obj, Utility.convertObject(type, value));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public static Object convertObject(Class<?> type, String value) {
-        if (type.equals(Boolean.class)) {
-            return Boolean.valueOf(value);
-        }
-        else if (type.equals(Byte.class)) {
-            return Byte.valueOf(value);
-        }
-        else if (type.equals(Character.class)) {
-            return value.charAt(0);
-        }
-        else if (type.equals(Short.class)) {
-            return Short.valueOf(value);
-        }
-        else if (type.equals(Integer.class)) {
-            return Integer.valueOf(value);
-        }
-        else if (type.equals(Long.class)) {
-            return Long.valueOf(value);
-        }
-        else if (type.equals(Float.class)) {
-            return Float.valueOf(value);
-        }
-        else if (type.equals(Double.class)) {
-            return Double.valueOf(value);
-        }
-        else if (type.equals(String.class)) {
-            return String.valueOf(value);
-        }
-        else {
-            return null;
-        }
-    }
-    
+
     public static void printObjectFields(Object obj){
         System.out.println("Class : " + obj.getClass().getCanonicalName() );
         // find all fields
