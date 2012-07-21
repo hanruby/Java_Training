@@ -10,8 +10,14 @@ import java.io.InputStreamReader;
  */
 public class Interpret {
     public static void main(String[] args) {
+        System.out.println("Welcome to java interpreter console.");
+
         Interpret interpreter = new Interpret();
         interpreter.createInterpreter();        
+
+        System.out.println("bye!");
+
+        return;
     }
     
     private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -21,8 +27,6 @@ public class Interpret {
     }
     
     public void createInterpreter() {
-        System.out.println("Welcome to java interpreter console.");
-        
         String line = null;
         Object obj = null;
         
@@ -48,7 +52,6 @@ public class Interpret {
                     ObjectUtility.printObjectFields(obj);
                 }
                 else if (args[0].equals("exit")) {
-                    System.out.println("bye!");
                     return;
                 }
                 break;
