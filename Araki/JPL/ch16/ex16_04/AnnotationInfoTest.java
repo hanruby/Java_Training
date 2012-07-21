@@ -1,7 +1,7 @@
 package ch16.ex16_04;
 
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
