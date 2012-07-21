@@ -164,10 +164,10 @@ public class Interpret {
         field.setAccessible(true);
         try{
             System.out.println(
-                    "{ name : \"" +
+                    "{ \"name\" : \"" +
                     field.getName() + 
-                    "\", value : \"" + field.get(o) + 
-                    "\", type : \"" + field.getType().getCanonicalName() +
+                    "\", \"value\" : \"" + field.get(o) + 
+                    "\", \"type\" : \"" + field.getType().getCanonicalName() +
                     "\" },");
         }
         catch(IllegalAccessException e){
