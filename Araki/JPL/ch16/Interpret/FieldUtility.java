@@ -29,26 +29,26 @@ public class FieldUtility {
         }
     }
 
-    public static void printObjectFields(Object obj){
+    public static void printObjectFields(Object obj) {
         System.out.println("Class : " + obj.getClass().getCanonicalName() );
         // find all fields
         Field[] fieldArr = obj.getClass().getDeclaredFields();
-        for(Field field : fieldArr){
+        for(Field field : fieldArr) {
             printObjectField(obj, field);
         }
     }
         
-    public static void printObjectField(Object o, Field field){
+    public static void printObjectField(Object obj, Field field) {
         field.setAccessible(true);
         try{
             System.out.println(
                     "{ \"name\" : \"" +
                     field.getName() + 
-                    "\", \"value\" : \"" + field.get(o) + 
+                    "\", \"value\" : \"" + field.get(obj) + 
                     "\", \"type\" : \"" + field.getType().getCanonicalName() +
                     "\" },");
         }
-        catch(IllegalAccessException e){
+        catch(IllegalAccessException e) {
             e.printStackTrace();
         }
     }
