@@ -16,7 +16,7 @@ public class MethodUtility {
         Object[] objs = new Object[types.length];
         
         for (int i = 0; i < types.length; i++) {
-            objs[i] = FieldUtility.convertObject(types[i], args[i]);
+            objs[i] = ObjectUtility.convertObject(types[i], args[i]);
         }
         
         try {
