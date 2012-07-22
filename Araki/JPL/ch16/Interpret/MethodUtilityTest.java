@@ -14,7 +14,7 @@ public class MethodUtilityTest {
     
     @Test
     public void test_execMethod() throws Exception {
-        TestClass t = new TestClass();
+        TestMethod t = new TestMethod();
         String ret;
         
         ret = (String) MethodUtility.execMethod(t, 0, "hoge");
@@ -30,7 +30,7 @@ public class MethodUtilityTest {
 }
 
 @SuppressWarnings("unused")
-class TestClass {
+class TestMethod {
     
     private String returnString(String str) {
         return "return:" + str;

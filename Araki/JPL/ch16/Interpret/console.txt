@@ -1,4 +1,10 @@
 new ch16.Interpret.TestA
+show field
 set privateInt 123
+show field
+
+new ch16.Interpret.TestMethod
+show method
+exec 0 abcd
 exit
 

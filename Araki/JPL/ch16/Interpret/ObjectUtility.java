@@ -20,6 +20,20 @@ public class ObjectUtility {
         
         return obj;
     }
+    
+    public static Object[] convertObjects(Class<?>[] types, String[] values) throws Exception {
+        if (types.length != values.length) {
+            throw new IllegalArgumentException("arguments mismatch");
+        }
+        
+        Object[] objs = new Object[types.length];
+        
+        for (int i = 0; i < types.length; i++) {
+            objs[i] = ObjectUtility.convertObject(types[i], values[i]);
+        }
+        
+        return objs;
+    }
 
     public static Object convertObject(Class<?> type, String value) {
         if (type.equals(Boolean.class) || type.equals(boolean.class)) {

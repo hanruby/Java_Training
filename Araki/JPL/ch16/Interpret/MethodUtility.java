@@ -11,15 +11,12 @@ public class MethodUtility {
         Method method = methods[method_number]; 
         method.setAccessible(true);
         
-        String[] args = argstr.split(",");
+        String[] values = argstr.split(",");
         Class<?>[] types = method.getParameterTypes();
-        Object[] objs = new Object[types.length];
-        
-        for (int i = 0; i < types.length; i++) {
-            objs[i] = ObjectUtility.convertObject(types[i], args[i]);
-        }
-        
+        Object[] objs;
+
         try {
+            objs = ObjectUtility.convertObjects(types, values);
             ret = method.invoke(obj, objs);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -27,8 +24,9 @@ public class MethodUtility {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
         return ret;
     }
     
