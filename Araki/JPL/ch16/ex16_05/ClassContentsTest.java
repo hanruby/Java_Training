@@ -33,16 +33,17 @@ public class ClassContentsTest {
     public void testSearchType() throws Exception {
 
         // Expected
-        _out.println("  public void ch16.ex16_03.A.methodA()");
-        _out.println("  public void ch16.ex16_03.X.methodX()");
+        _out.println("  public void ch16.ex16_05.A.methodA() @ch16.ex16_05.BugsFixed(value=[112233, 123456])");
+        _out.println("  public void ch16.ex16_05.X.methodX() @ch16.ex16_05.BugsFixed(value=[234567, 467211])");
         _out.flush();
         
-        Class<?> startClass = Class.forName("ch16.ex16_03.X");
+        Class<?> startClass = Class.forName("ch16.ex16_05.X");
 
         ClassContents.searchType(startClass);
         ClassContents.showMembers();
         
         cc.getOut().flush();
+        System.out.println(_actual.toString());
         assertEquals(_expected.toString(), _actual.toString());
     }
     
