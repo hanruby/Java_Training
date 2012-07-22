@@ -4,15 +4,23 @@ import java.lang.reflect.*;
 
 public class MethodUtility {
 
-    public static Object execMethod(Object obj, int method_number, Object... args) {
+    public static Object execMethod(Object obj, int method_number, String argstr) {
         Object ret = null;
         
         Method[] methods = obj.getClass().getDeclaredMethods();
         Method method = methods[method_number]; 
         method.setAccessible(true);
         
+        String[] args = argstr.split(",");
+        Class<?>[] types = method.getParameterTypes();
+        Object[] objs = new Object[types.length];
+        
+        for (int i = 0; i < types.length; i++) {
+            objs[i] = FieldUtility.convertObject(types[i], args[i]);
+        }
+        
         try {
-            ret = method.invoke(obj, args);
+            ret = method.invoke(obj, objs);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

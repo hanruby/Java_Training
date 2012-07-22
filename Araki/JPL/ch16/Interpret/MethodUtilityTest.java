@@ -20,7 +20,7 @@ public class MethodUtilityTest {
         ret = (String) MethodUtility.execMethod(t, 0, "hoge");
         assertEquals("return:hoge", ret);
 
-        ret = (String) MethodUtility.execMethod(t, 1, new Object[]{"hoge",2});
+        ret = (String) MethodUtility.execMethod(t, 1, "hoge,2");
         assertEquals("return:hoge2", ret);
     }
 
