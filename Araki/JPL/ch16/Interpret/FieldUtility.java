@@ -32,8 +32,8 @@ public class FieldUtility {
     public static void printObjectFields(Object obj) {
         System.out.println("Class : " + obj.getClass().getCanonicalName() );
         // find all fields
-        Field[] fieldArr = obj.getClass().getDeclaredFields();
-        for(Field field : fieldArr) {
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for(Field field : fields) {
             printObjectField(obj, field);
         }
     }
