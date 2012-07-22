@@ -22,6 +22,9 @@ public class MethodUtilityTest {
 
         ret = (String) MethodUtility.execMethod(t, 1, "hoge,2");
         assertEquals("return:hoge2", ret);
+
+        ret = (String) MethodUtility.execMethod(t, 2, "hoge,2,false");
+        assertEquals("return:hoge2false", ret);
     }
 
 }
@@ -35,6 +38,10 @@ class TestClass {
 
     private String returnString(String str, int num) {
         return "return:" + str + num;
+    }
+
+    private String returnString(String str, int num, boolean b) {
+        return "return:" + str + num + b;
     }
     
 }
