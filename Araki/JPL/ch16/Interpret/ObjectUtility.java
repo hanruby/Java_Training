@@ -1,20 +1,55 @@
 package ch16.Interpret;
 
+import java.lang.reflect.*;
+
 public class ObjectUtility {
 
-    public static Object createObject(String str) {
+    public static Object createObject(String className) {
         Class<?> cls = null;
         Object obj = null;
 
         // Create new Object
         try {
-            cls = (Class<?>)Class.forName(str);
+            cls = (Class<?>)Class.forName(className);
             obj = cls.newInstance();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        
+        return obj;
+    }
+
+    public static Object createObject(String className, int constructor_number, String argstr) {
+        Class<?> cls = null;
+        
+        try {
+            cls = (Class<?>)Class.forName(className);
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
+
+        Object obj = null;
+
+        Constructor<?>[] constructors = cls.getDeclaredConstructors();
+        Constructor<?> constructor = constructors[constructor_number];
+        
+        String[] values = argstr.split(",");
+        Class<?>[] types = (Class<?>[]) constructor.getGenericExceptionTypes(); 
+        Object[] objs;
+        
+        //  Create new Object
+        try {
+            objs = ObjectUtility.convertObjects(types, values);
+            obj = constructor.newInstance(objs);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         

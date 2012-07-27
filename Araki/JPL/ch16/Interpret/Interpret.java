@@ -64,11 +64,15 @@ public class Interpret {
                 }
             }
             else if (args[0].equals("new")) {
-                if (args.length != 2) {
-                    usage();
-                    continue;
+                if (args.length == 2) {
+                    obj = ObjectUtility.createObject(args[1]);
                 }
-                obj = ObjectUtility.createObject(args[1]);
+                else if (args.length == 4) {
+                    obj = ObjectUtility.createObject(args[1], Integer.parseInt(args[2]), args[3]);
+                }
+                else{
+                    usage();
+                }
             }
             else if (args[0].equals("set")) {
                 if (obj == null || args.length != 3) {
