@@ -58,6 +58,9 @@ public class Interpret {
                 else if (args[1].equals("method")) {
                     MethodUtility.printObjectMethods(obj);
                 }
+                else if (args[1].equals("constructor")) {
+                    MethodUtility.printObjectMethods(obj);
+                }
                 else {
                     usage();
                     continue;
