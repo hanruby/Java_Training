@@ -61,11 +61,11 @@ public class ClassContents {
             if (m.getDeclaringClass() == Object.class)
                 continue;
             String decl = m.toString();
-            members.add(strip(decl, "java.lang.") + " " + outputAnnotation(m));
+            members.add(outputAnnotation(m) + "%n  " + strip(decl, "java.lang."));
         }
     }
     
-    public static String outputAnnotation(Member mem) {
+    public static String outputAnnotation(Object mem) {
         Annotation[] annotations = new Annotation[0];
 
         if (mem instanceof Field) {
@@ -76,6 +76,9 @@ public class ClassContents {
         }
         if (mem instanceof Method) {
             annotations = ((Method)mem).getAnnotations();
+        }
+        if (mem instanceof Class) {
+            annotations = ((Class<?>)mem).getAnnotations();
         }
         
         String annotationInfo = "";
