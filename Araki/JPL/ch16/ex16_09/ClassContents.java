@@ -12,6 +12,8 @@ import java.util.Set;
 public class ClassContents {
     
     private static Set<String> members = new HashSet<String>();
+    private static Set<String> constructors = new HashSet<String>();
+    private static Set<String> methods = new HashSet<String>();
     
     public static void main(String[] args) {
         try {
@@ -61,7 +63,11 @@ public class ClassContents {
             if (m.getDeclaringClass() == Object.class)
                 continue;
             String decl = m.toString();
-            members.add(outputAnnotation(m) + "%n  " + strip(decl, "java.lang."));
+            String an = outputAnnotation(m);
+            if(an != null) {
+                members.add(an);
+            }
+            members.add(strip(decl, "java.lang."));
         }
     }
     
@@ -71,14 +77,18 @@ public class ClassContents {
         if (mem instanceof Field) {
             annotations = ((Field)mem).getAnnotations();
         }
-        if (mem instanceof Constructor) {
+        else if (mem instanceof Constructor) {
             annotations = ((Constructor<?>)mem).getAnnotations();           
         }
-        if (mem instanceof Method) {
+        else if (mem instanceof Method) {
             annotations = ((Method)mem).getAnnotations();
         }
-        if (mem instanceof Class) {
+        else if (mem instanceof Class) {
             annotations = ((Class<?>)mem).getAnnotations();
+        }
+        
+        if (annotations.length == 0) {
+            return null;
         }
         
         String annotationInfo = "";

@@ -30,20 +30,29 @@ public class ClassContentsTest {
     }
 
     @Test
+    public void testMain() throws Exception {
+        ClassContents.main(new String[]{"ch16.ex16_09.X"});
+
+        cc.getOut().flush();
+        System.out.printf(_actual.toString());
+
+    }
+    
+    @Test
     public void testSearchType() throws Exception {
 
         // Expected
-        _out.println("  public void ch16.ex16_05.A.methodA() @ch16.ex16_05.BugsFixed(value=[112233, 123456])");
-        _out.println("  public void ch16.ex16_05.X.methodX() @ch16.ex16_05.BugsFixed(value=[234567, 467211])");
+        _out.println("  public void ch16.ex16_09.A.methodA() @ch16.ex16_05.BugsFixed(value=[112233, 123456])");
+        _out.println("  public void ch16.ex16_09.X.methodX() @ch16.ex16_05.BugsFixed(value=[234567, 467211])");
         _out.flush();
         
-        Class<?> startClass = Class.forName("ch16.ex16_05.X");
+        Class<?> startClass = Class.forName("ch16.ex16_09.X");
 
         ClassContents.searchType(startClass);
         ClassContents.showMembers();
         
         cc.getOut().flush();
-        System.out.printf(_actual.toString());
+        //System.out.printf(_actual.toString());
         //assertEquals(_expected.toString(), _actual.toString());
     }
     
@@ -61,6 +70,7 @@ public class ClassContentsTest {
         
         assertEquals("@ch16.ex16_09.BugsFixed(value=[12, 211])", ret);
     }
+
 }
 
 

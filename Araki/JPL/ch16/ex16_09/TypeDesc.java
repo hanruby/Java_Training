@@ -49,7 +49,10 @@ public class TypeDesc {
         }
                 
         // Annotationを表示
-        out.println(ClassContents.outputAnnotation(cls));
+        String annotation = ClassContents.outputAnnotation(cls);
+        if (annotation != null) {
+            out.println(annotation);
+        }
 
         // 型を表示
         for (int i = 0; i < depth; i++)
