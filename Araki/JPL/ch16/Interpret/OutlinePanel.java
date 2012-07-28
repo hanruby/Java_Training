@@ -81,6 +81,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     System.out.println(obj);
+                                    Constructor<?> c = (Constructor<?>) obj;
                                 }
                             });
                             popup.add(exec);
