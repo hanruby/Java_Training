@@ -33,9 +33,6 @@ public class InterpretGUI extends JFrame{
         textArea.setLineWrap(true);
 
         OutlinePanel outline = new OutlinePanel();
-        JScrollPane scrollClassPanel = new JScrollPane(outline, 
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         Console console = new Console();
         JScrollPane consolePanel = new JScrollPane(console, 
@@ -46,13 +43,13 @@ public class InterpretGUI extends JFrame{
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        scrollClassPanel.setPreferredSize(new Dimension(400, 360));
+        outline.setPreferredSize(new Dimension(400, 360));
         consolePanel.setPreferredSize(new Dimension(400, 360));
 
         scrollTextPanel.setPreferredSize(new Dimension(800, 80));
         
         viewerPanel.add(consolePanel);
-        viewerPanel.add(scrollClassPanel);
+        viewerPanel.add(outline);
         operationPanel.add(scrollTextPanel);
 
         Container contentPane = getContentPane();

@@ -2,6 +2,10 @@ package ch16.Interpret;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -9,10 +13,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.*;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -33,9 +39,14 @@ public class OutlinePanel extends JPanel implements ActionListener{
     private Method[] methods;
         
     public OutlinePanel() {
-
+        
         tree = new JTree(classTree);
-        add(tree, BorderLayout.PAGE_START);
+
+        JScrollPane treePanel = new JScrollPane(tree, 
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
+        //treePanel.setPreferredSize(new Dimension(400, 300));
 
         model = (DefaultTreeModel) tree.getModel();
 
@@ -56,7 +67,9 @@ public class OutlinePanel extends JPanel implements ActionListener{
         controlPanel.add(addButton);
         controlPanel.add(deleteButton);
         
-        add(controlPanel, BorderLayout.PAGE_END);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(treePanel);
+        add(controlPanel);
     
         MouseListener ml = new MouseAdapter() {
             @Override
