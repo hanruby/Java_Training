@@ -133,12 +133,6 @@ public class OutlinePanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DefaultMutableTreeNode node = 
-            (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-
-        if (node == null){
-            return;
-        }
 
         String action = e.getActionCommand();
 
@@ -156,6 +150,17 @@ public class OutlinePanel extends JPanel implements ActionListener{
             }
         }
         else if (action.equals("-")) {
+            DefaultMutableTreeNode node = 
+                (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+
+            if (node == null || node.getParent() == null) {
+                return;
+            }
+
+            while ( node.getParent().toString().equals("Class") == false ) {
+                node = (DefaultMutableTreeNode) node.getParent();
+            }
+
             node.removeFromParent();
             model.reload();
         }
