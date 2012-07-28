@@ -1,5 +1,8 @@
 package ch16.Interpret;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.lang.reflect.*;
 
 import javax.swing.JPanel;
@@ -8,6 +11,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 public class OutlinePanel extends JPanel implements TreeSelectionListener{
 
@@ -28,6 +32,30 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
         add(tree);
         
         model = (DefaultTreeModel) tree.getModel();
+
+        MouseListener ml = new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                int selRow = tree.getRowForLocation(e.getX(), e.getY());
+                TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
+                if(selRow != -1) {
+                    System.out.println(selRow +" : "+ selPath.getPathCount());
+                }
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                if (node != null) {
+                    Object obj = node.getUserObject();
+                    if (obj instanceof Constructor<?>) {
+                        System.out.println("Selected node is Constructor: " + node.getUserObject());
+                    }
+                    else if (obj instanceof Field) {
+                        System.out.println("Selected node is Field: " + node.getUserObject());
+                    }
+                    else if (obj instanceof Method) {
+                        System.out.println("Selected node is Method: " + node.getUserObject());
+                    }
+                }
+            }
+        };
+        tree.addMouseListener(ml);
     }
     
     public void createClassTree(Class<?> cls) {
