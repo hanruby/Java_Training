@@ -17,14 +17,14 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
     
     public OutlinePanel() {
 
-        loadClassInfo(java.util.HashMap.class);
+        createClassTree(java.util.HashMap.class);
 
         tree = new JTree(classTree);
 
         add(tree);
     }
     
-    public void loadClassInfo(Class<?> cls) {
+    public void createClassTree(Class<?> cls) {
         
         this.classTree = new DefaultMutableTreeNode(cls.getCanonicalName());
 
@@ -51,6 +51,7 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
         classTree.add(fieldTree);
         classTree.add(methodTree);
         
+        System.out.println("ok");
     }
 
     @Override
