@@ -11,7 +11,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 public class OutlinePanel extends JPanel implements TreeSelectionListener{
 
@@ -34,21 +33,23 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
         model = (DefaultTreeModel) tree.getModel();
 
         MouseListener ml = new MouseAdapter() {
+            
+            // I refered : http://java.sun.com/javase/ja/6/docs/ja/api/javax/swing/JTree.html 
             public void mousePressed(MouseEvent e) {
-                int selRow = tree.getRowForLocation(e.getX(), e.getY());
-                TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
-                if(selRow != -1) {
-                    System.out.println(selRow +" : "+ selPath.getPathCount());
-                }
+                
+                // Get a member of the class object
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
                 if (node != null) {
                     Object obj = node.getUserObject();
+                    // Constructor
                     if (obj instanceof Constructor<?>) {
                         System.out.println("Selected node is Constructor: " + node.getUserObject());
                     }
+                    // Field
                     else if (obj instanceof Field) {
                         System.out.println("Selected node is Field: " + node.getUserObject());
                     }
+                    // Method
                     else if (obj instanceof Method) {
                         System.out.println("Selected node is Method: " + node.getUserObject());
                     }
