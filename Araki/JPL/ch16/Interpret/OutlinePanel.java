@@ -16,6 +16,11 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
     private JTree tree;
     private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
     private DefaultTreeModel model;
+
+    private Class<?> cls;
+    private Constructor<?>[] constructors;
+    private Field[] fields;
+    private Method[] methods;
         
     public OutlinePanel() {
 
@@ -26,6 +31,7 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
     }
     
     public void createClassTree(Class<?> cls) {
+        this.cls = cls;
         
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
@@ -33,17 +39,17 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
         DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
         DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
 
-        Constructor<?>[] constructors = cls.getConstructors();
+        constructors = cls.getConstructors();
         for (Constructor<?> constructor : constructors) {
             constructorTree.add(new DefaultMutableTreeNode(constructor));
         }
         
-        Field[] fields = cls.getDeclaredFields();
+        fields = cls.getDeclaredFields();
         for (Field field : fields) {
             fieldTree.add(new DefaultMutableTreeNode(field));
         }
         
-        Method[] methods = cls.getDeclaredMethods();
+        methods = cls.getDeclaredMethods();
         for (Method method : methods) {
             methodTree.add(new DefaultMutableTreeNode(method));
         }
@@ -60,5 +66,7 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
     public void valueChanged(TreeSelectionEvent e) {
         // TODO Auto-generated method stub
     }
+    
+    
 }
 
