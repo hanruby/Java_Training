@@ -59,6 +59,7 @@ public class InterpretGUI extends JFrame{
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
         
+        outline.createClassTree(java.lang.Object.class);
         outline.createClassTree(java.util.HashMap.class);
         
         pack();
