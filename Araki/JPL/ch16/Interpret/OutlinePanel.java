@@ -1,11 +1,6 @@
 package ch16.Interpret;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -33,10 +28,6 @@ public class OutlinePanel extends JPanel implements ActionListener{
     private DefaultTreeModel model;
     private JTextField text;
   
-    private Class<?> cls;
-    private Constructor<?>[] constructors;
-    private Field[] fields;
-    private Method[] methods;
         
     public OutlinePanel() {
         
@@ -112,7 +103,6 @@ public class OutlinePanel extends JPanel implements ActionListener{
     }
 
     public void createClassTree(Class<?> cls) {
-        this.cls = cls;
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
@@ -120,17 +110,17 @@ public class OutlinePanel extends JPanel implements ActionListener{
         DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
         DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
 
-        constructors = cls.getConstructors();
+        Constructor<?>[] constructors = cls.getConstructors();
         for (Constructor<?> constructor : constructors) {
             constructorTree.add(new DefaultMutableTreeNode(constructor));
         }
         
-        fields = cls.getDeclaredFields();
+        Field[] fields = cls.getDeclaredFields();
         for (Field field : fields) {
             fieldTree.add(new DefaultMutableTreeNode(field));
         }
         
-        methods = cls.getDeclaredMethods();
+        Method[] methods = cls.getDeclaredMethods();
         for (Method method : methods) {
             methodTree.add(new DefaultMutableTreeNode(method));
         }
