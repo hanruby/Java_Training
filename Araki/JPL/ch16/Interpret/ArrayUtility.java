@@ -11,7 +11,7 @@ public class ArrayUtility {
         
         return arr;
     }
-    
+
     public static void setArrayContents(Object array, String contents) {
 
         String[] values = contents.split(",");
