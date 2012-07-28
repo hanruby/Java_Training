@@ -1,11 +1,17 @@
 package ch16.Interpret;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.*;
 
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -34,26 +40,40 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
 
         MouseListener ml = new MouseAdapter() {
             
-            // I refered : http://java.sun.com/javase/ja/6/docs/ja/api/javax/swing/JTree.html 
-            public void mousePressed(MouseEvent e) {
-                
-                // Get a member of the class object
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                if (node != null) {
-                    Object obj = node.getUserObject();
-                    // Constructor
-                    if (obj instanceof Constructor<?>) {
-                        System.out.println("Selected node is Constructor: " + node.getUserObject());
-                    }
-                    // Field
-                    else if (obj instanceof Field) {
-                        System.out.println("Selected node is Field: " + node.getUserObject());
-                    }
-                    // Method
-                    else if (obj instanceof Method) {
-                        System.out.println("Selected node is Method: " + node.getUserObject());
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Open the popupmenu using right click
+                if ( e.getButton() == MouseEvent.BUTTON3) {
+
+                    // Get a member of the class object
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    if (node != null) {
+                        final Object obj = node.getUserObject();
+                        // Constructor
+                        if (obj instanceof Constructor<?>) {
+                            System.out.println("Selected node is Constructor: " + obj);
+                            JPopupMenu popup = new JPopupMenu();
+                            JMenuItem exec = new JMenuItem("Create object using this Constructor.");
+                            exec.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    System.out.println(obj);
+                                }
+                            });
+                            popup.add(exec);
+                            popup.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                        // Field
+                        else if (obj instanceof Field) {
+                            System.out.println("Selected node is Field: " + obj);
+                        }
+                        // Method
+                        else if (obj instanceof Method) {
+                            System.out.println("Selected node is Method: " + obj);
+                        }
                     }
                 }
+                super.mouseClicked(e);
             }
         };
         tree.addMouseListener(ml);
