@@ -43,12 +43,12 @@ public class OutlinePanel extends JPanel implements ActionListener{
         text = new JTextField(10);
         JPanel textPanel = new JPanel();
         textPanel.add(text);
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("+");
         addButton.addActionListener(this);
-        addButton.setActionCommand("+");
-        JButton deleteButton = new JButton("Delete");
+        addButton.setActionCommand("Add");
+        JButton deleteButton = new JButton("-");
         deleteButton.addActionListener(this);
-        deleteButton.setActionCommand("-");
+        deleteButton.setActionCommand("Delete");
     
         // create control panel
         JPanel controlPanel = new JPanel();
@@ -59,7 +59,6 @@ public class OutlinePanel extends JPanel implements ActionListener{
         add(controlPanel, BorderLayout.PAGE_END);
     
         MouseListener ml = new MouseAdapter() {
-            
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Open the popupmenu using right click
@@ -98,10 +97,10 @@ public class OutlinePanel extends JPanel implements ActionListener{
         };
         tree.addMouseListener(ml);
     }
-    
+
     public void createClassTree(Class<?> cls) {
         this.cls = cls;
-        
+
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
         DefaultMutableTreeNode constructorTree = new DefaultMutableTreeNode("Constructor");
@@ -136,7 +135,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
 
         String action = e.getActionCommand();
 
-        if (action.equals("+")) {
+        if (action.equals("Add")) {
             String name = text.getText();
             if (!name.equals("")) {
                 Class<?> cls = null;
@@ -149,7 +148,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
                 model.reload();
             }
         }
-        else if (action.equals("-")) {
+        else if (action.equals("Delete")) {
             DefaultMutableTreeNode node = 
                 (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
