@@ -25,17 +25,13 @@ public class InterpretGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
-        JPanel p = new JPanel();
+        JPanel viewerPanel = new JPanel();
+        JPanel operationPanel = new JPanel();
     
     
         textArea = new JTextArea();
         textArea.setLineWrap(true);
 
-        JScrollPane scrollTextPanel = new JScrollPane(textArea, 
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        
         OutlinePanel outline = new OutlinePanel();
         JScrollPane scrollClassPanel = new JScrollPane(outline, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
@@ -46,16 +42,22 @@ public class InterpretGUI extends JFrame{
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        scrollTextPanel.setPreferredSize(new Dimension(600, 360));
+        JScrollPane scrollTextPanel = new JScrollPane(textArea, 
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
         scrollClassPanel.setPreferredSize(new Dimension(400, 360));
         consolePanel.setPreferredSize(new Dimension(400, 360));
+
+        scrollTextPanel.setPreferredSize(new Dimension(800, 80));
         
-        //p.add(scrollTextPanel);
-        p.add(consolePanel);
-        p.add(scrollClassPanel);
+        viewerPanel.add(consolePanel);
+        viewerPanel.add(scrollClassPanel);
+        operationPanel.add(scrollTextPanel);
 
         Container contentPane = getContentPane();
-        contentPane.add(p, BorderLayout.WEST);
+        contentPane.add(viewerPanel, BorderLayout.WEST);
+        contentPane.add(operationPanel, BorderLayout.SOUTH);
         
         pack();
     }
