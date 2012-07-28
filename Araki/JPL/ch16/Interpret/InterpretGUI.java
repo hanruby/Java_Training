@@ -58,7 +58,7 @@ public class InterpretGUI extends JFrame{
         Container contentPane = getContentPane();
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
-        
+
         pack();
     }
 }

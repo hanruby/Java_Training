@@ -7,26 +7,27 @@ import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class OutlinePanel extends JPanel implements TreeSelectionListener{
 
     private static final long serialVersionUID = 1L;
 
     private JTree tree;
-    private DefaultMutableTreeNode classTree;
-    
+    private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
+    private DefaultTreeModel model;
+        
     public OutlinePanel() {
 
-        createClassTree(java.util.HashMap.class);
-
         tree = new JTree(classTree);
-
         add(tree);
+        
+        model = (DefaultTreeModel) tree.getModel();
     }
     
     public void createClassTree(Class<?> cls) {
         
-        this.classTree = new DefaultMutableTreeNode(cls.getCanonicalName());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
         DefaultMutableTreeNode constructorTree = new DefaultMutableTreeNode("Constructor");
         DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
@@ -47,11 +48,12 @@ public class OutlinePanel extends JPanel implements TreeSelectionListener{
             methodTree.add(new DefaultMutableTreeNode(method));
         }
                 
-        classTree.add(constructorTree);
-        classTree.add(fieldTree);
-        classTree.add(methodTree);
+        root.add(constructorTree);
+        root.add(fieldTree);
+        root.add(methodTree);
         
-        System.out.println("ok");
+        classTree.add(root);
+        model.reload();
     }
 
     @Override
