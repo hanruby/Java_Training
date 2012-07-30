@@ -18,23 +18,21 @@ public class InterpretGUI extends JFrame{
     }
     
     private JTextArea textArea;
+    private Console console = new Console();
     
     public InterpretGUI(String title) {
         setTitle(title);
     
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        
         JPanel viewerPanel = new JPanel();
         JPanel operationPanel = new JPanel();
-    
     
         textArea = new JTextArea();
         textArea.setLineWrap(true);
 
         OutlinePanel outline = new OutlinePanel();
         
-        Console console = new Console();
         JScrollPane consolePanel = new JScrollPane(console, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -45,7 +43,6 @@ public class InterpretGUI extends JFrame{
 
         outline.setPreferredSize(new Dimension(400, 360));
         consolePanel.setPreferredSize(new Dimension(400, 360));
-
         scrollTextPanel.setPreferredSize(new Dimension(800, 80));
         
         viewerPanel.add(consolePanel);
