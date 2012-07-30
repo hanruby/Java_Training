@@ -16,7 +16,7 @@ public class ConsoleTest {
         frame.pack();
         frame.setVisible(true);        
         
-        consolePanel.writeString("hoge");
-        consolePanel.writeString("hoge");
+        Console.err.println("hoge");
+        Console.err.println("hoge");
     }
 }

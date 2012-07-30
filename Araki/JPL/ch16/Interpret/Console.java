@@ -20,10 +20,6 @@ public class Console extends JTextArea {
         PrintConsole stream = new PrintConsole(this);
         err = new PrintStream(stream, true); // true = AutoFlush
     }
-    
-    public void writeString(String str) {
-        this.append(str+"\n");
-    }
 
     class PrintConsole extends OutputStream {
 

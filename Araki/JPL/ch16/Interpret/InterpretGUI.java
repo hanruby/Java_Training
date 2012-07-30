@@ -47,6 +47,7 @@ public class InterpretGUI extends JFrame{
         
         viewerPanel.add(consolePanel);
         viewerPanel.add(outline);
+
         operationPanel.add(scrollTextPanel);
 
         Container contentPane = getContentPane();
