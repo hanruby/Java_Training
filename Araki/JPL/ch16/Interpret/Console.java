@@ -10,6 +10,7 @@ import javax.swing.*;
 public class Console extends JTextArea {
 
     private static final long serialVersionUID = 1L;
+    public static PrintStream err;
     
     public Console() {
         
@@ -17,8 +18,7 @@ public class Console extends JTextArea {
         setLineWrap(true);
         
         PrintConsole stream = new PrintConsole(this);
-        //System.setOut(new PrintStream(stream, true));    // true は AutoFlush の設定
-        System.setErr(new PrintStream(stream, true));    // true は AutoFlush の設定
+        err = new PrintStream(stream, true); // true = AutoFlush
     }
     
     public void writeString(String str) {
