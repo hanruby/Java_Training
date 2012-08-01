@@ -1,23 +1,34 @@
 package ch16.Interpret;
 
 import java.awt.Dimension;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.lang.reflect.*;
 
+import javax.activation.ActivationDataFlavor;
+import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.TransferHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+
+import junit.framework.Test;
 
 public class OutlinePanel extends JPanel implements ActionListener{
 
@@ -32,6 +43,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
     public OutlinePanel() {
         
         tree = new JTree(classTree);
+        tree.setDragEnabled(true);
 
         JScrollPane treePanel = new JScrollPane(tree, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
@@ -65,6 +77,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
         MouseListener ml = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 // Open the popupmenu using right click
                 if ( e.getButton() == MouseEvent.BUTTON3) {
 
@@ -101,6 +114,13 @@ public class OutlinePanel extends JPanel implements ActionListener{
             }
         };
         tree.addMouseListener(ml);
+        tree.setTransferHandler(new ObjectTransfer());
+    }
+    
+
+        
+    public void addMouseListener(MouseListener ml) {
+        this.tree.addMouseListener(ml);
     }
 
     public void createClassTree(Class<?> cls) {
@@ -174,6 +194,80 @@ public class OutlinePanel extends JPanel implements ActionListener{
     @Override
     public void setPreferredSize(Dimension arg0) {
         super.setPreferredSize(arg0);
+    }
+}
+
+class ObjectTransfer extends TransferHandler {
+
+    private static final long serialVersionUID = 1L;
+    
+    public final static DataFlavor localObjectFlavor = new ActivationDataFlavor (
+                Constructor.class, DataFlavor.javaJVMLocalObjectMimeType, "Constructor");
+
+    public static final DataFlavor[] flavors = {
+        localObjectFlavor
+    };
+
+    @Override
+    protected Transferable createTransferable(JComponent c) {
+        JTree tree = (JTree) c;
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (node != null) {
+            Object obj = node.getUserObject();
+            
+            if(obj instanceof Constructor<?>) {
+                System.out.println(obj);
+                return new DataHandler(obj, localObjectFlavor.getMimeType());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getSourceActions(JComponent arg0) {
+        return COPY_OR_MOVE;
+    }
+
+
+    @Override
+    public boolean canImport(TransferSupport support) {
+        // クリップボード経由のデータ転送は扱わない
+        if (!support.isDrop()) {
+            return false;
+        }
+
+        // ドロップする位置を常に表示する
+        support.setShowDropLocation(true);
+
+        // フレーバの指定
+        if (support.isDataFlavorSupported(localObjectFlavor)) {
+            return true;
+        }
+
+        //return true;
+        return false;
+    }
+
+    @Override
+    public boolean importData(TransferSupport support) {
+        JTextField text = (JTextField)support.getComponent();
+        text.setText("hoge");
+        try {
+        System.out.println("hoge");
+            // ドロップデータ
+            //System.out.println(support.getTransferable().getTransferData(DataFlavor.stringFlavor));
+
+            support.getTransferable().getTransferData(localObjectFlavor);
+            //System.out.println(obj);
+
+            return true;
+        } catch (UnsupportedFlavorException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
+        return false;
     }
 }
 
