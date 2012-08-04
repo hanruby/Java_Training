@@ -76,9 +76,21 @@ public class ObjectPanel extends JPanel implements ActionListener{
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
                     if (node != null) {
                         Object obj = node.getUserObject();
+                        
                         // Field
                         if (obj instanceof Field) {
-                            System.out.println("Selected node is Field: " + obj);
+                            final Field field = (Field) obj;
+                            System.out.println("Selected node is Field: " + field);
+                            JPopupMenu popup = new JPopupMenu();
+                            JMenuItem change = new JMenuItem("Change value");
+                            change.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    System.out.println(field);
+                                }
+                            });
+                            popup.add(change);
+                            popup.show(e.getComponent(), e.getX(), e.getY());
                         }
                         // Method
                         else if (obj instanceof Method) {
@@ -217,7 +229,7 @@ class ConstructorField extends JTextField {
             private static final long serialVersionUID = 1156812525274063158L;
 
             public final DataFlavor localObjectFlavor = new DataFlavor (
-                    Constructor.class, "Constructor aa");
+                    Constructor.class, "This is Constructor.");
 
             @Override
             public boolean canImport(TransferSupport support) {
