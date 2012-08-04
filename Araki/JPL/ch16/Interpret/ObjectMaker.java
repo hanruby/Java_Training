@@ -84,6 +84,7 @@ class ConstructorField extends JTextField {
 
     public ConstructorField(int col) {
         super(col);
+        this.setEditable(false);
         
         // ドロップされたとき
         this.setTransferHandler(new TransferHandler(){

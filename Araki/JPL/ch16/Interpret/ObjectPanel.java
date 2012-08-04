@@ -137,17 +137,13 @@ public class ObjectPanel extends JPanel implements ActionListener{
                     createObjectTree(obj, objectName);
                     model.reload();
                 } catch (IllegalArgumentException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    Console.err.println(e1);
                 } catch (InstantiationException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    Console.err.println(e1);
                 } catch (IllegalAccessException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    Console.err.println(e1);
                 } catch (InvocationTargetException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    Console.err.println(e1);
                 }
             }
         }
@@ -159,7 +155,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
                 return;
             }
 
-            while ( node.getParent().toString().equals("Class") == false ) {
+            while ( node.getParent().toString().equals("Object") == false ) {
                 node = (DefaultMutableTreeNode) node.getParent();
             }
 
