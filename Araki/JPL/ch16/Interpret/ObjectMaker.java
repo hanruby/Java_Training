@@ -1,16 +1,12 @@
 package ch16.Interpret;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.lang.reflect.*;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.TransferHandler;
 
 public class ObjectMaker extends JPanel implements ActionListener {
     
