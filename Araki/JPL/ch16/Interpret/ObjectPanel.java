@@ -71,28 +71,26 @@ public class ObjectPanel extends JPanel implements ActionListener{
                     // Get a member of the class object
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
                     if (node != null) {
-                        final Object obj = node.getUserObject();
-                        // Constructor
-                        if (obj instanceof Constructor<?>) {
-                            System.out.println("Selected node is Constructor: " + obj);
-                            JPopupMenu popup = new JPopupMenu();
-                            JMenuItem exec = new JMenuItem("Create object using this Constructor.");
-                            exec.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    System.out.println(obj);
-                                }
-                            });
-                            popup.add(exec);
-                            popup.show(e.getComponent(), e.getX(), e.getY());
-                        }
+                        Object obj = node.getUserObject();
                         // Field
-                        else if (obj instanceof Field) {
+                        if (obj instanceof Field) {
                             System.out.println("Selected node is Field: " + obj);
                         }
                         // Method
                         else if (obj instanceof Method) {
-                            System.out.println("Selected node is Method: " + obj);
+                            final Method method = (Method) obj;
+                            System.out.println("Selected node is Method: " + method);
+                            JPopupMenu popup = new JPopupMenu();
+                            JMenuItem exec = new JMenuItem("exec");
+                            exec.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    System.out.println(method);
+                                    
+                                }
+                            });
+                            popup.add(exec);
+                            popup.show(e.getComponent(), e.getX(), e.getY());
                         }
                     }
                 }
