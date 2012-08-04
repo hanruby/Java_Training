@@ -12,7 +12,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.lang.reflect.*;
 
-import javax.activation.ActivationDataFlavor;
 import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -200,7 +199,7 @@ class ObjectTransfer extends TransferHandler {
 
     // Ref : http://docs.oracle.com/javase/tutorial/uiswing/dnd/dataflavor.html
     public final static DataFlavor localObjectFlavor = new DataFlavor (
-            Constructor.class, "Constructor aa");
+            Constructor.class, "This is Constructor");
 
     public static final DataFlavor[] flavors = {
         localObjectFlavor
@@ -225,50 +224,6 @@ class ObjectTransfer extends TransferHandler {
     @Override
     public int getSourceActions(JComponent arg0) {
         return COPY_OR_MOVE;
-    }
-
-    @Override
-    public boolean canImport(TransferSupport support) {
-        // クリップボード経由のデータ転送は扱わない
-        if (!support.isDrop()) {
-            return false;
-        }
-
-        // ドロップする位置を常に表示する
-        support.setShowDropLocation(true);
-
-        // フレーバの指定
-        if (support.isDataFlavorSupported(localObjectFlavor)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean importData(TransferSupport support) {
-        // クリップボード経由のデータ転送は扱わない
-        if (!support.isDrop()) {
-            return false;
-        }
-
-        JTextField text = (JTextField)support.getComponent();
-        try {
-            // ドロップデータ
-            Object obj = support.getTransferable().getTransferData(localObjectFlavor);
-            if (obj instanceof Constructor<?>) {
-                Constructor<?> constructor = (Constructor<?>) obj;
-                text.setText(constructor.toString());
-            }
-            return true;
-            
-        } catch (UnsupportedFlavorException ex) {
-            System.out.println(ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-
-        return false;
     }
 }
 
