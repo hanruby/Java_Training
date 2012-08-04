@@ -21,13 +21,13 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class ObjectPanel extends JPanel implements ActionListener{
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1726910916306653766L;
 
     private JTree tree;
-    private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
+    private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Object");
     private DefaultTreeModel model;
-    private JTextField text;
-  
+    private JTextField objectName;
+    private ConstructorField constructorField;
         
     public ObjectPanel() {
         
@@ -42,9 +42,8 @@ public class ObjectPanel extends JPanel implements ActionListener{
         model = (DefaultTreeModel) tree.getModel();
 
         // create control contents
-        text = new JTextField(10);
-        JPanel textPanel = new JPanel();
-        textPanel.add(text);
+        objectName = new JTextField(10);
+        constructorField = new ConstructorField(20);
         JButton addButton = new JButton("+");
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
@@ -54,7 +53,8 @@ public class ObjectPanel extends JPanel implements ActionListener{
     
         // create control panel
         JPanel controlPanel = new JPanel();
-        controlPanel.add(text);
+        controlPanel.add(objectName);
+        controlPanel.add(constructorField);
         controlPanel.add(addButton);
         controlPanel.add(deleteButton);
         
@@ -107,6 +107,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(name);
 
         // Create object tree
+        DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
         
         // Create object method tree
 
@@ -114,6 +115,8 @@ public class ObjectPanel extends JPanel implements ActionListener{
         
         // Create object 
         
+        
+        root.add(objectTree);
         
         classTree.add(root);
         model.reload();
@@ -125,16 +128,27 @@ public class ObjectPanel extends JPanel implements ActionListener{
         String action = e.getActionCommand();
 
         if (action.equals("Add")) {
-            String name = text.getText();
-            if (!name.equals("")) {
-                Class<?> cls = null;
+            String constructorName = constructorField.getText();
+            String objectName = this.objectName.getText();
+            if (!constructorName.equals("") && !objectName.equals("")) {
+                Object obj;
                 try {
-                    cls = Class.forName(name);
-                    //createObjectTree(cls);
-                } catch (ClassNotFoundException e1) {
+                    obj = constructorField.getConstructor().newInstance();
+                    createObjectTree(obj, objectName);
+                    model.reload();
+                } catch (IllegalArgumentException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (InstantiationException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (IllegalAccessException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (InvocationTargetException e1) {
+                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                model.reload();
             }
         }
         else if (action.equals("Delete")) {
@@ -153,7 +167,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
             model.reload();
         }
 
-        text.setText("");
+        objectName.setText("");
     }
     
     @Override

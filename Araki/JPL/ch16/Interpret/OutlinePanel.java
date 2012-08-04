@@ -51,8 +51,6 @@ public class OutlinePanel extends JPanel implements ActionListener{
 
         // create control contents
         text = new JTextField(10);
-        JPanel textPanel = new JPanel();
-        textPanel.add(text);
         JButton addButton = new JButton("+");
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
