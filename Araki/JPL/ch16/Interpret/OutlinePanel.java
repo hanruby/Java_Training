@@ -198,6 +198,7 @@ class ObjectTransfer extends TransferHandler {
 
     private static final long serialVersionUID = -1426178157203230501L;
 
+    // Ref : http://docs.oracle.com/javase/tutorial/uiswing/dnd/dataflavor.html
     public final static DataFlavor localObjectFlavor = new DataFlavor (
             Constructor.class, "Constructor aa");
 
