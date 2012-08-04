@@ -70,10 +70,10 @@ public class ObjectPanel extends JPanel implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Open the popupmenu using right click
-                if ( e.getButton() == MouseEvent.BUTTON3) {
+                if ( e.getButton() == MouseEvent.BUTTON1) {
 
                     // Get a member of the class object
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    final DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
                     if (node != null) {
                         Object obj = node.getUserObject();
                         
@@ -81,16 +81,13 @@ public class ObjectPanel extends JPanel implements ActionListener{
                         if (obj instanceof Field) {
                             final Field field = (Field) obj;
                             System.out.println("Selected node is Field: " + field);
-                            JPopupMenu popup = new JPopupMenu();
-                            JMenuItem change = new JMenuItem("Change value");
-                            change.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    System.out.println(field);
-                                }
-                            });
-                            popup.add(change);
-                            popup.show(e.getComponent(), e.getX(), e.getY());
+                            try {
+                                propertiesPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
+                                System.out.println((node.getChildAt(0)));
+                            } catch (Exception e1) {
+                                Console.err.println(e1);
+                                e1.printStackTrace();
+                            }
                         }
                         // Method
                         else if (obj instanceof Method) {
@@ -192,12 +189,10 @@ public class ObjectPanel extends JPanel implements ActionListener{
             DefaultMutableTreeNode node = 
                 (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
-            if (node == null || node.getParent() == null) {
-                return;
-            }
+            node = getObjectNode(node);
 
-            while ( node.getParent().toString().equals("Object") == false ) {
-                node = (DefaultMutableTreeNode) node.getParent();
+            if(node == null) {
+                return;
             }
 
             node.removeFromParent();
@@ -210,6 +205,22 @@ public class ObjectPanel extends JPanel implements ActionListener{
     @Override
     public void setPreferredSize(Dimension arg0) {
         super.setPreferredSize(arg0);
+    }
+    
+    private DefaultMutableTreeNode getObjectNode(DefaultMutableTreeNode node) {
+        if (node == null || node.getParent() == null) {
+            return null;
+        }
+
+        while ( node.getParent().toString().equals("Object") == false ) {
+            node = (DefaultMutableTreeNode) node.getParent();
+        }
+        return node;
+    }
+        
+    private ObjectPropertiesPanel propertiesPanal;
+    public void setPropertiesPanel(ObjectPropertiesPanel panel) {
+        propertiesPanal = panel;
     }
 }
 

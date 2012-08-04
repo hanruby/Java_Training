@@ -52,4 +52,10 @@ public class FieldUtility {
             e.printStackTrace();
         }
     }
+    
+    public static String getFieldValue(Object obj, Field field) {
+        
+        
+        return null;
+    }
 }
