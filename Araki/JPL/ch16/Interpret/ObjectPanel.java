@@ -108,15 +108,42 @@ public class ObjectPanel extends JPanel implements ActionListener{
 
         // Create object tree
         DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
-        
-        // Create object method tree
 
         // Create object field tree
+        DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
+            fieldTree.add(f);
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(obj);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            f.add(new DefaultMutableTreeNode(value));
+            System.out.println(field);
+        }
+
+        // Create object method tree
+        DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
+
+        Method[] methods = obj.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            method.setAccessible(true);
+            DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
+            methodTree.add(m);
+        }
         
         // Create object 
         
         
         root.add(objectTree);
+        root.add(fieldTree);
+        root.add(methodTree);
         
         classTree.add(root);
         model.reload();

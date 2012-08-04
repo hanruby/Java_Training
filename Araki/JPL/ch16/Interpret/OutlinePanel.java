@@ -141,8 +141,8 @@ public class OutlinePanel extends JPanel implements ActionListener{
         }
                 
         root.add(constructorTree);
-        root.add(fieldTree);
-        root.add(methodTree);
+        //root.add(fieldTree);
+        //root.add(methodTree);
         
         classTree.add(root);
         model.reload();
