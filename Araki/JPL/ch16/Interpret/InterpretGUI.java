@@ -63,6 +63,7 @@ public class InterpretGUI extends JFrame{
         
         outline.createClassTree(java.lang.Object.class);
         outline.createClassTree(java.util.HashMap.class);
+        outline.createClassTree(ch16.Interpret.InterpretGUI.class);
         
         objectpanel.createObjectTree(new java.util.HashMap(), "abc");
         pack();

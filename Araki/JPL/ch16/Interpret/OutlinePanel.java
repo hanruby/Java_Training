@@ -86,19 +86,10 @@ public class OutlinePanel extends JPanel implements ActionListener{
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     System.out.println(obj);
-                                    Constructor<?> c = (Constructor<?>) obj;
                                 }
                             });
                             popup.add(exec);
                             popup.show(e.getComponent(), e.getX(), e.getY());
-                        }
-                        // Field
-                        else if (obj instanceof Field) {
-                            System.out.println("Selected node is Field: " + obj);
-                        }
-                        // Method
-                        else if (obj instanceof Method) {
-                            System.out.println("Selected node is Method: " + obj);
                         }
                     }
                 }
@@ -120,27 +111,13 @@ public class OutlinePanel extends JPanel implements ActionListener{
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
         DefaultMutableTreeNode constructorTree = new DefaultMutableTreeNode("Constructor");
-        DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
-        DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
 
         Constructor<?>[] constructors = cls.getConstructors();
         for (Constructor<?> constructor : constructors) {
             constructorTree.add(new DefaultMutableTreeNode(constructor));
         }
-        
-        Field[] fields = cls.getDeclaredFields();
-        for (Field field : fields) {
-            fieldTree.add(new DefaultMutableTreeNode(field));
-        }
-        
-        Method[] methods = cls.getDeclaredMethods();
-        for (Method method : methods) {
-            methodTree.add(new DefaultMutableTreeNode(method));
-        }
                 
         root.add(constructorTree);
-        //root.add(fieldTree);
-        //root.add(methodTree);
         
         classTree.add(root);
         model.reload();
