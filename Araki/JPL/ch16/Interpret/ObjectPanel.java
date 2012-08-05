@@ -83,7 +83,6 @@ public class ObjectPanel extends JPanel implements ActionListener{
                             System.out.println("Selected node is Field: " + field);
                             try {
                                 propertiesPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
-                                System.out.println((node.getChildAt(0)));
                             } catch (Exception e1) {
                                 Console.err.println(e1);
                                 e1.printStackTrace();
@@ -98,8 +97,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
                             exec.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                    System.out.println(method);
-                                    
+
                                 }
                             });
                             popup.add(exec);
@@ -136,7 +134,6 @@ public class ObjectPanel extends JPanel implements ActionListener{
                 e.printStackTrace();
             }
             f.add(new DefaultMutableTreeNode(value));
-            System.out.println(field);
         }
 
         // Create object method tree
@@ -158,6 +155,27 @@ public class ObjectPanel extends JPanel implements ActionListener{
         
         classTree.add(root);
         model.reload();
+    }
+    
+    public void changeFieldValue(Field field, String value) {
+
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        DefaultMutableTreeNode root = getObjectNode(node);
+        Object obj = root.getNextNode().getUserObject();
+        
+        field.setAccessible(true);
+        try {
+            Class<?> type = field.get(obj).getClass();
+            field.set(obj, ObjectUtility.convertObject(type, value));
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        createObjectTree(obj, root.getUserObject().toString());
     }
 
     @Override

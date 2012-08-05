@@ -34,7 +34,7 @@ public class InterpretGUI extends JFrame{
         OutlinePanel outline = new OutlinePanel();
         ObjectPanel objectpanel = new ObjectPanel();
         ObjectMaker objMaker = new ObjectMaker();
-        ObjectPropertiesPanel objPropertiesPanel = new ObjectPropertiesPanel();
+        ObjectPropertiesPanel objPropertiesPanel = new ObjectPropertiesPanel(objectpanel);
         objectpanel.setPropertiesPanel(objPropertiesPanel);
         
         JScrollPane consolePanel = new JScrollPane(console, 

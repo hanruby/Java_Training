@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,18 +19,27 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
     private JTextField objectField;
     private JLabel typeField;
     private JTextField valueField;
+    private JButton changeButton;
     
     private Object obj;
     private Field field;
     
-    ObjectPropertiesPanel() {
+    private ObjectPanel objectPanel;
+    
+    ObjectPropertiesPanel(ObjectPanel objectPanel) {
         super();
+        
+        this.objectPanel = objectPanel;
         panel = new JPanel();
 
         objectField = new JTextField(10);
         fieldField = new JTextField(20);
         typeField = new JLabel("", 10);
         valueField = new JTextField(10);
+
+        changeButton = new JButton("Set");
+        changeButton.addActionListener(this);
+        changeButton.setActionCommand("Change");
 
         add(panel);
     }
@@ -51,12 +61,20 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         panel.add(fieldField);
         panel.add(typeField);
         panel.add(valueField);
+        panel.add(changeButton);
         
         this.updateUI();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        String action = e.getActionCommand();
+
+        if (action.equals("Change")) {
+
+            objectPanel.changeFieldValue(field, valueField.getText());
+        }
 
     }
 }
