@@ -177,6 +177,26 @@ public class ObjectTree extends JPanel implements ActionListener{
         
         createObjectTree(obj, root.getUserObject().toString());
     }
+    
+    public void addObject(String objectName, Constructor<?> constructor) {
+        if (constructor != null && objectName != null && !objectName.equals("")) {
+            Object obj;
+            try {
+                // Create new instance!!
+                obj = constructor.newInstance();
+                createObjectTree(obj, objectName);
+                model.reload();
+            } catch (IllegalArgumentException e1) {
+                Console.err.println(e1);
+            } catch (InstantiationException e1) {
+                Console.err.println(e1);
+            } catch (IllegalAccessException e1) {
+                Console.err.println(e1);
+            } catch (InvocationTargetException e1) {
+                Console.err.println(e1);
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -187,21 +207,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             String constructorName = constructorField.getText();
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
-                Object obj;
-                try {
-                    // Create new instance!!
-                    obj = constructorField.getConstructor().newInstance();
-                    createObjectTree(obj, objectName);
-                    model.reload();
-                } catch (IllegalArgumentException e1) {
-                    Console.err.println(e1);
-                } catch (InstantiationException e1) {
-                    Console.err.println(e1);
-                } catch (IllegalAccessException e1) {
-                    Console.err.println(e1);
-                } catch (InvocationTargetException e1) {
-                    Console.err.println(e1);
-                }
+                addObject(objectName, constructorField.getConstructor());
             }
         }
         else if (action.equals("Delete")) {

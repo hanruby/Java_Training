@@ -110,6 +110,7 @@ public class ClassTree extends JPanel implements ActionListener{
         classTree.add(root);
         model.reload();
     }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
