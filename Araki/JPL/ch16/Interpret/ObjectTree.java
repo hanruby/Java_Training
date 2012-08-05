@@ -167,11 +167,9 @@ public class ObjectTree extends JPanel implements ActionListener{
             Class<?> type = field.get(obj).getClass();
             field.set(obj, ObjectUtility.convertObject(type, value));
         } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Console.err.println(e);
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Console.err.println(e);
         }
         
         createObjectTree(obj, root.getUserObject().toString());
@@ -214,14 +212,11 @@ public class ObjectTree extends JPanel implements ActionListener{
             try {
                 ret = method.invoke(obj, objs);
             } catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Console.err.println(e);
             } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Console.err.println(e);
             } catch (InvocationTargetException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Console.err.println(e);
             };
             
             if (ret != null) {
