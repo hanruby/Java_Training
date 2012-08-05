@@ -24,7 +24,7 @@ import javax.swing.TransferHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-public class OutlinePanel extends JPanel implements ActionListener{
+public class ClassTree extends JPanel implements ActionListener{
 
     private static final long serialVersionUID = 671352749780328461L;
     
@@ -33,9 +33,9 @@ public class OutlinePanel extends JPanel implements ActionListener{
     private DefaultTreeModel model;
     private JTextField text;
     
-    private ObjectPanel objectPanel;
+    private ObjectTree objectPanel;
         
-    public OutlinePanel(ObjectPanel objectPanel) {
+    public ClassTree(ObjectTree objectPanel) {
         
         this.objectPanel = objectPanel;
         
@@ -159,8 +159,8 @@ public class OutlinePanel extends JPanel implements ActionListener{
         super.setPreferredSize(arg0);
     }
     
-    private ObjectPropertiesPanel propertiesPanal;
-    public void setPropertiesPanel(ObjectPropertiesPanel panel) {
+    private ControlPanel propertiesPanal;
+    public void setPropertiesPanel(ControlPanel panel) {
         propertiesPanal = panel;
     }
 }

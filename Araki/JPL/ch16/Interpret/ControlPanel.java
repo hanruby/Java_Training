@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ObjectPropertiesPanel extends JPanel implements ActionListener{
+public class ControlPanel extends JPanel implements ActionListener{
 
     private static final long serialVersionUID = 1406985790901319936L;
 
@@ -28,9 +28,9 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
     private Object obj;
     private Field field;
     
-    private ObjectPanel objectPanel;
+    private ObjectTree objectPanel;
     
-    ObjectPropertiesPanel(ObjectPanel objectPanel) {
+    ControlPanel(ObjectTree objectPanel) {
         super();
         
         this.objectPanel = objectPanel;

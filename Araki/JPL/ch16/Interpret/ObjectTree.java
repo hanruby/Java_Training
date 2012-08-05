@@ -1,14 +1,11 @@
 package ch16.Interpret;
 
 import java.awt.Dimension;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.lang.reflect.*;
 
 import javax.swing.BoxLayout;
@@ -19,11 +16,10 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.TransferHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-public class ObjectPanel extends JPanel implements ActionListener{
+public class ObjectTree extends JPanel implements ActionListener{
 
     private static final long serialVersionUID = 1726910916306653766L;
 
@@ -33,7 +29,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
     private JTextField objectName;
     private ConstructorField constructorField;
         
-    public ObjectPanel() {
+    public ObjectTree() {
         
         tree = new JTree(classTree);
 
@@ -241,8 +237,8 @@ public class ObjectPanel extends JPanel implements ActionListener{
         return node;
     }
         
-    private ObjectPropertiesPanel propertiesPanal;
-    public void setPropertiesPanel(ObjectPropertiesPanel panel) {
+    private ControlPanel propertiesPanal;
+    public void setPropertiesPanel(ControlPanel panel) {
         propertiesPanal = panel;
     }
 }

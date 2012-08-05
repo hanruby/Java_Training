@@ -31,30 +31,30 @@ public class InterpretGUI extends JFrame{
         textArea = new JTextArea();
         textArea.setLineWrap(true);
 
-        ObjectPanel objectpanel = new ObjectPanel();
+        ObjectTree objectTree = new ObjectTree();
         ObjectMaker objMaker = new ObjectMaker();
-        OutlinePanel outline = new OutlinePanel(objectpanel);
-        ObjectPropertiesPanel objPropertiesPanel = new ObjectPropertiesPanel(objectpanel);
-        outline.setPropertiesPanel(objPropertiesPanel);
-        objectpanel.setPropertiesPanel(objPropertiesPanel);
+        ClassTree classTree = new ClassTree(objectTree);
+        ControlPanel controlPanel = new ControlPanel(objectTree);
+        classTree.setPropertiesPanel(controlPanel);
+        objectTree.setPropertiesPanel(controlPanel);
         
         JScrollPane consolePanel = new JScrollPane(console, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        JScrollPane scrollTextPanel = new JScrollPane(objPropertiesPanel, 
+        JScrollPane scrollTextPanel = new JScrollPane(controlPanel, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         consolePanel.setPreferredSize(new Dimension(200, 360));
-        outline.setPreferredSize(new Dimension(400, 360));
-        objectpanel.setPreferredSize(new Dimension(800, 360));
+        classTree.setPreferredSize(new Dimension(400, 360));
+        objectTree.setPreferredSize(new Dimension(800, 360));
         scrollTextPanel.setPreferredSize(new Dimension(1000, 80));
         
         
         viewerPanel.add(consolePanel);
-        viewerPanel.add(outline);
-        viewerPanel.add(objectpanel);
+        viewerPanel.add(classTree);
+        viewerPanel.add(objectTree);
 
         operationPanel.add(scrollTextPanel);
 
@@ -62,12 +62,12 @@ public class InterpretGUI extends JFrame{
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
         
-        outline.createClassTree(java.lang.Object.class);
-        outline.createClassTree(java.util.HashMap.class);
-        outline.createClassTree(ch16.Interpret.InterpretGUI.class);
+        classTree.createClassTree(java.lang.Object.class);
+        classTree.createClassTree(java.util.HashMap.class);
+        classTree.createClassTree(ch16.Interpret.InterpretGUI.class);
         
-        objectpanel.createObjectTree(new java.util.HashMap(), "HashMap object");
-        objectpanel.createObjectTree("string", "string object");
+        objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
+        objectTree.createObjectTree("string", "string object");
         pack();
     }
 
