@@ -3,16 +3,16 @@ package ch16.Interpret;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 
 import javax.swing.JTextField;
 import javax.swing.TransferHandler;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ObjectField extends JTextField {
 
     private static final long serialVersionUID = 2552391809039249611L;
 
-    private Constructor<?> constructor;
+    private Object object;
 
     public ObjectField(int col) {
         super(col);
@@ -23,7 +23,7 @@ public class ObjectField extends JTextField {
             private static final long serialVersionUID = 496673230072108468L;
             
             public final DataFlavor localObjectFlavor = new DataFlavor (
-                    Constructor.class, "This is Constructor.");
+                    DefaultMutableTreeNode.class, "This is tree node.");
 
             @Override
             public boolean canImport(TransferSupport support) {
@@ -39,7 +39,7 @@ public class ObjectField extends JTextField {
                 if (support.isDataFlavorSupported(localObjectFlavor)) {
                     return true;
                 }
-
+                
                 return false;
             }
 
@@ -50,15 +50,13 @@ public class ObjectField extends JTextField {
                     return false;
                 }
 
-                ConstructorField text = (ConstructorField)support.getComponent();
+                ObjectField text = (ObjectField) support.getComponent();
                 try {
                     // ドロップデータ
-                    Object obj = support.getTransferable().getTransferData(localObjectFlavor);
-                    if (obj instanceof Constructor<?>) {
-                        Constructor<?> constructor = (Constructor<?>) obj;
-                        text.setText(constructor.toString());
-                        text.setConstructor(constructor);
-                    }
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) support.getTransferable().getTransferData(localObjectFlavor);
+                    Object obj = node.getUserObject();
+                    text.setText(obj.toString());
+                    text.setObject(obj);
                     return true;
 
                 } catch (UnsupportedFlavorException ex) {
@@ -72,11 +70,11 @@ public class ObjectField extends JTextField {
         });
     }
     
-    public void setConstructor(Constructor<?> constructor) {
-        this.constructor = constructor;
+    public void setObject(Object obj) {
+        this.object = obj;
     }
 
-    public Constructor<?> getConstructor() {
-        return constructor;
+    public Object getObject() {
+        return object;
     }
 }

@@ -34,7 +34,6 @@ public class ClassTree extends JPanel implements ActionListener{
     public ClassTree() {
         
         tree = new JTree(classTree);
-        tree.setDragEnabled(true);
 
         JScrollPane treePanel = new JScrollPane(tree, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
@@ -85,6 +84,9 @@ public class ClassTree extends JPanel implements ActionListener{
             }
         };
         tree.addMouseListener(ml);
+
+        // support for drag and drop
+        tree.setDragEnabled(true);
         tree.setTransferHandler(new ConstructorTransfer());
     }
     

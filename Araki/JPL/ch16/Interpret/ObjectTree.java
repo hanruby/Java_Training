@@ -1,6 +1,8 @@
 package ch16.Interpret;
 
 import java.awt.Dimension;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,14 +10,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.*;
 
+import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.TransferHandler;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -105,6 +110,10 @@ public class ObjectTree extends JPanel implements ActionListener{
             }
         };
         tree.addMouseListener(ml);
+
+        // support for drag and drop
+        tree.setDragEnabled(true);
+        tree.setTransferHandler(new ObjectTransfer());
     }
 
     public void createObjectTree(Object obj, String name) {
@@ -178,7 +187,7 @@ public class ObjectTree extends JPanel implements ActionListener{
         createObjectTree(obj, root.getUserObject().toString());
     }
     
-    public void addObject(String objectName, Constructor<?> constructor) {
+    public void addObject(String objectName, Constructor<?> constructor, Object[] objs) {
         if (constructor != null && objectName != null && !objectName.equals("")) {
             Object obj;
             try {
@@ -207,7 +216,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             String constructorName = constructorField.getText();
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
-                addObject(objectName, constructorField.getConstructor());
+                addObject(objectName, constructorField.getConstructor(), null);
             }
         }
         else if (action.equals("Delete")) {
@@ -249,3 +258,32 @@ public class ObjectTree extends JPanel implements ActionListener{
     }
 }
 
+class ObjectTransfer extends TransferHandler {
+
+    private static final long serialVersionUID = -1426178157203230501L;
+
+    // Ref : http://docs.oracle.com/javase/tutorial/uiswing/dnd/dataflavor.html
+    public final static DataFlavor localObjectFlavor = new DataFlavor (
+            DefaultMutableTreeNode.class, "This is tree node.");
+
+    public static final DataFlavor[] flavors = {
+        localObjectFlavor
+    };
+
+    @Override
+    protected Transferable createTransferable(JComponent c) {
+        JTree tree = (JTree) c;
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (node != null) {
+            // Accept object.
+            DataHandler dh = new DataHandler(node, localObjectFlavor.getMimeType());
+            return dh;
+        }
+        return null;
+    }
+
+    @Override
+    public int getSourceActions(JComponent arg0) {
+        return COPY_OR_MOVE;
+    }
+}

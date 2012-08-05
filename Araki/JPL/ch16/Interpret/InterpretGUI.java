@@ -48,7 +48,7 @@ public class InterpretGUI extends JFrame{
         consolePanel.setPreferredSize(new Dimension(200, 360));
         classTree.setPreferredSize(new Dimension(400, 360));
         objectTree.setPreferredSize(new Dimension(800, 360));
-        scrollTextPanel.setPreferredSize(new Dimension(1000, 80));
+        scrollTextPanel.setPreferredSize(new Dimension(1000, 200));
         
         
         viewerPanel.add(consolePanel);

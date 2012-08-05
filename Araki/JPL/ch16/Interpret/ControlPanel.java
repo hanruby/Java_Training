@@ -8,9 +8,11 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class ControlPanel extends JPanel implements ActionListener{
@@ -92,12 +94,22 @@ public class ControlPanel extends JPanel implements ActionListener{
         
         objField = new ObjectField(20);
 
-        panel.add(objectName);
-        panel.add(constructorField);
-        panel.add(objField);
-        panel.add(addButton);
-        panel.add(deleteButton);
+        JPanel controlPanel = new JPanel();
+        controlPanel.add(objectName);
+        controlPanel.add(constructorField);
+        controlPanel.add(objField);
+        controlPanel.add(addButton);
+        controlPanel.add(deleteButton);
+        
+        
+        Object[][] objs = {{constructor}};
+        Object[] names = {"hoge"};
 
+        JTable table = new JTable(objs,names);
+        
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(controlPanel);
+        panel.add(table);
         
         this.updateUI();
     }
@@ -122,7 +134,7 @@ public class ControlPanel extends JPanel implements ActionListener{
             String constructorName = constructorField.getText();
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
-                objectTree.addObject(objectName, constructorField.getConstructor());
+                objectTree.addObject(objectName, constructorField.getConstructor(),null);
             }
 
         }
