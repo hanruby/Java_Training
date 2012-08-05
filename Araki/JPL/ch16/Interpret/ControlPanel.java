@@ -1,20 +1,26 @@
 package ch16.Interpret;
 
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import javax.swing.BoxLayout;
+import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.TransferHandler;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ControlPanel extends JPanel implements ActionListener{
 
@@ -107,14 +113,79 @@ public class ControlPanel extends JPanel implements ActionListener{
         Object[] names = clss;
         Object[] objs = new Object[clss.length];
         
-        DefaultTableModel tableModel = new DefaultTableModel();
+        final DefaultTableModel tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
         tableModel.addColumn("arg", names);
         tableModel.addColumn("value", objs);
-        
+                
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(controlPanel);
         panel.add(table);
+        
+        // ドロップされたとき
+        table.setDropMode(DropMode.ON);
+        table.setDragEnabled(true);
+        table.setTransferHandler(new TransferHandler(){
+
+            private static final long serialVersionUID = 496673230072108468L;
+            
+            public final DataFlavor localObjectFlavor = new DataFlavor (
+                    DefaultMutableTreeNode.class, "This is tree node.");
+
+            @Override
+            public boolean canImport(TransferSupport support) {
+                // クリップボード経由のデータ転送は扱わない
+                if (!support.isDrop()) {
+                    return false;
+                }
+
+                // Drop locate
+                JTable.DropLocation dl = (JTable.DropLocation) support.getDropLocation();
+                
+                // タイトル列は無視
+                if (dl.getColumn() == 0) {
+                    return false;
+                }
+                
+                // ドロップする位置を常に表示する
+                support.setShowDropLocation(true);
+
+                // フレーバの指定
+                if (support.isDataFlavorSupported(localObjectFlavor)) {
+                    return true;
+                }
+                
+                return false;
+            }
+
+            @Override
+            public boolean importData(TransferSupport support) {
+                // クリップボード経由のデータ転送は扱わない
+                if (!support.isDrop()) {
+                    return false;
+                }
+                
+                // Drop locate
+                JTable.DropLocation dl = (JTable.DropLocation) support.getDropLocation();
+ 
+                try {
+                    // ドロップデータ
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) support.getTransferable().getTransferData(localObjectFlavor);
+                    Object obj = node.getUserObject();
+                    
+                    tableModel.setValueAt(obj, dl.getRow(), dl.getColumn());
+                    
+                    return true;
+
+                } catch (UnsupportedFlavorException ex) {
+                    System.out.println(ex);
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+
+                return false;
+            }
+        });
         
         this.updateUI();
     }
@@ -145,4 +216,6 @@ public class ControlPanel extends JPanel implements ActionListener{
         }
 
     }
+    
+    
 }
