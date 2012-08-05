@@ -69,6 +69,7 @@ public class ControlPanel extends JPanel implements ActionListener{
         valueField.setText(h.toString());
         //FieldUtility.printObjectField(obj, field);
                 
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.add(objectField);
         panel.add(fieldField);
         panel.add(typeField);
@@ -101,6 +102,7 @@ public class ControlPanel extends JPanel implements ActionListener{
         objField = new ObjectField(20);
 
         JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
         controlPanel.add(objectName);
         controlPanel.add(constructorField);
         controlPanel.add(objField);
