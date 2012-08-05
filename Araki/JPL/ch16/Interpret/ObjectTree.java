@@ -192,7 +192,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             Object obj;
             try {
                 // Create new instance!!
-                obj = constructor.newInstance();
+                obj = constructor.newInstance(objs);
                 createObjectTree(obj, objectName);
                 model.reload();
             } catch (IllegalArgumentException e1) {
