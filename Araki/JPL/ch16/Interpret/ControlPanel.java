@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class ControlPanel extends JPanel implements ActionListener{
 
@@ -101,11 +102,15 @@ public class ControlPanel extends JPanel implements ActionListener{
         controlPanel.add(addButton);
         controlPanel.add(deleteButton);
         
+        Class<?>[] clss = constructor.getParameterTypes();
         
-        Object[][] objs = {{constructor}};
-        Object[] names = {"hoge"};
-
-        JTable table = new JTable(objs,names);
+        Object[] names = clss;
+        Object[] objs = new Object[clss.length];
+        
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+        tableModel.addColumn("arg", names);
+        tableModel.addColumn("value", objs);
         
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(controlPanel);
