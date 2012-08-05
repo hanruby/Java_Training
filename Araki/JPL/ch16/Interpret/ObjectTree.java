@@ -14,9 +14,7 @@ import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -80,7 +78,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                         
                         // Field
                         if (obj instanceof Field) {
-                            final Field field = (Field) obj;
+                            Field field = (Field) obj;
                             System.out.println("Selected node is Field: " + field);
                             try {
                                 controlPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
@@ -91,18 +89,10 @@ public class ObjectTree extends JPanel implements ActionListener{
                         }
                         // Method
                         else if (obj instanceof Method) {
-                            final Method method = (Method) obj;
+                            Method method = (Method) obj;
                             System.out.println("Selected node is Method: " + method);
-                            JPopupMenu popup = new JPopupMenu();
-                            JMenuItem exec = new JMenuItem("exec");
-                            exec.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-
-                                }
-                            });
-                            popup.add(exec);
-                            popup.show(e.getComponent(), e.getX(), e.getY());
+                            
+                            controlPanal.execMethod(getObjectNode(node).getUserObject(), method);
                         }
                     }
                 }
@@ -205,6 +195,39 @@ public class ObjectTree extends JPanel implements ActionListener{
                 Console.err.println(e1);
             }
         }
+    }
+    
+    public void execMethod(String objectName, Method method, Object[] objs) {
+        
+        // ツリーからオブジェクトを取得
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (node == null || node.getParent() == null) {
+            return;
+        }
+        DefaultMutableTreeNode root = getObjectNode(node);
+        Object obj = root.getNextNode().getUserObject();
+
+        if (method != null && objectName != null && !objectName.equals("")) {
+
+            Object ret = null;
+            method.setAccessible(true);
+            try {
+                ret = method.invoke(obj, objs);
+            } catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            };
+            
+            if (ret != null) {
+                createObjectTree(ret, objectName);
+            }
+        }            
     }
 
     @Override
