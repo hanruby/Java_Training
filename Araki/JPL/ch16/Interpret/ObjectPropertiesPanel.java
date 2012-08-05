@@ -65,6 +65,11 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         
         this.updateUI();
     }
+    
+    public void addObject() {
+        
+    }
+   
 
     @Override
     public void actionPerformed(ActionEvent e) {

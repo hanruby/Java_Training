@@ -31,9 +31,9 @@ public class InterpretGUI extends JFrame{
         textArea = new JTextArea();
         textArea.setLineWrap(true);
 
-        OutlinePanel outline = new OutlinePanel();
         ObjectPanel objectpanel = new ObjectPanel();
         ObjectMaker objMaker = new ObjectMaker();
+        OutlinePanel outline = new OutlinePanel(objectpanel);
         ObjectPropertiesPanel objPropertiesPanel = new ObjectPropertiesPanel(objectpanel);
         objectpanel.setPropertiesPanel(objPropertiesPanel);
         
@@ -65,7 +65,8 @@ public class InterpretGUI extends JFrame{
         outline.createClassTree(java.util.HashMap.class);
         outline.createClassTree(ch16.Interpret.InterpretGUI.class);
         
-        objectpanel.createObjectTree(new java.util.HashMap(), "abc");
+        objectpanel.createObjectTree(new java.util.HashMap(), "HashMap object");
+        objectpanel.createObjectTree("string", "string object");
         pack();
     }
 

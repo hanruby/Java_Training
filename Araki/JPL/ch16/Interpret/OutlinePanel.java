@@ -32,9 +32,12 @@ public class OutlinePanel extends JPanel implements ActionListener{
     private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
     private DefaultTreeModel model;
     private JTextField text;
-  
+    
+    private ObjectPanel objectPanel;
         
-    public OutlinePanel() {
+    public OutlinePanel(ObjectPanel objectPanel) {
+        
+        this.objectPanel = objectPanel;
         
         tree = new JTree(classTree);
         tree.setDragEnabled(true);
@@ -136,7 +139,7 @@ public class OutlinePanel extends JPanel implements ActionListener{
                     cls = Class.forName(name);
                     createClassTree(cls);
                 } catch (ClassNotFoundException e1) {
-                    e1.printStackTrace();
+                    Console.err.println(e1);
                 }
                 model.reload();
             }
