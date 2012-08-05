@@ -85,6 +85,8 @@ public class ControlPanel extends JPanel implements ActionListener{
     private JTextField objectName;
     private ConstructorField constructorField;
     
+    private DefaultTableModel tableModel;
+    
     public void addObject(Constructor<?> constructor) {
      
         removeContents();
@@ -112,8 +114,7 @@ public class ControlPanel extends JPanel implements ActionListener{
         
         Object[] names = clss;
         Object[] objs = new Object[clss.length];
-        
-        final DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
         tableModel.addColumn("arg", names);
         tableModel.addColumn("value", objs);
@@ -210,7 +211,14 @@ public class ControlPanel extends JPanel implements ActionListener{
             String constructorName = constructorField.getText();
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
-                objectTree.addObject(objectName, constructorField.getConstructor(),null);
+                
+                // collect arguments
+                Object[] objs = new Object[tableModel.getRowCount()];
+                for (int i = 0; i < objs.length; i++) {
+                    objs[i] = tableModel.getValueAt(i, 1);
+                }
+                
+                objectTree.addObject(objectName, constructorField.getConstructor(),objs);
             }
 
         }
