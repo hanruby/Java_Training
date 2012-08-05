@@ -106,48 +106,74 @@ public class ObjectTree extends JPanel implements ActionListener{
         tree.setTransferHandler(new ObjectTransfer());
     }
 
+    private DefaultMutableTreeNode createArrayTree(Object obj) {
+        DefaultMutableTreeNode arrayTree = new DefaultMutableTreeNode(obj);
+        if (obj == null || ! obj.getClass().isArray()) {
+            return arrayTree;
+        }
+
+        int length = Array.getLength(obj);
+        for (int i = 0; i < length; i++) {
+            Object o = Array.get(obj, i); 
+            
+            DefaultMutableTreeNode arr = createArrayTree(o);
+            arrayTree.add(arr);
+        }
+        return arrayTree;
+    }
+    
     public void createObjectTree(Object obj, String name) {
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(name);
 
-        // Create object tree
-        DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
+        // is Array
+        if (obj.getClass().isArray()) {
+            // Create object array tree
+            DefaultMutableTreeNode arrayTree = new DefaultMutableTreeNode("Array");
+            
+            arrayTree.add(createArrayTree(obj));
+            
+            root.add(arrayTree);
+        }
+        else {
+            // Create object node
+            DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
 
-        // Create object field tree
-        DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
-            fieldTree.add(f);
-            field.setAccessible(true);
-            Object value = null;
-            try {
-                value = field.get(obj);
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            // Create object field tree
+            DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
+            Field[] fields = obj.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
+                fieldTree.add(f);
+                field.setAccessible(true);
+                Object value = null;
+                try {
+                    value = field.get(obj);
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                f.add(new DefaultMutableTreeNode(value));
             }
-            f.add(new DefaultMutableTreeNode(value));
-        }
 
-        // Create object method tree
-        DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
+            // Create object method tree
+            DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
 
-        Method[] methods = obj.getClass().getDeclaredMethods();
-        for (Method method : methods) {
-            method.setAccessible(true);
-            DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
-            methodTree.add(m);
+            Method[] methods = obj.getClass().getDeclaredMethods();
+            for (Method method : methods) {
+                method.setAccessible(true);
+                DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
+                methodTree.add(m);
+            }
+
+            // Create object 
+
+
+            root.add(objectTree);
+            root.add(fieldTree);
+            root.add(methodTree);
         }
-        
-        // Create object 
-        
-        
-        root.add(objectTree);
-        root.add(fieldTree);
-        root.add(methodTree);
-        
         classTree.add(root);
         model.reload();
     }
@@ -191,6 +217,28 @@ public class ObjectTree extends JPanel implements ActionListener{
                 Console.err.println(e1);
             } catch (InvocationTargetException e1) {
                 Console.err.println(e1);
+            }
+        }
+    }
+    
+    public void addArrayObject(String objectName, Constructor<?> constructor, Class<?> type, int[] dims) {
+        if (constructor != null && objectName != null && !objectName.equals("") && type != null && dims != null) {
+            Object obj;
+            try {
+                obj = constructor.newInstance(type, dims);
+                createObjectTree(obj, objectName);
+            } catch (IllegalArgumentException e) {
+                Console.err.println(e);
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                Console.err.println(e);
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                Console.err.println(e);
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                Console.err.println(e);
+                e.printStackTrace();
             }
         }
     }

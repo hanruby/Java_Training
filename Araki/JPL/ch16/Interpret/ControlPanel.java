@@ -179,6 +179,11 @@ public class ControlPanel extends JPanel implements ActionListener{
         
         Class<?>[] clss = constructor.getParameterTypes();
         
+        // 引数を持ってない場合
+        if (clss.length == 0) {
+            
+        }
+        
         Object[] names = clss;
         Object[] objs = new Object[clss.length];
         tableModel = new DefaultTableModel();
