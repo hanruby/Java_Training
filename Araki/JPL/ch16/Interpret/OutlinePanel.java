@@ -73,8 +73,8 @@ public class OutlinePanel extends JPanel implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                // Open the popupmenu using right click
-                if ( e.getButton() == MouseEvent.BUTTON3) {
+                // Open the popupmenu using left click
+                if ( e.getButton() == MouseEvent.BUTTON1) {
 
                     // Get a member of the class object
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
@@ -82,17 +82,8 @@ public class OutlinePanel extends JPanel implements ActionListener{
                         final Object obj = node.getUserObject();
                         // Constructor
                         if (obj instanceof Constructor<?>) {
-                            System.out.println("Selected node is Constructor: " + obj);
-                            JPopupMenu popup = new JPopupMenu();
-                            JMenuItem exec = new JMenuItem("Create object using this Constructor.");
-                            exec.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    System.out.println(obj);
-                                }
-                            });
-                            popup.add(exec);
-                            popup.show(e.getComponent(), e.getX(), e.getY());
+                            Constructor<?> constructor = (Constructor<?>) obj;
+                            propertiesPanal.addObject(constructor);
                         }
                     }
                 }
@@ -166,6 +157,11 @@ public class OutlinePanel extends JPanel implements ActionListener{
     @Override
     public void setPreferredSize(Dimension arg0) {
         super.setPreferredSize(arg0);
+    }
+    
+    private ObjectPropertiesPanel propertiesPanal;
+    public void setPropertiesPanel(ObjectPropertiesPanel panel) {
+        propertiesPanal = panel;
     }
 }
 

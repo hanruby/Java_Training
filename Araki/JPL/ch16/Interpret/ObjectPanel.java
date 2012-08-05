@@ -193,6 +193,7 @@ public class ObjectPanel extends JPanel implements ActionListener{
             if (!constructorName.equals("") && !objectName.equals("")) {
                 Object obj;
                 try {
+                    // Create new instance!!
                     obj = constructorField.getConstructor().newInstance();
                     createObjectTree(obj, objectName);
                     model.reload();

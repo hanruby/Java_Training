@@ -2,6 +2,10 @@ package ch16.Interpret;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import javax.swing.JButton;
@@ -66,10 +70,31 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         this.updateUI();
     }
     
+
+    private JTextField objectName;
+    private ConstructorField constructorField;
     
-    
-    public void addObject() {
+    public void addObject(Constructor<?> constructor) {
+     
+        removeContents();
         
+        // create control contents
+        objectName = new JTextField(10);
+        constructorField = new ConstructorField(20);
+        JButton addButton = new JButton("+");
+        addButton.addActionListener(this);
+        addButton.setActionCommand("Add");
+        JButton deleteButton = new JButton("-");
+        deleteButton.addActionListener(this);
+        deleteButton.setActionCommand("Delete");
+
+        panel.add(objectName);
+        panel.add(constructorField);
+        panel.add(addButton);
+        panel.add(deleteButton);
+
+        
+        this.updateUI();
     }
     
     private void removeContents() {
