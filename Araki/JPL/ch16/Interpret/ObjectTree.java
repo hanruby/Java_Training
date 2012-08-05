@@ -78,7 +78,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             final Field field = (Field) obj;
                             System.out.println("Selected node is Field: " + field);
                             try {
-                                propertiesPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
+                                controlPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
                             } catch (Exception e1) {
                                 Console.err.println(e1);
                                 e1.printStackTrace();
@@ -237,9 +237,9 @@ public class ObjectTree extends JPanel implements ActionListener{
         return node;
     }
         
-    private ControlPanel propertiesPanal;
+    private ControlPanel controlPanal;
     public void setPropertiesPanel(ControlPanel panel) {
-        propertiesPanal = panel;
+        controlPanal = panel;
     }
 }
 

@@ -14,9 +14,7 @@ import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -33,11 +31,7 @@ public class ClassTree extends JPanel implements ActionListener{
     private DefaultTreeModel model;
     private JTextField text;
     
-    private ObjectTree objectPanel;
-        
-    public ClassTree(ObjectTree objectPanel) {
-        
-        this.objectPanel = objectPanel;
+    public ClassTree() {
         
         tree = new JTree(classTree);
         tree.setDragEnabled(true);
@@ -83,7 +77,7 @@ public class ClassTree extends JPanel implements ActionListener{
                         // Constructor
                         if (obj instanceof Constructor<?>) {
                             Constructor<?> constructor = (Constructor<?>) obj;
-                            propertiesPanal.addObject(constructor);
+                            controlPanal.addObject(constructor);
                         }
                     }
                 }
@@ -159,9 +153,9 @@ public class ClassTree extends JPanel implements ActionListener{
         super.setPreferredSize(arg0);
     }
     
-    private ControlPanel propertiesPanal;
+    private ControlPanel controlPanal;
     public void setPropertiesPanel(ControlPanel panel) {
-        propertiesPanal = panel;
+        controlPanal = panel;
     }
 }
 

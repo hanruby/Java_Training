@@ -32,8 +32,7 @@ public class InterpretGUI extends JFrame{
         textArea.setLineWrap(true);
 
         ObjectTree objectTree = new ObjectTree();
-        ObjectMaker objMaker = new ObjectMaker();
-        ClassTree classTree = new ClassTree(objectTree);
+        ClassTree classTree = new ClassTree();
         ControlPanel controlPanel = new ControlPanel(objectTree);
         classTree.setPropertiesPanel(controlPanel);
         objectTree.setPropertiesPanel(controlPanel);
