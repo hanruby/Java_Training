@@ -33,11 +33,14 @@ public class ControlPanel extends JPanel implements ActionListener{
     private JTextField valueField;
     private ObjectField objField;
     
+    private JTextField dimsField;
+    
     private JButton changeButton;
     
     private Object obj;
     private Field field;
     private Method method;
+    private Constructor<?> constructor;
     
     private TransferHandler transferHandler;
     
@@ -60,11 +63,11 @@ public class ControlPanel extends JPanel implements ActionListener{
         changeButton.setActionCommand("Change");
 
         add(panel);
-        
-                transferHandler = new TransferHandler(){
+
+        transferHandler = new TransferHandler(){
 
             private static final long serialVersionUID = 496673230072108468L;
-            
+
             public final DataFlavor localObjectFlavor = new DataFlavor (
                     DefaultMutableTreeNode.class, "This is tree node.");
 
@@ -77,7 +80,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 
                 // Drop locate
                 JTable.DropLocation dl = (JTable.DropLocation) support.getDropLocation();
-                
+
                 // タイトル列は無視
                 if (dl.getColumn() == 0) {
                     return false;
@@ -154,7 +157,8 @@ public class ControlPanel extends JPanel implements ActionListener{
     private DefaultTableModel tableModel;
     
     public void addObject(Constructor<?> constructor) {
-     
+        this.constructor = constructor;
+        System.out.println("hgge" + constructor.getDeclaringClass());
         removeContents();
         
         // create control contents
@@ -163,11 +167,10 @@ public class ControlPanel extends JPanel implements ActionListener{
         JButton addButton = new JButton("+");
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
-        JButton deleteButton = new JButton("-");
-        deleteButton.addActionListener(this);
-        deleteButton.setActionCommand("Delete");
         
         objField = new ObjectField(20);
+        
+        constructorField.setText(constructor.getName());
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
@@ -175,31 +178,32 @@ public class ControlPanel extends JPanel implements ActionListener{
         controlPanel.add(constructorField);
         controlPanel.add(objField);
         controlPanel.add(addButton);
-        controlPanel.add(deleteButton);
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(controlPanel);
         
         Class<?>[] clss = constructor.getParameterTypes();
         
         // 引数を持ってない場合
         if (clss.length == 0) {
-            
+            dimsField = new JTextField(20);
+            panel.add(dimsField);
         }
-        
-        Object[] names = clss;
-        Object[] objs = new Object[clss.length];
-        tableModel = new DefaultTableModel();
-        JTable table = new JTable(tableModel);
-        tableModel.addColumn("arg", names);
-        tableModel.addColumn("value", objs);
-                
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(controlPanel);
-        panel.add(table);
-        
-        // ドロップされたとき
-        table.setDropMode(DropMode.ON);
-        table.setDragEnabled(true);
-        table.setTransferHandler(transferHandler);
-        
+        else {
+            Object[] names = clss;
+            Object[] objs = new Object[clss.length];
+            tableModel = new DefaultTableModel();
+            JTable table = new JTable(tableModel);
+            tableModel.addColumn("arg", names);
+            tableModel.addColumn("value", objs);
+
+            panel.add(table);
+            // ドロップされたとき
+            table.setDropMode(DropMode.ON);
+            table.setDragEnabled(true);
+            table.setTransferHandler(transferHandler);
+        }
+
         this.updateUI();
     }
     
@@ -265,15 +269,28 @@ public class ControlPanel extends JPanel implements ActionListener{
             String constructorName = constructorField.getText();
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
-                
-                // collect arguments
-                Object[] objs = new Object[tableModel.getRowCount()];
-                for (int i = 0; i < objs.length; i++) {
-                    objs[i] = tableModel.getValueAt(i, 1);
+
+                Class<?>[] clss = constructor.getParameterTypes();
+        
+                // 引数を持ってない場合
+                if (clss.length == 0) {
+                    if (!dimsField.getText().equals("")) {
+                        objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), new int[]{2,2});
+                    }
+                    else {
+                        objectTree.addObject(objectName, constructor,null);
+                    }
                 }
-                
-                // create new instance
-                objectTree.addObject(objectName, constructorField.getConstructor(),objs);
+                else {
+                    // collect arguments
+                    Object[] objs = new Object[tableModel.getRowCount()];
+                    for (int i = 0; i < objs.length; i++) {
+                        objs[i] = tableModel.getValueAt(i, 1);
+                    }
+
+                    // create new instance
+                    objectTree.addObject(objectName, constructor,objs);
+                }
             }
 
         }
@@ -287,9 +304,5 @@ public class ControlPanel extends JPanel implements ActionListener{
 
             objectTree.execMethod("hoge", method, objs);
         }
-
-
     }
-    
-    
 }

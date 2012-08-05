@@ -32,6 +32,7 @@ public class ArrayUtilityTest {
 
         obj = Array.newInstance(Object.class, new int[]{4,4,5,2,4,2,5,12,1,4,32});
         assertEquals(11, ArrayUtility.getDim(obj));
+
     }
     
     @Test

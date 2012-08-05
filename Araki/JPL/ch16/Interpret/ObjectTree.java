@@ -225,18 +225,9 @@ public class ObjectTree extends JPanel implements ActionListener{
         if (constructor != null && objectName != null && !objectName.equals("") && type != null && dims != null) {
             Object obj;
             try {
-                obj = constructor.newInstance(type, dims);
+                obj = Array.newInstance(type, dims);
                 createObjectTree(obj, objectName);
             } catch (IllegalArgumentException e) {
-                Console.err.println(e);
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                Console.err.println(e);
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                Console.err.println(e);
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
                 Console.err.println(e);
                 e.printStackTrace();
             }
@@ -307,7 +298,7 @@ public class ObjectTree extends JPanel implements ActionListener{
         super.setPreferredSize(arg0);
     }
     
-    private DefaultMutableTreeNode getObjectNode(DefaultMutableTreeNode node) {
+    public static DefaultMutableTreeNode getObjectNode(DefaultMutableTreeNode node) {
         if (node == null || node.getParent() == null) {
             return null;
         }
