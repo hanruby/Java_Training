@@ -160,6 +160,10 @@ public class ObjectPanel extends JPanel implements ActionListener{
     public void changeFieldValue(Field field, String value) {
 
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (node == null || node.getParent() == null) {
+            return;
+        }
+        
         DefaultMutableTreeNode root = getObjectNode(node);
         Object obj = root.getNextNode().getUserObject();
         

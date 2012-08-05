@@ -48,7 +48,7 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         this.obj = obj;
         this.field = field;
         
-        this.panel.removeAll();
+        removeContents();
         
         this.field.setAccessible(true);
         objectField.setText((String) this.obj);
@@ -66,8 +66,15 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         this.updateUI();
     }
     
+    
+    
     public void addObject() {
         
+    }
+    
+    private void removeContents() {
+        this.panel.removeAll();
+        this.updateUI();
     }
    
 
@@ -77,8 +84,9 @@ public class ObjectPropertiesPanel extends JPanel implements ActionListener{
         String action = e.getActionCommand();
 
         if (action.equals("Change")) {
-
+            // Modify the object of Tree
             objectPanel.changeFieldValue(field, valueField.getText());
+            removeContents();
         }
 
     }
