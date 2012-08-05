@@ -48,4 +48,14 @@ public class ArrayUtility {
         
         return dim;
     }
+    
+    public static int[] parseDimensionString(String str) {
+        String[] strs = str.split("x");
+        int[] values = new int[strs.length];
+        
+        for (int i = 0; i < values.length; i++) {
+            values[i] = Integer.valueOf(strs[i]);
+        }
+        return values;
+    }
 }

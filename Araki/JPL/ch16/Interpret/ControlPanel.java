@@ -275,7 +275,15 @@ public class ControlPanel extends JPanel implements ActionListener{
                 // 引数を持ってない場合
                 if (clss.length == 0) {
                     if (!dimsField.getText().equals("")) {
-                        objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), new int[]{2,2});
+                        int[] dims = null;
+                        try {
+                            dims = ArrayUtility.parseDimensionString(dimsField.getText());
+                        }
+                        catch (Exception e1){
+                            Console.err.println(e1);
+                            e1.printStackTrace();
+                        }
+                        objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), dims);
                     }
                     else {
                         objectTree.addObject(objectName, constructor,null);
@@ -305,4 +313,8 @@ public class ControlPanel extends JPanel implements ActionListener{
             objectTree.execMethod("hoge", method, objs);
         }
     }
+    
+
 }
+
+

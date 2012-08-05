@@ -50,4 +50,25 @@ public class ArrayUtilityTest {
         assertEquals(12.2f, Array.get(array, 0));
         assertEquals(4.2f, Array.get(array, 3));
     }
+    
+    @Test
+    public void testPerser() throws Exception {
+        {
+            int[] result = ArrayUtility.parseDimensionString("1x2x3x4");
+            int[] expected = {1,2,3,4};
+
+            for (int i = 0; i < expected.length; i++) {
+                assertEquals(expected[i], result[i]);
+            }
+        }
+        {
+            int[] result = ArrayUtility.parseDimensionString("1x2x3x");
+            int[] expected = {1,2,3};
+
+            for (int i = 0; i < expected.length; i++) {
+                assertEquals(expected[i], result[i]);
+            }
+        }
+
+    }
 }
