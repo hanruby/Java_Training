@@ -23,17 +23,19 @@ public class ControlPanel extends JPanel implements ActionListener{
     private JTextField objectField;
     private JLabel typeField;
     private JTextField valueField;
+    private ObjectField objField;
+    
     private JButton changeButton;
     
     private Object obj;
     private Field field;
     
-    private ObjectTree objectPanel;
+    private ObjectTree objectTree;
     
-    ControlPanel(ObjectTree objectPanel) {
+    ControlPanel(ObjectTree objectTree) {
         super();
         
-        this.objectPanel = objectPanel;
+        this.objectTree = objectTree;
         panel = new JPanel();
 
         objectField = new JTextField(10);
@@ -87,9 +89,12 @@ public class ControlPanel extends JPanel implements ActionListener{
         JButton deleteButton = new JButton("-");
         deleteButton.addActionListener(this);
         deleteButton.setActionCommand("Delete");
+        
+        objField = new ObjectField(20);
 
         panel.add(objectName);
         panel.add(constructorField);
+        panel.add(objField);
         panel.add(addButton);
         panel.add(deleteButton);
 
@@ -110,8 +115,16 @@ public class ControlPanel extends JPanel implements ActionListener{
 
         if (action.equals("Change")) {
             // Modify the object of Tree
-            objectPanel.changeFieldValue(field, valueField.getText());
+            objectTree.changeFieldValue(field, valueField.getText());
             removeContents();
+        }
+        else if (action.equals("Add")) {
+            String constructorName = constructorField.getText();
+            String objectName = this.objectName.getText();
+            if (!constructorName.equals("") && !objectName.equals("")) {
+                objectTree.addObject(objectName, constructorField.getConstructor());
+            }
+
         }
 
     }

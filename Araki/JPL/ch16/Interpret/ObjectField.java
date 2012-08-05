@@ -8,21 +8,20 @@ import java.lang.reflect.Constructor;
 import javax.swing.JTextField;
 import javax.swing.TransferHandler;
 
-class ConstructorField extends JTextField {
+public class ObjectField extends JTextField {
 
     private static final long serialVersionUID = 2552391809039249611L;
 
     private Constructor<?> constructor;
 
-    public ConstructorField(int col) {
+    public ObjectField(int col) {
         super(col);
-        this.setEditable(false);
         
         // ドロップされたとき
         this.setTransferHandler(new TransferHandler(){
 
-            private static final long serialVersionUID = 1156812525274063158L;
-
+            private static final long serialVersionUID = 496673230072108468L;
+            
             public final DataFlavor localObjectFlavor = new DataFlavor (
                     Constructor.class, "This is Constructor.");
 
