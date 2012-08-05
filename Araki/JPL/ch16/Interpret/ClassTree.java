@@ -85,7 +85,7 @@ public class ClassTree extends JPanel implements ActionListener{
             }
         };
         tree.addMouseListener(ml);
-        tree.setTransferHandler(new ObjectTransfer());
+        tree.setTransferHandler(new ConstructorTransfer());
     }
     
 
@@ -160,7 +160,7 @@ public class ClassTree extends JPanel implements ActionListener{
     }
 }
 
-class ObjectTransfer extends TransferHandler {
+class ConstructorTransfer extends TransferHandler {
 
     private static final long serialVersionUID = -1426178157203230501L;
 
