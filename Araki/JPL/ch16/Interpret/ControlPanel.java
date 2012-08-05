@@ -4,9 +4,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -218,6 +215,7 @@ public class ControlPanel extends JPanel implements ActionListener{
                     objs[i] = tableModel.getValueAt(i, 1);
                 }
                 
+                // create new instance
                 objectTree.addObject(objectName, constructorField.getConstructor(),objs);
             }
 
