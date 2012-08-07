@@ -39,26 +39,26 @@ public class InterpretGUI extends JFrame{
         classTree.setPropertiesPanel(controlPanel);
         objectTree.setPropertiesPanel(controlPanel,subPanel);
         
-        JScrollPane consolePanel = new JScrollPane(console, 
+        JScrollPane consoleScrollPanel = new JScrollPane(console, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        JScrollPane scrollTextPanel = new JScrollPane(controlPanel, 
+        JScrollPane controlScrollPanel = new JScrollPane(controlPanel, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        consolePanel.setPreferredSize(new Dimension(200, 360));
+        consoleScrollPanel.setPreferredSize(new Dimension(200, 360));
         classTree.setPreferredSize(new Dimension(400, 360));
         objectTree.setPreferredSize(new Dimension(400, 360));
-        scrollTextPanel.setPreferredSize(new Dimension(600, 200));
-        subPanel.setPreferredSize(new Dimension(800, 200));
+        controlScrollPanel.setPreferredSize(new Dimension(600, 200));
+        subPanel.setPreferredSize(new Dimension(400, 200));
         
         
-        viewerPanel.add(consolePanel);
+        viewerPanel.add(consoleScrollPanel);
         viewerPanel.add(classTree);
         viewerPanel.add(objectTree);
 
-        operationPanel.add(scrollTextPanel);
+        operationPanel.add(controlScrollPanel);
         operationPanel.add(subPanel);
 
         Container contentPane = getContentPane();

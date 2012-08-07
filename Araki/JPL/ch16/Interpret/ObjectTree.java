@@ -111,12 +111,6 @@ public class ObjectTree extends JPanel implements ActionListener{
                             
                             createMethodTree(node, obj);
                             tree.updateUI();
-                            //FieldMethodTree fmtree = new FieldMethodTree(obj);
-                            
-                            //subPanel.removeAll();
-                            //subPanel.add(fmtree);
-                            //subPanel.updateUI();
-                            
                         }
                     }
                 }
