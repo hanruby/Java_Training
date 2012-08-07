@@ -21,7 +21,6 @@ public class ObjectPanel extends JPanel {
     
     public ObjectPanel(Object obj) {
         array = obj;
-
         
         base = new JPanel();
         JScrollPane tablePanel = new JScrollPane(base, 
@@ -72,7 +71,7 @@ public class ObjectPanel extends JPanel {
             int column = Array.getLength(line);
             
             for (int c = 0; c < column; c++) {
-                Array.set(line, c, ObjectUtility.convertObject(array.getClass().getComponentType(), tableModel.getValueAt(r, c).toString()));
+                Array.set(line, c, ObjectUtility.convertObject(array.getClass().getComponentType(), (String)tableModel.getValueAt(r, c)));
             }
         }
         drawArray(array);
