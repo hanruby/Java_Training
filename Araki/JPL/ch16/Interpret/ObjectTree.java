@@ -101,7 +101,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             System.out.println("Selected node is Array");
                             
                             ObjectPanel op = new ObjectPanel(obj);
-                            op.setNode(node);
+                            op.setObjectTree(tree);
                             
                             subPanel.removeAll();
                             subPanel.add(op);
@@ -275,6 +275,10 @@ public class ObjectTree extends JPanel implements ActionListener{
                 createObjectTree(ret, objectName);
             }
         }            
+    }
+    
+    public void updateTree() {
+        tree.updateUI();
     }
 
     @Override

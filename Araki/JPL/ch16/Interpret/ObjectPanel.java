@@ -2,12 +2,14 @@ package ch16.Interpret;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.lang.reflect.Array;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -20,7 +22,7 @@ public class ObjectPanel extends JPanel {
     
     private Object array;
 
-    private DefaultMutableTreeNode node;
+    private JTree tree;
     
     public ObjectPanel(Object obj) {
         base = new JPanel();
@@ -37,6 +39,7 @@ public class ObjectPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateArray();
+                drawArray(array);
             }
         });
 
@@ -78,14 +81,19 @@ public class ObjectPanel extends JPanel {
                 Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c)));
             }
         }
-        drawArray(array);
     }
     
     public Object getArrayObject() {
         return array;
     }
+
+    public void setObjectTree(JTree tree) {
+        this.tree = tree;
+    }
     
-    public void setNode(DefaultMutableTreeNode node) {
-        this.node = node;
+    private void updateTree() {
+        if (tree != null) {
+            tree.updateUI();
+        }
     }
 }
