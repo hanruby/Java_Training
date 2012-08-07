@@ -101,6 +101,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             System.out.println("Selected node is Array");
                             
                             ObjectPanel op = new ObjectPanel(obj);
+                            op.setNode(node);
                             
                             subPanel.removeAll();
                             subPanel.add(op);
