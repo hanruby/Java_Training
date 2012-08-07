@@ -20,7 +20,7 @@ import javax.swing.TransferHandler;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class ControlPanel extends JPanel implements ActionListener{
+public class ControlPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1406985790901319936L;
 
@@ -64,7 +64,7 @@ public class ControlPanel extends JPanel implements ActionListener{
 
         add(panel);
 
-        transferHandler = new TransferHandler(){
+        transferHandler = new TransferHandler() {
 
             private static final long serialVersionUID = 496673230072108468L;
 
@@ -158,7 +158,6 @@ public class ControlPanel extends JPanel implements ActionListener{
     
     public void addObject(Constructor<?> constructor) {
         this.constructor = constructor;
-        System.out.println("hgge" + constructor.getDeclaringClass());
         removeContents();
         
         // create control contents
