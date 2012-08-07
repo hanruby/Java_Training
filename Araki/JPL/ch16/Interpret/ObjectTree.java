@@ -96,8 +96,10 @@ public class ObjectTree extends JPanel implements ActionListener{
                             controlPanal.execMethod(getObjectNode(node).getUserObject(), method);
                         }
                         // Array
-                        else if (obj != null && obj.getClass().isArray()) {
+                        else if (obj != null && obj.getClass().isArray() && ArrayUtility.getDim(obj) == 2) {
+                                                        
                             System.out.println("Selected node is Array");
+                            
                             ObjectPanel op = new ObjectPanel(obj);
                             subPanel.removeAll();
                             subPanel.add(op);

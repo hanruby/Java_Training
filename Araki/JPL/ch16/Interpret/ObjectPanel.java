@@ -19,7 +19,7 @@ public class ObjectPanel extends JPanel {
     
     private Object array;
     
-    public ObjectPanel (Object obj) {
+    public ObjectPanel(Object obj) {
         array = obj;
 
         
@@ -53,11 +53,8 @@ public class ObjectPanel extends JPanel {
             tableModel = new DefaultTableModel(0,colmun);       
             JTable table = new JTable(tableModel);
         
-            
-            Object[] arr = new Object[colmun];
-            
             for (int row = 0; row < colmun; row++) {
-                arr = (Object[]) Array.get(array,row);
+                Object[] arr = (Object[]) Array.get(array,row);
                 tableModel.addRow(arr);
             }
             base.add(table);
@@ -75,7 +72,7 @@ public class ObjectPanel extends JPanel {
             int column = Array.getLength(line);
             
             for (int c = 0; c < column; c++) {
-                Array.set(line, c, tableModel.getValueAt(r, c));
+                Array.set(line, c, ObjectUtility.convertObject(array.getClass().getComponentType(), tableModel.getValueAt(r, c).toString()));
             }
         }
         drawArray(array);

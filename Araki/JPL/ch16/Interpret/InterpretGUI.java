@@ -71,7 +71,7 @@ public class InterpretGUI extends JFrame{
         
         objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
         objectTree.createObjectTree("string", "string object");
-        String[] hoge = {"aaa","bbb"};
+        String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
         objectTree.createObjectTree(hoge, "string array");
         objectTree.createObjectTree(new Integer[4][3], "null array");
         pack();
