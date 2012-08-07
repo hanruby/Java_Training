@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,12 +20,17 @@ public class ObjectPanel extends JPanel {
     private Object array;
     
     public ObjectPanel (Object obj) {
-        base = new JPanel();
+        array = obj;
 
+        
+        base = new JPanel();
+        JScrollPane tablePanel = new JScrollPane(base, 
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
         drawArray(obj);
-        
-        add(base);
-        
+        add(tablePanel);
+
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
             
@@ -38,8 +44,6 @@ public class ObjectPanel extends JPanel {
     }
     
     public void drawArray(Object obj) {
-        array = obj;
-
         
         if (array.getClass().isArray()) {
             base.removeAll();
@@ -57,6 +61,7 @@ public class ObjectPanel extends JPanel {
                 tableModel.addRow(arr);
             }
             base.add(table);
+            updateUI();
         }
     }
     
@@ -64,21 +69,16 @@ public class ObjectPanel extends JPanel {
 
         int rowl = Array.getLength(array);
         
-        
         for (int r = 0; r < rowl; r++) {
             
             Object line = Array.get(array,r);
             int column = Array.getLength(line);
             
             for (int c = 0; c < column; c++) {
-                System.out.println(tableModel.getValueAt(r, c));
                 Array.set(line, c, tableModel.getValueAt(r, c));
             }
         }
-        
         drawArray(array);
-        
-        updateUI();
     }
     
     public Object getArrayObject() {

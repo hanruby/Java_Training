@@ -14,6 +14,7 @@ import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -93,6 +94,14 @@ public class ObjectTree extends JPanel implements ActionListener{
                             System.out.println("Selected node is Method: " + method);
                             
                             controlPanal.execMethod(getObjectNode(node).getUserObject(), method);
+                        }
+                        // Array
+                        else if (obj != null && obj.getClass().isArray()) {
+                            System.out.println("Selected node is Array");
+                            ObjectPanel op = new ObjectPanel(obj);
+                            subPanel.removeAll();
+                            subPanel.add(op);
+                            subPanel.updateUI();
                         }
                     }
                 }
@@ -310,8 +319,11 @@ public class ObjectTree extends JPanel implements ActionListener{
     }
         
     private ControlPanel controlPanal;
-    public void setPropertiesPanel(ControlPanel panel) {
+    private JPanel subPanel;
+    
+    public void setPropertiesPanel(ControlPanel panel, JPanel subPanel) {
         controlPanal = panel;
+        this.subPanel = subPanel;
     }
 }
 

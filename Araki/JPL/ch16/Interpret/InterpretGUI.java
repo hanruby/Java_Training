@@ -27,6 +27,8 @@ public class InterpretGUI extends JFrame{
         
         JPanel viewerPanel = new JPanel();
         JPanel operationPanel = new JPanel();
+
+        JPanel subPanel = new JPanel();
     
         textArea = new JTextArea();
         textArea.setLineWrap(true);
@@ -35,7 +37,7 @@ public class InterpretGUI extends JFrame{
         ClassTree classTree = new ClassTree();
         ControlPanel controlPanel = new ControlPanel(objectTree);
         classTree.setPropertiesPanel(controlPanel);
-        objectTree.setPropertiesPanel(controlPanel);
+        objectTree.setPropertiesPanel(controlPanel,subPanel);
         
         JScrollPane consolePanel = new JScrollPane(console, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
@@ -47,8 +49,9 @@ public class InterpretGUI extends JFrame{
 
         consolePanel.setPreferredSize(new Dimension(200, 360));
         classTree.setPreferredSize(new Dimension(400, 360));
-        objectTree.setPreferredSize(new Dimension(800, 360));
-        scrollTextPanel.setPreferredSize(new Dimension(1000, 200));
+        objectTree.setPreferredSize(new Dimension(400, 360));
+        scrollTextPanel.setPreferredSize(new Dimension(600, 200));
+        subPanel.setPreferredSize(new Dimension(400, 200));
         
         
         viewerPanel.add(consolePanel);
@@ -56,6 +59,7 @@ public class InterpretGUI extends JFrame{
         viewerPanel.add(objectTree);
 
         operationPanel.add(scrollTextPanel);
+        operationPanel.add(subPanel);
 
         Container contentPane = getContentPane();
         contentPane.add(viewerPanel, BorderLayout.WEST);
