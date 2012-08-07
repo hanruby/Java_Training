@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ObjectPanel extends JPanel {
 
@@ -18,10 +19,10 @@ public class ObjectPanel extends JPanel {
     private DefaultTableModel tableModel;
     
     private Object array;
+
+    private DefaultMutableTreeNode node;
     
     public ObjectPanel(Object obj) {
-        array = obj;
-        
         base = new JPanel();
         JScrollPane tablePanel = new JScrollPane(base, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
@@ -38,13 +39,16 @@ public class ObjectPanel extends JPanel {
                 updateArray();
             }
         });
-        
+
         add(ok);
+        updateUI();
     }
     
     public void drawArray(Object obj) {
+        array = obj;
         
         if (array.getClass().isArray()) {
+        
             base.removeAll();
 
             int colmun = Array.getLength(array);
@@ -64,14 +68,14 @@ public class ObjectPanel extends JPanel {
     public void updateArray() {
 
         int rowl = Array.getLength(array);
-        
+                
         for (int r = 0; r < rowl; r++) {
             
             Object line = Array.get(array,r);
             int column = Array.getLength(line);
             
             for (int c = 0; c < column; c++) {
-                Array.set(line, c, ObjectUtility.convertObject(array.getClass().getComponentType(), (String)tableModel.getValueAt(r, c)));
+                System.out.println(ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c)));
             }
         }
         drawArray(array);
@@ -79,5 +83,9 @@ public class ObjectPanel extends JPanel {
     
     public Object getArrayObject() {
         return array;
+    }
+    
+    public void setNode(DefaultMutableTreeNode node) {
+        this.node = node;
     }
 }
