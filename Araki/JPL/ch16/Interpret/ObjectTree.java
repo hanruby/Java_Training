@@ -14,7 +14,6 @@ import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -107,6 +106,18 @@ public class ObjectTree extends JPanel implements ActionListener{
                             subPanel.add(op);
                             subPanel.updateUI();
                         }
+                        else if (obj != null && obj.getClass().isArray() == false && node.isLeaf()) {
+                            System.out.println("object");
+                            
+                            createMethodTree(node, obj);
+                            tree.updateUI();
+                            //FieldMethodTree fmtree = new FieldMethodTree(obj);
+                            
+                            //subPanel.removeAll();
+                            //subPanel.add(fmtree);
+                            //subPanel.updateUI();
+                            
+                        }
                     }
                 }
                 super.mouseClicked(e);
@@ -152,55 +163,55 @@ public class ObjectTree extends JPanel implements ActionListener{
             // Create object node
             DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
 
-            // Create object field tree
-            DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
-            Field[] fields = obj.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
-                fieldTree.add(f);
-                field.setAccessible(true);
-                Object value = null;
-                try {
-                    value = field.get(obj);
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                f.add(new DefaultMutableTreeNode(value));
-            }
-
-            // Create object method tree
-            DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
-
-            Method[] methods = obj.getClass().getDeclaredMethods();
-            for (Method method : methods) {
-                method.setAccessible(true);
-                DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
-                methodTree.add(m);
-            }
-
-            // Create object 
-
-
-            root.add(objectTree);
-            root.add(fieldTree);
-            root.add(methodTree);
         }
         classTree.add(root);
         model.reload();
     }
     
+    public void createMethodTree(DefaultMutableTreeNode root, Object obj) {
+        // Create object field tree
+        DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
+            fieldTree.add(f);
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(obj);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            f.add(new DefaultMutableTreeNode(value));
+        }
+
+        // Create object method tree
+        DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
+
+        Method[] methods = obj.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            method.setAccessible(true);
+            DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
+            methodTree.add(m);
+        }
+
+        // Create object 
+        root.add(fieldTree);
+        root.add(methodTree);
+    }
+
     public void changeFieldValue(Field field, String value) {
 
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         if (node == null || node.getParent() == null) {
             return;
         }
-        
+
         DefaultMutableTreeNode root = getObjectNode(node);
         Object obj = root.getNextNode().getUserObject();
-        
+
         field.setAccessible(true);
         try {
             Class<?> type = field.get(obj).getClass();
@@ -210,7 +221,7 @@ public class ObjectTree extends JPanel implements ActionListener{
         } catch (IllegalAccessException e) {
             Console.err.println(e);
         }
-        
+
         createObjectTree(obj, root.getUserObject().toString());
     }
     
