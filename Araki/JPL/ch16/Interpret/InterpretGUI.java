@@ -13,8 +13,7 @@ public class InterpretGUI extends JFrame{
     private static final long serialVersionUID = 1L;
 
     public static void main(String[] args) {
-        InterpretGUI interpret = new InterpretGUI("Interpret");
-        interpret.setVisible(true);
+        new InterpretGUI("Interpret");
     }
     
     private JTextArea textArea;
@@ -71,10 +70,13 @@ public class InterpretGUI extends JFrame{
         
         objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
         objectTree.createObjectTree("string", "string object");
+        objectTree.createObjectTree(true, "true");
         String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
         objectTree.createObjectTree(hoge, "string array");
         objectTree.createObjectTree(new Integer[4][3], "null array");
         pack();
+
+        setVisible(true);
     }
 
 }

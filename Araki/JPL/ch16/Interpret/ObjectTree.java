@@ -112,7 +112,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             subPanel.updateUI();
                         }
                         else if (obj != null && obj.getClass().isArray() == false && node.isLeaf()) {
-                            System.out.println("object");
+                            System.out.println("Selected node is object");
                             
                             createMethodTree(node, obj);
                             tree.updateUI();
