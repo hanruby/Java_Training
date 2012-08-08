@@ -9,6 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.activation.DataHandler;
 import javax.swing.BoxLayout;
@@ -156,36 +161,78 @@ public class ObjectTree extends JPanel implements ActionListener{
         else {
             // Create object node
             DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
-
+            
+            root.add(objectTree);
         }
         classTree.add(root);
         model.reload();
     }
     
     public void createMethodTree(DefaultMutableTreeNode root, Object obj) {
+
+        Type type = obj.getClass().getGenericSuperclass();
+        ArrayList<Class<?>> classArr = new ArrayList<Class<?>>(); 
+        
+        classArr.add(obj.getClass());
+        
+        while(type != null) {
+
+            Class<?> cls = null;
+            if (type instanceof Class<?>) {
+                cls = (Class<?>) type;
+            }
+            else if (type instanceof ParameterizedType) {
+                cls = (Class<?>) ((ParameterizedType)type).getRawType();
+            }
+            else {
+                throw new Error("Unexpected non-class type");
+            }
+
+            classArr.add(cls);
+
+            type = cls.getGenericSuperclass();
+        }
+        
         // Create object field tree
         DefaultMutableTreeNode fieldTree = new DefaultMutableTreeNode("Field");
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
-            fieldTree.add(f);
-            field.setAccessible(true);
-            Object value = null;
-            try {
-                value = field.get(obj);
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+        for (Class<?> cls : classArr) {
+            Field[] fields = cls.getDeclaredFields();    
+            for (Field field : fields) {
+                DefaultMutableTreeNode f = new DefaultMutableTreeNode(field);
+                fieldTree.add(f);
+                field.setAccessible(true);
+                Object value = null;
+                try {
+                    value = field.get(obj);
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                f.add(new DefaultMutableTreeNode(value));
             }
-            f.add(new DefaultMutableTreeNode(value));
         }
 
         // Create object method tree
         DefaultMutableTreeNode methodTree = new DefaultMutableTreeNode("Method");
-
-        Method[] methods = obj.getClass().getDeclaredMethods();
-        for (Method method : methods) {
+        Set<Method> methodArr = new HashSet<Method>();
+        for (Class<?> cls : classArr) {
+            Method[] methods = cls.getDeclaredMethods();
+            for (Method method : methods) {
+                methodArr.add(method);
+            }
+        }
+        // Sort
+        TreeSet<Method> methodSortedArr =  new TreeSet<Method>(new Comparator<Method>() {
+            @Override
+            public int compare(Method m1, Method m2) {
+                
+                return m1.toString().compareTo(m2.toString());
+            }
+        }); 
+        methodSortedArr.addAll(methodArr);
+        // Add tree
+        for (Method method : methodSortedArr) {
             method.setAccessible(true);
             DefaultMutableTreeNode m = new DefaultMutableTreeNode(method);
             methodTree.add(m);
