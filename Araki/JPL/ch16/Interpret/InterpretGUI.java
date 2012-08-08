@@ -67,10 +67,11 @@ public class InterpretGUI extends JFrame{
         classTree.createClassTree(java.lang.Object.class);
         classTree.createClassTree(java.util.HashMap.class);
         classTree.createClassTree(ch16.Interpret.InterpretGUI.class);
+        classTree.createClassTree(java.awt.Frame.class);
         
         objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
         objectTree.createObjectTree("string", "string object");
-        objectTree.createObjectTree(true, "true");
+        objectTree.createObjectTree(new Boolean(true), "true");
         String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
         objectTree.createObjectTree(hoge, "string array");
         objectTree.createObjectTree(new Integer[4][3], "null array");
