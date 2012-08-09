@@ -102,6 +102,7 @@ public class TypeDescTest {
 
 
 class TestClass {
+    @SuppressWarnings("unused")
     private int num;
     
     public void methodA() {}

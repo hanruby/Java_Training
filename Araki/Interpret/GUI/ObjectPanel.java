@@ -2,16 +2,13 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.lang.reflect.Array;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ObjectPanel extends JPanel {
 
@@ -22,8 +19,6 @@ public class ObjectPanel extends JPanel {
     
     private Object array;
 
-    private JTree tree;
-    
     public ObjectPanel(Object obj) {
         base = new JPanel();
         JScrollPane tablePanel = new JScrollPane(base, 
@@ -85,15 +80,5 @@ public class ObjectPanel extends JPanel {
     
     public Object getArrayObject() {
         return array;
-    }
-
-    public void setObjectTree(JTree tree) {
-        this.tree = tree;
-    }
-    
-    private void updateTree() {
-        if (tree != null) {
-            tree.updateUI();
-        }
     }
 }

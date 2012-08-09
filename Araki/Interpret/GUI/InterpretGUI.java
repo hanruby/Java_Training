@@ -19,6 +19,7 @@ public class InterpretGUI extends JFrame{
     private JTextArea textArea;
     private Console console = new Console();
     
+    @SuppressWarnings("rawtypes")
     public InterpretGUI(String title) {
         setTitle(title);
     

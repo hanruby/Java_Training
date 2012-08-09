@@ -12,8 +12,6 @@ import java.util.Set;
 public class ClassContents {
     
     private static Set<String> members = new HashSet<String>();
-    private static Set<String> constructors = new HashSet<String>();
-    private static Set<String> methods = new HashSet<String>();
     
     public static void main(String[] args) {
         try {
