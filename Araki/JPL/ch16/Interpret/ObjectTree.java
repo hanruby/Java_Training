@@ -405,7 +405,7 @@ class ObjectTransfer extends TransferHandler {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         if (node != null) {
             // Accept object.
-            DataHandler dh = new DataHandler(node, localObjectFlavor.getMimeType());
+            DataHandler dh = new DataHandler(node.clone(), localObjectFlavor.getMimeType());
             return dh;
         }
         return null;
