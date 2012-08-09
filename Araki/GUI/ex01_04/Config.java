@@ -28,14 +28,14 @@ public class Config implements Cloneable {
         prefs = Preferences.userNodeForPackage(this.getClass());
         
         // Set preferenses
-        clockFormat = new SimpleDateFormat(prefs.get("clockFormat", "yyyy/MM/dd HH:mm:ss"));
-        simpleClockFormat = new SimpleDateFormat(prefs.get("simpleClockFormat", "HH:mm:ss"));
-        fontsize = prefs.getInt("fontsize", 20);
-        fontname =  prefs.get("fontname", "Consolas");
-        backgroundColor = new Color(prefs.getInt("backgroundColor", Color.GRAY.getRGB()));
-        fontColor = new Color(prefs.getInt("fontColor", Color.BLACK.getRGB()));
+        clockFormat = new SimpleDateFormat(prefs.get("a2.clockFormat", "yyyy/MM/dd HH:mm:ss"));
+        simpleClockFormat = new SimpleDateFormat(prefs.get("a2.simpleClockFormat", "HH:mm:ss"));
+        fontsize = prefs.getInt("a2.fontsize", 20);
+        fontname =  prefs.get("a2.fontname", "Consolas");
+        backgroundColor = new Color(prefs.getInt("a2.backgroundColor", Color.GRAY.getRGB()));
+        fontColor = new Color(prefs.getInt("a2.fontColor", Color.BLACK.getRGB()));
 
-        clockPos = new Point(prefs.getInt("clockPos_x", 0), prefs.getInt("clockPos_y", 0));
+        clockPos = new Point(prefs.getInt("a2.clockPos_x", 0), prefs.getInt("a2.clockPos_y", 0));
         margin = new Insets(10, 10, 10, 10);
     }
 
@@ -63,12 +63,12 @@ public class Config implements Cloneable {
         // Save preferences
         //clockFormat
         //simpleClockFormat
-        prefs.putInt("fontsize", fontsize);
-        prefs.put("fontname", fontname);
-        prefs.putInt("backgroundColor", backgroundColor.getRGB());
-        prefs.putInt("fontColor", fontColor.getRGB());
-        prefs.putInt("clockPos_x", clockPos.x);
-        prefs.putInt("clockPos_y", clockPos.y);
+        prefs.putInt("a2.fontsize", fontsize);
+        prefs.put("a2.fontname", fontname);
+        prefs.putInt("a2.backgroundColor", backgroundColor.getRGB());
+        prefs.putInt("a2.fontColor", fontColor.getRGB());
+        prefs.putInt("a2.clockPos_x", clockPos.x);
+        prefs.putInt("a2.clockPos_y", clockPos.y);
     }
     
     public String clock(Calendar cal) {
