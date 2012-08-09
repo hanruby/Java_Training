@@ -309,7 +309,7 @@ public class ControlPanel extends JPanel implements ActionListener {
                     objs[i] = tableModel.getValueAt(i, 1);
                 }
 
-            objectTree.execMethod("hoge", method, objs);
+            objectTree.execMethod("result", method, objs);
         }
     }
     
