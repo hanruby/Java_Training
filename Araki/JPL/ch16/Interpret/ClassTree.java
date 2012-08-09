@@ -100,15 +100,11 @@ public class ClassTree extends JPanel implements ActionListener{
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
 
-        DefaultMutableTreeNode constructorTree = new DefaultMutableTreeNode("Constructor");
-
         Constructor<?>[] constructors = cls.getConstructors();
         for (Constructor<?> constructor : constructors) {
-            constructorTree.add(new DefaultMutableTreeNode(constructor));
+            root.add(new DefaultMutableTreeNode(constructor));
         }
                 
-        root.add(constructorTree);
-        
         classTree.add(root);
         model.reload();
     }
