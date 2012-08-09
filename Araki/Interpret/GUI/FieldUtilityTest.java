@@ -1,4 +1,4 @@
-package ch16.Interpret;
+package GUI;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ public class FieldUtilityTest {
 
     @Test
     public void test_printObjectField() throws Exception {
-        Object obj = ObjectUtility.createObject("ch16.Interpret.TestA");
+        Object obj = ObjectUtility.createObject("GUI.TestA");
         
         FieldUtility.printObjectFields(obj);
 

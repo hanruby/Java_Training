@@ -1,9 +1,9 @@
-new ch16.Interpret.TestA
+new GUI.TestA
 show field
 set privateInt 123
 show field
 
-new ch16.Interpret.TestMethod
+new GUI.TestMethod
 show method
 exec 0 abcd
 exit

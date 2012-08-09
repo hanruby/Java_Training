@@ -1,4 +1,4 @@
-package ch16.Interpret;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -66,7 +66,7 @@ public class InterpretGUI extends JFrame{
         
         classTree.createClassTree(java.lang.Object.class);
         classTree.createClassTree(java.util.HashMap.class);
-        classTree.createClassTree(ch16.Interpret.InterpretGUI.class);
+        classTree.createClassTree(GUI.InterpretGUI.class);
         classTree.createClassTree(java.awt.Frame.class);
         
         objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");

@@ -1,4 +1,4 @@
-package ch16.Interpret;
+package GUI;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
