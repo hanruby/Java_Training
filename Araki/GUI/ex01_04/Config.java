@@ -3,6 +3,7 @@ package ex01_04;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.Point;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +21,8 @@ public class Config implements Cloneable {
 
     private Color backgroundColor;
     private Color fontColor;
-    
+    private Point clockPos;
+
     public Config() {
         // Load user preferences
         prefs = Preferences.userNodeForPackage(this.getClass());
@@ -33,6 +35,7 @@ public class Config implements Cloneable {
         backgroundColor = new Color(prefs.getInt("backgroundColor", Color.GRAY.getRGB()));
         fontColor = new Color(prefs.getInt("fontColor", Color.BLACK.getRGB()));
 
+        clockPos = new Point(prefs.getInt("clockPos_x", 0), prefs.getInt("clockPos_y", 0));
         margin = new Insets(10, 10, 10, 10);
     }
 
@@ -44,6 +47,7 @@ public class Config implements Cloneable {
         this.backgroundColor = conf.backgroundColor;
         this.fontColor = conf.fontColor;
         this.margin = conf.margin;
+        this.clockPos = conf.clockPos;
     }
     
     @Override
@@ -63,6 +67,8 @@ public class Config implements Cloneable {
         prefs.put("fontname", fontname);
         prefs.putInt("backgroundColor", backgroundColor.getRGB());
         prefs.putInt("fontColor", fontColor.getRGB());
+        prefs.putInt("clockPos_x", clockPos.x);
+        prefs.putInt("clockPos_y", clockPos.y);
     }
     
     public String clock(Calendar cal) {
@@ -117,5 +123,13 @@ public class Config implements Cloneable {
     
     public Insets getMargin() {
         return this.margin;
+    }
+    
+    public Point getPosition() {
+        return clockPos;
+    }
+    
+    public void setPosition(Point pos) {
+        this.clockPos = pos;
     }
 }

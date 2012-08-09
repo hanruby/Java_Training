@@ -62,7 +62,10 @@ public class DigitalClock extends Window implements Runnable{
         ClockMouseListener mouseEvent = new ClockMouseListener(); 
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
-        
+
+        // set new window position
+        clock.setLocation(config.getPosition());
+
         setVisible(true);
     }
     
@@ -237,6 +240,7 @@ public class DigitalClock extends Window implements Runnable{
      * 終了処理
      */
     public void exitProcess() {
+        this.config.setPosition(clock.getLocation());
         this.config.savePref();
         System.exit (0);
     }
