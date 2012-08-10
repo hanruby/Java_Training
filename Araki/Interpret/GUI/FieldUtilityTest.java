@@ -40,6 +40,9 @@ public class FieldUtilityTest {
 
         FieldUtility.setField(obj, "privateString", "def");
         assertEquals("def", FieldUtility.getField(obj, "privateString"));
+
+        FieldUtility.setField(obj, "privateFinalShort", "12");
+        assertEquals((short)12, FieldUtility.getField(obj, "privateFinalShort"));
     }
 }
 
@@ -53,5 +56,6 @@ class TestA {
     private long privateLong = 10;
     private float privateFloat = 12.34f;
     private double privateDouble = 23.34;
+    private final short privateFinalShort = 10;
     private String privateString = "abc";
 }

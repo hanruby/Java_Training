@@ -64,18 +64,26 @@ public class InterpretGUI extends JFrame{
         Container contentPane = getContentPane();
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
+
         
+        //////////// demo /////////////
         classTree.createClassTree(java.lang.Object.class);
-        classTree.createClassTree(java.util.HashMap.class);
-        classTree.createClassTree(GUI.InterpretGUI.class);
+        //classTree.createClassTree(java.util.HashMap.class);
+        classTree.createClassTree(java.lang.Integer.class);
+        classTree.createClassTree(java.awt.Point.class);
         classTree.createClassTree(java.awt.Frame.class);
+        classTree.createClassTree(java.awt.Color.class);
+        classTree.createClassTree(GUI.InterpretGUI.class);
         
-        objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
-        objectTree.createObjectTree("string", "string object");
-        objectTree.createObjectTree(new Boolean(true), "true");
+        //objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
+        objectTree.createObjectTree("This is string!!!!", "String object");
+        objectTree.createObjectTree(new Boolean(true), "Boolean object");
         String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
-        objectTree.createObjectTree(hoge, "string array");
-        objectTree.createObjectTree(new Integer[4][3], "null array");
+        objectTree.createObjectTree(hoge, "String array object");
+        objectTree.createObjectTree(new GUI.TestA(), "TestA");
+        //objectTree.createObjectTree(new Integer[4][3], "null array");
+
+        
         pack();
 
         setVisible(true);

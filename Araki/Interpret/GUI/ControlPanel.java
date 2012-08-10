@@ -291,12 +291,22 @@ public class ControlPanel extends JPanel implements ActionListener {
                 else {
                     // collect arguments
                     Object[] objs = new Object[tableModel.getRowCount()];
-                    for (int i = 0; i < objs.length; i++) {
-                        objs[i] = tableModel.getValueAt(i, 1);
+                    if (tableModel.getValueAt(0, 1).getClass().equals(String.class)) {
+                        String args = "";
+                        for (int i = 0; i < objs.length; i++) {
+                            args += tableModel.getValueAt(i, 1).toString() + ",";
+                        }
+                        
+                        objectTree.addObjectFromString(objectName, constructor, args);
                     }
+                    else {
+                        for (int i = 0; i < objs.length; i++) {
+                            objs[i] = tableModel.getValueAt(i, 1);
+                        }
 
-                    // create new instance
-                    objectTree.addObject(objectName, constructor,objs);
+                        // create new instance
+                        objectTree.addObject(objectName, constructor,objs);
+                    }
                 }
             }
 
