@@ -23,13 +23,13 @@ public class EscapeSpecialCharacters {
      * @return
      */
     public static String escape(String str) {
-        String escapedStr = "";
+        StringBuilder escapedStr = new StringBuilder(str.length());
         
         for (int i = 0; i < str.length(); i++) {
-            escapedStr += escapeChar(str.charAt(i));
+            escapedStr.append(escapeChar(str.charAt(i)));
         }
         
-        return escapedStr;
+        return escapedStr.toString();
     }
     
     /**
