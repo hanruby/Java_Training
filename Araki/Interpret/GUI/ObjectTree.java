@@ -285,32 +285,6 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
     }
 
-    public void addObjectFromString(String objectName, Constructor<?> constructor, String strs) {
-        if (constructor != null && objectName != null && !objectName.equals("")) {
-            Object obj;
-            try {
-                // Create new instance!!
-                String[] values = strs.split(",");
-                Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
-                Object[] objs = ObjectUtility.convertObjects(types, values);
-                obj = constructor.newInstance(objs);
-                createObjectTree(obj, objectName);
-                model.reload();
-            } catch (IllegalArgumentException e1) {
-                Console.err.println(e1);
-            } catch (InstantiationException e1) {
-                Console.err.println(e1);
-            } catch (IllegalAccessException e1) {
-                Console.err.println(e1);
-            } catch (InvocationTargetException e1) {
-                Console.err.println(e1);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
-    
     public void addArrayObject(String objectName, Constructor<?> constructor, Class<?> type, int[] dims) {
         if (constructor != null && objectName != null && !objectName.equals("") && type != null && dims != null) {
             Object obj;
