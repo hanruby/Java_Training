@@ -43,20 +43,22 @@ public class ObjectPanel extends JPanel {
     }
     
     public void drawArray(Object obj) {
-        array = obj;
+        array = obj;            
         
         if (array.getClass().isArray()) {
         
             base.removeAll();
 
-            int colmun = Array.getLength(array);
+            int colmun = Array.getLength(Array.get(array,0));
+            int row = Array.getLength(array);
 
             tableModel = new DefaultTableModel(0,colmun);       
             JTable table = new JTable(tableModel);
         
-            for (int row = 0; row < colmun; row++) {
-                Object[] arr = (Object[]) Array.get(array,row);
-                tableModel.addRow(arr);
+            for (int r = 0; r < row; r++) {
+                Object line = Array.get(array,r);
+                Object[] l = ArrayUtility.castArray(line);
+                tableModel.addRow(l);
             }
             base.add(table);
             updateUI();
@@ -72,9 +74,9 @@ public class ObjectPanel extends JPanel {
             Object line = Array.get(array,r);
             int column = Array.getLength(line);
             for (int c = 0; c < column; c++) {
-                //Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c)));
-                //Array.set(line, c, ObjectUtility.convertObject(Arrays, (String)tableModel.getValueAt(r, c)));
-                Array.set(line, c, ObjectUtility.convertObject((Integer.class), (String)tableModel.getValueAt(r, c)));
+                //System.out.println(Array.get(line, c).getClass());
+                //Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c).toString()));
+                //Array.set(line, c, ObjectUtility.convertObject(Array.get(line, c).getClass(), (String)tableModel.getValueAt(r, c).toString()));
             }
         }
     }
