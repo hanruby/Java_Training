@@ -99,4 +99,13 @@ public class ArrayUtilityTest {
         }
     }
     
+    @Test
+    public void testCastArray() throws Exception {
+        String[] array = {"aaa", "bbb"};
+        Object[] objarr = ArrayUtility.castArray(array);
+
+        assertEquals(objarr[0].toString(), array[0]);
+        assertEquals(objarr[1].toString(), array[1]);
+    }
+    
 }

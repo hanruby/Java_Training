@@ -79,4 +79,25 @@ public class ArrayUtility {
         }
         return values;
     }
+    
+    public static Object[] castArray(Object array) {
+        
+        if (array == null) {
+            throw new NullPointerException(); 
+        }
+        
+        if (getDim(array) != 1) {
+            throw new IllegalArgumentException("array argument should be single array object.");
+        }
+        
+        int length = Array.getLength(array);
+        
+        Object[] objarr = new Object[length];
+
+        for (int i = 0; i < length; i++) {
+            objarr[i] = Array.get(array, i);
+        }
+        
+        return objarr;
+    }
 }
