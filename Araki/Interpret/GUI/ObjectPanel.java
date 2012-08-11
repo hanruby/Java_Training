@@ -74,9 +74,7 @@ public class ObjectPanel extends JPanel {
             Object line = Array.get(array,r);
             int column = Array.getLength(line);
             for (int c = 0; c < column; c++) {
-                //System.out.println(Array.get(line, c).getClass());
-                //Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c).toString()));
-                //Array.set(line, c, ObjectUtility.convertObject(Array.get(line, c).getClass(), (String)tableModel.getValueAt(r, c).toString()));
+                Array.set(line, c, ObjectUtility.convertObject(Array.get(line, c).getClass(), (String)tableModel.getValueAt(r, c).toString()));
             }
         }
     }
