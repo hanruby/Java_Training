@@ -1,6 +1,8 @@
 package GUI;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ArrayUtility {
     
@@ -12,6 +14,25 @@ public class ArrayUtility {
         return arr;
     }
 
+    public static void initArray(Object array, Constructor<?> constructor, Object... initargs) throws ArrayIndexOutOfBoundsException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        if (array == null) {
+            return;
+        }
+
+        int length = Array.getLength(array);
+
+        if ( getDim(array) >= 2 ) {
+            for (int i = 0; i < length; i++) {
+                initArray(Array.get(array, i), constructor, initargs);
+            }
+        }
+        else {
+            for (int i = 0; i < length; i++) {
+                Array.set(array, i, constructor.newInstance(initargs));
+            }
+        }
+    }
+    
     public static void setArrayContents(Object array, String contents) {
 
         String[] values = contents.split(",");

@@ -285,11 +285,26 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
     }
 
-    public void addArrayObject(String objectName, Constructor<?> constructor, Class<?> type, int[] dims) {
+    public void addArrayObject(String objectName, Constructor<?> constructor, Class<?> type, int[] dims, Object... initargs) {
         if (constructor != null && objectName != null && !objectName.equals("") && type != null && dims != null) {
             Object obj;
             try {
                 obj = Array.newInstance(type, dims);
+                try {
+                    ArrayUtility.initArray(obj, constructor, initargs);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 createObjectTree(obj, objectName);
             } catch (IllegalArgumentException e) {
                 Console.err.println(e);

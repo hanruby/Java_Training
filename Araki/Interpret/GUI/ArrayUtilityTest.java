@@ -69,6 +69,34 @@ public class ArrayUtilityTest {
                 assertEquals(expected[i], result[i]);
             }
         }
-
     }
+    
+    @Test
+    public void testInitArray() throws Exception {
+        {
+            Object array = Array.newInstance(Integer.class, new int[]{3});
+            //System.out.println(Integer.class.getDeclaredConstructors()[0]);
+            ArrayUtility.initArray(array, Integer.class.getDeclaredConstructors()[0], 0);
+
+            int length = Array.getLength(array);
+            for (int i = 0; i < length; i++) {
+                assertEquals(0, Array.get(array,i));
+            }
+        }
+        {
+            Object array = Array.newInstance(Float.class, new int[]{3,5});
+            //System.out.println(Float.class.getDeclaredConstructors()[0]);
+            ArrayUtility.initArray(array, Float.class.getDeclaredConstructors()[0], 0.0f);
+
+            int length1 = Array.getLength(array);
+            for (int i = 0; i < length1; i++) {
+                Object arr = Array.get(array,i);
+                int length2 = Array.getLength(arr);
+                for (int j = 0; j < length2; j++) {
+                    assertEquals(0.0f, Array.get(arr,j));
+                }
+            }
+        }
+    }
+    
 }

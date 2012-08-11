@@ -184,11 +184,11 @@ public class ControlPanel extends JPanel implements ActionListener {
         Class<?>[] clss = constructor.getParameterTypes();
         
         // 引数を持ってない場合
-        if (clss.length == 0) {
+        //if (clss.length == 0) {
             dimsField = new JTextField(20);
             panel.add(dimsField);
-        }
-        else {
+        //}
+        //else {
             Object[] names = clss;
             Object[] objs = new Object[clss.length];
             tableModel = new DefaultTableModel();
@@ -201,7 +201,7 @@ public class ControlPanel extends JPanel implements ActionListener {
             table.setDropMode(DropMode.ON);
             table.setDragEnabled(true);
             table.setTransferHandler(transferHandler);
-        }
+        //}
 
         this.updateUI();
     }
@@ -269,11 +269,10 @@ public class ControlPanel extends JPanel implements ActionListener {
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
 
-                Class<?>[] clss = constructor.getParameterTypes();
-        
-                // 引数を持ってない場合
-                if (clss.length == 0) {
-                    if (!dimsField.getText().equals("")) {
+                // 配列の指定がある
+                if (!dimsField.getText().equals("")) {
+                    
+                        // 次元をパース
                         int[] dims = null;
                         try {
                             dims = ArrayUtility.parseDimensionString(dimsField.getText());
@@ -282,12 +281,21 @@ public class ControlPanel extends JPanel implements ActionListener {
                             Console.err.println(e1);
                             e1.printStackTrace();
                         }
-                        objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), dims);
+                        
+                        // 引数を取得
+                        Object[] initargs = new Object[tableModel.getRowCount()];
+
+                        Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
+                        for (int i = 0; i < initargs.length; i++) {
+                            initargs[i] = tableModel.getValueAt(i, 1);
+                            if (initargs[i].getClass().equals(String.class)) {
+                                initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());
+                            }
+                        }
+
+                        objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), dims, initargs);
                     }
-                    else {
-                        objectTree.addObject(objectName, constructor,null);
-                    }
-                }
+                // 配列の指定がない
                 else {
                     // collect arguments
                     Object[] objs = new Object[tableModel.getRowCount()];

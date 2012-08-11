@@ -27,7 +27,7 @@ public class ObjectPanel extends JPanel {
         
         drawArray(obj);
         add(tablePanel);
-
+        
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
             
@@ -71,9 +71,10 @@ public class ObjectPanel extends JPanel {
             
             Object line = Array.get(array,r);
             int column = Array.getLength(line);
-            
             for (int c = 0; c < column; c++) {
-                Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c)));
+                //Array.set(line, c, ObjectUtility.convertObject(tableModel.getValueAt(r, c).getClass(), (String)tableModel.getValueAt(r, c)));
+                //Array.set(line, c, ObjectUtility.convertObject(Arrays, (String)tableModel.getValueAt(r, c)));
+                Array.set(line, c, ObjectUtility.convertObject((Integer.class), (String)tableModel.getValueAt(r, c)));
             }
         }
     }

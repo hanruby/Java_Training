@@ -19,7 +19,6 @@ public class InterpretGUI extends JFrame{
     private JTextArea textArea;
     private Console console = new Console();
     
-    //@SuppressWarnings("rawtypes")
     public InterpretGUI(String title) {
         setTitle(title);
     
@@ -68,7 +67,7 @@ public class InterpretGUI extends JFrame{
         
         //////////// demo /////////////
         classTree.createClassTree(java.lang.Object.class);
-        //classTree.createClassTree(java.util.HashMap.class);
+        classTree.createClassTree(java.util.HashMap.class);
         classTree.createClassTree(java.lang.Integer.class);
         classTree.createClassTree(java.awt.Point.class);
         classTree.createClassTree(java.awt.Frame.class);
@@ -78,10 +77,11 @@ public class InterpretGUI extends JFrame{
         //objectTree.createObjectTree(new java.util.HashMap(), "HashMap object");
         objectTree.createObjectTree("This is string!!!!", "String object");
         objectTree.createObjectTree(new Boolean(true), "Boolean object");
-        String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
-        objectTree.createObjectTree(hoge, "String array object");
+        //String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
+        //objectTree.createObjectTree(hoge, "String array object");
         objectTree.createObjectTree(new GUI.TestA(), "TestA");
-        //objectTree.createObjectTree(new Integer[4][3], "null array");
+        objectTree.createObjectTree(new Integer[4][3], "null array");
+        objectTree.createObjectTree(new int[4][3], "null array");
 
         
         pack();
