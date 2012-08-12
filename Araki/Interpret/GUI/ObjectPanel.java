@@ -79,7 +79,6 @@ public class ObjectPanel extends JPanel {
                 } catch (java.lang.NumberFormatException e) {
                     Console.err.printf("Number format was wrong at (%d,%d) of table. Your input string was : \"%s\". Please input correct format string. %n",c+1 , r+1, tableModel.getValueAt(r, c).toString());
                 }
-                
             }
         }
     }

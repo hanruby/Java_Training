@@ -269,6 +269,22 @@ public class ControlPanel extends JPanel implements ActionListener {
             String objectName = this.objectName.getText();
             if (!constructorName.equals("") && !objectName.equals("")) {
 
+                // collect arguments
+                    Object[] initargs = new Object[tableModel.getRowCount()];
+
+                    Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
+                    for (int i = 0; i < initargs.length; i++) {
+                        initargs[i] = tableModel.getValueAt(i, 1);
+                        if (initargs[i].getClass().equals(String.class)) {
+                            try {
+                                initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());                                
+                            } catch (java.lang.NumberFormatException e1) {
+                                Console.err.printf("Number format was wrong at \"%s\" of table. Your input string was : \"%s\". Please input \"%s\" type string. %n",types[i] , tableModel.getValueAt(i, 1).toString(), types[i]);
+                                return;
+                            }
+                        }
+                    }
+
                 // 配列の指定がある
                 if (!dimsField.getText().equals("")) {
                     
@@ -281,35 +297,14 @@ public class ControlPanel extends JPanel implements ActionListener {
                             Console.err.println(e1);
                             e1.printStackTrace();
                         }
-                        
-                        // 引数を取得
-                        Object[] initargs = new Object[tableModel.getRowCount()];
-
-                        Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
-                        for (int i = 0; i < initargs.length; i++) {
-                            initargs[i] = tableModel.getValueAt(i, 1);
-                            if (initargs[i].getClass().equals(String.class)) {
-                                initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());
-                            }
-                        }
 
                         objectTree.addArrayObject(objectName, constructor, constructor.getDeclaringClass(), dims, initargs);
                     }
                 // 配列の指定がない
                 else {
-                    // collect arguments
-                    Object[] objs = new Object[tableModel.getRowCount()];
-
-                    Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
-                    for (int i = 0; i < objs.length; i++) {
-                        objs[i] = tableModel.getValueAt(i, 1);
-                        if (objs[i].getClass().equals(String.class)) {
-                            objs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());
-                        }
-                    }
 
                     // create new instance
-                    objectTree.addObject(objectName, constructor,objs);
+                    objectTree.addObject(objectName, constructor,initargs);
                 }
             }
 

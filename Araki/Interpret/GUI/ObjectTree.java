@@ -281,6 +281,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                 Console.err.println(e1);
             } catch (InvocationTargetException e1) {
                 Console.err.println(e1);
+                Console.err.println(e1.getCause());
             }
         }
     }
