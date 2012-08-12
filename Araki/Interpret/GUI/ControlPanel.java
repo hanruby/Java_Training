@@ -258,7 +258,7 @@ public class ControlPanel extends JPanel implements ActionListener {
             initargs[i] = tableModel.getValueAt(i, 1);
             if (initargs[i].getClass().equals(String.class)) {
                 try {
-                    initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());                                
+                    initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());              
                 } catch (java.lang.NumberFormatException e1) {
                     Console.err.printf("Number format was wrong at \"%s\" of table. Your input string was : \"%s\". Please input \"%s\" type string. %n",types[i] , tableModel.getValueAt(i, 1).toString(), types[i]);
                     return null;
