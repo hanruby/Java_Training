@@ -163,8 +163,13 @@ public class ControlPanel extends JPanel implements ActionListener {
         
         // create control contents
         objectName = new JTextField(10);
+        objectName.setName("objectNameField");
+        
         constructorField = new ConstructorField(20);
+        constructorField.setName("constructorField");
+        
         JButton addButton = new JButton("+");
+        addButton.setName("addObjectButton");
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
         

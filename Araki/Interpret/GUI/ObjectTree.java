@@ -31,23 +31,24 @@ public class ObjectTree extends JPanel implements ActionListener{
 
     private static final long serialVersionUID = 1726910916306653766L;
 
-    private JTree tree;
-    private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Object");
+    private JTree objectTree;
+    private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Object");
     private DefaultTreeModel model;
     private JTextField objectName;
     private ConstructorField constructorField;
         
     public ObjectTree() {
         
-        tree = new JTree(classTree);
+        objectTree = new JTree(root);
+        objectTree.setName("objectTree");
 
-        JScrollPane treePanel = new JScrollPane(tree, 
+        JScrollPane treePanel = new JScrollPane(objectTree, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         //treePanel.setPreferredSize(new Dimension(400, 300));
 
-        model = (DefaultTreeModel) tree.getModel();
+        model = (DefaultTreeModel) objectTree.getModel();
 
         // create control contents
         objectName = new JTextField(10);
@@ -77,7 +78,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                 if ( e.getButton() == MouseEvent.BUTTON1) {
 
                     // Get a member of the class object
-                    final DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    final DefaultMutableTreeNode node = (DefaultMutableTreeNode) objectTree.getLastSelectedPathComponent();
                     if (node != null) {
                         Object obj = node.getUserObject();
                         
@@ -114,18 +115,18 @@ public class ObjectTree extends JPanel implements ActionListener{
                             System.out.println("Selected node is object");
                             
                             createMethodTree(node, obj);
-                            tree.updateUI();
+                            objectTree.updateUI();
                         }
                     }
                 }
                 super.mouseClicked(e);
             }
         };
-        tree.addMouseListener(ml);
+        objectTree.addMouseListener(ml);
 
         // support for drag and drop
-        tree.setDragEnabled(true);
-        tree.setTransferHandler(new ObjectTransfer());
+        objectTree.setDragEnabled(true);
+        objectTree.setTransferHandler(new ObjectTransfer());
     }
 
     private DefaultMutableTreeNode createArrayTree(Object obj) {
@@ -146,7 +147,7 @@ public class ObjectTree extends JPanel implements ActionListener{
     
     public void createObjectTree(Object obj, String name) {
 
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(name);
+        DefaultMutableTreeNode newObject = new DefaultMutableTreeNode(name);
 
         // is Array
         if (obj.getClass().isArray()) {
@@ -155,19 +156,19 @@ public class ObjectTree extends JPanel implements ActionListener{
             
             arrayTree.add(createArrayTree(obj));
             
-            root.add(arrayTree);
+            newObject.add(arrayTree);
         }
         else {
             // Create object node
             DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
             
-            root.add(objectTree);
+            newObject.add(objectTree);
         }
-        classTree.add(root);
+        root.add(newObject);
         model.reload();
     }
     
-    public void createMethodTree(DefaultMutableTreeNode root, Object obj) {
+    public void createMethodTree(DefaultMutableTreeNode objctRoot, Object obj) {
 
         Type type = obj.getClass().getGenericSuperclass();
         ArrayList<Class<?>> classArr = new ArrayList<Class<?>>(); 
@@ -238,19 +239,19 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
 
         // Create object 
-        root.add(fieldTree);
-        root.add(methodTree);
+        objctRoot.add(fieldTree);
+        objctRoot.add(methodTree);
     }
 
     public void changeFieldValue(Field field, String value) {
 
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) objectTree.getLastSelectedPathComponent();
         if (node == null || node.getParent() == null) {
             return;
         }
 
-        DefaultMutableTreeNode root = getObjectNode(node);
-        Object obj = root.getNextNode().getUserObject();
+        DefaultMutableTreeNode objectRoot = getObjectNode(node);
+        Object obj = objectRoot.getNextNode().getUserObject();
 
         field.setAccessible(true);
         try {
@@ -262,7 +263,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             Console.err.println(e);
         }
 
-        createObjectTree(obj, root.getUserObject().toString());
+        createObjectTree(obj, objectRoot.getUserObject().toString());
     }
     
     public void addObject(String objectName, Constructor<?> constructor, Object[] objs) {
@@ -317,12 +318,12 @@ public class ObjectTree extends JPanel implements ActionListener{
     public void execMethod(String objectName, Method method, Object[] objs) {
         
         // ツリーからオブジェクトを取得
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) objectTree.getLastSelectedPathComponent();
         if (node == null || node.getParent() == null) {
             return;
         }
-        DefaultMutableTreeNode root = getObjectNode(node);
-        Object obj = root.getNextNode().getUserObject();
+        DefaultMutableTreeNode objectRoot = getObjectNode(node);
+        Object obj = objectRoot.getNextNode().getUserObject();
 
         if (method != null && objectName != null && !objectName.equals("")) {
 
@@ -345,7 +346,7 @@ public class ObjectTree extends JPanel implements ActionListener{
     }
     
     public void updateTree() {
-        tree.updateUI();
+        objectTree.updateUI();
     }
 
     @Override
@@ -362,7 +363,7 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
         else if (action.equals("Delete")) {
             DefaultMutableTreeNode node = 
-                (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                (DefaultMutableTreeNode) objectTree.getLastSelectedPathComponent();
 
             node = getObjectNode(node);
 
