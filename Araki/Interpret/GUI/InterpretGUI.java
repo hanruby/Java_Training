@@ -13,11 +13,15 @@ public class InterpretGUI extends JFrame{
     private static final long serialVersionUID = 1L;
 
     public static void main(String[] args) {
-        new InterpretGUI("Interpret");
+        InterpretGUI interpret = new InterpretGUI("Interpret");
+        interpret.addDemoContents();
     }
     
     private JTextArea textArea;
     private Console console = new Console();
+    
+    private ObjectTree objectTree;
+    private ClassTree classTree;
     
     public InterpretGUI(String title) {
         setTitle(title);
@@ -32,8 +36,8 @@ public class InterpretGUI extends JFrame{
         textArea = new JTextArea();
         textArea.setLineWrap(true);
 
-        ObjectTree objectTree = new ObjectTree();
-        ClassTree classTree = new ClassTree();
+        objectTree = new ObjectTree();
+        classTree = new ClassTree();
         ControlPanel controlPanel = new ControlPanel(objectTree);
         classTree.setPropertiesPanel(controlPanel);
         objectTree.setPropertiesPanel(controlPanel,subPanel);
@@ -64,6 +68,14 @@ public class InterpretGUI extends JFrame{
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
 
+
+        
+        pack();
+
+        setVisible(true);
+    }
+    
+    public void addDemoContents() {
         
         //////////// demo /////////////
         classTree.createClassTree(java.lang.Object.class);
@@ -82,11 +94,5 @@ public class InterpretGUI extends JFrame{
         objectTree.createObjectTree(new GUI.TestA(), "TestA");
         objectTree.createObjectTree(new Integer[4][3], "null array");
         objectTree.createObjectTree(new int[4][3], "null array");
-
-        
-        pack();
-
-        setVisible(true);
     }
-
 }
