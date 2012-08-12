@@ -33,7 +33,7 @@ public class GUITest {
     
     @Test
     public void addClass() {
-        window.textBox("classNameField").enterText("java.lang.Object");
+        window.textBox("classNameField").setText("java.lang.Object");
         window.button("addClassButton").click();
         window.textBox("classNameField").requireText("");
     }
