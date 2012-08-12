@@ -325,7 +325,7 @@ public class ControlPanel extends JPanel implements ActionListener {
                 return;
             }
             
-            objectTree.execMethod("result", method, objs);
+            objectTree.execMethod("result", method, initargs);
         }
     }
 }
