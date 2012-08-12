@@ -155,6 +155,7 @@ public class ControlPanel extends JPanel implements ActionListener {
     private ConstructorField constructorField;
     
     private DefaultTableModel tableModel;
+    private Class<?>[] types;
     
     public void addObject(Constructor<?> constructor) {
         this.constructor = constructor;
@@ -181,27 +182,23 @@ public class ControlPanel extends JPanel implements ActionListener {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(controlPanel);
         
-        Class<?>[] clss = constructor.getParameterTypes();
+        types = constructor.getParameterTypes();
         
-        // 引数を持ってない場合
-        //if (clss.length == 0) {
-            dimsField = new JTextField(20);
-            panel.add(dimsField);
-        //}
-        //else {
-            Object[] names = clss;
-            Object[] objs = new Object[clss.length];
-            tableModel = new DefaultTableModel();
-            JTable table = new JTable(tableModel);
-            tableModel.addColumn("arg", names);
-            tableModel.addColumn("value", objs);
+        dimsField = new JTextField(20);
+        panel.add(dimsField);
 
-            panel.add(table);
-            // ドロップされたとき
-            table.setDropMode(DropMode.ON);
-            table.setDragEnabled(true);
-            table.setTransferHandler(transferHandler);
-        //}
+        Object[] names = types;
+        Object[] objs = new Object[types.length];
+        tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+        tableModel.addColumn("arg", names);
+        tableModel.addColumn("value", objs);
+
+        panel.add(table);
+        // ドロップされたとき
+        table.setDropMode(DropMode.ON);
+        table.setDragEnabled(true);
+        table.setTransferHandler(transferHandler);
 
         this.updateUI();
     }
@@ -227,10 +224,10 @@ public class ControlPanel extends JPanel implements ActionListener {
         controlPanel.add(methodField);
         controlPanel.add(execButton);
 
-        Class<?>[] clss = method.getParameterTypes();
+        types = method.getParameterTypes();
         
-        Object[] names = clss;
-        Object[] objs = new Object[clss.length];
+        Object[] names = types;
+        Object[] objs = new Object[types.length];
         tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
         tableModel.addColumn("arg", names);
@@ -257,7 +254,6 @@ public class ControlPanel extends JPanel implements ActionListener {
         // collect arguments
         Object[] initargs = new Object[tableModel.getRowCount()];
 
-        Class<?>[] types = (Class<?>[]) constructor.getParameterTypes(); 
         for (int i = 0; i < initargs.length; i++) {
             initargs[i] = tableModel.getValueAt(i, 1);
             if (initargs[i].getClass().equals(String.class)) {
