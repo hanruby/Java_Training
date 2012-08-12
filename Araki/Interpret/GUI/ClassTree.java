@@ -29,7 +29,7 @@ public class ClassTree extends JPanel implements ActionListener{
     private JTree tree;
     private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
     private DefaultTreeModel model;
-    private JTextField text;
+    private JTextField className;
     
     public ClassTree() {
         
@@ -44,19 +44,24 @@ public class ClassTree extends JPanel implements ActionListener{
         model = (DefaultTreeModel) tree.getModel();
 
         // create control contents
-        text = new JTextField(10);
-        JButton addButton = new JButton("+");
-        addButton.addActionListener(this);
-        addButton.setActionCommand("Add");
-        JButton deleteButton = new JButton("-");
-        deleteButton.addActionListener(this);
-        deleteButton.setActionCommand("Delete");
+        className = new JTextField(10);
+        className.setName("classNameField");
+        
+        JButton addClassButton = new JButton("+");
+        addClassButton.setName("addClassButton");
+        addClassButton.addActionListener(this);
+        addClassButton.setActionCommand("Add");
+        
+        JButton deleteClassButton = new JButton("-");
+        deleteClassButton.setName("deleteClassButton");
+        deleteClassButton.addActionListener(this);
+        deleteClassButton.setActionCommand("Delete");
     
         // create control panel
         JPanel controlPanel = new JPanel();
-        controlPanel.add(text);
-        controlPanel.add(addButton);
-        controlPanel.add(deleteButton);
+        controlPanel.add(className);
+        controlPanel.add(addClassButton);
+        controlPanel.add(deleteClassButton);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(treePanel);
@@ -116,7 +121,7 @@ public class ClassTree extends JPanel implements ActionListener{
         String action = e.getActionCommand();
 
         if (action.equals("Add")) {
-            String name = text.getText();
+            String name = className.getText();
             if (!name.equals("")) {
                 Class<?> cls = null;
                 try {
@@ -144,7 +149,7 @@ public class ClassTree extends JPanel implements ActionListener{
             model.reload();
         }
 
-        text.setText("");
+        className.setText("");
     }
     
     @Override
