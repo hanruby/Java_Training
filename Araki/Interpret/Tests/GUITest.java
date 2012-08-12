@@ -31,11 +31,24 @@ public class GUITest {
     }
     
     
+    public void addClass(String className) {
+        window.textBox("classNameField").setText(className);
+        window.button("addClassButton").click();
+    }
+    
     @Test
     public void addClass() {
         window.textBox("classNameField").setText("java.lang.Object");
         window.button("addClassButton").click();
         window.textBox("classNameField").requireText("");
+        
+        window.tree("classTree").expandPath("Class/java.lang.Object");
+        
+        addClass("java.lang.Integer");
+        addClass("java.awt.Point");
+        addClass("java.awt.Frame");
+        addClass("java.awt.Color");
+        addClass("GUI.InterpretGUI");
     }
     
 }

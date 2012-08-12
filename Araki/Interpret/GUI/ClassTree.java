@@ -26,22 +26,23 @@ public class ClassTree extends JPanel implements ActionListener{
 
     private static final long serialVersionUID = 671352749780328461L;
     
-    private JTree tree;
-    private DefaultMutableTreeNode classTree = new DefaultMutableTreeNode("Class");
+    private JTree classTree;
+    private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Class");
     private DefaultTreeModel model;
     private JTextField className;
     
     public ClassTree() {
         
-        tree = new JTree(classTree);
+        classTree = new JTree(root);
+        classTree.setName("classTree");
 
-        JScrollPane treePanel = new JScrollPane(tree, 
+        JScrollPane treePanel = new JScrollPane(classTree, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         //treePanel.setPreferredSize(new Dimension(400, 300));
 
-        model = (DefaultTreeModel) tree.getModel();
+        model = (DefaultTreeModel) classTree.getModel();
 
         // create control contents
         className = new JTextField(10);
@@ -75,7 +76,7 @@ public class ClassTree extends JPanel implements ActionListener{
                 if ( e.getButton() == MouseEvent.BUTTON1) {
 
                     // Get a member of the class object
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) classTree.getLastSelectedPathComponent();
                     if (node != null) {
                         final Object obj = node.getUserObject();
                         // Constructor
@@ -88,29 +89,29 @@ public class ClassTree extends JPanel implements ActionListener{
                 super.mouseClicked(e);
             }
         };
-        tree.addMouseListener(ml);
+        classTree.addMouseListener(ml);
 
         // support for drag and drop
-        tree.setDragEnabled(true);
-        tree.setTransferHandler(new ConstructorTransfer());
+        classTree.setDragEnabled(true);
+        classTree.setTransferHandler(new ConstructorTransfer());
     }
     
 
         
     public void addMouseListener(MouseListener ml) {
-        this.tree.addMouseListener(ml);
+        this.classTree.addMouseListener(ml);
     }
 
     public void createClassTree(Class<?> cls) {
 
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(cls.getCanonicalName());
+        DefaultMutableTreeNode newClass = new DefaultMutableTreeNode(cls.getCanonicalName());
 
         Constructor<?>[] constructors = cls.getConstructors();
         for (Constructor<?> constructor : constructors) {
-            root.add(new DefaultMutableTreeNode(constructor));
+            newClass.add(new DefaultMutableTreeNode(constructor));
         }
                 
-        classTree.add(root);
+        root.add(newClass);
         model.reload();
     }
     
@@ -135,7 +136,7 @@ public class ClassTree extends JPanel implements ActionListener{
         }
         else if (action.equals("Delete")) {
             DefaultMutableTreeNode node = 
-                (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                (DefaultMutableTreeNode) classTree.getLastSelectedPathComponent();
 
             if (node == null || node.getParent() == null) {
                 return;
