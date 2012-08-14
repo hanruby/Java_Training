@@ -165,7 +165,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         objectName = new JTextField(10);
         objectName.setName("objectNameField");
         
-        constructorField = new ConstructorField(20);
+        constructorField = new ConstructorField(10);
         constructorField.setName("constructorField");
         
         JButton addButton = new JButton("+");
@@ -173,7 +173,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
         
-        objField = new ObjectField(20);
+        objField = new ObjectField(10);
         
         constructorField.setText(constructor.getName());
 
@@ -196,6 +196,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         Object[] objs = new Object[types.length];
         tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
+        table.setName("table");
         tableModel.addColumn("arg", names);
         tableModel.addColumn("value", objs);
 
@@ -235,6 +236,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         Object[] objs = new Object[types.length];
         tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
+        table.setName("table");
         tableModel.addColumn("arg", names);
         tableModel.addColumn("value", objs);
 
