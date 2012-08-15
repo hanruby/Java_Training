@@ -1,6 +1,8 @@
 package Tests;
 
 
+import java.util.regex.Pattern;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,24 +33,22 @@ public class GUITest {
     }
     
     
-    public void addClass(String className) {
-        window.textBox("classNameField").setText(className);
-        window.button("addClassButton").click();
-    }
-    
     @Test
     public void addClass() {
+        
         window.textBox("classNameField").setText("java.lang.Object");
+        
         window.button("addClassButton").click();
         window.textBox("classNameField").requireText("");
         
         window.tree("classTree").expandPath("Class/java.lang.Object");
+
+
+        // get error message
+        window.textBox("classNameField").setText("Object");
+        window.button("addClassButton").click();
+        //window.textBox("Console").requireText(Pattern.compile("Could not found class.*"));
         
-        addClass("java.lang.Integer");
-        addClass("java.awt.Point");
-        addClass("java.awt.Frame");
-        addClass("java.awt.Color");
-        addClass("GUI.InterpretGUI");
     }
     
 }

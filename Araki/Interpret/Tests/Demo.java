@@ -57,8 +57,9 @@ public class Demo {
         // Object
         addClass("java.lang.Object");
         
+        window.tree("classTree").expandPath("Class");
         window.tree("classTree").expandPath("Class/java.lang.Object");
-        window.tree("classTree").expandRow(1);
+        window.tree("classTree").expandPath("Class/java.lang.Object");
         window.tree("classTree").expandPath("Class/java.lang.Object/public java.lang.Object()");
 
         window.textBox("objectNameField").setText("object");
@@ -70,7 +71,7 @@ public class Demo {
         // Integer
         addClass("java.lang.Integer");
         window.tree("classTree").expandPath("Class/java.lang.Integer");
-        window.tree("classTree").expandRow(2);
+        window.tree("classTree").expandPath("Class/java.lang.Integer");
         window.tree("classTree").expandPath("Class/java.lang.Integer/public java.lang.Integer(int)");        
 
         window.textBox("objectNameField").setText("int object");

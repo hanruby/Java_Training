@@ -17,6 +17,8 @@ public class Console extends JTextArea {
         setEditable(false);
         setLineWrap(true);
         
+        this.setName("Console");
+        
         PrintConsole stream = new PrintConsole(this);
         err = new PrintStream(stream, true); // true = AutoFlush
     }

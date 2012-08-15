@@ -129,7 +129,7 @@ public class ClassTree extends JPanel implements ActionListener{
                     cls = Class.forName(name);
                     createClassTree(cls);
                 } catch (ClassNotFoundException e1) {
-                    Console.err.println(e1);
+                    Console.err.printf("Could not found class \"%s\". Please check your input.%n", name);
                 }
                 model.reload();
             }
