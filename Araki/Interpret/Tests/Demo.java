@@ -1,13 +1,12 @@
 package Tests;
 
 
-import javax.swing.text.JTextComponent;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.fest.swing.core.BasicRobot;
-import org.fest.swing.core.Robot;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
 import org.fest.swing.fixture.*;
@@ -24,7 +23,18 @@ public class Demo {
     public void setUp() throws Exception {
         InterpretGUI frame = GuiActionRunner.execute(new GuiQuery<InterpretGUI>() {
             protected InterpretGUI executeInEDT() {
-                return new InterpretGUI("Test");  
+                InterpretGUI gui = new InterpretGUI("Test");
+
+                // set LAF to default 
+                String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
+                try{
+                    UIManager.setLookAndFeel(lafClassName);
+                    SwingUtilities.updateComponentTreeUI(gui);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                return gui;  
             }
         });
         window = new FrameFixture(frame);
@@ -48,36 +58,25 @@ public class Demo {
         addClass("java.lang.Object");
         
         window.tree("classTree").expandPath("Class/java.lang.Object");
+        window.tree("classTree").expandRow(1);
         window.tree("classTree").expandPath("Class/java.lang.Object/public java.lang.Object()");
 
         window.textBox("objectNameField").setText("object");
         window.button("addObjectButton").click();
         
         window.tree("objectTree").expandPath("Object/object");
-        window.tree("objectTree").expandRow(2);
+        window.tree("objectTree").expandRow(1);
      
         // Integer
         addClass("java.lang.Integer");
         window.tree("classTree").expandPath("Class/java.lang.Integer");
+        window.tree("classTree").expandRow(2);
         window.tree("classTree").expandPath("Class/java.lang.Integer/public java.lang.Integer(int)");        
 
         window.textBox("objectNameField").setText("int object");
-        //window.table("table").cell(row(0).column(1)).startEditing().enterValue("12");
-        //window.button("addObjectButton").click();
+        window.table("table").cell(row(0).column(1)).enterValue("12");
+        window.button("addObjectButton").click();
 
-        JTableCellFixture cell = window.table("table").cell(row(0).column(1));
-        
-        cell.startEditing();
-        cell.doubleClick();
-        try {
-            cell.rightClick();
-            cell.enterValue("12");            
-        } catch (org.fest.swing.exception.ActionFailedException e) {
-
-        }
-        cell.stopEditing();
-        
         window.textBox("classNameField").enterText("exit!!!!!!!!!!");
     }
-    
 }

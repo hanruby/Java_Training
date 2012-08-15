@@ -14,6 +14,7 @@ import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.TransferHandler;
@@ -200,7 +201,9 @@ public class ControlPanel extends JPanel implements ActionListener {
         tableModel.addColumn("arg", names);
         tableModel.addColumn("value", objs);
 
-        panel.add(table);
+        JScrollPane sp = new JScrollPane(table);
+        panel.add(sp);
+        
         // ドロップされたとき
         table.setDropMode(DropMode.ON);
         table.setDragEnabled(true);
@@ -242,7 +245,9 @@ public class ControlPanel extends JPanel implements ActionListener {
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(controlPanel);
-        panel.add(table);
+
+        JScrollPane sp = new JScrollPane(table);
+        panel.add(sp);
 
         // ドロップされたとき
         table.setDropMode(DropMode.ON);
