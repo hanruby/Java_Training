@@ -89,7 +89,6 @@ public class ObjectTree extends JPanel implements ActionListener{
                             try {
                                 controlPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
                             } catch (Exception e1) {
-                                Console.err.println(e1);
                                 e1.printStackTrace();
                             }
                         }
@@ -258,9 +257,9 @@ public class ObjectTree extends JPanel implements ActionListener{
             Class<?> type = field.get(obj).getClass();
             field.set(obj, ObjectUtility.convertObject(type, value));
         } catch (IllegalArgumentException e) {
-            Console.err.println(e);
+            Console.err.println("Your input argument is invalid. reason : " + e.getMessage());
         } catch (IllegalAccessException e) {
-            Console.err.println(e);
+            Console.err.println("Cannot access this. reason : " + e.getMessage());
         }
 
         createObjectTree(obj, objectRoot.getUserObject().toString());
@@ -274,15 +273,15 @@ public class ObjectTree extends JPanel implements ActionListener{
                 obj = constructor.newInstance(objs);
                 createObjectTree(obj, objectName);
                 model.reload();
-            } catch (IllegalArgumentException e1) {
-                Console.err.println(e1);
-            } catch (InstantiationException e1) {
-                Console.err.println(e1);
-            } catch (IllegalAccessException e1) {
-                Console.err.println(e1);
-            } catch (InvocationTargetException e1) {
-                Console.err.println(e1);
-                Console.err.println(e1.getCause());
+            } catch (IllegalArgumentException e) {
+                Console.err.println("Your input argument is invalid. reason : " + e.getMessage());
+            } catch (InstantiationException e) {
+                Console.err.println(e);
+            } catch (IllegalAccessException e) {
+                Console.err.println("Cannot access this. reason : " + e.getMessage());
+            } catch (InvocationTargetException e) {
+                Console.err.println(e);
+                Console.err.println(e.getCause());
             }
         }
     }

@@ -139,7 +139,6 @@ public class ControlPanel extends JPanel implements ActionListener {
         fieldField.setText(this.field.getName());
         typeField.setText(this.field.getType().getCanonicalName());
         valueField.setText(h.toString());
-        //FieldUtility.printObjectField(obj, field);
                 
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.add(objectField);
