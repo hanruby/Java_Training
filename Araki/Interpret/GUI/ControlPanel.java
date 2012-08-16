@@ -32,7 +32,6 @@ public class ControlPanel extends JPanel implements ActionListener {
     private JTextField objectField;
     private JLabel typeField;
     private JTextField valueField;
-    private ObjectField objField;
     
     private JTextField dimsField;
     
@@ -173,15 +172,12 @@ public class ControlPanel extends JPanel implements ActionListener {
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
         
-        objField = new ObjectField(10);
-        
         constructorField.setText(constructor.getName());
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
         controlPanel.add(objectName);
         controlPanel.add(constructorField);
-        controlPanel.add(objField);
         controlPanel.add(addButton);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
