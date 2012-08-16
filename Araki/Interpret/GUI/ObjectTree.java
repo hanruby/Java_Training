@@ -46,25 +46,15 @@ public class ObjectTree extends JPanel implements ActionListener{
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        //treePanel.setPreferredSize(new Dimension(400, 300));
-
         model = (DefaultTreeModel) objectTree.getModel();
 
         // create control contents
-        objectName = new JTextField(10);
-        constructorField = new ConstructorField(20);
-        JButton addButton = new JButton("+");
-        addButton.addActionListener(this);
-        addButton.setActionCommand("Add");
         JButton deleteButton = new JButton("-");
         deleteButton.addActionListener(this);
         deleteButton.setActionCommand("Delete");
     
         // create control panel
         JPanel controlPanel = new JPanel();
-        controlPanel.add(objectName);
-        controlPanel.add(constructorField);
-        controlPanel.add(addButton);
         controlPanel.add(deleteButton);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -261,8 +251,9 @@ public class ObjectTree extends JPanel implements ActionListener{
         } catch (IllegalAccessException e) {
             Console.err.println("Cannot access this. reason : " + e.getMessage());
         }
-
-        createObjectTree(obj, objectRoot.getUserObject().toString());
+  
+        objectRoot.getNextNode().removeAllChildren();
+        model.reload();
     }
     
     public void addObject(String objectName, Constructor<?> constructor, Object[] objs) {
@@ -280,8 +271,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             } catch (IllegalAccessException e) {
                 Console.err.println("Cannot access this. reason : " + e.getMessage());
             } catch (InvocationTargetException e) {
-                Console.err.println(e);
-                Console.err.println(e.getCause());
+                Console.err.println("Exception thrown by an invoked constructor. Reason : " + e.getCause());
             }
         }
     }
@@ -294,17 +284,13 @@ public class ObjectTree extends JPanel implements ActionListener{
                 try {
                     ArrayUtility.initArray(obj, constructor, initargs);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Console.err.println(e); 
                 } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Console.err.println(e); 
                 } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Console.err.println("Cannot access this. reason : " + e.getMessage());
                 } catch (InvocationTargetException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Console.err.println("Exception thrown by an invoked constructor. Reason : " + e.getCause());
                 }
                 createObjectTree(obj, objectName);
             } catch (IllegalArgumentException e) {
@@ -335,7 +321,7 @@ public class ObjectTree extends JPanel implements ActionListener{
             } catch (IllegalAccessException e) {
                 Console.err.println(e);
             } catch (InvocationTargetException e) {
-                Console.err.println(e);
+                Console.err.println("Exception thrown by an invoked method. Reason : " + e.getCause());
             };
             
             if (ret != null) {
