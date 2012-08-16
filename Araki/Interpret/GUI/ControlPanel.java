@@ -263,6 +263,9 @@ public class ControlPanel extends JPanel implements ActionListener {
 
         for (int i = 0; i < initargs.length; i++) {
             initargs[i] = tableModel.getValueAt(i, 1);
+            if (initargs[i] == null) {
+                return null;
+            }
             if (initargs[i].getClass().equals(String.class)) {
                 try {
                     initargs[i] = ObjectUtility.convertObject(types[i], tableModel.getValueAt(i, 1).toString());              
