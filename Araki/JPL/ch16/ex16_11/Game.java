@@ -1,5 +1,8 @@
 package ch16.ex16_11;
 
+/**
+ * Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするPlayerLoaderクラスを提供する。
+ */
 public class Game {
     public static void main(String[] args) {
         
@@ -7,22 +10,36 @@ public class Game {
         
         while ((name = getNextPlayer()) != null) {
             try {
+                // ゲームを実行するためのクラスをロードするためにPlayerLoaderオブジェクトを生成
                 PlayerLoader loader = new PlayerLoader();
-                Class<? extends Player> classOf = loader.loadClass(name).asSubclass(Player.class);
-                Player player = classOf.newInstance();
-                Game game = new Game();
+                // Playerクラスの新たなオブジェクトを生成する
+                Class<? extends Player> classOf;
 
+                classOf = loader.loadClass(name).asSubclass(Player.class);
+                Player player;
+
+                player = classOf.newInstance();
+
+                // ゲームを生成してプレーする
+                Game game = new Game();
                 player.play(game);
-                game.reportScore(name);
                 
-            } catch (Exception e) {
+                // スコアを報告する
+                game.reportScore(name);
+
+            } catch (ClassNotFoundException e) {
+                reportException(name, e);
+            } catch (InstantiationException e) {
+                reportException(name, e);
+            } catch (IllegalAccessException e) {
                 reportException(name, e);
             }
         }
     }
 
     private static void reportException(String name, Exception e) {
-        System.err.println(name + ":" + e);
+        System.err.println(name + ":" + e.toString());
+        e.printStackTrace();
     }
 
     private void reportScore(String name) {
