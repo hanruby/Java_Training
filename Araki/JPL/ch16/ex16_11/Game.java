@@ -20,6 +20,7 @@ public class Game {
         
         String name;    // class name
         
+        // TODO: サーバ化 P.382
         while ((name = names.poll()) != null) {
             try {
                 // ゲームを実行するためのクラスをロードするためにPlayerLoaderオブジェクトを生成
