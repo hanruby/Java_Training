@@ -10,8 +10,10 @@ public class PlayerLoader extends ClassLoader {
     public Class<?> findClass(String name) throws ClassNotFoundException
     {
         try {
+            // 指定されたクラスに対するバイトコードを読み込む
             byte[] buf = bytesForClass(name);
             
+            // バイトで定義されたクラスを実際に仮想マシンにロードして、そのクラスに対するClassオブジェクトを返す
             return defineClass(name, buf, 0, buf.length);
         } catch (IOException e) {
 
@@ -19,6 +21,13 @@ public class PlayerLoader extends ClassLoader {
         }
     }
 
+    /**
+     * 指定されたクラスに対するバイトコードを読み込む
+     * @param name : クラス名
+     * @return クラスに対するバイトコード
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     protected byte[] bytesForClass(String name) throws IOException, ClassNotFoundException
     {
         FileInputStream in = null;
