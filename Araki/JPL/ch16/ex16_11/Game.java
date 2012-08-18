@@ -8,12 +8,12 @@ import java.util.Queue;
  */
 public class Game {
 
-    private static Queue<String> names = new LinkedList<String>() {
-        private static final long serialVersionUID = 2724134062714600771L;
-        {
-            this.add("hoge");
-        }
-    };
+    private static Queue<String> names = new LinkedList<String>();
+    
+    public Game() {
+        // TODO Auto-generated constructor stub
+        names.add("hoge");
+    }
     
     public static void main(String[] args) {
         
