@@ -22,8 +22,7 @@ public class Game {
     }
 
     private static void reportException(String name, Exception e) {
-        // TODO Auto-generated method stub
-        
+        System.err.println(name + ":" + e);
     }
 
     private void reportScore(String name) {

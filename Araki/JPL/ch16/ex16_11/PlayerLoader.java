@@ -1,5 +1,6 @@
 package ch16.ex16_11;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 
@@ -15,7 +16,24 @@ public class PlayerLoader extends ClassLoader {
         }
     }
 
-    private byte[] bytesForClass(String name) throws IOException{
+    protected byte[] bytesForClass(String name) throws IOException, ClassNotFoundException
+    {
+        FileInputStream in = null;
+        try {
+            in = streamFor(name + ".class");
+            int length = in.available(); // get byte count
+            if (length == 0)
+                throw new ClassNotFoundException(name);
+            byte[] buf = new byte[length];
+            in.read(buf);                // read the bytes
+            return buf;
+        } finally {
+            if (in != null)
+                in.close();
+        }
+    }
+
+    private FileInputStream streamFor(String string) {
         // TODO Auto-generated method stub
         return null;
     }
