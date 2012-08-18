@@ -3,6 +3,9 @@ package Tests;
 
 import static org.junit.Assert.*;
 
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +23,18 @@ public class GUITest {
     public static void setUpBeforeClass() throws Exception {
         InterpretGUI frame = GuiActionRunner.execute(new GuiQuery<InterpretGUI>() {
             protected InterpretGUI executeInEDT() {
-                return new InterpretGUI("Test");  
+                InterpretGUI gui = new InterpretGUI("Test");
+
+                // set LAF to default 
+                String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
+                try{
+                    UIManager.setLookAndFeel(lafClassName);
+                    SwingUtilities.updateComponentTreeUI(gui);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                return gui;  
             }
         });
         window = new FrameFixture(frame);

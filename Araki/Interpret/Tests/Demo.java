@@ -4,8 +4,8 @@ package Tests;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
@@ -17,10 +17,10 @@ import GUI.*;
 
 public class Demo {
 
-    private FrameFixture window;
+    private static FrameFixture window;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
         InterpretGUI frame = GuiActionRunner.execute(new GuiQuery<InterpretGUI>() {
             protected InterpretGUI executeInEDT() {
                 InterpretGUI gui = new InterpretGUI("Test");
@@ -41,8 +41,8 @@ public class Demo {
         window.show(); // shows the frame to test
     }
 
-    @After 
-    public void tearDown() {
+    @AfterClass
+    public static void tearDownAfterClass() {
         window.cleanUp();
     }
     
