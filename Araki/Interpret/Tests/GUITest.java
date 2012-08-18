@@ -1,8 +1,10 @@
 package Tests;
 
 
-import org.junit.After;
-import org.junit.Before;
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
@@ -12,10 +14,10 @@ import GUI.*;
 
 public class GUITest {
 
-    private FrameFixture window;
-
-    @Before
-    public void setUp() throws Exception {
+    private static FrameFixture window;
+    
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
         InterpretGUI frame = GuiActionRunner.execute(new GuiQuery<InterpretGUI>() {
             protected InterpretGUI executeInEDT() {
                 return new InterpretGUI("Test");  
@@ -25,11 +27,10 @@ public class GUITest {
         window.show(); // shows the frame to test
     }
 
-    @After 
-    public void tearDown() {
+    @AfterClass
+    public static void tearDownAfterClass() {
         window.cleanUp();
     }
-    
     
     @Test
     public void addClass() {
@@ -40,13 +41,13 @@ public class GUITest {
         window.textBox("classNameField").requireText("");
         
         window.tree("classTree").expandPath("Class/java.lang.Object");
-
-
+    }
+    
+    @Test
+    public void addInvalidClass() throws Exception {
         // get error message
         window.textBox("classNameField").setText("Object");
         window.button("addClassButton").click();
         //window.textBox("Console").requireText(Pattern.compile("Could not found class.*"));
-        
     }
-    
 }
