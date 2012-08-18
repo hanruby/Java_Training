@@ -1,7 +1,6 @@
 package Tests;
 
 
-import static org.junit.Assert.*;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
