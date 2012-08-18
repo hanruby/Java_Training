@@ -12,6 +12,7 @@ public class PlayerLoader extends ClassLoader {
             
             return defineClass(name, buf, 0, buf.length);
         } catch (IOException e) {
+
             throw new ClassNotFoundException(e.toString());
         }
     }
@@ -22,11 +23,16 @@ public class PlayerLoader extends ClassLoader {
         try {
             in = streamFor(name + ".class");
             int length = in.available(); // get byte count
-            if (length == 0)
+            
+            if (length == 0) {
                 throw new ClassNotFoundException(name);
+            }
+            
             byte[] buf = new byte[length];
             in.read(buf);                // read the bytes
+            
             return buf;
+
         } finally {
             if (in != null)
                 in.close();
