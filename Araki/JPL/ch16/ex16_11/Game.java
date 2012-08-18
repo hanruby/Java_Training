@@ -1,9 +1,20 @@
 package ch16.ex16_11;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするPlayerLoaderクラスを提供する。
  */
 public class Game {
+
+    private static Queue<String> names = new LinkedList<String>() {
+        private static final long serialVersionUID = 2724134062714600771L;
+        {
+            this.add("hoge");
+        }
+    };
+    
     public static void main(String[] args) {
         
         String name;    // class name
@@ -48,7 +59,6 @@ public class Game {
     }
 
     private static String getNextPlayer() {
-        // TODO Auto-generated method stub
-        return null;
+        return names.poll();
     }
 }
