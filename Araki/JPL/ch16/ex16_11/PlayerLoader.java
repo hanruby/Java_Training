@@ -3,7 +3,9 @@ package ch16.ex16_11;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-
+/**
+ * P.385 Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするクラス
+ */
 public class PlayerLoader extends ClassLoader {
     
     @Override
@@ -14,7 +16,7 @@ public class PlayerLoader extends ClassLoader {
             byte[] buf = bytesForClass(name);
             
             // バイトで定義されたクラスを実際に仮想マシンにロードして、そのクラスに対するClassオブジェクトを返す
-            return defineClass(name, buf, 0, buf.length);
+            return defineClass(name, buf, 0, buf.length); // P.385
         } catch (IOException e) {
 
             throw new ClassNotFoundException(e.toString());
@@ -22,7 +24,7 @@ public class PlayerLoader extends ClassLoader {
     }
 
     /**
-     * 指定されたクラスに対するバイトコードを読み込む
+     * P.385 指定されたクラスに対するバイトコードを読み込む
      * @param name : クラス名
      * @return クラスに対するバイトコード
      * @throws IOException

@@ -3,9 +3,6 @@ package ch16.ex16_11;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするPlayerLoaderクラスを提供する。
- */
 public class Game {
 
     private static Queue<String> names = new LinkedList<String>();
