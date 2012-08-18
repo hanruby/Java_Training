@@ -5,6 +5,8 @@ import java.util.Queue;
 
 public class Game {
     
+    private int score;
+
     public Game() {
         // TODO Auto-generated constructor stub
     }
@@ -14,7 +16,7 @@ public class Game {
         Queue<String> names = new LinkedList<String>() { 
             private static final long serialVersionUID = 2018587615929817842L;
             {
-                add("hoge");
+                add("ch16.ex16_11.RandomPlayer");
             }
         };
         
@@ -51,7 +53,10 @@ public class Game {
     }
     
     private void reportScore(String name) {
-        // TODO Auto-generated method stub
-        
+        System.out.printf(">> %s, your score is : %d %n" , name, score);
+    }
+    
+    public void setScore(int score) {
+        this.score = score;
     }
 }
