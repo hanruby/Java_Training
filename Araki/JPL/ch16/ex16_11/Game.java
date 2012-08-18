@@ -4,19 +4,23 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Game {
-
-    private static Queue<String> names = new LinkedList<String>();
     
     public Game() {
         // TODO Auto-generated constructor stub
-        names.add("hoge");
     }
     
     public static void main(String[] args) {
+
+        Queue<String> names = new LinkedList<String>() { 
+            private static final long serialVersionUID = 2018587615929817842L;
+            {
+                add("hoge");
+            }
+        };
         
         String name;    // class name
         
-        while ((name = getNextPlayer()) != null) {
+        while ((name = names.poll()) != null) {
             try {
                 // ゲームを実行するためのクラスをロードするためにPlayerLoaderオブジェクトを生成
                 PlayerLoader loader = new PlayerLoader();
@@ -36,26 +40,17 @@ public class Game {
                 game.reportScore(name);
 
             } catch (ClassNotFoundException e) {
-                reportException(name, e);
+                e.printStackTrace();
             } catch (InstantiationException e) {
-                reportException(name, e);
+                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                reportException(name, e);
+                e.printStackTrace();
             }
         }
     }
-
-    private static void reportException(String name, Exception e) {
-        System.err.println(name + ":" + e.toString());
-        e.printStackTrace();
-    }
-
+    
     private void reportScore(String name) {
         // TODO Auto-generated method stub
         
-    }
-
-    private static String getNextPlayer() {
-        return names.poll();
     }
 }
