@@ -17,14 +17,14 @@ public class GameTest {
     @Test
     public void test_getNextPlayer() throws Exception {
         Game g = new Game();
-        Method method = Game.class.getDeclaredMethod("getNextPlayer", null);
+        Method method = Game.class.getDeclaredMethod("getNextPlayer");
         method.setAccessible(true);
         {
-            String result = (String) method.invoke(g, null);
+            String result = (String) method.invoke(g);
             assertEquals("hoge", result);
         }
         {
-            String result = (String) method.invoke(g, null);
+            String result = (String) method.invoke(g);
             assertEquals(null, result);
         }
     }
@@ -32,14 +32,14 @@ public class GameTest {
     @Test
     public void test_getNextPlayer2() throws Exception {
         Game g = new Game();
-        Method method = Game.class.getDeclaredMethod("getNextPlayer", null);
+        Method method = Game.class.getDeclaredMethod("getNextPlayer");
         method.setAccessible(true);
         {
-            String result = (String) method.invoke(g, null);
+            String result = (String) method.invoke(g);
             assertEquals("hoge", result);
         }
         {
-            String result = (String) method.invoke(g, null);
+            String result = (String) method.invoke(g);
             assertEquals(null, result);
         }
     }
