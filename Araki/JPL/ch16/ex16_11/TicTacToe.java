@@ -49,7 +49,7 @@ public class TicTacToe {
             grid[x][y] = m;
 
             // turnを更新
-            this.turn = nextTurn();
+            this.turn = getNextTurn();
             
             // ゲームカウントをインクリメント
             count++;
@@ -62,7 +62,7 @@ public class TicTacToe {
         return false;
     }
     
-    private Mark nextTurn() {
+    public Mark getNextTurn() {
         if (this.turn == Mark.O) {
             return Mark.X;
         }
