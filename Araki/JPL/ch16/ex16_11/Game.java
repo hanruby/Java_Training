@@ -17,6 +17,8 @@ public class Game {
             private static final long serialVersionUID = 2018587615929817842L;
             {
                 add("ch16.ex16_11.RandomPlayer");
+                add("ch16.ex16_11.RandomPlayer");
+                add("ch16.ex16_11.RandomPlayer");
                 add("ch16.ex16_11.DumbPlayer");
             }
         };
