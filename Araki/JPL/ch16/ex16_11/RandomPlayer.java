@@ -13,8 +13,10 @@ public class RandomPlayer extends Player {
         
         while( ! t.isFinish() ) {
             t.setMark(rand.nextInt(3), rand.nextInt(3), Mark.O);
-            t.isWin();
             t.printGrid();
+            if (t.isWin()) {
+                break;
+            }
         }
         game.setScore(t.getScore());
     }

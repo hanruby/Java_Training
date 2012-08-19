@@ -19,6 +19,7 @@ public class TicTacToe {
     }
 
     private Mark winner = Mark.None;
+    private Mark turn = Mark.O;
     
     private final int GRID_X = 3;
     private final int GRID_Y = 3;
@@ -40,9 +41,16 @@ public class TicTacToe {
         if ( !( 0 <= x && x < GRID_X && 0 <= y && y < GRID_Y ) ) {
             throw new IllegalArgumentException("X or Y is invalid : (x,y) = (" + x + "," + y + ")");
         }
+        if (this.turn != m) {
+            throw new IllegalAccessError("Is not your turn.");
+        }
+        
         if (grid[x][y] == Mark.None) {
             grid[x][y] = m;
 
+            // turnを更新
+            this.turn = nextTurn();
+            
             // ゲームカウントをインクリメント
             count++;
             
@@ -52,6 +60,16 @@ public class TicTacToe {
             return true;
         }
         return false;
+    }
+    
+    private Mark nextTurn() {
+        if (this.turn == Mark.O) {
+            return Mark.X;
+        }
+        else if (this.turn == Mark.X) {
+            return Mark.O;
+        }
+        throw new IllegalStateException("Please debug..");
     }
     
     public boolean isFinish() {
