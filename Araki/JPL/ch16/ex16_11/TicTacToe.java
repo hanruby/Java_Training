@@ -49,7 +49,7 @@ public class TicTacToe {
             grid[x][y] = m;
 
             // turnを更新
-            this.turn = getNextTurn();
+            this.turn = nextTurn();
             
             // ゲームカウントをインクリメント
             count++;
@@ -62,7 +62,7 @@ public class TicTacToe {
         return false;
     }
     
-    public Mark getNextTurn() {
+    private Mark nextTurn() {
         if (this.turn == Mark.O) {
             return Mark.X;
         }
@@ -70,6 +70,10 @@ public class TicTacToe {
             return Mark.O;
         }
         throw new IllegalStateException("Please debug..");
+    }
+    
+    public Mark getPlayer() {
+        return this.turn;
     }
     
     public boolean isFinish() {

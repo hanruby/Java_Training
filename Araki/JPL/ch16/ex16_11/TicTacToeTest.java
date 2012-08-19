@@ -239,5 +239,21 @@ public class TicTacToeTest {
         t.printGrid();
     }
     
+    @Test
+    public void test_getPlayer() throws Exception {		
+        TicTacToe t = new TicTacToe();
+        //
+        assertEquals(Mark.O, t.getPlayer());
+        t.setMark(0, 0, Mark.O);
+        assertEquals(Mark.X, t.getPlayer());
+        t.setMark(0, 2, Mark.X);
+        assertEquals(Mark.O, t.getPlayer());
+        t.setMark(1, 1, Mark.O);
+        assertEquals(Mark.X, t.getPlayer());
+        t.setMark(1, 2, Mark.X);
+        assertEquals(Mark.O, t.getPlayer());
+        t.setMark(2, 2, Mark.O);
+        assertEquals(Mark.X, t.getPlayer());
+    }
     
 }
