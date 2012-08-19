@@ -9,10 +9,13 @@ public class RandomPlayer extends Player {
     @Override
     public void play(Game game) {
         TicTacToe t = new TicTacToe();
-        
         Random rand = new Random();
         
-        t.setMark(rand.nextInt(3), rand.nextInt(3), Mark.O);
-        game.setScore(100);
+        while( ! t.isFinish() ) {
+            t.setMark(rand.nextInt(3), rand.nextInt(3), Mark.O);
+            t.isWin();
+            t.printGrid();
+        }
+        game.setScore(t.getScore());
     }
 }

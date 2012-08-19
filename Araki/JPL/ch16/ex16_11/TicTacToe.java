@@ -43,53 +43,52 @@ public class TicTacToe {
         if (grid[x][y] == Mark.None) {
             grid[x][y] = m;
 
+            // ゲームカウントをインクリメント
             count++;
+            
+            // winner調査
+            checkWinner(m);
+            
             return true;
         }
         return false;
+    }
+    
+    public boolean isFinish() {
+        // カウントがフルになっているか、または、winnerが決まっていればおわり
+        return (count >= GRID_X*GRID_Y) || (this.winner != Mark.None);
     }
     
     public int getScore() {
         return GRID_X*GRID_Y - count;
     }
     
-    public boolean isWin() {
-
+    private void checkWinner(Mark m) {
         // Horizontal
         for (int y = 0; y < GRID_Y; y++) {
-            if ( isHorizontal(Mark.O, y) ) {
-                this.winner = Mark.O;
-                return true;
-            } 
-            else if ( isHorizontal(Mark.X, y) ) {
-                this.winner = Mark.X;
-                return true;
+            if ( isHorizontal(m, y) ) {
+                this.winner = m;
+                return;
             } 
         }
 
         // Vertical
         for (int x = 0; x < GRID_X; x++) {
-            if ( isVertical(Mark.O, x) ) {
-                this.winner = Mark.O;
-                return true;
-            } 
-            else if ( isVertical(Mark.X, x) ) {
-                this.winner = Mark.X;
-                return true;
+            if ( isVertical(m, x) ) {
+                this.winner = m;
+                return;
             } 
         }
 
         // Diagonal
-        if ( isDiagonal(Mark.O) ) {
-            this.winner = Mark.O;
-            return true;
+        if ( isDiagonal(m) ) {
+            this.winner = m;
+            return;
         } 
-        else if ( isDiagonal(Mark.X) ) {
-            this.winner = Mark.X;
-            return true;
-        } 
-        
-        return false;
+    }
+    
+    public boolean isWin() {
+        return (winner != Mark.None);
     }
     
     private boolean isHorizontal (Mark m, int y) {
