@@ -66,7 +66,7 @@ public class TicTacToe {
     private void checkWinner(Mark m) {
         // Horizontal
         for (int y = 0; y < GRID_Y; y++) {
-            if ( isHorizontal(m, y) ) {
+            if ( checkHorizontal(m, y) ) {
                 this.winner = m;
                 return;
             } 
@@ -74,14 +74,14 @@ public class TicTacToe {
 
         // Vertical
         for (int x = 0; x < GRID_X; x++) {
-            if ( isVertical(m, x) ) {
+            if ( checkVertical(m, x) ) {
                 this.winner = m;
                 return;
             } 
         }
 
         // Diagonal
-        if ( isDiagonal(m) ) {
+        if ( checkDiagonal(m) ) {
             this.winner = m;
             return;
         } 
@@ -91,15 +91,15 @@ public class TicTacToe {
         return (winner != Mark.None);
     }
     
-    private boolean isHorizontal (Mark m, int y) {
+    private boolean checkHorizontal (Mark m, int y) {
         return ( grid[0][y] == m && grid[1][y] == m && grid[2][y] == m );
     }
 
-    private boolean isVertical (Mark m, int x) {
+    private boolean checkVertical (Mark m, int x) {
         return ( grid[x][0] == m && grid[x][1] == m && grid[x][2] == m );
     }
 
-    private boolean isDiagonal (Mark m) {
+    private boolean checkDiagonal (Mark m) {
         return ( ( grid[0][0] == m && grid[1][1] == m && grid[2][2] == m ) || ( grid[0][2] == m && grid[1][1] == m && grid[2][0] == m ) ); 
     }
     
