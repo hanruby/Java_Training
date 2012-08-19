@@ -129,6 +129,19 @@ public class TicTacToe {
         return winner;
     }
     
+    public Mark[][] getGrid() {
+        Mark[][] grid = new Mark[GRID_X][GRID_Y];
+     
+        // copy
+        for (int y = 0; y < GRID_Y; y++) {
+            for (int x = 0; x < GRID_X; x++) {
+                grid[x][y] = this.grid[x][y];
+            }
+        }
+        
+        return grid;
+    }
+    
     public void printGrid() {
         
         /* 

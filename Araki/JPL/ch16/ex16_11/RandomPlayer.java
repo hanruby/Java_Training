@@ -10,7 +10,9 @@ public class RandomPlayer extends Player {
         Random rand = new Random();
         
         while( ! t.isFinish() ) {
-            t.setMark(rand.nextInt(3), rand.nextInt(3), t.getPlayer());
+            if (! t.setMark(rand.nextInt(3), rand.nextInt(3), t.getPlayer()) ) {
+                continue;
+            }
             t.printGrid();
             if (t.isWin()) {
                 break;

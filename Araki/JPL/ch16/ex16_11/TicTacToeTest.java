@@ -238,7 +238,7 @@ public class TicTacToeTest {
         assertEquals(Mark.O, t.getWinner());
         t.printGrid();
     }
-    
+
     @Test
     public void test_getPlayer() throws Exception {		
         TicTacToe t = new TicTacToe();
@@ -254,6 +254,22 @@ public class TicTacToeTest {
         assertEquals(Mark.O, t.getPlayer());
         t.setMark(2, 2, Mark.O);
         assertEquals(Mark.X, t.getPlayer());
+    }
+    
+    @Test
+    public void test_Clone() throws Exception {		
+        TicTacToe t = new TicTacToe();
+
+        t.setMark(0, 0, Mark.O);
+        t.setMark(0, 2, Mark.X);
+        
+        Mark[][] grid = t.getGrid();
+        assertEquals(Mark.O, grid[0][0]);
+        assertEquals(Mark.X, grid[0][2]);
+        
+        grid[1][1] = Mark.O;
+        Mark[][] grid2 = t.getGrid();
+        assertNotSame(Mark.O, grid2[1][1]);
     }
     
 }
