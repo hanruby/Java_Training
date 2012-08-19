@@ -9,12 +9,12 @@ public class DumbPlayer extends Player {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 t.setMark(x, y, t.getPlayer());
-                t.printGrid();
                 if (t.isWin()) {
                     break;
                 }
             }
         }
+        t.printGrid();
         game.setScore(t.getScore());
     }
 }
