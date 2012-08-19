@@ -6,7 +6,7 @@ import java.lang.ref.WeakReference;
 
 public class DataHandler {
     
-    private File lastFile;    // 最後に読んだファイル
+    private WeakReference<File> lastFile;    // 最後に読んだファイル
     private WeakReference<byte[]> lastData;    // （おそらく）最後のデータ
 
     /**
@@ -29,8 +29,9 @@ public class DataHandler {
         
         // 記憶していないので、読み込む
         data = readBytesFromFile(file);
-        lastFile = file;
+        lastFile = new WeakReference<File>(file);
         // データは、新たなWeakReferenceで包み込む
+        // WeakReferenceを使用することで、時々ディスクからデータを再読み込みするコストで、領域を回収させることができる
         lastData = new WeakReference<byte[]>(data);
 
         return data;
