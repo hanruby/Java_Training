@@ -1,8 +1,11 @@
 package ch16.ex16_11;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 
 /**
  * P.385 Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするクラス
@@ -66,5 +69,30 @@ public class PlayerLoader extends ClassLoader {
         }
         return in;
     }
+
+    @Override
+    protected Enumeration<URL> findResources(String name) throws IOException {
+        // TODO Auto-generated method stub
+        return super.findResources(name);
+    }
+    
+    @Override
+    @SuppressWarnings("deprecation")
+    public java.net.URL findResource(String name) {
+        File f = fileFor(name);
+        if (!f.exists())
+            return null;
+        try {
+            return f.toURL();
+        } catch (java.net.MalformedURLException e) {
+            return null; 
+        }
+    }
+
+    private File fileFor(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
 
