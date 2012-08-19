@@ -69,6 +69,7 @@ public class TicTacToeTest {
         t.setMark(2, 0, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
     
     @Test
@@ -84,6 +85,7 @@ public class TicTacToeTest {
         t.setMark(2, 1, Mark.O);
         assertTrue(t.isWin());
         assertEquals(Mark.O, t.getWinner());
+        t.printGrid();
     }
     
     @Test
@@ -99,6 +101,7 @@ public class TicTacToeTest {
         t.setMark(2, 2, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
     
     @Test
@@ -114,6 +117,7 @@ public class TicTacToeTest {
         t.setMark(0, 2, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
 
     @Test
@@ -129,6 +133,7 @@ public class TicTacToeTest {
         t.setMark(1, 2, Mark.O);
         assertTrue(t.isWin());
         assertEquals(Mark.O, t.getWinner());
+        t.printGrid();
     }
 
     @Test
@@ -144,6 +149,7 @@ public class TicTacToeTest {
         t.setMark(2, 2, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
 
     @Test
@@ -159,6 +165,7 @@ public class TicTacToeTest {
         t.setMark(2, 2, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
 
     @Test
@@ -174,6 +181,7 @@ public class TicTacToeTest {
         t.setMark(2, 0, Mark.X);
         assertTrue(t.isWin());
         assertEquals(Mark.X, t.getWinner());
+        t.printGrid();
     }
     
     

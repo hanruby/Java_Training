@@ -3,9 +3,19 @@ package ch16.ex16_11;
 public class TicTacToe {
 
     public enum Mark {
-        None,
-        X ,
-        O ,
+        None (" "),
+        X ("X"),
+        O ("O");
+        
+        String m;
+        private Mark(String m) {
+            this.m = m;
+        }
+        
+        @Override
+        public String toString() {
+            return this.m;
+        }
     }
 
     private Mark winner = Mark.None;
@@ -96,5 +106,29 @@ public class TicTacToe {
     
     public Mark getWinner() {
         return winner;
+    }
+    
+    public void printGrid() {
+        
+        /* 
+         * -----
+         * O X O
+         * X O X
+         * O X O
+         * -----
+         */
+        
+        StringBuilder output = new StringBuilder(30);
+        output.append("-----%n");
+        for (int y = 0; y < GRID_Y; y++) {
+            for (int x = 0; x < GRID_X; x++) {
+                output.append(grid[x][y].toString());
+                output.append(" ");
+            }
+            output.append("%n");
+        }
+        output.append("-----%n");
+
+        System.out.printf(output.toString());
     }
 }
