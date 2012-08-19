@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="build Game for JPL chapter 16" default="javac">
+  <target name="javac">
+    <javac srcdir="./" destdir="./"
+           classpath="../JPL"/>
+  </target>
+  <target name="clean">
+    <delete>
+      <fileset dir="." includes="**/*.class"/>
+    </delete>
+  </target>
+</project>

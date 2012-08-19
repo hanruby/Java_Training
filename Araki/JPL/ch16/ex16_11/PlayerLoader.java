@@ -1,12 +1,16 @@
 package ch16.ex16_11;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
  * P.385 Playerクラスからバイトコードを読み込んで、使用できるクラスとしてインストールするクラス
  */
 public class PlayerLoader extends ClassLoader {
+    
+    //public static String loadClassPath = "/Users/ato/git/practicejpl/Araki/Game/";
+    public static String loadClassPath = "./Game/";
     
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException
@@ -52,9 +56,15 @@ public class PlayerLoader extends ClassLoader {
         }
     }
 
-    private FileInputStream streamFor(String string) {
-        // TODO Auto-generated method stub
-        return null;
+    private FileInputStream streamFor(String name) {
+        FileInputStream in = null;
+        try {
+            System.out.println("Load from : " + loadClassPath + name);
+            in = new FileInputStream(loadClassPath + name);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return in;
     }
 }
 
