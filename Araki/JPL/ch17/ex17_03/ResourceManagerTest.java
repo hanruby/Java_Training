@@ -54,6 +54,12 @@ public class ResourceManagerTest {
         Runtime.getRuntime().gc();
         
         showFreeMemory();
+
+        System.out.println("Release half objects");
+        for (int i = SIZE/2; i < SIZE; i++) {
+            resources[i].release();
+        }
+        showFreeMemory();
     }
     
     private static void showFreeMemory() {

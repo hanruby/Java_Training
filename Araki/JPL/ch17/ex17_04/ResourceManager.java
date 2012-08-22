@@ -1,4 +1,4 @@
-package ch17.ex17_03;
+package ch17.ex17_04;
 
 import java.lang.ref.*;
 import java.util.HashMap;
@@ -64,9 +64,15 @@ public final class ResourceManager {
     class ReaperThread extends Thread {
         public void run() {
             // 割り込まれるまで実行
+            boolean shutdown = false;
+            
             while (true) {
                 try {
                     Reference<?> ref =  queue.remove();
+                    if ( refs.size() == 0 && shutdown ) {
+                        System.out.println("Finished all resource release.");
+                        break;
+                    }
                     Resource res = null;
                     synchronized(ResourceManager.this) {
                         res = refs.get(ref);
@@ -76,7 +82,12 @@ public final class ResourceManager {
                     ref.clear();
                 }
                 catch (InterruptedException ex) {
-                    break; // すべて終了
+                    // すべての割り当てられたResourceが開放されないと終了しない
+                    System.out.println("Waiting for all resources is released.");
+                    if ( refs.size() == 0 ) {
+                        break;
+                    }
+                    shutdown = true;
                 }
             }
         }

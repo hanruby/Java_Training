@@ -1,4 +1,4 @@
-package ch17.ex17_03;
+package ch17.ex17_04;
 
 
 public class ResourceManagerTest {
@@ -35,7 +35,7 @@ public class ResourceManagerTest {
         showFreeMemory();
         
         System.out.println("Release half objects");
-        for (int i = 0; i < SIZE / 2; i++) {
+        for (int i = 0; i < SIZE; i++) {
             resources[i].release();
         }
         showFreeMemory();
