@@ -1,13 +1,19 @@
 package ch17.ex17_03;
 
+/**
+ * P.403<br>
+ * Resourceの実装クラス<br>
+ * Resourceオブジェクトが、キーへの強い参照を保持していないことが重要。<br>
+ *  
+ */
 public class ResourceImpl implements Resource {
 
     int keyHash;
     boolean needsRelease = false;
-
+    
     ResourceImpl(Object key) {
         keyHash = System.identityHashCode(key);
-
+        
         // .. 外部リソースの設定
 
         needsRelease = true;

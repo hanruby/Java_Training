@@ -7,32 +7,39 @@ public class ResourceManagerTest {
         
         int SIZE = 10000;
         ResourceManager manager;
-        String key;
-
+        
         manager = new ResourceManager();
-        Resource[] resArr = new Resource[SIZE];
+        Resource[] resources = new Resource[SIZE];
 
+        System.out.println("gc!");
+        Runtime.getRuntime().gc();
+        
+        System.out.println("Initialize");
         showFreeMemory();
         
-        for(int i = 0; i < SIZE; i++) {
-            key = String.valueOf("str:"+i);
-            resArr[i] = manager.getResource(key);
-            resArr[i].use(key, new Integer(i));
-            key = null;
+        {
+            for (int i = 0; i < SIZE; i++) {
+                String key = String.valueOf("key : " + i);
+
+                resources[i] = manager.getResource(key);
+                resources[i].use(key, new Integer(i));
+            }
         }
 
+        System.out.println("Stored objects");
         showFreeMemory();
         
-        for(int i = SIZE; i < SIZE / 2; i++){
-            resArr[i].release();
+        System.out.println("Release half objects");
+        for (int i = SIZE; i < SIZE / 2; i++){
+            resources[i].release();
         }
 
         System.out.println("gc!");
-        
         Runtime.getRuntime().gc();
         
         showFreeMemory();
         
+        System.out.println("Shutdown ResourceManager");
         manager.shutdown();
         
         showFreeMemory();
