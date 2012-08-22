@@ -28,11 +28,17 @@ public class ResourceManagerTest {
 
         System.out.println("Stored objects");
         showFreeMemory();
+
+        System.out.println("gc!");
+        Runtime.getRuntime().gc();
+        
+        showFreeMemory();
         
         System.out.println("Release half objects");
-        for (int i = SIZE; i < SIZE / 2; i++){
+        for (int i = 0; i < SIZE / 2; i++) {
             resources[i].release();
         }
+        showFreeMemory();
 
         System.out.println("gc!");
         Runtime.getRuntime().gc();
@@ -41,6 +47,11 @@ public class ResourceManagerTest {
         
         System.out.println("Shutdown ResourceManager");
         manager.shutdown();
+        
+        showFreeMemory();
+
+        System.out.println("gc!");
+        Runtime.getRuntime().gc();
         
         showFreeMemory();
     }

@@ -1,5 +1,7 @@
 package ch17.ex17_03;
 
+import java.lang.ref.SoftReference;
+
 /**
  * P.403<br>
  * Resourceの実装クラス<br>
@@ -8,11 +10,11 @@ package ch17.ex17_03;
  */
 public class ResourceImpl implements Resource {
 
-    int keyHash;
+    SoftReference<Object> keyObject; // ソフト参照でキーオブジェクトを保持する
     boolean needsRelease = false;
     
     ResourceImpl(Object key) {
-        keyHash = System.identityHashCode(key);
+        keyObject = new SoftReference<Object>(key);
         
         // .. 外部リソースの設定
 
@@ -21,9 +23,9 @@ public class ResourceImpl implements Resource {
     
     @Override
     public void use(Object key, Object... args) {
-        if (System.identityHashCode(key) != keyHash)
+        if ( keyObject != null && !keyObject.get().equals(key) )
             throw new IllegalArgumentException("wrong key");
-
+        
         // ... リソースの使用 ...        
     }
 
@@ -33,6 +35,7 @@ public class ResourceImpl implements Resource {
             needsRelease = false;
 
             // .. リソースの解放 ...
+            keyObject.clear();
         }        
     }
 
