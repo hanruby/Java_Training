@@ -11,7 +11,7 @@ public class GC_practice {
         System.out.println("Now, creating objects.");
 
         {
-            for(int i = 0; i < 10000; i++){
+            for(int i = 0; i < 10000; i++) {
                 @SuppressWarnings("unused")
                 Byte[] array = new Byte[1000];
             }
