@@ -34,7 +34,7 @@ public class ResourceManagerTest {
         
         showFreeMemory();
         
-        System.out.println("Release half objects");
+        System.out.println("Release all objects");
         for (int i = 0; i < SIZE; i++) {
             resources[i].release();
         }
