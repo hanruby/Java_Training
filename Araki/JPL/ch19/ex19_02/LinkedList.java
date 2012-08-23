@@ -6,11 +6,17 @@ import ch02.ex02_15.Vehicle;
  * LinkedList 
  */
 public class LinkedList {
+    /**
+     * オブジェクトを格納する要素
+     */
 	private Object obj;
+	
+	/**
+	 * 次のLinkedList要素
+	 */
 	private LinkedList next;
 	
 	/**
-	 * コンストラクタ 
 	 * @param obj LinkedListへ格納するオブジェクト
 	 */
 	public LinkedList(Object obj) {

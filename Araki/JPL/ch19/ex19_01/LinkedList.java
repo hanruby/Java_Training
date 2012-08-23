@@ -10,7 +10,6 @@ public class LinkedList {
 	private LinkedList next;
 	
 	/**
-	 * コンストラクタ 
 	 * @param obj LinkedListへ格納するオブジェクト
 	 */
 	public LinkedList(Object obj) {
