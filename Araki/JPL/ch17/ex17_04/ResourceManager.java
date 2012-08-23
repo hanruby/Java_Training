@@ -70,7 +70,7 @@ public final class ResourceManager {
                 try {
                     Reference<?> ref =  queue.remove();
                     if ( refs.size() == 0 && shutdown ) {
-                        System.out.println("Finished all resource release.");
+                        System.out.println("All resources was released.");
                         break;
                     }
                     Resource res = null;
