@@ -2,30 +2,56 @@ package ch19.ex19_01;
 
 import ch02.ex02_15.Vehicle;
 
+/**
+ * LinkedList 
+ */
 public class LinkedList {
 	private Object obj;
 	private LinkedList next;
 	
+	/**
+	 * コンストラクタ 
+	 * @param obj LinkedListへ格納するオブジェクト
+	 */
 	public LinkedList(Object obj) {
 		this.obj = obj;
 	}
 	
+	/**
+	 * LinkedListで保持しているオブジェクトを返すメソッド
+	 * @return このリンクで保持しているオブジェクト
+	 */
 	public Object getObj() {
 		return obj;
 	}
 
+	/**
+	 * LinkedListへオブジェクトを保持するメソッド
+	 * @param obj LinkedListへ保持するオブジェクト
+	 */
 	public void setObj(Object obj) {
 		this.obj = obj;
 	}
 
+	/**
+	 * 次のLinkedListを返すメソッド
+	 * @return 次のLinkedList
+	 */
 	public LinkedList getNext() {
 		return next;
 	}
 
+	/**
+	 * 次のLinkedListをセットするメソッド
+	 * @param next 次のLinkedList
+	 */
 	public void setNext(LinkedList next) {
 		this.next = next;
 	}
 
+	/**
+	 * LinkedListの内容を文字列へ変換するメソッド
+	 */
 	@Override
 	public String toString() {
 		String desc = this.obj.toString();
@@ -36,10 +62,8 @@ public class LinkedList {
 	}
 	
 	/**
-	 * ex02_12 
-	 * 可変長の引数で一括してobjectを登録するメソッドを書いてみた。
-	 * comment: 一括で登録できるため便利だと思う。
-	 * @param objs
+	 * 可変長の引数で一括してObjectを登録するメソッド
+	 * @param objs 登録する複数のオブジェクト
 	 */
 	public void setObjects(Object... objs) {
 		LinkedList l = this;
@@ -49,6 +73,10 @@ public class LinkedList {
 		}
 	}
 	
+	/**
+	 * LinkedListの長さを返すメソッド
+	 * @return LinkedListの長さ
+	 */
 	public long len() {
 		long length = 1;
 		if (this.next != null) {
@@ -56,7 +84,11 @@ public class LinkedList {
 		}
 		return length;
 	}
-	
+
+	/**
+	 * サンプルプログラム
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		LinkedList l;
 		
