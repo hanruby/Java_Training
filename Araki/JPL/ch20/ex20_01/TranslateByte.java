@@ -12,12 +12,11 @@ public class TranslateByte {
 
     public static void main(String[] args) throws IOException {
         
-        translate(args[0],args[1]);
+        translate((byte)args[0].charAt(0),(byte)args[1].charAt(0));
     }
 
-    private static void translate(String in, String out) throws IOException {
-        byte from = (byte) in.charAt(0);
-        byte to = (byte) out.charAt(0);
+    private static void translate(byte from, byte to) throws IOException {
+
         int b;
         
         while ((b = System.in.read()) != -1) {
