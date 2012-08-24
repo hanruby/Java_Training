@@ -26,4 +26,14 @@ public class TranslateByteTest {
 
         assertEquals("Abc", out.toString());
     }
+    
+    @Test
+    public void testTranslate_02() throws Exception {
+        OutputStream out = new ByteArrayOutputStream();
+        InputStream in = new ByteArrayInputStream("abcabcabcabc".getBytes());
+        
+        TranslateByte.translate(in, out, (byte)'b',(byte)'B');
+
+        assertEquals("aBcaBcaBcaBc", out.toString());
+    }
 }
