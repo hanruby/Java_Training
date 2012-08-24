@@ -12,15 +12,17 @@ public class TranslateByte {
 
     public static void main(String[] args) throws IOException {
         
-        translate((byte)args[0].charAt(0),(byte)args[1].charAt(0));
+        translate(System.in, System.out, (byte)args[0].charAt(0),(byte)args[1].charAt(0));
     }
 
-    private static void translate(byte from, byte to) throws IOException {
+    public static void translate(InputStream in, OutputStream out, byte from, byte to) throws IOException {
 
         int b;
         
-        while ((b = System.in.read()) != -1) {
-            System.out.write(b == from ? to : b);
+        while ((b = in.read()) != -1) {
+            out.write(b == from ? to : b);
         }
+        
+        out.flush();
     }
 }
