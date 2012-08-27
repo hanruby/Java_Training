@@ -19,21 +19,31 @@ public class TranslateByteTest {
 
     @Test
     public void testTranslate_01() throws Exception {
-        OutputStream out = new ByteArrayOutputStream();
+        StringBuilder builder = new StringBuilder();
         InputStream in = new ByteArrayInputStream("abc".getBytes());
         
-        TranslateByte.translate(in, out, (byte)'a',(byte)'A');
+        TranslateByte tb = new TranslateByte(in, (byte)'a',(byte)'A');
+        
+        int c;
+        while( (c = tb.read()) != -1 ) {
+            builder.append((char)c);
+        }
 
-        assertEquals("Abc", out.toString());
+        assertEquals("Abc", builder.toString());
     }
     
     @Test
     public void testTranslate_02() throws Exception {
-        OutputStream out = new ByteArrayOutputStream();
+        StringBuilder builder = new StringBuilder();
         InputStream in = new ByteArrayInputStream("abcabcabcabc".getBytes());
         
-        TranslateByte.translate(in, out, (byte)'b',(byte)'B');
+        TranslateByte tb = new TranslateByte(in, (byte)'b',(byte)'B');
+        
+        int c;
+        while( (c = tb.read()) != -1 ) {
+            builder.append((char)c);
+        }
 
-        assertEquals("aBcaBcaBcaBc", out.toString());
+        assertEquals("aBcaBcaBcaBc", builder.toString());
     }
 }
