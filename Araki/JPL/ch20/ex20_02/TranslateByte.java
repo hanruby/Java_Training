@@ -47,15 +47,4 @@ public class TranslateByte extends FilterInputStream {
         }
         System.out.println();
     }
-
-    public static void translate(InputStream in, OutputStream out, byte from, byte to) throws IOException {
-
-        int b;
-        
-        while ((b = in.read()) != -1) {
-            out.write(b == from ? to : b);
-        }
-        
-        out.flush();
-    }
 }
