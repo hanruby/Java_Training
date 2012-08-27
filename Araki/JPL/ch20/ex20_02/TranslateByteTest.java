@@ -4,9 +4,7 @@ package ch20.ex20_02;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import org.junit.Before;
 import org.junit.Test;
