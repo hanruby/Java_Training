@@ -23,13 +23,9 @@ public class TranslateByte extends FilterInputStream {
      */
     @Override
     public int read() throws IOException {
-        int b;
+        int b = super.read();
         
-        if ((b = super.read()) != -1) {
-            return (b == from ? to : b);
-        }
-
-        return -1;
+        return (b == from ? to : b);
     }
 
     /**
