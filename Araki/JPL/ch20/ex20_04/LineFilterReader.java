@@ -5,7 +5,11 @@ import java.io.Reader;
 
 public class LineFilterReader extends FilterReader{
 
-    protected LineFilterReader(Reader reader) {
-        super(reader);
+    protected LineFilterReader(Reader in) {
+        super(in);
+    }
+    
+    public String readLine() {
+        return null;
     }
 }
