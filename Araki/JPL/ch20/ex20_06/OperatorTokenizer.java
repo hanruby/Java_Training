@@ -85,14 +85,14 @@ public class OperatorTokenizer {
                     double rightVal = 0.0;
                     
                     try {
-                        leftVal = operations.get(key);
+                        leftVal = operations.get(name);
                     } catch (Exception e) {
                         // キーが見つからなかったら 0 にする
                         leftVal = 0.0;
                     }
                     
                     try {
-                        rightVal = operations.get(name);
+                        rightVal = operations.get(key);
                     } catch (Exception e) {
                         // キーが見つからなかったら 0 にする
                         rightVal = 0.0;
