@@ -16,6 +16,19 @@ public class OperatorTokenizerTest {
 
     
     @Test
+    public void test_ExpressionState() throws Exception {
+        OperatorTokenizer.ExpressionState state = OperatorTokenizer.ExpressionState.NAME;
+        state = state.next();
+        assertEquals(OperatorTokenizer.ExpressionState.OPERATION, state);
+        
+        state = state.next();
+        assertEquals(OperatorTokenizer.ExpressionState.VALUE, state);
+        
+        state = state.next();
+        assertEquals(OperatorTokenizer.ExpressionState.NAME, state);
+    }
+    
+    @Test
     public void test_Tokenizer() throws Exception {
         String filename = "JPL/ch20/ex20_06/calclist.txt";
 

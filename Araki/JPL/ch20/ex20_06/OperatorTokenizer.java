@@ -76,30 +76,30 @@ public class OperatorTokenizer {
         }
     }
     
-    private enum Expression {
+    protected enum ExpressionState {
         NAME {
             @Override
-            public void next() {
-                // TODO Auto-generated method stub
-                
+            public ExpressionState next() {
+                return OPERATION;
             }
         },
         OPERATION {
-              @Override
-            public void next() {
-                // TODO Auto-generated method stub
-                
+            @Override
+            public ExpressionState next() {
+                return VALUE;
             }
         },
         VALUE {
             @Override
-            public void next() {
-                // TODO Auto-generated method stub
-                
+            public ExpressionState next() {
+                return NAME;
             }
         };
         
-        public abstract void next(); 
+        public abstract ExpressionState next();
+        public ExpressionState reset() {
+            return NAME;
+        }
     }
     
 }
