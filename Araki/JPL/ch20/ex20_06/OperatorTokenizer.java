@@ -81,9 +81,22 @@ public class OperatorTokenizer {
                 // 値
                 if (state == ExpressionState.VALUE) {
                     String key = in.sval;
-                    double leftVal = operations.get(key);
-                    double rightVal = operations.get(name);
-                    // TODO: keyがない場合
+                    double leftVal = 0.0;
+                    double rightVal = 0.0;
+                    
+                    try {
+                        leftVal = operations.get(key);
+                    } catch (Exception e) {
+                        // キーが見つからなかったら 0 にする
+                        leftVal = 0.0;
+                    }
+                    
+                    try {
+                        rightVal = operations.get(name);
+                    } catch (Exception e) {
+                        // キーが見つからなかったら 0 にする
+                        rightVal = 0.0;
+                    }
                     
                     operations.put(name, operator.calc(leftVal, rightVal));
                                         
@@ -100,6 +113,7 @@ public class OperatorTokenizer {
                     try {
                         leftVal = operations.get(name);
                     } catch (NullPointerException e) {
+                        // キーが見つからなかったら 0 にする
                         leftVal = 0.0;
                     }
                     double rightVal = value;
