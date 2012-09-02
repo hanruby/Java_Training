@@ -4,6 +4,10 @@ package ch20.ex20_06;
 import static org.junit.Assert.*;
 
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +44,11 @@ public class OperatorTokenizerTest {
             OperatorTokenizer ot = new OperatorTokenizer();
             ot.readOperation(fileIn);
             ot.printOperations();
+            
+            assertEquals(130.0, ot.operations.get("x"), 0);
+            assertEquals(130.0, ot.operations.get("y"), 0);
+            assertEquals(-100.0, ot.operations.get("z"), 0);
+            assertEquals(20.0, ot.operations.get("i"), 0);
 
         } finally {
             // Close FileReader and LineNumberReader

@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 public class OperatorTokenizer {
 
-    private Map<String, Double> operations = new HashMap<String, Double>();
+    protected Map<String, Double> operations = new HashMap<String, Double>();
     
     enum Operator {
         PLUS('+') {
@@ -141,7 +141,6 @@ public class OperatorTokenizer {
     }
     
     public void printOperations() {
-        System.out.println("value num = " + operations.size());
         for (Entry<String, Double> operator : operations.entrySet()) {
             System.out.printf("%s:%f%n",operator.getKey(), operator.getValue());
         }
