@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class OperatorTokenizer {
 
-    private Map<String, Double> operation = new HashMap<String, Double>();
+    private Map<String, Double> operations = new HashMap<String, Double>();
     
     enum Operator {
         PLUS('+') {
@@ -82,7 +82,7 @@ public class OperatorTokenizer {
             else if (in.ttype == StreamTokenizer.TT_NUMBER) {
                 if (state == ExpressionState.VALUE) {
                     value = in.nval;
-                    operation.put(name, value);
+                    operations.put(name, value);
                     //operation.get(name);
                     state = state.next();
                 } else {
