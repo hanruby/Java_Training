@@ -137,7 +137,11 @@ public class OperatorTokenizer {
         }
     }
     
+    /**
+     * 式の遷移を表す 
+     */
     protected enum ExpressionState {
+        // FIXME: 状態にアクションを含めるほうがいいかも
         NAME {
             @Override
             public ExpressionState next() {
