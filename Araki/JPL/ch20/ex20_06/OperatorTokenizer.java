@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class OperatorTokenizer {
 
@@ -13,19 +14,19 @@ public class OperatorTokenizer {
     enum Operator {
         PLUS('+') {
             @Override
-            public int calc(int left, int right) {
+            public double calc(double left, double right) {
                 return left + right;
             }
         },
         MINUS('-') {
             @Override
-            public int calc(int left, int right) {
+            public double calc(double left, double right) {
                 return left - right;
             }
         },
         EQUAL('=') {
             @Override
-            public int calc(int left, int right) {
+            public double calc(double left, double right) {
                 return right;
             }
         };
@@ -36,7 +37,7 @@ public class OperatorTokenizer {
             this.op = op;
         }
         
-        public abstract int calc(int left, int right);
+        public abstract double calc(double left, double right);
         
         @Override
         public String toString() {
@@ -61,7 +62,7 @@ public class OperatorTokenizer {
     public void readOperation(Reader source) throws IOException {
         double value = 0.0;
         String name = null;
-        Operator operator ;
+        Operator operator = null;
                 
         ExpressionState state = ExpressionState.reset();
         
@@ -70,16 +71,28 @@ public class OperatorTokenizer {
         in.commentChar('#');  // コメント文字を'#'にする
         in.ordinaryChar('/'); // '/'をコメント文字でなくす
         while (in.nextToken() != StreamTokenizer.TT_EOF) {
-            System.out.println(String.valueOf(in.ttype));
             // もし、単語だったら:
             if (in.ttype == StreamTokenizer.TT_WORD) {
+                // 変数名
                 if (state == ExpressionState.NAME) {
                     name = in.sval;
+                    state = state.next();
+                }
+                // 値
+                if (state == ExpressionState.VALUE) {
+                    String key = in.sval;
+                    double leftVal = operations.get(key);
+                    double rightVal = operations.get(name);
+                    // TODO: keyがない場合
+                    
+                    operations.put(name, operator.calc(leftVal, rightVal));
+                                        
                     state = state.next();
                 }
             } 
             // もし、数値だったら
             else if (in.ttype == StreamTokenizer.TT_NUMBER) {
+                // 値
                 if (state == ExpressionState.VALUE) {
                     value = in.nval;
                     operations.put(name, value);
@@ -89,6 +102,7 @@ public class OperatorTokenizer {
                     throw new IOException("misplaced value");
                 }
             }
+            // 演算子
             else if (state == ExpressionState.OPERATION) {
                 Character opchar = (char)in.ttype;
                 operator = Operator.get(opchar);
@@ -127,6 +141,9 @@ public class OperatorTokenizer {
     }
     
     public void printOperations() {
-        
+        System.out.println("value num = " + operations.size());
+        for (Entry<String, Double> operator : operations.entrySet()) {
+            System.out.printf("%s:%f%n",operator.getKey(), operator.getValue());
+        }
     }
 }

@@ -37,7 +37,9 @@ public class OperatorTokenizerTest {
         try {
             fileIn = new FileReader(filename);
             
-            new OperatorTokenizer().readOperation(fileIn);
+            OperatorTokenizer ot = new OperatorTokenizer();
+            ot.readOperation(fileIn);
+            ot.printOperations();
 
         } finally {
             // Close FileReader and LineNumberReader
