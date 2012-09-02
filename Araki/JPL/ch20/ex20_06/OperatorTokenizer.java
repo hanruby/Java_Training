@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class OperatorTokenizer {
 
-    private Map<String, Integer> operation = new HashMap<String, Integer>();
+    private Map<String, Double> operation = new HashMap<String, Double>();
     
     enum Operator {
         PLUS('+') {
@@ -42,36 +42,60 @@ public class OperatorTokenizer {
         public String toString() {
             return String.valueOf(this.op);
         }
+        
+        public Character toChar() {
+            return this.op;
+        }
+         
+        private static final Map<Character, Operator> lookup = new HashMap<Character, Operator>();
+        static {
+            for (Operator operator : Operator.values())
+                lookup.put(operator.toChar(), operator);
+        }
+
+        public static Operator get(Character op) {
+            return lookup.get(op);
+        }
     }
     
     public void readOperation(Reader source) throws IOException {
         double value = 0.0;
         String name = null;
-        String op = null;
+        Operator operator ;
+                
+        ExpressionState state = ExpressionState.reset();
         
         StreamTokenizer in = new StreamTokenizer(source);
         
         in.commentChar('#');  // コメント文字を'#'にする
         in.ordinaryChar('/'); // '/'をコメント文字でなくす
         while (in.nextToken() != StreamTokenizer.TT_EOF) {
+            System.out.println(String.valueOf(in.ttype));
             // もし、単語だったら:
             if (in.ttype == StreamTokenizer.TT_WORD) {
-                if (name == null) {
+                if (state == ExpressionState.NAME) {
                     name = in.sval;
-                } else {
-                    op = in.sval;
+                    state = state.next();
                 }
             } 
             // もし、数値だったら
             else if (in.ttype == StreamTokenizer.TT_NUMBER) {
-                if (name == null || op == null) {
-                    throw new IOException("misplaced");
-                } else {
-                    switch(in.ttype) {
-                        
-                    }
+                if (state == ExpressionState.VALUE) {
                     value = in.nval;
+                    operation.put(name, value);
+                    //operation.get(name);
+                    state = state.next();
+                } else {
+                    throw new IOException("misplaced value");
                 }
+            }
+            else if (state == ExpressionState.OPERATION) {
+                Character opchar = (char)in.ttype;
+                operator = Operator.get(opchar);
+                if (operator == null ) {
+                    throw new IOException("Operator incorrect");    
+                }
+                state = state.next();
             }
         }
     }
@@ -97,9 +121,12 @@ public class OperatorTokenizer {
         };
         
         public abstract ExpressionState next();
-        public ExpressionState reset() {
+        public static ExpressionState reset() {
             return NAME;
         }
     }
     
+    public void printOperations() {
+        
+    }
 }
