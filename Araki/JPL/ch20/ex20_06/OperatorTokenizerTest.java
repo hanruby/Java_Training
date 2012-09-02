@@ -46,8 +46,8 @@ public class OperatorTokenizerTest {
             ot.printOperations();
             
             assertEquals(130.0, ot.operations.get("x"), 0);
-            assertEquals(130.0, ot.operations.get("y"), 0);
-            assertEquals(-100.0, ot.operations.get("z"), 0);
+            assertEquals(140.0, ot.operations.get("y"), 0);
+            assertEquals(-110.0, ot.operations.get("z"), 0);
             assertEquals(20.0, ot.operations.get("i"), 0);
 
         } finally {

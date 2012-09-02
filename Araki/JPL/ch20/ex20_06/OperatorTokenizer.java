@@ -95,8 +95,17 @@ public class OperatorTokenizer {
                 // 値
                 if (state == ExpressionState.VALUE) {
                     value = in.nval;
-                    operations.put(name, value);
-                    //operation.get(name);
+                                 
+                    double leftVal = 0.0;
+                    try {
+                        leftVal = operations.get(name);
+                    } catch (NullPointerException e) {
+                        leftVal = 0.0;
+                    }
+                    double rightVal = value;
+                    
+                    operations.put(name, operator.calc(leftVal, rightVal));
+                    
                     state = state.next();
                 } else {
                     throw new IOException("misplaced value");
