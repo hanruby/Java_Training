@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class WordCount {
     private HashMap<String, Integer> countTable;
@@ -55,6 +56,21 @@ public class WordCount {
             countTable.put(key, count);
         } else {
             countTable.put(key, 1);
+        }
+    }
+    
+    public void printResults() {
+        for (Entry<String, Integer> element : countTable.entrySet()) {
+            System.out.printf("%s:%d%n",element.getKey(), element.getValue());
+        }
+    }
+    
+    public Integer getCount(String word) {
+        if (countTable.containsKey(word)) {
+            return countTable.get(word);
+        }
+        else {
+            return 0;
         }
     }
 }
