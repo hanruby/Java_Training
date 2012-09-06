@@ -33,6 +33,8 @@ public class AttrTest {
         DataInputStream in = new DataInputStream(fis);
         assertEquals("hoge", in.readUTF());
         assertEquals("piyo", in.readUTF());
+        
+        file.delete();
     }
     
     @Test
