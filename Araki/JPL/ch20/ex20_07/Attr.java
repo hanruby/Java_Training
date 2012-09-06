@@ -1,5 +1,6 @@
 package ch20.ex20_07;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -17,6 +18,11 @@ public class Attr {
     public Attr(String name, Object value) {
         this.name = name;
         this.value = value;
+    }
+        
+    public Attr(DataInputStream in) throws IOException {
+        name = in.readUTF();
+        value = in.readUTF();
     }
 
     public String getName() {

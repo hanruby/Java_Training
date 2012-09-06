@@ -22,7 +22,8 @@ public class AttrTest {
     @Test
     public void test_writeStream() throws Exception {
         File file = new File("JPL/ch20/ex20_07/out.txt");
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
+        FileOutputStream fos = new FileOutputStream(file);
+        DataOutputStream out = new DataOutputStream(fos);
 
         Attr a = new Attr("hoge","piyo");
         
@@ -32,5 +33,17 @@ public class AttrTest {
         DataInputStream in = new DataInputStream(fis);
         assertEquals("hoge", in.readUTF());
         assertEquals("piyo", in.readUTF());
+    }
+    
+    @Test
+    public void test_Attr_constructor_read_from_DataInputStream() throws Exception {
+        File file = new File("JPL/ch20/ex20_07/out.txt");
+        FileInputStream fis = new FileInputStream(file);
+        DataInputStream in = new DataInputStream(fis);
+        
+        Attr a = new Attr(in);
+        
+        assertEquals("hoge", a.getName());
+        assertEquals("piyo", a.getValue());
     }
 }
