@@ -1,16 +1,31 @@
-%%
+%% 
 足踏み（あしぶみ）
+Ashibumi, placing the footing. The archer steps onto the line from where arrows are shot (known as the shai) and turns to face the kamiza, so that the left side of his body faces the target. He then sights from the target to his feet and sets his feet apart so that the distance between them is equal to his yazuka, approximately half his body height, and equal to the length of an arrow. A line drawn between the archer's toes should pass through the target after the completion of the ashibumi. During competition, an archer may have a second set of arrows sitting on the ground at his or her feet. To be correct in ashibumi, these arrows must not extend in front of or behind the archer's footing stance. The archer's feet are then placed outward at a 60 degree angle from each other, forming a "V", this ensures equal balance to both feet.
 %%
 胴造り（どうづくり）
+Dozukuri, forming the body. The archer verifies his balance and that his pelvis and the line between his shoulders are parallel to the line set up during ashibumi. During dozukuri, the kyudoka will arch his or her back, straightening the back and causing the buttocks to stick out slightly behind. Practically this posture is to prevent the strings of the hakama from being clipped by the bowstring during shooting as well as ensuring the back of the archer is very straight, which, in turn, prevents the bowstring from striking the archer's face when shooting.
 %%
 弓構え（ゆがまえ）
+Yugamae, readying the bow. Yugamae consists of three phases:
+1. Torikake, gripping of the bowstring with the right hand.
+2. Tenouchi, the left hand is positioned for shooting on the bow's grip.
+3. Monomi, the archer turns the head to gaze at the target.
 %%
 打起し（うちおこし）
+Uchiokoshi, raising the bow. The archer raises the bow above the head to prepare for the draw.
 %%
 引分け（ひきわけ）
+Hikiwake, drawing apart. The archer starts bringing down the bow while spreading his arms, simultaneously pushing the bow with the left hand and drawing the string with the right, until the arrow is level with the eyebrows.
+1. Daisan, Big three. This forms the midway point in Hikiwake.
 %%
 会（かい）
+Kai, the full draw. The archer continues the movement started in the previous phase, until full draw is achieved with the arrow placed slightly below the cheekbone. The arrow points along the line set up during ashibumi.
+1. Tsumeai, constructing the vertical and horizontal lines of the body.
+2. Nobiai, uniting the expansions of the body.
 %%
 離れ（はなれ）
+Hanare, the release. The technique results in the bowstring being released from the right hand.
 %%
 残心（ざんしん）
+Zanshin, "the remaining body or mind" or "the continuation of the shot". The archer remains in the position reached after hanare while returning from the state of concentration associated with the shot.
+1. Yudaoshi, lowering of the bow.
