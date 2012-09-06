@@ -1,7 +1,7 @@
 package ch20.ex20_08;
 
 
-import static org.junit.Assert.*;
+
 
 import java.io.File;
 
@@ -21,7 +21,7 @@ public class RandomAccessTest {
         RandomAccess ra = new RandomAccess(file);
         
         ra.findEntryIndex();
-        
+
         ra.randomPrint();
     }
 }

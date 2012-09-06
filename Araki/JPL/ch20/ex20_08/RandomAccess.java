@@ -32,10 +32,20 @@ public class RandomAccess {
     public void findEntryIndex() throws IOException {
                 
         String line;
-        while ((line = fp.readLine()) != null) {
-            Matcher matcher = pattern.matcher(line);
-            if (matcher.matches()) {
+        while (true) {
+            long pos = fp.getFilePointer();
+            
+            // ファイルの最後
+            if ((line = fp.readLine()) == null) {
+                // ファイルの最後を保持する。
                 index.add(fp.getFilePointer());
+                break;
+            }
+            
+            Matcher matcher = pattern.matcher(line);
+            // パターンが一致したら保持する。
+            if (matcher.matches()) {
+                index.add(pos);
             }
         }
     }
@@ -50,14 +60,18 @@ public class RandomAccess {
         try {
             int randomIndex = rand.nextInt(index.size() - 1);
             long start = index.get(randomIndex);
-            long end = index.get(randomIndex+1);
+            long end = index.get(randomIndex + 1);
+
+            fp.seek(start);
+
+            // １行読み飛ばす
+            fp.readLine();
+            start = fp.getFilePointer();	
 
             int size = (int) (end - start);
-            
             byte[] buffer = new byte[size];
-            fp.seek(start);
-            fp.read(buffer);
             
+            fp.read(buffer);
             System.out.println(new String(buffer, "UTF-8"));
             
         } catch (IOException e) {
