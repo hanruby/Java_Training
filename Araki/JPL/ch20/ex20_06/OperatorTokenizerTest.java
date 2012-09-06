@@ -4,10 +4,6 @@ package ch20.ex20_06;
 import static org.junit.Assert.*;
 
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
