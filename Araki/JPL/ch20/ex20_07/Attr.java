@@ -1,5 +1,8 @@
 package ch20.ex20_07;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 /**
  * Attr class from P.66 in JPL
  */
@@ -32,6 +35,11 @@ public class Attr {
 
     public String toString() {
         return name + "='" + value + "'";
+    }
+    
+    public void writeStream(DataOutputStream out) throws IOException{
+        out.writeUTF(name);
+        out.writeUTF(value.toString());
     }
 }
 
