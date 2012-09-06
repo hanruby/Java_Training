@@ -37,7 +37,7 @@ public class AttrTest {
     
     @Test
     public void test_Attr_constructor_read_from_DataInputStream() throws Exception {
-        File file = new File("JPL/ch20/ex20_07/out.txt");
+        File file = new File("JPL/ch20/ex20_07/in.txt");
         FileInputStream fis = new FileInputStream(file);
         DataInputStream in = new DataInputStream(fis);
         
