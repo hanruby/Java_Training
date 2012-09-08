@@ -72,6 +72,13 @@ public class ObjectTree extends JPanel implements ActionListener{
                     if (node != null) {
                         Object obj = node.getUserObject();
                         
+                        if (node.getLevel() == 1) {
+                            DefaultMutableTreeNode child = node.getNextNode();
+                            node.removeAllChildren();
+                             
+                            reloadObjectTree(node, child.getUserObject());
+                        }
+                        
                         // Field
                         if (obj instanceof Field) {
                             Field field = (Field) obj;
@@ -141,11 +148,7 @@ public class ObjectTree extends JPanel implements ActionListener{
         // is Array
         if (obj.getClass().isArray()) {
             // Create object array tree
-            DefaultMutableTreeNode arrayTree = new DefaultMutableTreeNode("Array");
-            
-            arrayTree.add(createArrayTree(obj));
-            
-            newObject.add(arrayTree);
+            newObject.add(createArrayTree(obj));
         }
         else {
             // Create object node
@@ -154,6 +157,22 @@ public class ObjectTree extends JPanel implements ActionListener{
             newObject.add(objectTree);
         }
         root.add(newObject);
+        model.reload();
+    }
+
+    public void reloadObjectTree(DefaultMutableTreeNode newObject, Object obj) {
+
+        // is Array
+        if (obj.getClass().isArray()) {
+            // Create object array tree
+            newObject.add(createArrayTree(obj));
+        }
+        else {
+            // Create object node
+            DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
+            
+            newObject.add(objectTree);
+        }
         model.reload();
     }
     
