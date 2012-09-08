@@ -74,10 +74,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                         
                         // When object node is clicked, reload the tree structure
                         if (node.getLevel() == 1) {
-                            DefaultMutableTreeNode child = node.getNextNode();
-                            node.removeAllChildren();
-                             
-                            reloadObjectTree(node, child.getUserObject());
+                            reloadObjectTree(node);
                         }
                         
                         // Field
@@ -98,7 +95,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             controlPanal.execMethod(getObjectNode(node).getUserObject(), method);
                         }
                         // Array
-                        else if (obj != null && obj.getClass().isArray() && ArrayUtility.getDim(obj) == 2) {
+                        else if (obj != null && obj.getClass().isArray() && ArrayUtility.getDim(obj) <= 2) {
                                                         
                             System.out.println("Selected node is Array");
                             
@@ -161,18 +158,22 @@ public class ObjectTree extends JPanel implements ActionListener{
         model.reload();
     }
 
-    public void reloadObjectTree(DefaultMutableTreeNode newObject, Object obj) {
+    public void reloadObjectTree(DefaultMutableTreeNode node) {
+
+        DefaultMutableTreeNode child = node.getNextNode();
+        Object obj = child.getUserObject();
+        node.removeAllChildren();
 
         // is Array
         if (obj.getClass().isArray()) {
             // Create object array tree
-            newObject.add(createArrayTree(obj));
+            node.add(createArrayTree(obj));
         }
         else {
             // Create object node
             DefaultMutableTreeNode objectTree = new DefaultMutableTreeNode(obj);
             
-            newObject.add(objectTree);
+            node.add(objectTree);
         }
         model.reload();
     }
