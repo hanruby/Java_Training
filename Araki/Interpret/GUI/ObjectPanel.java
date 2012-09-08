@@ -23,7 +23,7 @@ public class ObjectPanel extends JPanel {
         base = new JPanel();
         JScrollPane tablePanel = new JScrollPane(base, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         
         drawArray(obj);
         add(tablePanel);

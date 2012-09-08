@@ -249,8 +249,12 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
 
         // Create object 
-        objctRoot.add(fieldTree);
-        objctRoot.add(methodTree);
+        if ( !fieldTree.isLeaf()) { 
+            objctRoot.add(fieldTree);
+        }
+        if ( !methodTree.isLeaf()) {
+            objctRoot.add(methodTree);            
+        }
     }
 
     public void changeFieldValue(Field field, String value) {
