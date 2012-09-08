@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
@@ -16,12 +17,13 @@ public class ObjectPanel extends JPanel {
 
     private JPanel base;
     private DefaultTableModel tableModel;
-    
+    private JScrollPane tablePanel;
+
     private Object array;
 
     public ObjectPanel(Object obj) {
         base = new JPanel();
-        JScrollPane tablePanel = new JScrollPane(base, 
+        tablePanel = new JScrollPane(base, 
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         
@@ -40,6 +42,12 @@ public class ObjectPanel extends JPanel {
 
         add(ok);
         updateUI();
+    }
+    
+    @Override
+    public void setPreferredSize(Dimension preferredSize) {
+        tablePanel.setPreferredSize(preferredSize);
+        super.setPreferredSize(preferredSize);
     }
     
     public void drawArray(Object obj) {

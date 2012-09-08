@@ -68,8 +68,6 @@ public class InterpretGUI extends JFrame{
         contentPane.add(viewerPanel, BorderLayout.WEST);
         contentPane.add(operationPanel, BorderLayout.SOUTH);
 
-
-        
         pack();
 
         setVisible(true);
@@ -93,6 +91,6 @@ public class InterpretGUI extends JFrame{
         objectTree.createObjectTree(hoge, "String array object");
         objectTree.createObjectTree(new GUI.TestA(), "TestA");
         objectTree.createObjectTree(new Integer[4][3], "null array");
-        objectTree.createObjectTree(new int[4][3], "null array");
+        objectTree.createObjectTree(new int[14][23], "null array");
     }
 }
