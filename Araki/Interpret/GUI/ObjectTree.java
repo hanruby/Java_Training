@@ -72,6 +72,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                     if (node != null) {
                         Object obj = node.getUserObject();
                         
+                        // When object node is clicked, reload the tree structure
                         if (node.getLevel() == 1) {
                             DefaultMutableTreeNode child = node.getNextNode();
                             node.removeAllChildren();
