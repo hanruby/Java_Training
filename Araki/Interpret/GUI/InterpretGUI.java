@@ -90,8 +90,8 @@ public class InterpretGUI extends JFrame{
         String[][] hoge = {{"aaa","bbb"},{"ccc","ddd"}};
         objectTree.createObjectTree(hoge, "String array object");
         objectTree.createObjectTree(new GUI.TestA(), "TestA");
-        objectTree.createObjectTree(new Integer[4][3], "null array");
-        objectTree.createObjectTree(new int[14][23], "null array");
-        objectTree.createObjectTree(new boolean[4][3], "null array");
+        objectTree.createObjectTree(new boolean[4][3], "boolean array");
+        int i = 0;
+        objectTree.createObjectTree(i, "i");
     }
 }

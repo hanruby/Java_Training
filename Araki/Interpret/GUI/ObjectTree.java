@@ -82,7 +82,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             Field field = (Field) obj;
                             System.out.println("Selected node is Field: " + field);
                             try {
-                                controlPanal.updateInfo(getObjectNode(node).getUserObject(), field, node.getChildAt(0));
+                                controlPanal.updateInfo(getObjectNode(node).getNextNode().getUserObject(), field, node.getChildAt(0));
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }
@@ -92,7 +92,7 @@ public class ObjectTree extends JPanel implements ActionListener{
                             Method method = (Method) obj;
                             System.out.println("Selected node is Method: " + method);
                             
-                            controlPanal.execMethod(getObjectNode(node).getUserObject(), method);
+                            controlPanal.execMethod(getObjectNode(node).getNextNode().getUserObject(), method);
                         }
                         // Array
                         else if (obj != null && obj.getClass().isArray() && ArrayUtility.getDim(obj) <= 2) {
@@ -326,16 +326,8 @@ public class ObjectTree extends JPanel implements ActionListener{
         }
     }
     
-    public void execMethod(String objectName, Method method, Object[] objs) {
+    public void execMethod(Object obj, String objectName, Method method, Object[] objs) {
         
-        // ツリーからオブジェクトを取得
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) objectTree.getLastSelectedPathComponent();
-        if (node == null || node.getParent() == null) {
-            return;
-        }
-        DefaultMutableTreeNode objectRoot = getObjectNode(node);
-        Object obj = objectRoot.getNextNode().getUserObject();
-
         if (method != null && objectName != null && !objectName.equals("")) {
 
             Object ret = null;

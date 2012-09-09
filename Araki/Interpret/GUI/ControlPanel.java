@@ -134,7 +134,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         removeContents();
         
         this.field.setAccessible(true);
-        objectField.setText((String) this.obj);
+        objectField.setText((String) this.obj.toString());
         fieldField.setText(this.field.getName());
         typeField.setText(this.field.getType().getCanonicalName());
         valueField.setText(h.toString());
@@ -214,7 +214,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         removeContents();
         
         typeField.setText(this.method.getReturnType().getCanonicalName());
-        objectField.setText((String) this.obj);
+        objectField.setText((String) this.obj.toString());
         methodField.setText(this.method.getName());
 
         JButton execButton = new JButton("Exec");
@@ -331,7 +331,7 @@ public class ControlPanel extends JPanel implements ActionListener {
                 return;
             }
             
-            objectTree.execMethod("result", method, initargs);
+            objectTree.execMethod(obj, "result", method, initargs);
         }
     }
 }
