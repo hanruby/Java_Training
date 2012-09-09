@@ -101,7 +101,6 @@ public class ObjectTree extends JPanel implements ActionListener{
                             
                             ObjectPanel op = new ObjectPanel(obj);
                             op.setPreferredSize(subPanel.getPreferredSize());
-                            System.out.println(subPanel.getPreferredSize());
                             
                             subPanel.removeAll();
                             subPanel.add(op);
