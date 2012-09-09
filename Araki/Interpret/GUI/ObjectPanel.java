@@ -76,6 +76,16 @@ public class ObjectPanel extends JPanel {
                     
                     tableModel.setValueAt(obj, dl.getRow(), dl.getColumn());
                     
+                    switch (ArrayUtility.getDim(array)) {
+                    case 2:
+                        Object line = Array.get(array, dl.getRow());
+                        Array.set(line, dl.getColumn(), obj);
+                        break;
+                    case 1:
+                        Array.set(array, dl.getColumn(), obj);
+                        break;
+                    }
+                    
                     return true;
 
                 } catch (UnsupportedFlavorException ex) {

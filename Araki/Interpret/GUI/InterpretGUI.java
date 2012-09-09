@@ -92,5 +92,6 @@ public class InterpretGUI extends JFrame{
         objectTree.createObjectTree(new GUI.TestA(), "TestA");
         objectTree.createObjectTree(new Integer[4][3], "null array");
         objectTree.createObjectTree(new int[14][23], "null array");
+        objectTree.createObjectTree(new boolean[4][3], "null array");
     }
 }
