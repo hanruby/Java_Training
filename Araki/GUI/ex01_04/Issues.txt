@@ -1,0 +1,2 @@
+
+- WindowsでPropertiesを変更するとWindowが後ろへ行ってしまう。
