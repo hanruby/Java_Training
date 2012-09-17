@@ -12,6 +12,12 @@ public class LineFilterReader extends FilterReader{
 
     private boolean carriageReturn = false;
     
+    /**
+     * Read a line of text.  
+     * 
+     * @throws  IOException
+     *          If an I/O error occurs
+     */
     public String readLine() throws IOException {
         
         StringBuilder builder = new StringBuilder();
