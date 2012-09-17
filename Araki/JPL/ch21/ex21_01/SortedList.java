@@ -1,11 +1,9 @@
 package ch21.ex21_01;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 import ch20.ex20_04.LineFilterReader;
