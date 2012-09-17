@@ -27,8 +27,7 @@ public class LineFilterReaderTest {
         assertEquals("ccc", lineFilterReader.readLine());
         assertEquals("ddd", lineFilterReader.readLine());
         assertEquals("", lineFilterReader.readLine());
-        
-        
+        assertEquals(null, lineFilterReader.readLine());
     }
     
     @Test
@@ -44,9 +43,6 @@ public class LineFilterReaderTest {
         assertEquals("ccc", lineFilterReader.readLine());
         assertEquals("ddd", lineFilterReader.readLine());
         assertEquals("", lineFilterReader.readLine());
-        assertEquals("", lineFilterReader.readLine());
-        assertEquals("", lineFilterReader.readLine());
-        
-        
+        assertEquals(null, lineFilterReader.readLine());
     }
 }
