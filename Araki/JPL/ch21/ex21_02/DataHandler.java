@@ -1,27 +1,25 @@
 package ch21.ex21_02;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
 
 public class DataHandler {
   
-    private File lastFile;    // 最後に読んだファイル
-    private WeakReference<byte[]> lastData;    // （おそらく）最後のデータ
+    private WeakHashMap<File, byte[]> weakMap = new WeakHashMap<File, byte[]>();
 
     byte[] readFile(File file) {
         byte[] data;
 
         // データを記憶しているか調べる
-        if (file.equals(lastFile)) {
-            data = lastData.get();
+        if (weakMap.containsKey(file)) {
+            data = weakMap.get(file);
             if (data != null)
                 return data;
         }
 
         // 記憶していないので、読み込む
         data = readBytesFromFile(file);
-        lastFile = file;
-        lastData = new WeakReference<byte[]>(data);
+        weakMap.put(file, data);
 
         return data;
     }
