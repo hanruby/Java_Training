@@ -29,6 +29,10 @@ public class ShortStrings implements Iterator<String> {
      *         見つけることなく、文字列元のイテレータが終わると、falseを返す。
      */
     public boolean hasNext() {
+        /* hasNextの設計:
+         * nextの前に複数回呼び出されても動作するようになっている ← 必須事項
+         * 
+         */
         // すでに見つけた
         if (nextShort != null) {
             return true;
@@ -50,6 +54,10 @@ public class ShortStrings implements Iterator<String> {
      * @throws NoSuchElementException 何も返すものがない場合
      */
     public String next() {
+        /*
+         * nextの設計:
+         * hasNextを一度も呼び出さなかった場合でも動作するようになっている 
+         */
         if (nextShort == null && !hasNext()) {
             throw new NoSuchElementException();
         }
@@ -63,6 +71,10 @@ public class ShortStrings implements Iterator<String> {
      * @throws UnsupportedOperationException
      */
     public void remove() {
+        /*
+         * removeの設計:
+         * 正しく動作することができないため、利用を許さない
+         */
         throw new UnsupportedOperationException();
     }
 }
