@@ -1,4 +1,4 @@
-package ch21.ex21_04;
+package practice.ch21_Collections;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
