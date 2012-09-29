@@ -2,7 +2,15 @@ package ch22.ex22_02;
 
 import java.util.BitSet;
 
+/**
+ * 文字列中に出現した文字を記録する 
+ * @see JPL P.559
+ */
 public class WhichChars {
+    /** 
+     * 出現した文字を保持する<br>
+     * BitSet内の各位置は、文字の数値を表す
+     */
     private BitSet used = new BitSet();
 
     public WhichChars(String str) {
