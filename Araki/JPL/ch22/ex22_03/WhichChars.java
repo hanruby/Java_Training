@@ -16,12 +16,14 @@ public class WhichChars {
      */
     private HashMap<Byte, BitSet> usedMap = new HashMap<Byte, BitSet>();
 
+    private static int shift = (21-8);
+    
     public WhichChars(String str) {
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
 
-            Byte topByte = (byte) ((c >>> 8) & 0xFF); // 上位8ビット
-            Byte lowBytes = (byte) (c & 0xFF); // 下位ビット
+            Byte topByte = (byte) ((c >>> shift) & 0xFF); // 上位8ビット
+            Integer lowBytes = (int) (c & 0xFFFF); // 下位ビット
 
             // Mapに上位バイトが格納されている場合
             if (usedMap.containsKey(topByte)) {
@@ -50,7 +52,7 @@ public class WhichChars {
             
             for (int lowBytes = used.nextSetBit(0); lowBytes >= 0; lowBytes = used.nextSetBit(lowBytes + 1)) {
                 char ch;
-                ch = (char) (topByte << 8); // 上位バイトをシフト
+                ch = (char) (topByte << shift); // 上位バイトをシフト
                 ch |= (char) lowBytes; // 下位バイトを接続
                 desc.append(ch);
             }

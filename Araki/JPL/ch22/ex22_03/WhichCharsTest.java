@@ -32,6 +32,12 @@ public class WhichCharsTest {
             
             assertEquals("[123あいう１２３]", wc.toString());
         }
+        {
+            WhichChars wc = new WhichChars("ARAKI Ato 荒木天外 アラキアト ⌘");
+            
+            assertEquals("[ AIKRot⌘アキトラ外天木荒]", wc.toString());
+        }
+
     }
 
 }
