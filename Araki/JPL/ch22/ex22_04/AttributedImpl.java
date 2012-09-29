@@ -1,32 +1,57 @@
 package ch22.ex22_04;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Observable;
 
 public class AttributedImpl extends Observable implements Attributed {
 
+    LinkedList<Attr> list = new LinkedList<Attr>();
+
     @Override
     public void add(Attr newAttr) {
-        // TODO Auto-generated method stub
-        
+        Attr attr = this.find(newAttr.getName());
+
+        // NotFound
+        if (attr == null) {
+
+        }
+        list.add(attr);
+
+        // Notify observers
+        setChanged();
+        notifyObservers("Add attr object : " + attr.getName());
     }
 
     @Override
     public Attr find(String attrName) {
-        // TODO Auto-generated method stub
+        for (Attr attr : list) {
+            if (attr.getName().equals(attrName)) {
+                return attr;
+            }
+        }
         return null;
     }
 
     @Override
     public Attr remove(String attrName) {
-        // TODO Auto-generated method stub
-        return null;
+        Attr attr = find(attrName);
+
+        if (attr == null) {
+            return null;
+        }
+        list.remove(attr);
+
+        // Notify observers
+        setChanged();
+        notifyObservers("Remove attr object : " + attr.getName());
+
+        return attr;
     }
 
     @Override
     public Iterator<Attr> attrs() {
-        // TODO Auto-generated method stub
-        return null;
+        return list.iterator();
     }
 
 }
