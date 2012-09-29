@@ -23,10 +23,12 @@ public class WhichChars {
     public String toString() {
         TreeSet<Character> sorted = new TreeSet<Character>(used);
                 
-        String desc = "[";
+        StringBuilder desc = new StringBuilder();
+        desc.append("[");
         for (Character ch : sorted) {
-            desc += ch;
+            desc.append(ch);
         }
-        return desc + "]";
+        desc.append("]");
+        return desc.toString();
     }
 }
