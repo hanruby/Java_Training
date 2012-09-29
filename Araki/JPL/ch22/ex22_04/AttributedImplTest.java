@@ -27,9 +27,15 @@ public class AttributedImplTest {
 
             String message = (String) changeAttr;
 
-            System.out.println(message);
+            messages.append(message);
+            messages.append("\n");
         }
 
+        private StringBuilder messages = new StringBuilder();
+
+        public String getMessages() {
+            return messages.toString();
+        }
     }
 
     @Before
@@ -39,16 +45,22 @@ public class AttributedImplTest {
     @Test
     public void test_can_get_notify() throws Exception {
         AttributedImpl attributed = new AttributedImpl();
-        
+
         attributed.add(new Attr("one", 1));
         attributed.add(new Attr("two", 2));
-        
+
         SimpleAttrObserver observer = new SimpleAttrObserver(attributed);
-        
+
         attributed.add(new Attr("three", 3));
         attributed.add(new Attr("four", 4));
-        
+
         attributed.remove("one");
         attributed.remove("two");
+
+        assertEquals("Add attr object : three\n" +
+                     "Add attr object : four\n" +
+                     "Remove attr object : one\n" +
+                     "Remove attr object : two\n", 
+                     observer.getMessages());
     }
 }
