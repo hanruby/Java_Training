@@ -1,6 +1,8 @@
 package ch22.ex22_02;
 
-import java.util.BitSet;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 文字列中に出現した文字を記録する 
@@ -8,21 +10,22 @@ import java.util.BitSet;
  */
 public class WhichChars {
     /** 
-     * 出現した文字を保持する<br>
-     * BitSet内の各位置は、文字の数値を表す
+     * 出現した文字を保持する
      */
-    private BitSet used = new BitSet();
+    private Set<Character> used = new HashSet<Character>();
 
     public WhichChars(String str) {
         for (int i = 0; i < str.length(); i++) {
-            used.set(str.charAt(i)); // 文字に対応したビットを設定
+            used.add(str.charAt(i)); // 文字に対応したビットを設定
         }
     }
 
     public String toString() {
+        TreeSet<Character> sorted = new TreeSet<Character>(used);
+                
         String desc = "[";
-        for (int i = used.nextSetBit(0); i >= 0; i = used.nextSetBit(i + 1)) {
-            desc += (char) i;
+        for (Character ch : sorted) {
+            desc += ch;
         }
         return desc + "]";
     }
