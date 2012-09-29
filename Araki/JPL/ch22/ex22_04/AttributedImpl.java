@@ -14,13 +14,13 @@ public class AttributedImpl extends Observable implements Attributed {
 
         // NotFound
         if (attr == null) {
-
+            list.remove(attr);
         }
-        list.add(attr);
+        list.add(newAttr);
 
         // Notify observers
         setChanged();
-        notifyObservers("Add attr object : " + attr.getName());
+        notifyObservers("Add attr object : " + newAttr.getName());
     }
 
     @Override
