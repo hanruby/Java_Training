@@ -33,7 +33,7 @@ public class CSVTest {
     @Parameters
     public static Collection<Object[]> data() {
         // テストする各オブジェクトをここに追加する
-        Object[][] data = new Object[][] { {new CSV_pattern1()}, {new CSV_pattern2()} };
+        Object[][] data = new Object[][] { {new CSV_pattern1()}, {new CSV_pattern2()}, {new CSV_pattern3()} };
         return Arrays.asList(data);
     }
 	 
@@ -114,12 +114,25 @@ public class CSVTest {
     
     @Test
     public void test_readCSVTable_Benchmark() throws Exception {
-        StringReader in = new StringReader("1,2,3,4\n4,3,2,1\n");
-        
-        int count = 1000;
+        {
+            StringReader in = new StringReader(
+                    "1,2,3,4\n" +
+                    "4,3,2,1\n"
+            );
 
-        long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
-        
-        System.out.println(csv.getClass() + ", " + count + " exec in " + time + " nanoseconds");
+            int count = 1000;
+            long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
+            System.out.println(csv.getClass() + ", short string csv, " + count + " exec in " + time + " nanoseconds");
+        }
+        {
+            StringReader in = new StringReader(
+                    "123456789098765432134567890987654321111234567890987654321234567890987654321,12345678909876543212345678909876543213456789098767y654321234567890987654321,2345678976543213456756787654323456789080987654343432,1234\n" +
+                    "123456789098765432134567890987654321111234567890987654321234567890987654321,12345678909876543212345678909876543213456789098767y654321234567890987654321,2345678976543213456756787654323456789080987654343432,1234\n"
+            );
+            
+            int count = 1000;
+            long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
+            System.out.println(csv.getClass() + ",  long string csv, " + count + " exec in " + time + " nanoseconds");
+        }
     }
 }
