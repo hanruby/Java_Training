@@ -29,7 +29,7 @@ public class CSV {
                 for (int i = 0; i < cells_num; i++)
                     cells[i] = match.group(i + 1);
                 vals.add(cells);
-                in.nextLine(); // skip newline
+                in.nextLine(); // 改行を読み飛ばす
             }
 
             else {
