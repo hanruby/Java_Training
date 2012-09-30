@@ -12,6 +12,11 @@ public class CSV {
 
     public static List<String[]> readCSVTable(Readable source)
             throws IOException {
+        return readCSVTable(source, CELLS);
+    }
+
+    public static List<String[]> readCSVTable(Readable source, int cells_num)
+            throws IOException {
         Scanner in = new Scanner(source);
         List<String[]> vals = new ArrayList<String[]>();
         String exp = "^(.*),(.*),(.*),(.*)";
@@ -19,9 +24,9 @@ public class CSV {
         while (in.hasNextLine()) {
             String line = in.findInLine(pat);
             if (line != null) {
-                String[] cells = new String[CELLS];
+                String[] cells = new String[cells_num];
                 MatchResult match = in.match();
-                for (int i = 0; i < CELLS; i++)
+                for (int i = 0; i < cells_num; i++)
                     cells[i] = match.group(i + 1);
                 vals.add(cells);
                 in.nextLine(); // skip newline
