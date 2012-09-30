@@ -8,12 +8,6 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public class CSV {
-    static final int CELLS = 4;
-
-    public static List<String[]> readCSVTable(Readable source)
-            throws IOException {
-        return readCSVTable(source, CELLS);
-    }
 
     public static List<String[]> readCSVTable(Readable source, int cells_num)
             throws IOException {

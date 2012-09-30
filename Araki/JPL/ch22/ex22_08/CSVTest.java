@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
@@ -17,10 +18,10 @@ public class CSVTest {
     }
 
     @Test
-    public void test_readCSVTable() throws Exception {
+    public void test_readCSVTable_4cell() throws Exception {
         File file = new File("JPL/ch22/ex22_07/testdata_4cells.csv");
         
-        List<String[]> list = CSV.readCSVTable(new FileReader(file));
+        List<String[]> list = CSV.readCSVTable(new FileReader(file), 4);
         
         String[][] expected = {{"1","2","3","4",},{"4","3","2","1",}};
         
@@ -82,5 +83,12 @@ public class CSVTest {
             }
             i++;
         }
+    }
+    
+    @Test(expected=IOException.class)
+    public void test_readCSVTable_wrong_cell() throws Exception {
+        File file = new File("JPL/ch22/ex22_07/testdata_4cells.csv");
+        
+        CSV.readCSVTable(new FileReader(file), 3);
     }
 }
