@@ -18,7 +18,7 @@ public class CSVTest {
 
     @Test
     public void test_readCSVTable() throws Exception {
-        File file = new File("JPL/ch22/ex22_07/testdata.csv");
+        File file = new File("JPL/ch22/ex22_07/testdata_4cells.csv");
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file));
         
@@ -35,11 +35,11 @@ public class CSVTest {
 
     @Test
     public void test_readCSVTable_3cell() throws Exception {
-        File file = new File("JPL/ch22/ex22_07/testdata.csv");
+        File file = new File("JPL/ch22/ex22_07/testdata_3cells.csv");
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file), 3);
         
-        String[][] expected = {{"1","2","3",},{"4","3","2",}};
+        String[][] expected = {{"1","2","3",},{"3","2","1",}};
         
         int i = 0;
         for (String[] strings : list) {
@@ -50,6 +50,23 @@ public class CSVTest {
         }
     }
 
+    @Test
+    public void test_readCSVTable_5cell() throws Exception {
+        File file = new File("JPL/ch22/ex22_07/testdata_5cells.csv");
+        
+        List<String[]> list = CSV.readCSVTable(new FileReader(file), 5);
+        
+        String[][] expected = {{"1","2","3","4","5"},{"5","4","3","2","1"}};
+        
+        int i = 0;
+        for (String[] strings : list) {
+            for (int col = 0; col < strings.length; col++) {
+                assertEquals(expected[i][col], strings[col]);
+            }
+            i++;
+        }
+    }
+    
     @Test
     public void test_readCSVTable_emptyline() throws Exception {
         File file = new File("JPL/ch22/ex22_07/test_emptyline.csv");
