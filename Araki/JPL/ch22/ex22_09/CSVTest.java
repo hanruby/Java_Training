@@ -33,7 +33,12 @@ public class CSVTest {
     @Parameters
     public static Collection<Object[]> data() {
         // テストする各オブジェクトをここに追加する
-        Object[][] data = new Object[][] { {new CSV_pattern1()}, {new CSV_pattern2()}, {new CSV_pattern3()} };
+        Object[][] data = new Object[][] { 
+                {new CSV_pattern1()},
+                {new CSV_pattern2()},
+                {new CSV_pattern3()},
+                {new CSV_pattern4()},
+                };
         return Arrays.asList(data);
     }
 	 
@@ -122,7 +127,9 @@ public class CSVTest {
 
             int count = 1000;
             long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
-            System.out.println(csv.getClass() + ", short string csv, " + count + " exec in " + time + " nanoseconds");
+            System.out.println(csv.getClass() + 
+                    ":\n \t" + csv.createPattern(4) + 
+                    "\n \t\t short string csv, " + count + " exec in " + time + " nanoseconds");
         }
         {
             StringReader in = new StringReader(
@@ -132,7 +139,9 @@ public class CSVTest {
             
             int count = 1000;
             long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
-            System.out.println(csv.getClass() + ",  long string csv, " + count + " exec in " + time + " nanoseconds");
+            System.out.println(csv.getClass() + 
+                    ":\n \t" + csv.createPattern(4) + 
+                    "\n \t\t  long string csv, " + count + " exec in " + time + " nanoseconds");
         }
     }
 }
