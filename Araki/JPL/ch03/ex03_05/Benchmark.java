@@ -1,7 +1,7 @@
 package ch03.ex03_05;
 
 public abstract class Benchmark {
-    abstract void benchmark();
+    abstract public void benchmark();
     
     public final long repeat(int count) {
         long start = System.nanoTime();

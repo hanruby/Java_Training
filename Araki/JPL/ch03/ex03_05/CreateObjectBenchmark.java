@@ -2,7 +2,7 @@ package ch03.ex03_05;
 
 class CreateObjectBenchmark extends Benchmark {
     /** Objectを作成する */
-    void benchmark() {
+    public void benchmark() {
         @SuppressWarnings("unused")
         Object o = new Object();
     }
