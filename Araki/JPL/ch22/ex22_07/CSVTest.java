@@ -3,7 +3,6 @@ package ch22.ex22_07;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
