@@ -69,7 +69,7 @@ public class CSVTest {
     
     @Test
     public void test_readCSVTable_emptyline() throws Exception {
-        File file = new File("JPL/ch22/ex22_07/test_emptyline.csv");
+        File file = new File("JPL/ch22/ex22_08/test_emptyline.csv");
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file), 3);
         
