@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class Gaussian {
 
-    public static final int TRIALS_NUM = 10000;
-    public static final int DIVIDE_NUM = 30; 
+    public static final int TRIALS_NUM = 1000000;
+    public static final int DIVIDE_NUM = 100; 
     
-    private static final double MAX_RANGE = 4.0;
-    private static final double MIN_RANGE = -4.0;
+    private static final double MAX_RANGE = 3.0;
+    private static final double MIN_RANGE = -3.0;
     
     private int[] score = new int[DIVIDE_NUM];
     private double[] normalizedData = new double[DIVIDE_NUM];
@@ -43,6 +43,23 @@ public class Gaussian {
         }
     }
     
+    public void showGraph() {
+        char[][] graph = new char[10][DIVIDE_NUM];
+        for (int line = 0; line < graph.length; line++) {
+            for (int pos = 0; pos < DIVIDE_NUM; pos++) {
+                graph[line][pos] = ' ';
+            }
+        }
+        
+        for (int pos = 0; pos < DIVIDE_NUM; pos++) {
+            graph[(int)((normalizedData[pos]*DIVIDE_NUM*2))][pos] = '*';
+        }
+        
+        for (int i = graph.length -1; i >= 0 ; i--) {
+            System.out.println(String.valueOf(graph[i]));
+        }
+    }
+    
     public double[] getData() {
         return normalizedData;
     }
@@ -50,7 +67,8 @@ public class Gaussian {
     public static void main(String[] args) {
         Gaussian g = new Gaussian();
         g.run();
-        g.show();
+        //g.show();
+        g.showGraph();
     }
 
 
