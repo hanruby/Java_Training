@@ -33,7 +33,7 @@ public class CSVTest {
     @Parameters
     public static Collection<Object[]> data() {
         // テストする各オブジェクトをここに追加する
-        Object[][] data = new Object[][] { {new CSV_pattern1()} };
+        Object[][] data = new Object[][] { {new CSV_pattern1()}, {new CSV_pattern2()} };
         return Arrays.asList(data);
     }
 	 
