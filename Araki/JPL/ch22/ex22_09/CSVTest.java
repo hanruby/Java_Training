@@ -32,6 +32,7 @@ public class CSVTest {
     
     @Parameters
     public static Collection<Object[]> data() {
+        // テストする各オブジェクトをここに追加する
         Object[][] data = new Object[][] { {new CSV_pattern1()} };
         return Arrays.asList(data);
     }
@@ -119,6 +120,6 @@ public class CSVTest {
 
         long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
         
-        System.out.println(count + " exec in " + time + " nanoseconds");
+        System.out.println(csv.getClass() + ", " + count + " exec in " + time + " nanoseconds");
     }
 }
