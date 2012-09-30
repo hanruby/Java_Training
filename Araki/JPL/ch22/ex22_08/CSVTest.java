@@ -74,7 +74,7 @@ public class CSVTest {
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file), 3);
         
-        String[][] expected = {{"1","2","3",},{"4","3","2",}};
+        String[][] expected = {{"1","2","3",},{"3","2","1",}};
         
         int i = 0;
         for (String[] strings : list) {

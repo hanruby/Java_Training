@@ -19,13 +19,21 @@ public class CSV {
         for (int cell = 1; cell < cells_num; cell++) {
             exp.append(",(.*)");
         }
+        exp.append(",(.*)");
         
         Pattern pat = Pattern.compile(exp.toString(), Pattern.MULTILINE);
         while (in.hasNextLine()) {
             String line = in.findInLine(pat);
             if (line != null) {
+                
                 String[] cells = new String[cells_num];
                 MatchResult match = in.match();
+                
+                // セルの数の指定よりもデータセットが多い場合はエラー
+                if (match.group(cells_num + 1) != null) {
+                    throw new IOException("input format error : " + line);
+                }
+
                 for (int i = 0; i < cells_num; i++)
                     cells[i] = match.group(i + 1);
                 vals.add(cells);
@@ -33,7 +41,7 @@ public class CSV {
             }
 
             else {
-                throw new IOException("input format error");
+                in.nextLine(); // 改行を読み飛ばす
             }
         }
 
