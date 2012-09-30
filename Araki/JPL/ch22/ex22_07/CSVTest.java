@@ -23,11 +23,14 @@ public class CSVTest {
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file));
         
+        String[][] expected = {{"1","2","3","4",},{"4","3","2","1",}};
+        
+        int i = 0;
         for (String[] strings : list) {
-            for (String string : strings) {
-                System.out.printf("%s ",string);
+            for (int col = 0; col < strings.length; col++) {
+                assertEquals(expected[i][col], strings[col]);
             }
-            System.out.printf("%n");
+            i++;
         }
     }
 }
