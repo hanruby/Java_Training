@@ -21,6 +21,7 @@ public class DigitalClock extends JPanel implements ActionListener {
 
     private Config config;
     private JFrame clockFrame;
+    private Timer time = new Timer(5, (ActionListener) this);
 
     public static void main(String[] args) {
         new DigitalClock();
@@ -28,10 +29,10 @@ public class DigitalClock extends JPanel implements ActionListener {
 
     public DigitalClock() {
         config = new Config();
-        
+
         clockFrame = new JFrame(TITLE);
         clockFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        
+
         // クローズボタンで終了する
         clockFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         clockFrame.setTitle(TITLE);
@@ -40,21 +41,18 @@ public class DigitalClock extends JPanel implements ActionListener {
         time.start();
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D gui = (Graphics2D) g;
-        
+
         // 時計文字描画
         gui.setPaint(Color.BLACK);
-        gui.drawString(config.clock(new GregorianCalendar(TimeZone.getTimeZone("Japan"))), 10, 50);
+        gui.drawString(config.clock(new GregorianCalendar(TimeZone
+                .getTimeZone("Japan"))), 10, 50);
     }
-    
-    private Timer time = new Timer(5, (ActionListener) this);
-    int x = 0, y = 0;
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
-
 }
