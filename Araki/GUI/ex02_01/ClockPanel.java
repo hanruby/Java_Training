@@ -12,11 +12,11 @@ public class ClockPanel extends JPanel {
 
     private static final long serialVersionUID = 5748159979557134680L;
     private Config config;
-    
+
     public ClockPanel() {
         config = new Config();
     }
-    
+
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -24,13 +24,13 @@ public class ClockPanel extends JPanel {
 
         paintClock(g);
     }
-    
+
     private void paintClock(Graphics2D g) {
-        
+
         // 背景をクリア
         g.setBackground(Color.WHITE);
         g.clearRect(0, 0, getWidth(), getHeight());
-        
+
         // 時計文字描画
         g.setPaint(Color.BLACK);
         g.drawString(config.clock(new GregorianCalendar(TimeZone

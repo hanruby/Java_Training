@@ -25,13 +25,13 @@ public class DigitalClock extends JFrame implements ActionListener {
     }
 
     public DigitalClock() {
-        
-        // set LAF to default 
+
+        // set LAF to default
         String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
-        try{
+        try {
             UIManager.setLookAndFeel(lafClassName);
             SwingUtilities.updateComponentTreeUI(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -40,24 +40,26 @@ public class DigitalClock extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit
         this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.setResizable(false);
-        
+
         this.setLocationRelativeTo(null);
         Container contentPane = this.getContentPane();
-        
+
         // Add ProgressPanel
         ProgressPanel progressPanel = new ProgressPanel();
-        progressPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, (int)(DEFAULT_HEIGHT*0.8)));
+        progressPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH,
+                (int) (DEFAULT_HEIGHT * 0.8)));
         contentPane.add(progressPanel, BorderLayout.NORTH);
-        
+
         // Add ClockPanel
         ClockPanel clockPanel = new ClockPanel();
-        clockPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, (int)(DEFAULT_HEIGHT*0.1)));
+        clockPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH,
+                (int) (DEFAULT_HEIGHT * 0.1)));
         contentPane.add(clockPanel, BorderLayout.SOUTH);
-        
+
         time = new Timer(1000, (ActionListener) this);
         time.addActionListener(progressPanel);
         time.start();
-        
+
         this.setVisible(true);
     }
 

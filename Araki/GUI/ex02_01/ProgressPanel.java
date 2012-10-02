@@ -18,7 +18,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
     private JSlider slider_hour;
     private JSlider slider_min;
     private JSlider slider_sec;
-    
+
     public ProgressPanel() {
 
         // 背景をクリア
@@ -50,7 +50,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
         slider_sec.setPaintLabels(true);
         slider_sec.setEnabled(false);
         slider_sec.setBackground(Color.BLACK);
-        
+
         // layout
         this.setLayout(new GridLayout(3, 1));
 
@@ -63,13 +63,15 @@ public class ProgressPanel extends JPanel implements ActionListener {
     }
 
     private void updateSlider() {
-        // see http://docs.oracle.com/javase/jp/6/api/java/util/GregorianCalendar.html
-        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("Japan"));
+        // see
+        // http://docs.oracle.com/javase/jp/6/api/java/util/GregorianCalendar.html
+        GregorianCalendar calendar = new GregorianCalendar(
+                TimeZone.getTimeZone("Japan"));
         slider_hour.setValue(calendar.get(Calendar.HOUR_OF_DAY));
         slider_min.setValue(calendar.get(Calendar.MINUTE));
         slider_sec.setValue(calendar.get(Calendar.SECOND));
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         this.updateSlider();
