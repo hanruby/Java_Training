@@ -18,7 +18,7 @@ public class DigitalClock extends JFrame implements ActionListener {
     private static final int DEFAULT_WIDTH = 320;
     private static final int DEFAULT_HEIGHT = 240;
 
-    private Timer time = new Timer(5, (ActionListener) this);
+    private Timer time;
 
     public static void main(String[] args) {
         DigitalClock clock = new DigitalClock();
@@ -54,6 +54,7 @@ public class DigitalClock extends JFrame implements ActionListener {
         clockPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, (int)(DEFAULT_HEIGHT*0.1)));
         contentPane.add(clockPanel, BorderLayout.SOUTH);
         
+        time = new Timer(1000, (ActionListener) this);
         time.addActionListener(progressPanel);
         time.start();
         

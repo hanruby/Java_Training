@@ -21,39 +21,35 @@ public class ProgressPanel extends JPanel implements ActionListener {
     
     public ProgressPanel() {
 
-        {
-            // 背景をクリア
-            this.setBackground(Color.BLACK);
-        }
-        
-        {     
-            // hour
-            slider_hour = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
-            slider_hour.setMajorTickSpacing(12);
-            slider_hour.setMinorTickSpacing(1);
-            slider_hour.setPaintTicks(true);
-            slider_hour.setPaintLabels(true);
-            slider_hour.setEnabled(false);
-            slider_hour.setBackground(Color.BLACK);
-            
-            // min
-            slider_min = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
-            slider_min.setMajorTickSpacing(15);
-            slider_min.setMinorTickSpacing(1);
-            slider_min.setPaintTicks(true);
-            slider_min.setPaintLabels(true);
-            slider_min.setEnabled(false);
-            slider_min.setBackground(Color.BLACK);
-            
-            // sec
-            slider_sec = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
-            slider_sec.setMajorTickSpacing(10);
-            slider_sec.setMinorTickSpacing(1);
-            slider_sec.setPaintTicks(true);
-            slider_sec.setPaintLabels(true);
-            slider_sec.setEnabled(false);
-            slider_sec.setBackground(Color.BLACK);
-        }
+        // 背景をクリア
+        this.setBackground(Color.BLACK);
+
+        // hour
+        slider_hour = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
+        slider_hour.setMajorTickSpacing(3);
+        slider_hour.setMinorTickSpacing(1);
+        slider_hour.setPaintTicks(true);
+        slider_hour.setPaintLabels(true);
+        slider_hour.setEnabled(false);
+        slider_hour.setBackground(Color.BLACK);
+
+        // min
+        slider_min = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
+        slider_min.setMajorTickSpacing(15);
+        slider_min.setMinorTickSpacing(1);
+        slider_min.setPaintTicks(true);
+        slider_min.setPaintLabels(true);
+        slider_min.setEnabled(false);
+        slider_min.setBackground(Color.BLACK);
+
+        // sec
+        slider_sec = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
+        slider_sec.setMajorTickSpacing(10);
+        slider_sec.setMinorTickSpacing(1);
+        slider_sec.setPaintTicks(true);
+        slider_sec.setPaintLabels(true);
+        slider_sec.setEnabled(false);
+        slider_sec.setBackground(Color.BLACK);
         
         // layout
         this.setLayout(new GridLayout(3, 1));
@@ -62,14 +58,20 @@ public class ProgressPanel extends JPanel implements ActionListener {
         this.add(slider_hour);
         this.add(slider_min);
         this.add(slider_sec);
+
+        this.updateSlider();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    private void updateSlider() {
         // see http://docs.oracle.com/javase/jp/6/api/java/util/GregorianCalendar.html
         GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("Japan"));
-        slider_hour.setValue(calendar.get(Calendar.HOUR));
+        slider_hour.setValue(calendar.get(Calendar.HOUR_OF_DAY));
         slider_min.setValue(calendar.get(Calendar.MINUTE));
         slider_sec.setValue(calendar.get(Calendar.SECOND));
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.updateSlider();
     }
 }
