@@ -21,19 +21,19 @@ public class DigitalClock extends JFrame implements ActionListener {
     private Timer time;
 
     public static void main(String[] args) {
-        DigitalClock clock = new DigitalClock();
+        new DigitalClock();
+    }
+
+    public DigitalClock() {
         
         // set LAF to default 
         String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
         try{
             UIManager.setLookAndFeel(lafClassName);
-            SwingUtilities.updateComponentTreeUI(clock);
+            SwingUtilities.updateComponentTreeUI(this);
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    public DigitalClock() {
 
         // set params
         this.setTitle(TITLE);
