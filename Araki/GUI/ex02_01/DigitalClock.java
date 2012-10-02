@@ -1,18 +1,15 @@
 package ex02_01;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 public class DigitalClock extends JFrame implements ActionListener {
 
@@ -21,16 +18,22 @@ public class DigitalClock extends JFrame implements ActionListener {
     private static final int DEFAULT_WIDTH = 320;
     private static final int DEFAULT_HEIGHT = 240;
 
-    private Config config;
-
     private Timer time = new Timer(5, (ActionListener) this);
 
     public static void main(String[] args) {
-        new DigitalClock();
+        DigitalClock clock = new DigitalClock();
+        
+        // set LAF to default 
+        String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
+        try{
+            UIManager.setLookAndFeel(lafClassName);
+            SwingUtilities.updateComponentTreeUI(clock);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public DigitalClock() {
-        config = new Config();
 
         // set params
         this.setTitle(TITLE);

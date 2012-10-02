@@ -1,7 +1,6 @@
 package ex02_01;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.GregorianCalendar;
@@ -16,8 +15,6 @@ public class ClockPanel extends JPanel {
     
     public ClockPanel() {
         config = new Config();
-        
-        this.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
     }
     
     @Override
