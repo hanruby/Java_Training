@@ -39,6 +39,7 @@ public class DigitalClock extends JFrame implements ActionListener {
         this.setTitle(TITLE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit
         this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        this.setResizable(false);
         
         this.setLocationRelativeTo(null);
         Container contentPane = this.getContentPane();
