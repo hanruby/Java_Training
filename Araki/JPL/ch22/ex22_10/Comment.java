@@ -14,8 +14,9 @@ public class Comment {
         List<String> tokens = new ArrayList<String>();
         
         Pattern COMMENT = Pattern.compile("#.*", Pattern.MULTILINE);
+
+        @SuppressWarnings("unused")
         String comment;
-        
         
         while (in.hasNext()) {
             if (in.hasNext(COMMENT)) {
