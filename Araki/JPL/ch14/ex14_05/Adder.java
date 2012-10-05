@@ -10,7 +10,6 @@ public class Adder {
     public static void add(int num) {
         synchronized (Adder.class) {
             current_num = current_num + num;
-            //System.out.println(this.current_num);
         }
     }
     

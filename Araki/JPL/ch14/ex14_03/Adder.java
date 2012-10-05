@@ -9,7 +9,6 @@ public class Adder {
     
     public synchronized void add(int num) {
         this.current_num = this.current_num + num;
-        //System.out.println(this.current_num);
     }
     
     public int getNum() {
