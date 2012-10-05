@@ -4,11 +4,11 @@ public class ObjectNotFoundException extends Exception {
 
     private static final long serialVersionUID = 1L;
     
-    public final String name;
+    public final Object obj;
     
-    public ObjectNotFoundException(String name) {
-        super(name + ": Not found");
-        this.name = name;
+    public ObjectNotFoundException(Object obj) {
+        super(obj.toString() + ": Not found");
+        this.obj = obj;
     }
     
 }

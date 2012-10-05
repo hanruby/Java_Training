@@ -90,8 +90,9 @@ public class LinkedListImpl<E> implements LinkedList<E> {
          * オブジェクトが発見されなかったときに、nullを返すより、例外をスローする方が良い点：
          * - 利用者がnullの処理を漏らした場合のデバッグが大変。
          * - 例外であれば、理由を上に投げることができる。
+         * 見つからなかった場合はオブジェクトそのものを返すのがいい。toString()すると実装されていなければわけわからないアドレスが返るかもしれないため。
          */
-        throw new ObjectNotFoundException(obj.toString());
+        throw new ObjectNotFoundException(obj);
     }
 }
 
