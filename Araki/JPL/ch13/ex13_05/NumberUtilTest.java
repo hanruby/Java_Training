@@ -29,4 +29,15 @@ public class NumberUtilTest {
         assertTrue(resultStr.equals("23,984,573,201,948,018,256,361,539,801,256,361,539"));
     }
 
+    @Test
+    public void testNumberFormatter_short() {
+
+        assertEquals("1", NumberUtil.numberFormatter("1"));
+        assertEquals("12", NumberUtil.numberFormatter("12"));
+        assertEquals("123", NumberUtil.numberFormatter("123"));
+        assertEquals("1,234", NumberUtil.numberFormatter("1234"));
+        assertEquals("12,345", NumberUtil.numberFormatter("12345"));
+        assertEquals("123,456", NumberUtil.numberFormatter("123456"));
+   }
+
 }
