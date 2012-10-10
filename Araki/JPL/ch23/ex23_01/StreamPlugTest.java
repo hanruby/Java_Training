@@ -17,4 +17,13 @@ public class StreamPlugTest {
 
         assertEquals(proc.waitFor(), 0);
     }
+
+    @Test
+    public void testAddPrograms() throws Exception {
+        Process ping1 = StreamPlug.userProg("ping -c 3 8.8.8.8");
+        Process ping2 = StreamPlug.userProg("ping -c 3 localhost");
+
+        assertEquals(ping1.waitFor(), 0);
+        assertEquals(ping2.waitFor(), 0);
+    }
 }
