@@ -4,7 +4,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class StreamPlug {
+public class StreamPlug extends Thread {
+    
+    private InputStream in;
+    private OutputStream out;
+    
+    public StreamPlug(InputStream in, OutputStream out) {
+        this.in = in;
+        this.out = out;
+    }
 
     /**
      * 親のプロセスの標準ストリームを子プロセスの標準ストリームに結びつける
@@ -25,13 +33,17 @@ public class StreamPlug {
     /**
      * 1つのストリームからバイトを読みだして、そのバイトをもう1つのストリームに書きこむことにより、2つのストリームを結合するためのメソッド 
      */
-    private static void plugTogether(InputStream in, OutputStream out) {
-        // TODO Auto-generated method stub
-        
+    public static void plugTogether(InputStream in, OutputStream out) {
+        new StreamPlug(in, out);
     }
-    private static void plugTogether(OutputStream out, InputStream in) {
+    public static void plugTogether(OutputStream out, InputStream in) {
+        new StreamPlug(in, out);
+    }
+    
+    @Override
+    public void run() {
         // TODO Auto-generated method stub
-        
+        super.run();
     }
 
 }
