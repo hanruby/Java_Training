@@ -3,7 +3,6 @@ package ch23.ex23_01;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 
 public class StreamPlug {
 
@@ -26,11 +25,11 @@ public class StreamPlug {
     /**
      * 1つのストリームからバイトを読みだして、そのバイトをもう1つのストリームに書きこむことにより、2つのストリームを結合するためのメソッド 
      */
-    private static void plugTogether(InputStream in, OutputStream outputStream) {
+    private static void plugTogether(InputStream in, OutputStream out) {
         // TODO Auto-generated method stub
         
     }
-    private static void plugTogether(PrintStream out, InputStream inputStream) {
+    private static void plugTogether(OutputStream out, InputStream in) {
         // TODO Auto-generated method stub
         
     }
