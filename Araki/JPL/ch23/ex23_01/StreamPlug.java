@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-public class Programs {
+public class StreamPlug {
 
     /**
      * 親のプロセスの標準ストリームを子プロセスの標準ストリームに結びつける
@@ -25,16 +25,14 @@ public class Programs {
 
     /**
      * 1つのストリームからバイトを読みだして、そのバイトをもう1つのストリームに書きこむことにより、2つのストリームを結合するためのメソッド 
-     * @param out
-     * @param inputStream
      */
+    private static void plugTogether(InputStream in, OutputStream outputStream) {
+        // TODO Auto-generated method stub
+        
+    }
     private static void plugTogether(PrintStream out, InputStream inputStream) {
         // TODO Auto-generated method stub
         
     }
 
-    private static void plugTogether(InputStream in, OutputStream outputStream) {
-        // TODO Auto-generated method stub
-        
-    }
 }
