@@ -7,6 +7,12 @@ import java.io.PrintStream;
 
 public class Programs {
 
+    /**
+     * 親のプロセスの標準ストリームを子プロセスの標準ストリームに結びつける
+     * @param cmd
+     * @return
+     * @throws IOException
+     */
     public static Process userProg(String cmd)
     throws IOException
     {
@@ -17,6 +23,11 @@ public class Programs {
         return proc;
     }
 
+    /**
+     * 1つのストリームからバイトを読みだして、そのバイトをもう1つのストリームに書きこむことにより、2つのストリームを結合するためのメソッド 
+     * @param out
+     * @param inputStream
+     */
     private static void plugTogether(PrintStream out, InputStream inputStream) {
         // TODO Auto-generated method stub
         
