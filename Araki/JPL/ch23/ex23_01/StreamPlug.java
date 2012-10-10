@@ -34,15 +34,23 @@ public class StreamPlug extends Thread {
      * 1つのストリームからバイトを読みだして、そのバイトをもう1つのストリームに書きこむことにより、2つのストリームを結合するためのメソッド 
      */
     public static void plugTogether(InputStream in, OutputStream out) {
-        new StreamPlug(in, out);
+        (new StreamPlug(in, out)).start();
     }
     public static void plugTogether(OutputStream out, InputStream in) {
-        new StreamPlug(in, out);
+        (new StreamPlug(in, out)).start();
     }
     
     @Override
     public void run() {
-        // TODO Auto-generated method stub
+        try {
+            int b;
+            while( (b = in.read()) != -1) {
+                out.write(b);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         super.run();
     }
 
