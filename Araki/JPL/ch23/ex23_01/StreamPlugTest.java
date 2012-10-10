@@ -1,6 +1,5 @@
 package ch23.ex23_01;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
