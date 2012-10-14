@@ -44,7 +44,7 @@ public class GlobalHelloTest {
     }
     
     @Test
-    public void test_JAPAN() throws Exception {
+    public void test_ResourceBundle() throws Exception {
         Locale.setDefault(locale);
         
         ResourceBundle res = ResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
