@@ -4,6 +4,7 @@ package ch24.ex24_01;
 import static org.junit.Assert.*;
 
 import java.util.Locale;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class GlobalHelloTest {
         
         ResourceBundle res = ResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
         assertEquals("こんにちは", res.getString(GlobalRes.HELLO));
-    }
+    }   
 
     @Test
     public void test_ENGLISH() throws Exception {
@@ -29,5 +30,13 @@ public class GlobalHelloTest {
         
         ResourceBundle res = ResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
         assertEquals("hello", res.getString(GlobalRes.HELLO));
+    }
+
+    @Test
+    public void test_KOREA() throws Exception {
+        Locale.setDefault(Locale.KOREA);
+
+        ResourceBundle res = PropertyResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
+        assertEquals("안녕하세요", res.getString(GlobalRes.HELLO));
     }
 }
