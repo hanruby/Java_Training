@@ -39,6 +39,7 @@ public class GlobalHelloTest {
                 {Locale.JAPAN, GlobalRes.HELLO, "こんにちは"},
                 {Locale.KOREA, GlobalRes.HELLO, "안녕하세요"},
                 {Locale.ENGLISH, GlobalRes.HELLO, "hello"},
+                {new Locale("ja_test"), GlobalRes.HELLO, "こんちわ"},
         };
         return Arrays.asList(data);
     }
@@ -46,6 +47,7 @@ public class GlobalHelloTest {
     @Test
     public void test_ResourceBundle() throws Exception {
         Locale.setDefault(locale);
+        System.out.println(locale);
         
         ResourceBundle res = ResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
         assertEquals(expected, res.getString(key));
