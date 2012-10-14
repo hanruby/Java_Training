@@ -50,4 +50,16 @@ public class GlobalHelloTest {
         ResourceBundle res = ResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
         assertEquals(expected, res.getString(key));
     }   
+    
+    @Test
+    public void test_PropertyResourceBundle() throws Exception {
+        Locale.setDefault(locale);
+        
+        /* PropertyResourceBundleの振る舞い
+         * 1. ResNameを探す
+         * 2. ResName.propertiesを探す
+         */
+        ResourceBundle res = PropertyResourceBundle.getBundle("ch24.ex24_01.GlobalRes");
+        assertEquals(expected, res.getString(key));
+    }   
 }
