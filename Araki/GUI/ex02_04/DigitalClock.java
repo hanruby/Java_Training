@@ -15,7 +15,6 @@ import javax.swing.UIManager;
 public class DigitalClock extends JWindow implements ActionListener {
 
     private static final long serialVersionUID = 1362097885644824584L;
-    private static final String TITLE = "@atotto's Digital Clock";
     private static final int DEFAULT_WIDTH = 320;
     private static final int DEFAULT_HEIGHT = 240;
 
@@ -37,10 +36,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         }
 
         // set params
-//        this.setTitle(TITLE);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit
         this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        this.setResizable(false);
 
         this.setLocationRelativeTo(null);
         Container contentPane = this.getContentPane();
