@@ -40,6 +40,10 @@ public class Config implements Cloneable {
     }
 
     public Config(Config conf) {
+        this.set(conf);
+    }
+    
+    public void set(Config conf) {
         this.clockFormat = conf.clockFormat;
         this.simpleClockFormat = conf.simpleClockFormat;
         this.fontname =  conf.fontname;

@@ -78,9 +78,7 @@ public class PropertiesDialog extends JDialog {
                 font_name_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        Config conf = new Config(config);
-                        conf.setFont(new Font((String)e.getItem(),conf.getFont().getStyle(),conf.getFont().getSize()));
-                        config = conf;
+                        config.setFont(new Font((String)e.getItem(),config.getFont().getStyle(),config.getFont().getSize()));
                     }
                 });
                 propertiesPanel.add(font_name_list);
@@ -101,9 +99,7 @@ public class PropertiesDialog extends JDialog {
                 font_size_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        Config conf = new Config(config);
-                        conf.setFont(new Font(conf.getFont().getFontName(),conf.getFont().getStyle(),Integer.parseInt((String)e.getItem())));
-                        config = conf;
+                        config.setFont(new Font(config.getFont().getFontName(),config.getFont().getStyle(),Integer.parseInt((String)e.getItem())));
                     }
                 });
                 propertiesPanel.add(font_size_list);
@@ -125,9 +121,8 @@ public class PropertiesDialog extends JDialog {
                 font_color_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        Config conf = new Config(config);
                         try {
-                            conf.setFontColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
+                            config.setFontColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
                         } catch (IllegalArgumentException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
@@ -141,7 +136,6 @@ public class PropertiesDialog extends JDialog {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                        config = conf;
                     }
                 });
                 propertiesPanel.add(font_color_list);
@@ -162,9 +156,8 @@ public class PropertiesDialog extends JDialog {
                 bg_color_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        Config conf = new Config(config);
                         try {
-                            conf.setBackgroundColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
+                            config.setBackgroundColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
                         } catch (IllegalArgumentException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
@@ -178,7 +171,6 @@ public class PropertiesDialog extends JDialog {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                        config = conf;
                     }
                 });
                 propertiesPanel.add(bg_color_list);
@@ -191,7 +183,7 @@ public class PropertiesDialog extends JDialog {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    config = defaultConf; // もとに戻す
+                    config.set(defaultConf); // もとに戻す
                     dispose();
                 }
             });
