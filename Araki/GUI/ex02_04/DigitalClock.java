@@ -83,7 +83,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         propertiesMenu.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                //configDialog.open();
+                new PropertiesDialog(config);
             }
         });
 
