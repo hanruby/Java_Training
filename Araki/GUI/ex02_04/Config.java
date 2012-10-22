@@ -7,9 +7,10 @@ import java.awt.Point;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Observable;
 import java.util.prefs.Preferences;
 
-public class Config {
+public class Config extends Observable {
     private Preferences prefs;
     
     private DateFormat clockFormat;
@@ -52,6 +53,9 @@ public class Config {
         this.fontColor = conf.fontColor;
         this.margin = conf.margin;
         this.clockPos = conf.clockPos;
+
+        setChanged();
+        notifyObservers("all");
     }
     
     public void savePref() {
@@ -85,6 +89,9 @@ public class Config {
     public void setFont(Font font) {
         this.fontname = font.getName();
         this.fontsize = font.getSize();
+
+        setChanged();
+        notifyObservers("font");
     }
     
     public String getFontName() {
@@ -93,6 +100,9 @@ public class Config {
     
     public void setFontName(String fontname) {
         this.fontname = fontname;
+
+        setChanged();
+        notifyObservers("font");
     }
     
     public int getFontSize() {
@@ -101,6 +111,9 @@ public class Config {
     
     public void setFontSize(int fontsize) {
         this.fontsize = fontsize;
+
+        setChanged();
+        notifyObservers("font");
     }
 
     public Color getBackgroundColor() {
@@ -109,6 +122,9 @@ public class Config {
     
     public void setBackgroundColor(Color color) {
         backgroundColor = color;
+
+        setChanged();
+        notifyObservers("color");
     }
     
     public Color getFontColor() {
@@ -117,6 +133,9 @@ public class Config {
     
     public void setFontColor(Color color) {
         fontColor = color;
+
+        setChanged();
+        notifyObservers("color");
     }
     
     public Insets getMargin() {

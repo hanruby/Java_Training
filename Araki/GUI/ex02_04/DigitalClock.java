@@ -1,6 +1,7 @@
 package ex02_04;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -10,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -26,7 +29,7 @@ public class DigitalClock extends JWindow implements ActionListener {
 
     private Timer time;
     private Config config;
-    
+        
     private JPopupMenu popupmenu;
     
     public static void main(String[] args) {
@@ -44,7 +47,8 @@ public class DigitalClock extends JWindow implements ActionListener {
             e.printStackTrace();
         }
         config = new Config();
-        
+        new ConfigObserver(config);
+                        
         // set params
         this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
@@ -179,4 +183,26 @@ public class DigitalClock extends JWindow implements ActionListener {
             exitProcess();
         }
     }
+    
+    class ConfigObserver implements Observer {
+        Config watching;
+        
+        public ConfigObserver(Config config) {
+            watching = config; 
+            watching.addObserver(this);
+        }
+
+        @Override
+        public void update(Observable config, Object contents) {
+            if (config != watching) {
+                throw new IllegalArgumentException("Config object does not same.");
+            }
+            
+            // When config are changed, repaint this window
+            DigitalClock.this.repaint();
+        }
+    }
 }
+
+
+
