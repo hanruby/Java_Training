@@ -20,6 +20,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class PropertiesDialog extends JDialog {
 
@@ -108,21 +111,23 @@ public class PropertiesDialog extends JDialog {
                 propertiesPanel.add(new Label("Font size",Label.RIGHT));
                 font_size_list = new Choice();
 
-                // Load Supported size
-                int[] sizes = SupportedProperties.supportedFontSizes();
+                JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
+                font_size_slider.setMajorTickSpacing(3);
+                font_size_slider.setMinorTickSpacing(1);
+                font_size_slider.setPaintTicks(true);
+                font_size_slider.setPaintLabels(true);
 
-                for (int size : sizes) {
-                    font_size_list.add(String.valueOf(size)); 
-                }
+                // set saved size 
+                font_size_slider.setValue(config.getFont().getSize());
                 
-                font_size_list.select(Integer.toString(config.getFont().getSize()));
-                font_size_list.addItemListener(new ItemListener() {
+                font_size_slider.addChangeListener(new ChangeListener() {
                     @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        config.setFont(new Font(config.getFont().getFontName(),config.getFont().getStyle(),Integer.parseInt((String)e.getItem())));
+                    public void stateChanged(ChangeEvent e) {
+                        JSlider source = (JSlider)e.getSource();
+                        config.setFont(new Font(config.getFont().getFontName(),config.getFont().getStyle(),source.getValue()));
                     }
                 });
-                propertiesPanel.add(font_size_list);
+                propertiesPanel.add(font_size_slider);
             }
             {
                 // Font color
