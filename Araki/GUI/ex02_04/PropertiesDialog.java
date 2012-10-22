@@ -82,13 +82,11 @@ public class PropertiesDialog extends JDialog {
 
         {
             propertiesPanel.setLayout(new GridLayout(4, 2));
-            
-            Choice font_name_list, font_size_list, font_color_list, bg_color_list;
-            
+                        
             {
                 // Font name
                 propertiesPanel.add(new Label("Font name",Label.RIGHT));
-                font_name_list = new Choice();
+                Choice font_name_list = new Choice();
 
                 // Load System fonts.
                 String fonts[] = SupportedProperties.supportedFonts();
@@ -109,9 +107,9 @@ public class PropertiesDialog extends JDialog {
             {
                 // Font size
                 propertiesPanel.add(new Label("Font size",Label.RIGHT));
-                font_size_list = new Choice();
-
                 JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
+
+                // slider settings
                 font_size_slider.setMajorTickSpacing(3);
                 font_size_slider.setMinorTickSpacing(1);
                 font_size_slider.setPaintTicks(true);
@@ -132,7 +130,7 @@ public class PropertiesDialog extends JDialog {
             {
                 // Font color
                 propertiesPanel.add(new Label("Font color",Label.RIGHT));
-                font_color_list = new Choice();
+                Choice font_color_list = new Choice();
 
                 // Load supported colors
                 String[] colors = SupportedProperties.supportedColors();
@@ -168,7 +166,7 @@ public class PropertiesDialog extends JDialog {
             {
                 // Background color
                 propertiesPanel.add(new Label("Background color",Label.RIGHT));
-                bg_color_list = new Choice();
+                Choice bg_color_list = new Choice();
 
                 // Load supported colors
                 String[] colors = SupportedProperties.supportedColors();
