@@ -34,7 +34,7 @@ public class LayeredPane extends JFrame {
         setSize(300, 300);
         setVisible(true);
 
-        // stage
+        // layer
         JLayeredPane layer = new JLayeredPane();
         add(layer);
 
