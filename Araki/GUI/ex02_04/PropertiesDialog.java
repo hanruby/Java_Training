@@ -181,7 +181,7 @@ public class PropertiesDialog extends JDialog {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    PropertiesDialog.this.revert();
+                    PropertiesDialog.this.revert(); // もとに戻す
                     dispose();
                 }
             });
@@ -210,8 +210,6 @@ public class PropertiesDialog extends JDialog {
     
     /**
      * Windowがクローズされた場合
-     * @author ato
-     *
      */
     class PropertiesDialogListener extends WindowAdapter {
         @Override
