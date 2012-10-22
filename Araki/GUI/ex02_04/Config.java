@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.prefs.Preferences;
 
-public class Config implements Cloneable {
+public class Config {
     private Preferences prefs;
     
     private DateFormat clockFormat;
@@ -52,12 +52,6 @@ public class Config implements Cloneable {
         this.fontColor = conf.fontColor;
         this.margin = conf.margin;
         this.clockPos = conf.clockPos;
-    }
-    
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        Config newConf = new Config(this);
-        return newConf;
     }
     
     public void savePref() {
