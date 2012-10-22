@@ -36,9 +36,7 @@ public class PropertiesDialog extends JDialog {
         createPropertiesDialog();
         
         setTitle("Properties");
-        //setSize(400, 400);
-        Rectangle bounds = this.getGraphicsConfiguration().getBounds();
-        setBounds((int)(bounds.width/2)-200,((int)bounds.height/2-200),400,400);
+        pack();
         
         addWindowListener(new PropertiesDialogListener());
                 
