@@ -2,6 +2,9 @@ package ex02_04;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -25,6 +28,7 @@ public class ClockPanel extends JPanel {
     }
 
     private void paintClock(Graphics2D g) {
+        Point pt = new Point(getWidth()/2, 20);
 
         // 背景をクリア
         g.setBackground(config.getBackgroundColor());
@@ -35,7 +39,17 @@ public class ClockPanel extends JPanel {
         g.setPaint(config.getFontColor());
         
         // 時計文字描画
+        Rectangle2D clockSize = this.getClockSize();
+        Point clockPosition = new Point(pt.x - (int)clockSize.getWidth() / 2, pt.y + 6);
+   
         g.drawString(config.clock(new GregorianCalendar(TimeZone
-                .getTimeZone("Japan"))), 100, 20);
+                .getTimeZone("Japan"))),
+                clockPosition.x, 
+                clockPosition.y + (int)clockSize.getHeight() );
     }
+
+    private Rectangle2D getClockSize() {
+        return new TextLayout("0000/00/00 00:00:00", config.getFont(), ((Graphics2D)this.getGraphics()).getFontRenderContext()).getBounds();
+    }
+
 }
