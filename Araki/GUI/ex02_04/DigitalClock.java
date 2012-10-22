@@ -52,7 +52,8 @@ public class DigitalClock extends JWindow implements ActionListener {
         // set params
         this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-        this.setLocationRelativeTo(null);
+        this.setLocation(config.getPosition());
+
         Container contentPane = this.getContentPane();
 
         // Add ProgressPanel
