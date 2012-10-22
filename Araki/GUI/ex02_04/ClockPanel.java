@@ -1,5 +1,6 @@
 package ex02_04;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -28,7 +29,7 @@ public class ClockPanel extends JPanel {
     }
 
     private void paintClock(Graphics2D g) {
-        Point pt = new Point(getWidth()/2, 20);
+        Point pt = new Point(getWidth()/2, 0);
 
         // 背景をクリア
         g.setBackground(config.getBackgroundColor());
@@ -39,8 +40,8 @@ public class ClockPanel extends JPanel {
         g.setPaint(config.getFontColor());
         
         // 時計文字描画
-        Rectangle2D clockSize = this.getClockSize();
-        Point clockPosition = new Point(pt.x - (int)clockSize.getWidth() / 2, pt.y + 6);
+        Dimension clockSize = this.getPreferredSize();
+        Point clockPosition = new Point(pt.x - (int)clockSize.getWidth() / 2, pt.y - 5);
    
         g.drawString(config.clock(new GregorianCalendar(TimeZone
                 .getTimeZone("Japan"))),
@@ -48,6 +49,11 @@ public class ClockPanel extends JPanel {
                 clockPosition.y + (int)clockSize.getHeight() );
     }
 
+    @Override
+    public Dimension getPreferredSize() {
+        Rectangle2D size = this.getClockSize();
+        return new Dimension((int)size.getWidth() + 10, (int)size.getHeight() + 10);
+    }
     private Rectangle2D getClockSize() {
         return new TextLayout("0000/00/00 00:00:00", config.getFont(), ((Graphics2D)this.getGraphics()).getFontRenderContext()).getBounds();
     }

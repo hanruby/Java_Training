@@ -23,13 +23,12 @@ import javax.swing.UIManager;
 public class DigitalClock extends JWindow implements ActionListener {
 
     private static final long serialVersionUID = 1362097885644824584L;
-    private static final int DEFAULT_WIDTH = 320;
-    private static final int DEFAULT_HEIGHT = 240;
 
     private Timer time;
     private Config config;
         
     private JPopupMenu popupmenu;
+    private ClockPanel clockPanel;
     
     public static void main(String[] args) {
         new DigitalClock();
@@ -49,23 +48,22 @@ public class DigitalClock extends JWindow implements ActionListener {
         new ConfigObserver(config);
                         
         // set params
-        this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
         this.setLocation(config.getPosition());
 
         Container contentPane = this.getContentPane();
 
         // Add ProgressPanel
         ProgressPanel progressPanel = new ProgressPanel();
-        progressPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH,
-                (int) (DEFAULT_HEIGHT * 0.8)));
+        progressPanel.setPreferredSize(new Dimension(320,
+                (int) (200)));
         contentPane.add(progressPanel, BorderLayout.NORTH);
 
         // Add ClockPanel
-        ClockPanel clockPanel = new ClockPanel(config);
-        clockPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH,
-                (int) (DEFAULT_HEIGHT * 0.2)));
+        clockPanel = new ClockPanel(config);
         contentPane.add(clockPanel, BorderLayout.SOUTH);
+
+        pack();
+        this.setClockRegion();
         
         // Event
         addWindowListener(new ClockWindowListener());
@@ -79,6 +77,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         
         popupmenu = createMenuBar();
 
+        pack();
         this.setVisible(true);
     }
 
@@ -111,6 +110,12 @@ public class DigitalClock extends JWindow implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
+    }
+    
+    private void setClockRegion() {
+
+        clockPanel.setSize(clockPanel.getPreferredSize());
+        pack();
     }
     
     class MouseListener extends MouseAdapter {
@@ -196,6 +201,12 @@ public class DigitalClock extends JWindow implements ActionListener {
         public void update(Observable config, Object contents) {
             if (config != watching) {
                 throw new IllegalArgumentException("Config object does not same.");
+            }
+            
+            String change = (String)contents;
+            
+            if (change.equals("font") || change.equals("all") ) {
+                DigitalClock.this.setClockRegion();
             }
             
             // When config are changed, repaint this window
