@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
@@ -47,11 +49,32 @@ public class PropertiesDialog extends JDialog {
         
         setFont(new Font("Arial",Font.PLAIN,12)); // font set for properties dialog.
         
-        setLayout(new GridLayout(2, 1));
+        
+        GridBagLayout layout = new GridBagLayout();
+        
+        setLayout(layout);
         
         Panel propertiesPanel = new Panel(); 
         Panel controlPanel = new Panel();
-        
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        // Layout
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.weightx = 1.0d;
+        gbc.weighty = 1.0d;
+        layout.setConstraints(controlPanel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1.0d;
+        gbc.weighty = 1.0d;
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        layout.setConstraints(controlPanel, gbc);
+    
         add(propertiesPanel);
         add(controlPanel);
 
