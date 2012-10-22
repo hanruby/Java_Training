@@ -183,7 +183,7 @@ public class PropertiesDialog extends JDialog {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    config.set(defaultConf); // もとに戻す
+                    PropertiesDialog.this.revert();
                     dispose();
                 }
             });
@@ -201,6 +201,10 @@ public class PropertiesDialog extends JDialog {
         }
     }
     
+    private void revert() {
+        config.set(defaultConf); // もとに戻す
+    }
+    
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -214,6 +218,7 @@ public class PropertiesDialog extends JDialog {
     class PropertiesDialogListener extends WindowAdapter {
         @Override
         public void windowClosing (WindowEvent event) {
+            PropertiesDialog.this.revert(); // もとに戻す
             // Dialogを閉じる
             dispose();
         }
