@@ -107,10 +107,12 @@ public class PropertiesDialog extends JDialog {
             {
                 // Font size
                 propertiesPanel.add(new Label("Font size",Label.RIGHT));
-                JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
+                JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL);
 
                 // slider settings
-                font_size_slider.setMajorTickSpacing(3);
+                font_size_slider.setMaximum(36);
+                font_size_slider.setMinimum(10);
+                font_size_slider.setMajorTickSpacing(2);
                 font_size_slider.setMinorTickSpacing(1);
                 font_size_slider.setPaintTicks(true);
                 font_size_slider.setPaintLabels(true);
