@@ -30,8 +30,11 @@ public class ClockPanel extends JPanel {
         g.setBackground(config.getBackgroundColor());
         g.clearRect(0, 0, getWidth(), getHeight());
 
-        // 時計文字描画
+        // Font settings
+        g.setFont(config.getFont());
         g.setPaint(config.getFontColor());
+        
+        // 時計文字描画
         g.drawString(config.clock(new GregorianCalendar(TimeZone
                 .getTimeZone("Japan"))), 100, 20);
     }

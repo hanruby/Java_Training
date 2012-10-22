@@ -64,7 +64,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         // Add ClockPanel
         ClockPanel clockPanel = new ClockPanel(config);
         clockPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH,
-                (int) (DEFAULT_HEIGHT * 0.1)));
+                (int) (DEFAULT_HEIGHT * 0.2)));
         contentPane.add(clockPanel, BorderLayout.SOUTH);
         
         // Event
