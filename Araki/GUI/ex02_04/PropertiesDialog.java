@@ -1,8 +1,6 @@
 package ex02_04;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -19,7 +15,11 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -56,8 +56,8 @@ public class PropertiesDialog extends JDialog {
         
         setLayout(layout);
         
-        Panel propertiesPanel = new Panel(); 
-        Panel controlPanel = new Panel();
+        JPanel propertiesPanel = new JPanel(); 
+        JPanel controlPanel = new JPanel();
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -85,17 +85,14 @@ public class PropertiesDialog extends JDialog {
                         
             {
                 // Font name
-                propertiesPanel.add(new Label("Font name",Label.RIGHT));
-                Choice font_name_list = new Choice();
+                propertiesPanel.add(new JLabel("Font name",JLabel.RIGHT));
 
                 // Load System fonts.
                 String fonts[] = SupportedProperties.supportedFonts();
 
-                for (String font : fonts) {
-                    font_name_list.add(font);
-                }
-                
-                font_name_list.select(config.getFont().getName());
+                JComboBox font_name_list = new JComboBox(fonts);
+
+                font_name_list.setSelectedItem(config.getFont().getName());
                 font_name_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
@@ -106,7 +103,7 @@ public class PropertiesDialog extends JDialog {
             }
             {
                 // Font size
-                propertiesPanel.add(new Label("Font size",Label.RIGHT));
+                propertiesPanel.add(new JLabel("Font size",JLabel.RIGHT));
                 JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL);
 
                 // slider settings
@@ -131,17 +128,13 @@ public class PropertiesDialog extends JDialog {
             }
             {
                 // Font color
-                propertiesPanel.add(new Label("Font color",Label.RIGHT));
-                Choice font_color_list = new Choice();
+                propertiesPanel.add(new JLabel("Font color",JLabel.RIGHT));
 
                 // Load supported colors
                 String[] colors = SupportedProperties.supportedColors();
+                JComboBox font_color_list = new JComboBox(colors);
 
-                for (String color : colors) {
-                    font_color_list.add(color); 
-                }
-                
-                font_color_list.select(config.getFontColor().toString()); // TODO fix
+                font_color_list.setSelectedItem(config.getFontColor().toString()); // TODO fix
                 //System.out.println(config.getFontColor().getClass().getName());
                 font_color_list.addItemListener(new ItemListener() {
                     @Override
@@ -167,17 +160,13 @@ public class PropertiesDialog extends JDialog {
             }
             {
                 // Background color
-                propertiesPanel.add(new Label("Background color",Label.RIGHT));
-                Choice bg_color_list = new Choice();
+                propertiesPanel.add(new JLabel("Background color",JLabel.RIGHT));
 
                 // Load supported colors
                 String[] colors = SupportedProperties.supportedColors();
+                JComboBox bg_color_list = new JComboBox(colors);
 
-                for (String color : colors) {
-                    bg_color_list.add(color); 
-                }
-
-                bg_color_list.select(config.getBackgroundColor().toString());        // TODO fix        
+                bg_color_list.setSelectedItem(config.getBackgroundColor().toString());        // TODO fix        
                 bg_color_list.addItemListener(new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
@@ -204,7 +193,7 @@ public class PropertiesDialog extends JDialog {
         {
             controlPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
             // cancel 
-            Button cancel = new Button("Cancel");
+            JButton cancel = new JButton("Cancel");
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -213,7 +202,7 @@ public class PropertiesDialog extends JDialog {
                 }
             });
             // ok
-            Button ok = new Button("OK");
+            JButton ok = new JButton("OK");
             ok.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
