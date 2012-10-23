@@ -14,6 +14,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -130,64 +132,33 @@ public class PropertiesDialog extends JDialog {
                 // Font color
                 propertiesPanel.add(new JLabel("Font color",JLabel.RIGHT));
 
-                // Load supported colors
-                String[] colors = SupportedProperties.supportedColors();
-                JComboBox font_color_list = new JComboBox(colors);
-
-                font_color_list.setSelectedItem(config.getFontColor().toString()); // TODO fix
-                //System.out.println(config.getFontColor().getClass().getName());
-                font_color_list.addItemListener(new ItemListener() {
+                ColorPicker colorpicker = new ColorPicker(config.getFontColor());
+                propertiesPanel.add(colorpicker);
+                colorpicker.addPropertyChangeListener(new PropertyChangeListener() {
+                    
                     @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        try {
-                            config.setFontColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
-                        } catch (IllegalArgumentException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (SecurityException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (IllegalAccessException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (NoSuchFieldException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
+                    public void propertyChange(PropertyChangeEvent evt) {
+                        if (evt.getPropertyName().equals("color")) {
+                            config.setFontColor((Color)evt.getNewValue());
                         }
                     }
                 });
-                propertiesPanel.add(font_color_list);
             }
             {
                 // Background color
                 propertiesPanel.add(new JLabel("Background color",JLabel.RIGHT));
 
-                // Load supported colors
-                String[] colors = SupportedProperties.supportedColors();
-                JComboBox bg_color_list = new JComboBox(colors);
-
-                bg_color_list.setSelectedItem(config.getBackgroundColor().toString());        // TODO fix        
-                bg_color_list.addItemListener(new ItemListener() {
+                ColorPicker colorpicker = new ColorPicker(config.getBackgroundColor());
+                propertiesPanel.add(colorpicker);
+                colorpicker.addPropertyChangeListener(new PropertyChangeListener() {
+                    
                     @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        try {
-                            config.setBackgroundColor((Color)(Color.class.getField((String)e.getItem()).get(null)));
-                        } catch (IllegalArgumentException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (SecurityException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (IllegalAccessException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        } catch (NoSuchFieldException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
+                    public void propertyChange(PropertyChangeEvent evt) {
+                        if (evt.getPropertyName().equals("color")) {
+                            config.setBackgroundColor((Color)evt.getNewValue());
                         }
                     }
                 });
-                propertiesPanel.add(bg_color_list);
             }
         }
         {
