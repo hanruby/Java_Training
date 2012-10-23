@@ -13,42 +13,35 @@ public class ProgressPanel extends JPanel {
 
     private static final long serialVersionUID = -8483677666452465265L;
 
-    private JSlider slider_hour;
-    private JSlider slider_min;
-    private JSlider slider_sec;
+    private static JSlider slider_hour = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
+    private static JSlider slider_min = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
+    private static JSlider slider_sec= new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
 
-    public ProgressPanel() {
-
-        // 背景をクリア
-        this.setBackground(Color.BLACK);
+    public ProgressPanel(Config config) {
 
         // hour
-        slider_hour = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
         slider_hour.setMajorTickSpacing(3);
         slider_hour.setMinorTickSpacing(1);
         slider_hour.setPaintTicks(true);
         slider_hour.setPaintLabels(true);
         slider_hour.setEnabled(false);
-        slider_hour.setBackground(Color.BLACK);
 
         // min
-        slider_min = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
         slider_min.setMajorTickSpacing(15);
         slider_min.setMinorTickSpacing(1);
         slider_min.setPaintTicks(true);
         slider_min.setPaintLabels(true);
         slider_min.setEnabled(false);
-        slider_min.setBackground(Color.BLACK);
 
         // sec
-        slider_sec = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
         slider_sec.setMajorTickSpacing(10);
         slider_sec.setMinorTickSpacing(1);
         slider_sec.setPaintTicks(true);
         slider_sec.setPaintLabels(true);
         slider_sec.setEnabled(false);
-        slider_sec.setBackground(Color.BLACK);
 
+        this.setBackground(config.getBackgroundColor());
+        
         // layout
         this.setLayout(new GridLayout(3, 1));
 
@@ -58,6 +51,14 @@ public class ProgressPanel extends JPanel {
         this.add(slider_sec);
 
         this.updateSlider();
+    }
+    
+    @Override
+    public void setBackground(Color bg) {
+        super.setBackground(bg);
+        slider_hour.setBackground(bg);
+        slider_min.setBackground(bg);
+        slider_sec.setBackground(bg);
     }
 
     public void updateSlider() {
