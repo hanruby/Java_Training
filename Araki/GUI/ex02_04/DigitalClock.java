@@ -24,7 +24,6 @@ public class DigitalClock extends JWindow {
 
     private static final long serialVersionUID = 1362097885644824584L;
 
-    private Timer time;
     private Config config;
         
     private JPopupMenu popupmenu;
@@ -72,14 +71,14 @@ public class DigitalClock extends JWindow {
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
 
-        time = new Timer(1000, new ActionListener() {
+        // 1 sec 
+        new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
                 progressPanel.updateSlider();
             }
-        });
-        time.start();
+        }).start();
         
         popupmenu = createMenuBar();
 
