@@ -2,8 +2,6 @@ package ex02_04;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -11,7 +9,7 @@ import java.util.TimeZone;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-public class ProgressPanel extends JPanel implements ActionListener {
+public class ProgressPanel extends JPanel {
 
     private static final long serialVersionUID = -8483677666452465265L;
 
@@ -62,7 +60,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
         this.updateSlider();
     }
 
-    private void updateSlider() {
+    public void updateSlider() {
         // see
         // http://docs.oracle.com/javase/jp/6/api/java/util/GregorianCalendar.html
         GregorianCalendar calendar = new GregorianCalendar(
@@ -70,10 +68,5 @@ public class ProgressPanel extends JPanel implements ActionListener {
         slider_hour.setValue(calendar.get(Calendar.HOUR_OF_DAY));
         slider_min.setValue(calendar.get(Calendar.MINUTE));
         slider_sec.setValue(calendar.get(Calendar.SECOND));
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this.updateSlider();
     }
 }

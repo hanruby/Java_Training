@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
-public class DigitalClock extends JWindow implements ActionListener {
+public class DigitalClock extends JWindow {
 
     private static final long serialVersionUID = 1362097885644824584L;
 
@@ -29,6 +29,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         
     private JPopupMenu popupmenu;
     private ClockPanel clockPanel;
+    private ProgressPanel progressPanel;
     
     public static void main(String[] args) {
         new DigitalClock();
@@ -53,7 +54,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         Container contentPane = this.getContentPane();
         
         // Add ProgressPanel
-        ProgressPanel progressPanel = new ProgressPanel();
+        progressPanel = new ProgressPanel();
         progressPanel.setPreferredSize(new Dimension(320,
                 (int) (200)));
         contentPane.add(progressPanel, BorderLayout.NORTH);
@@ -71,8 +72,13 @@ public class DigitalClock extends JWindow implements ActionListener {
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
 
-        time = new Timer(1000, (ActionListener) this);
-        time.addActionListener(progressPanel);
+        time = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                repaint();
+                progressPanel.updateSlider();
+            }
+        });
         time.start();
         
         popupmenu = createMenuBar();
@@ -105,11 +111,6 @@ public class DigitalClock extends JWindow implements ActionListener {
         menuBar.add(quitMenu);
 
         return menuBar;
-    }
-            
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
     }
     
     private void setClockRegion() {
