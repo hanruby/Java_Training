@@ -93,7 +93,6 @@ public class DigitalClock extends JWindow {
         progressPanel.addMouseMotionListener(l);
     }
     
-    @SuppressWarnings("unused")
     private void setLAFtoDefault() {
         // set LAF to default
         String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
