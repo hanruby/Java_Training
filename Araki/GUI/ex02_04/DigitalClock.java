@@ -37,15 +37,9 @@ public class DigitalClock extends JWindow {
     }
 
     public DigitalClock() {
-
-        // set LAF to default
-        String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
-        try {
-            UIManager.setLookAndFeel(lafClassName);
-            SwingUtilities.updateComponentTreeUI(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
+        setLAFtoDefault();
+        
         config = new Config();
         new ConfigObserver(config);
                         
@@ -98,6 +92,18 @@ public class DigitalClock extends JWindow {
         super.addMouseMotionListener(l);
         progressPanel.addMouseMotionListener(l);
     }
+    
+    @SuppressWarnings("unused")
+    private void setLAFtoDefault() {
+        // set LAF to default
+        String lafClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
+        try {
+            UIManager.setLookAndFeel(lafClassName);
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private JPopupMenu createMenuBar(){
         JMenuItem propertiesMenu = new JMenuItem("Properties");
@@ -105,7 +111,6 @@ public class DigitalClock extends JWindow {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 new PropertiesDialog(config);
-                
             }
         });
 
