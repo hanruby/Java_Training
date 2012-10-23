@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JWindow;
@@ -51,7 +52,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         this.setLocation(config.getPosition());
 
         Container contentPane = this.getContentPane();
-
+        
         // Add ProgressPanel
         ProgressPanel progressPanel = new ProgressPanel();
         progressPanel.setPreferredSize(new Dimension(320,
@@ -66,8 +67,8 @@ public class DigitalClock extends JWindow implements ActionListener {
         this.setClockRegion();
         
         // Event
-        addWindowListener(new ClockWindowListener());
-        MouseListener mouseEvent = new MouseListener();
+        addWindowListener(new LocalWindowListener());
+        LocalMouseListener mouseEvent = new LocalMouseListener();
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
 
@@ -118,7 +119,7 @@ public class DigitalClock extends JWindow implements ActionListener {
         pack();
     }
     
-    class MouseListener extends MouseAdapter {
+    class LocalMouseListener extends MouseAdapter {
         
         Point dragStartPos, draggingPos, currentPos;
         int mouseButton;
@@ -177,7 +178,7 @@ public class DigitalClock extends JWindow implements ActionListener {
     /**
      * Windowがクローズされた場合
      */
-    class ClockWindowListener extends WindowAdapter {
+    class LocalWindowListener extends WindowAdapter {
         @Override
         public void windowClosing (WindowEvent event) {
             exitProcess();
