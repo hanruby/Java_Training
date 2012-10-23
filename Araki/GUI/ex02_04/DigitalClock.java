@@ -56,8 +56,7 @@ public class DigitalClock extends JWindow {
         
         // Add ProgressPanel
         progressPanel = new ProgressPanel(config);
-        progressPanel.setPreferredSize(new Dimension(320,
-                (int) (200)));
+        progressPanel.setPreferredSize(new Dimension(320,200));
         contentPane.add(progressPanel, BorderLayout.NORTH);
 
         // Add ClockPanel
@@ -229,6 +228,3 @@ public class DigitalClock extends JWindow {
         }
     }
 }
-
-
-
