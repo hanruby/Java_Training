@@ -2,6 +2,8 @@ package ex02_04;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -69,5 +71,21 @@ public class ProgressPanel extends JPanel {
         slider_hour.setValue(calendar.get(Calendar.HOUR_OF_DAY));
         slider_min.setValue(calendar.get(Calendar.MINUTE));
         slider_sec.setValue(calendar.get(Calendar.SECOND));
+    }
+    
+    @Override
+    public synchronized void addMouseListener(MouseListener l) {
+        super.addMouseListener(l);
+        slider_hour.addMouseListener(l);
+        slider_min.addMouseListener(l);
+        slider_sec.addMouseListener(l);
+    }
+    
+    @Override
+    public synchronized void addMouseMotionListener(MouseMotionListener l) {
+        super.addMouseMotionListener(l);
+        slider_hour.addMouseMotionListener(l);
+        slider_min.addMouseMotionListener(l);
+        slider_sec.addMouseMotionListener(l);
     }
 }

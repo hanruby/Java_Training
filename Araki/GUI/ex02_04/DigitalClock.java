@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
@@ -84,6 +86,18 @@ public class DigitalClock extends JWindow {
 
         pack();
         this.setVisible(true);
+    }
+    
+    @Override
+    public synchronized void addMouseListener(MouseListener l) {
+        super.addMouseListener(l);
+        progressPanel.addMouseListener(l);
+    }
+    
+    @Override
+    public synchronized void addMouseMotionListener(MouseMotionListener l) {
+        super.addMouseMotionListener(l);
+        progressPanel.addMouseMotionListener(l);
     }
 
     private JPopupMenu createMenuBar(){
