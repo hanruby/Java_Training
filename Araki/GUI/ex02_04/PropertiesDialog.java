@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -35,6 +35,7 @@ public class PropertiesDialog extends JDialog {
     
     public PropertiesDialog(Config config) {
         super(null, ModalityType.APPLICATION_MODAL);
+        this.setResizable(false);
 
         this.config = config;
         defaultConf = new Config(config);
@@ -66,10 +67,10 @@ public class PropertiesDialog extends JDialog {
         // Layout
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridheight = 2;
+        gbc.gridheight = 1;
         gbc.weightx = 1.0d;
-        gbc.weighty = 1.0d;
-        layout.setConstraints(controlPanel, gbc);
+        gbc.weighty = 20.0d;
+        layout.setConstraints(propertiesPanel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -83,17 +84,24 @@ public class PropertiesDialog extends JDialog {
         add(controlPanel);
 
         {
-            propertiesPanel.setLayout(new GridLayout(4, 2));
+            GridBagLayout layoutt = new GridBagLayout();
+            double label_weight = 0.3d;
+            double control_weight = 0.7d;
+            
+            //propertiesPanel.setLayout(new GridLayout(4, 2));
+            propertiesPanel.setLayout(layoutt);
+            GridBagConstraints gbcc = new GridBagConstraints();
+            gbcc.insets = new Insets(2, 2, 2, 2);
                         
             {
                 // Font name
-                propertiesPanel.add(new JLabel("Font name",JLabel.RIGHT));
+                JLabel label = new JLabel("Font name",JLabel.RIGHT);
 
                 // Load System fonts.
                 String fonts[] = SupportedProperties.supportedFonts();
 
                 JComboBox font_name_list = new JComboBox(fonts);
-
+                                
                 font_name_list.setSelectedItem(config.getFont().getName());
                 font_name_list.addItemListener(new ItemListener() {
                     @Override
@@ -101,12 +109,27 @@ public class PropertiesDialog extends JDialog {
                         config.setFont(new Font((String)e.getItem(),config.getFont().getStyle(),config.getFont().getSize()));
                     }
                 });
+                propertiesPanel.add(label);
                 propertiesPanel.add(font_name_list);
+
+                // Layout
+                gbcc.gridx = 0;
+                gbcc.gridy = 0;
+                gbcc.gridheight = 1;
+                gbcc.weightx = label_weight;
+                gbcc.anchor = GridBagConstraints.EAST;
+                layoutt.setConstraints(label, gbcc);
+                gbcc.weightx = control_weight;
+                gbcc.gridx = 1;
+                gbcc.anchor = GridBagConstraints.WEST;
+                layoutt.setConstraints(font_name_list, gbcc);
             }
             {
                 // Font size
-                propertiesPanel.add(new JLabel("Font size",JLabel.RIGHT));
+                JLabel label = new JLabel("Font size",JLabel.RIGHT);
                 JSlider font_size_slider = new JSlider(JSlider.HORIZONTAL);
+                font_size_slider.setSize(400, 50);
+                font_size_slider.setPreferredSize(font_size_slider.getSize());
 
                 // slider settings
                 font_size_slider.setMaximum(120);
@@ -126,14 +149,26 @@ public class PropertiesDialog extends JDialog {
                         config.setFont(new Font(config.getFont().getFontName(),config.getFont().getStyle(),source.getValue()));
                     }
                 });
+                propertiesPanel.add(label);
                 propertiesPanel.add(font_size_slider);
+                
+                // Layout
+                gbcc.gridx = 0;
+                gbcc.gridy = 1;
+                gbcc.gridheight = 1;
+                gbcc.weightx = label_weight;
+                gbcc.anchor = GridBagConstraints.EAST;
+                layoutt.setConstraints(label, gbcc);
+                gbcc.gridx = 1;
+                gbcc.weightx = control_weight;
+                gbcc.anchor = GridBagConstraints.WEST;
+                layoutt.setConstraints(font_size_slider, gbcc);
             }
             {
                 // Font color
-                propertiesPanel.add(new JLabel("Font color",JLabel.RIGHT));
+                JLabel label = new JLabel("Font color",JLabel.RIGHT);
 
                 ColorPicker colorpicker = new ColorPicker(config.getFontColor());
-                propertiesPanel.add(colorpicker);
                 colorpicker.addPropertyChangeListener(new PropertyChangeListener() {
                     
                     @Override
@@ -143,13 +178,26 @@ public class PropertiesDialog extends JDialog {
                         }
                     }
                 });
+                propertiesPanel.add(label);
+                propertiesPanel.add(colorpicker);
+                
+                // Layout
+                gbcc.gridx = 0;
+                gbcc.gridy = 2;
+                gbcc.gridheight = 1;
+                gbcc.weightx = label_weight;
+                gbcc.anchor = GridBagConstraints.EAST;
+                layoutt.setConstraints(label, gbcc);
+                gbcc.gridx = 1;
+                gbcc.weightx = control_weight;
+                gbcc.anchor = GridBagConstraints.WEST;                      
+                layoutt.setConstraints(colorpicker, gbcc);
             }
             {
                 // Background color
-                propertiesPanel.add(new JLabel("Background color",JLabel.RIGHT));
+                JLabel label = new JLabel("Background color",JLabel.RIGHT);
 
                 ColorPicker colorpicker = new ColorPicker(config.getBackgroundColor());
-                propertiesPanel.add(colorpicker);
                 colorpicker.addPropertyChangeListener(new PropertyChangeListener() {
                     
                     @Override
@@ -159,6 +207,20 @@ public class PropertiesDialog extends JDialog {
                         }
                     }
                 });
+                propertiesPanel.add(label);
+                propertiesPanel.add(colorpicker);
+                
+                // Layout
+                gbcc.gridx = 0;
+                gbcc.gridy = 3;
+                gbcc.gridheight = 10;
+                gbcc.weightx = label_weight;
+                gbcc.anchor = GridBagConstraints.EAST;
+                layoutt.setConstraints(label, gbcc);
+                gbcc.gridx = 1;
+                gbcc.weightx = control_weight;
+                gbcc.anchor = GridBagConstraints.WEST;
+                layoutt.setConstraints(colorpicker, gbcc);
             }
         }
         {

@@ -46,8 +46,9 @@ public class ColorPicker extends JPanel{
         
         previousColorPanel = new JPanel();
         selectedColorPanel = new JPanel();
-        
         createWindow();
+        setSize(430, 280);
+        setPreferredSize(getSize());
     }
     
     private void createWindow() {
@@ -58,18 +59,6 @@ public class ColorPicker extends JPanel{
         setLayout(gridbag);
         
         c.fill = GridBagConstraints.BOTH;
-        {
-            c.weightx = 1;
-            c.weighty = 0;
-            c.gridheight = 1;
-            c.gridwidth = 2;
-            {
-                c.gridwidth = GridBagConstraints.REMAINDER;
-                JLabel label = new JLabel("Please select a color from the color chart by click.");
-                gridbag.setConstraints(label, c);
-                add(label);
-            }
-        }
         {
             c.weightx = 30;
             c.weighty = 3.0;
