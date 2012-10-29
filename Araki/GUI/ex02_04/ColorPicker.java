@@ -39,16 +39,24 @@ public class ColorPicker extends JPanel{
         
         loadColorImage();
         
-        colorPanel = new JPanel();
+        colorPanel = new JPanel(){
+            private static final long serialVersionUID = 5563093553950259428L;
+    
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.drawImage((Image)colorImage, 0, 0, this);
+                super.paintComponent(g);
+            }
+        };
         colorPanel.addMouseListener(mouseEvent);
         colorPanel.addMouseMotionListener(mouseEvent);
         colorPanel.setSize(colorImage.getWidth(), colorImage.getHeight());
+        colorPanel.setPreferredSize(colorPanel.getSize());
+        colorPanel.setOpaque(false); 
         
         previousColorPanel = new JPanel();
         selectedColorPanel = new JPanel();
         createWindow();
-        setSize(430, 280);
-        setPreferredSize(getSize());
     }
     
     private void createWindow() {
@@ -108,19 +116,10 @@ public class ColorPicker extends JPanel{
     }
     
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        
-        Graphics2D colorPanelGraphic = (Graphics2D) colorPanel.getGraphics();
-        colorPanelGraphic.drawImage((Image)colorImage, 0, 0, this);
-        
-        Graphics2D grd = (Graphics2D) previousColorPanel.getGraphics();
-        grd.setColor(previousColor);
-        grd.fillRect(10, 23, 60, 20);
-
-        Graphics2D gr = (Graphics2D) selectedColorPanel.getGraphics();
-        gr.setColor(selectedColor);
-        gr.fillRect(10, 23, 60, 20);
+    public void paintComponent(Graphics g) {
+        previousColorPanel.setBackground(previousColor);
+        selectedColorPanel.setBackground(selectedColor);
+        super.paintComponent(g);
     }
     
     @Override
