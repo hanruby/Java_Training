@@ -18,7 +18,7 @@ public class DataHandler {
 
         // データを記憶しているか調べる
         // 最後に読んだファイルが要求されているファイルと同じかどうかを調べる
-        if (file.equals(lastFile)) {
+        if (file.equals(lastFile.get())) {
             // lastDataに保存された参照を取り出す
             data = lastData.get();
             if (data != null)
