@@ -39,6 +39,15 @@ public class ClassContentsTest {
     }
     
     @Test
+    public void testMain_with_HashMap() throws Exception {
+        ClassContents.main(new String[]{"java.util.HashMap"});
+
+        cc.getOut().flush();
+        System.out.printf(_actual.toString());
+
+    }
+    
+    @Test
     public void testSearchType() throws Exception {
 
         // Expected
