@@ -138,7 +138,18 @@ public class ColorPicker extends JPanel{
         @Override
         public void mousePressed(MouseEvent e) {
             mouseButton = e.getButton();
-            
+
+            // Left button of mouse
+            if ( e.getButton() == MouseEvent.BUTTON1 ) {
+                Point draggedPos = e.getPoint();
+                if (draggedPos.x >= 0 && draggedPos.y >= 0 &&
+                        draggedPos.x < colorImage.getWidth() &&
+                        draggedPos.y < colorImage.getHeight() ) {
+                    selectedColor = new Color(colorImage.getRGB(draggedPos.x, draggedPos.y));
+                    repaint();
+                    ColorPicker.this.firePropertyChange("color", previousColor, selectedColor);
+                }
+            }
             super.mousePressed(e);
         }
         
@@ -146,7 +157,7 @@ public class ColorPicker extends JPanel{
         public void mouseDragged(MouseEvent e) {
             
             // Left button of mouse
-            if ( e.getButton() == MouseEvent.BUTTON1 || mouseButton == MouseEvent.BUTTON1) {
+            if ( e.getButton() == MouseEvent.BUTTON1 ) {
                 Point draggedPos = e.getPoint();
                 if (draggedPos.x >= 0 && draggedPos.y >= 0 &&
                         draggedPos.x < colorImage.getWidth() &&
