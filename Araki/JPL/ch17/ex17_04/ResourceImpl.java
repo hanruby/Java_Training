@@ -1,6 +1,6 @@
 package ch17.ex17_04;
 
-import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 
 /**
  * P.403<br>
@@ -10,11 +10,11 @@ import java.lang.ref.SoftReference;
  */
 public class ResourceImpl implements Resource {
 
-    SoftReference<Object> keyObject; // ソフト参照でキーオブジェクトを保持する
+    WeakReference<Object> keyObject; // キーオブジェクトを保持する
     boolean needsRelease = false;
     
     ResourceImpl(Object key) {
-        keyObject = new SoftReference<Object>(key);
+        keyObject = new WeakReference<Object>(key);
         
         // .. 外部リソースの設定
 
@@ -23,7 +23,12 @@ public class ResourceImpl implements Resource {
     
     @Override
     public void use(Object key, Object... args) {
-        if ( keyObject != null && !keyObject.get().equals(key) )
+        // keyObjectが既に解放されている
+        if ( keyObject.get() == null )
+            throw new IllegalStateException("already released");
+        
+        // keyが違う
+        if ( !keyObject.get().equals(key) )
             throw new IllegalArgumentException("wrong key");
         
         // ... リソースの使用 ...        

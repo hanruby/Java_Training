@@ -38,9 +38,20 @@ public class ResourceImplTest {
     public void testUse_wrong_key() {
         String key = "This is key";
         Resource resource = new ResourceImpl(key);
-
+ 
         String wrong_key = "This is wrong key";
         resource.use(wrong_key, "any objects");
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void testUse_already_released_key() {
+        String key = "This is key";
+        Resource resource = new ResourceImpl(key);
+        
+        resource.release();
+
+        // use correct key
+        resource.use(key, "any objects");
     }
 
     @Test
