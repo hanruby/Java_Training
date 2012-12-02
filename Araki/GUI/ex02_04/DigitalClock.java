@@ -50,7 +50,6 @@ public class DigitalClock extends JWindow {
         
         // Add ProgressPanel
         progressPanel = new ProgressPanel(config);
-        progressPanel.setPreferredSize(new Dimension(320,200));
         contentPane.add(progressPanel, BorderLayout.NORTH);
 
         // Add ClockPanel
@@ -229,6 +228,8 @@ public class DigitalClock extends JWindow {
             // When config are changed, repaint this window
             DigitalClock.this.repaint();
             DigitalClock.this.progressPanel.setBackground(DigitalClock.this.config.getBackgroundColor());
+            DigitalClock.this.progressPanel.setForeground(DigitalClock.this.config.getFontColor());
+            DigitalClock.this.progressPanel.setFont(DigitalClock.this.config.getFont());
         }
     }
 }

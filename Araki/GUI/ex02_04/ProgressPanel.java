@@ -1,7 +1,9 @@
 package ex02_04;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Calendar;
@@ -15,34 +17,51 @@ public class ProgressPanel extends JPanel {
 
     private static final long serialVersionUID = -8483677666452465265L;
 
-    private static JSlider slider_hour = new JSlider(JSlider.HORIZONTAL, 0, 24, 0);
-    private static JSlider slider_min = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
-    private static JSlider slider_sec= new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
+    private static ClockSlider slider_hour = new ClockSlider(24);
+    private static ClockSlider slider_min = new ClockSlider(60);
+    private static ClockSlider slider_sec = new ClockSlider(60);
 
+    static class ClockSlider extends JSlider {
+
+        private static final long serialVersionUID = 4070158171214566911L;
+
+        public ClockSlider(int max) {
+            super(JSlider.HORIZONTAL, 0, max, 0);
+
+            this.setPaintTicks(true);
+            this.setPaintLabels(true);
+
+            MouseListener[] mouseListeners = this.getMouseListeners();
+            for (MouseListener mouseListener : mouseListeners) {
+                this.removeMouseListener(mouseListener);            
+            }
+            
+            KeyListener[] keyListeners = this.getKeyListeners();
+            for (KeyListener keyListener : keyListeners) {
+                this.removeKeyListener(keyListener);    
+            }
+        }
+        
+    }
+    
     public ProgressPanel(Config config) {
 
         // hour
         slider_hour.setMajorTickSpacing(3);
         slider_hour.setMinorTickSpacing(1);
-        slider_hour.setPaintTicks(true);
-        slider_hour.setPaintLabels(true);
-        slider_hour.setEnabled(false);
+        //slider_hour.set
 
         // min
         slider_min.setMajorTickSpacing(15);
         slider_min.setMinorTickSpacing(1);
-        slider_min.setPaintTicks(true);
-        slider_min.setPaintLabels(true);
-        slider_min.setEnabled(false);
 
         // sec
         slider_sec.setMajorTickSpacing(10);
         slider_sec.setMinorTickSpacing(1);
-        slider_sec.setPaintTicks(true);
-        slider_sec.setPaintLabels(true);
-        slider_sec.setEnabled(false);
 
         this.setBackground(config.getBackgroundColor());
+        this.setForeground(config.getFontColor());
+        this.setFont(config.getFont());
         
         // layout
         this.setLayout(new GridLayout(3, 1));
@@ -61,6 +80,22 @@ public class ProgressPanel extends JPanel {
         slider_hour.setBackground(bg);
         slider_min.setBackground(bg);
         slider_sec.setBackground(bg);
+    }
+    
+    @Override
+    public void setForeground(Color fg) {
+        super.setForeground(fg);
+        slider_hour.setForeground(fg);
+        slider_min.setForeground(fg);
+        slider_sec.setForeground(fg);
+    }
+    
+    @Override
+    public void setFont(Font font) {
+        super.setFont(font);
+        slider_hour.setFont(font);
+        slider_min.setFont(font);
+        slider_sec.setFont(font);
     }
 
     public void updateSlider() {
