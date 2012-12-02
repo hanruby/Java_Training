@@ -28,12 +28,12 @@ public final class ResourceManager {
         if (!shutdown) {
             shutdown = true;
             
-            while (true) {
+            while ( refs.size() != 0 ) {
                 Reference<?> ref =  queue.poll();
-                if ( refs.size() == 0 ) {
-                    System.out.println("All resources was released.");
+                if (ref == null) {
                     break;
                 }
+                
                 Resource res = null;
                 synchronized(ResourceManager.this) {
                     res = refs.get(ref);
@@ -42,6 +42,7 @@ public final class ResourceManager {
                 res.release();
                 ref.clear();
             }
+        System.out.println("All resources was released.");
         }
     }
 
