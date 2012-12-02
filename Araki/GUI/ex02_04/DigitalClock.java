@@ -2,10 +2,13 @@ package ex02_04;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -61,6 +64,8 @@ public class DigitalClock extends JWindow {
         
         // Event
         addWindowListener(new LocalWindowListener());
+        addComponentListener(new LocalComponentListener());
+        
         LocalMouseListener mouseEvent = new LocalMouseListener();
         addMouseListener(mouseEvent);
         addMouseMotionListener(mouseEvent);
@@ -190,8 +195,28 @@ public class DigitalClock extends JWindow {
         System.exit (0);
     }
 
+    class LocalComponentListener implements ComponentListener {
+
+        @Override
+        public void componentResized(ComponentEvent e) {
+            pack();
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentShown(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentHidden(ComponentEvent e) {
+        }
+    }
+    
     /**
-     * Windowがクローズされた場合
+     * WindowListener
      */
     class LocalWindowListener extends WindowAdapter {
         @Override
