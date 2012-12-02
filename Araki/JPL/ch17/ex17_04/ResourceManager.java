@@ -33,6 +33,12 @@ public final class ResourceManager {
         if (!shutdown) {
             shutdown = true;
             reaper.interrupt();
+            try {
+                reaper.join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 
@@ -63,16 +69,11 @@ public final class ResourceManager {
      */
     class ReaperThread extends Thread {
         public void run() {
+
             // 割り込まれるまで実行
-            boolean shutdown = false;
-            
             while (true) {
                 try {
                     Reference<?> ref =  queue.remove();
-                    if ( refs.size() == 0 && shutdown ) {
-                        System.out.println("All resources was released.");
-                        break;
-                    }
                     Resource res = null;
                     synchronized(ResourceManager.this) {
                         res = refs.get(ref);
@@ -80,14 +81,25 @@ public final class ResourceManager {
                     }
                     res.release();
                     ref.clear();
+                    
                 }
                 catch (InterruptedException ex) {
                     // すべての割り当てられたResourceが開放されないと終了しない
-                    System.out.println("Waiting for all resources is released.");
-                    if ( refs.size() == 0 ) {
-                        break;
+                    try {
+                        // 解放！
+                        System.gc();
+                        while(refs.size() != 0 ) {
+                            Reference<?> ref =  queue.remove();
+                            Resource res = refs.get(ref);
+                            refs.remove(ref);
+                            res.release();
+                            ref.clear();
+                        }
+                        System.out.println("All resources was released.");
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    shutdown = true;
+                    break; // 終了
                 }
             }
         }
