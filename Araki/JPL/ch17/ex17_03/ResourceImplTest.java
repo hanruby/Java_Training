@@ -43,6 +43,21 @@ public class ResourceImplTest {
         resource.use(wrong_key, "any objects");
     }
 
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testUse_already_released_key() {
+        String key = "This is key";
+        Resource resource = new ResourceImpl(key);
+
+        System.gc();
+        System.gc();
+        System.gc();
+        System.gc();
+        
+        // use correct key
+        resource.use(key, "any objects");
+    }
+
     @Test
     public void testRelease() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         String key = "This is key";
