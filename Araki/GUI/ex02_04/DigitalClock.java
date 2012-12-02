@@ -16,11 +16,14 @@ import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
 public class DigitalClock extends JWindow {
@@ -41,6 +44,10 @@ public class DigitalClock extends JWindow {
         
         setLAFtoDefault();
         
+        Icon icon = new ImageIcon("image/position.png");
+        UIDefaults defaults = UIManager.getDefaults();
+        defaults.put("Slider.horizontalThumbIcon", icon);
+
         config = new Config();
         new ConfigObserver(config);
                         

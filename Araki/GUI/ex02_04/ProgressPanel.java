@@ -10,12 +10,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 
 public class ProgressPanel extends JPanel {
 
@@ -44,12 +40,7 @@ public class ProgressPanel extends JPanel {
             for (KeyListener keyListener : keyListeners) {
                 this.removeKeyListener(keyListener);    
             }
-
-            Icon icon = new ImageIcon("image/position.png");
-            UIDefaults defaults = UIManager.getDefaults();
-            defaults.put("Slider.horizontalThumbIcon", icon);
-        }
-        
+        }        
     }
     
     public ProgressPanel(Config config) {
