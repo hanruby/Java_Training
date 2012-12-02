@@ -23,8 +23,12 @@ public class ResourceImpl implements Resource {
     
     @Override
     public void use(Object key, Object... args) {
-        // keyObjectが既に解放されている か keyが違う
-        if ( keyObject.get() == null || !keyObject.get().equals(key) )
+        // keyObjectが既に解放されている
+        if ( keyObject.get() == null )
+            throw new IllegalStateException("already released");
+        
+        // keyが違う
+        if ( !keyObject.get().equals(key) )
             throw new IllegalArgumentException("wrong key");
         
         // ... リソースの使用 ...        
