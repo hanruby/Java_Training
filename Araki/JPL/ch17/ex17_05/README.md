@@ -6,3 +6,8 @@
 
 ReaperThreadを使用しないようにResourceManagerを再設計しなさい。
 ResourceManagerが持つセマンティクスを明確にし、リソースがいつ開放されるかについても明確にしなさい。
+
+
+## 補足
+
+getResourceとshutdownで実施する。
