@@ -7,16 +7,16 @@ public class Find implements FilenameFilter{
 
     @Override
     public boolean accept(File dir, String name) {
-        // prefix で終われば true
-        return name.endsWith(prefix);
+        // suffix で終われば true
+        return name.endsWith(suffix);
     }
 
     private File dir;
-    private String prefix;
+    private String suffix;
     
-    public Find(File dir, String prefix) {
+    public Find(File dir, String suffix) {
         this.dir = dir;
-        this.prefix = prefix;
+        this.suffix = suffix;
     }
     
     public String[] getList() {
