@@ -6,19 +6,19 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 
 public class Grep {
+
+    /**
+     * Example : java ch20.ex20_05.Grep ch20/ex20_05/testfile.txt hoge
+     * @param args
+     */
     public static void main(String[] args) {
 
         if (args.length != 2)
-            throw new IllegalArgumentException(
-                    "need char and file");
-        
-        
-        
+            System.err.println("need char and file");
         try {
             findString(args[0], args[1]);
         } catch (FileNotFoundException e) {
-            System.out.println("No such file : " );
-            e.printStackTrace();
+            System.err.println("No such file : " );
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
