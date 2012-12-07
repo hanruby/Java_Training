@@ -4,6 +4,7 @@
 ## Defect
 
 * WindowsでColorPickerがクリックで選択できない
+* 文字盤の60は行かない。← 仕様です。
 
 ## Request
 
