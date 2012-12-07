@@ -24,7 +24,7 @@ public class TranslateByte {
         int b;
         
         while ((b = in.read()) != -1) {
-            out.write(b == from ? to : b);
+            out.write((byte)b == from ? to : b);
         }
         
         out.flush();

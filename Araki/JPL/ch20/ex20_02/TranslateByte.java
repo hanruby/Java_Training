@@ -25,7 +25,7 @@ public class TranslateByte extends FilterInputStream {
     public int read() throws IOException {
         int b = super.read();
         
-        return (b == from ? to : b);
+        return ((byte)b == from ? to : b);
     }
 
     /**

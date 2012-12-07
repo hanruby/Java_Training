@@ -44,4 +44,15 @@ public class TranslateByteTest {
 
         assertEquals("aBcaBcaBcaBc", builder.toString());
     }
+     
+    @Test
+    public void testTranslate_0x80() throws Exception {
+        InputStream in = new ByteArrayInputStream(new byte[]{(byte) 0x80});
+        
+        TranslateByte tb = new TranslateByte(in, (byte)0x80,(byte)0x70);
+        
+        int c;
+        c = tb.read();
+        assertEquals((byte)0x70, (byte)c);
+    }
 }
