@@ -50,6 +50,7 @@ public class LinkedList {
 
 	/**
 	 * LinkedListの内容を文字列へ変換するメソッド
+	 * @return LinkedListの内容の文字列
 	 */
 	@Override
 	public String toString() {
