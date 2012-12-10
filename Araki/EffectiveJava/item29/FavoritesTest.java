@@ -14,6 +14,7 @@ public class FavoritesTest {
     @Test
     public void test_fav() throws Exception {
         Favorites f = new Favorites();
+        
         f.putFavorite(String.class, "Java");
         f.putFavorite(Integer.class, 0xcafebabe);
         f.putFavorite(Class.class, Favorites.class);
@@ -24,12 +25,7 @@ public class FavoritesTest {
         
         // check
         assertEquals("Java", favoriteString);
-        assertSame("Java", favoriteString);
-        
         assertEquals(0xcafebabe, favoriteInteger);
-        assertSame(0xcafebabe, favoriteInteger);
-        
         assertEquals(Favorites.class, favoriteClass);
-        assertSame(Favorites.class, favoriteClass);
     }
 }
