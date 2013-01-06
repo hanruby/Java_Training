@@ -26,6 +26,8 @@ import javax.swing.Timer;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
+import com.sun.awt.AWTUtilities;
+
 public class DigitalClock extends JWindow {
 
     private static final long serialVersionUID = 1362097885644824584L;
@@ -53,7 +55,8 @@ public class DigitalClock extends JWindow {
                         
         // set params
         this.setLocation(config.getPosition());
-
+        AWTUtilities.setWindowOpacity(this, config.getOpacity());
+        
         Container contentPane = this.getContentPane();
         
         // Add ProgressPanel
@@ -260,6 +263,7 @@ public class DigitalClock extends JWindow {
             DigitalClock.this.progressPanel.setBackground(DigitalClock.this.config.getBackgroundColor());
             DigitalClock.this.progressPanel.setForeground(DigitalClock.this.config.getFontColor());
             DigitalClock.this.progressPanel.setFont(DigitalClock.this.config.getFont());
+            AWTUtilities.setWindowOpacity(DigitalClock.this, DigitalClock.this.config.getOpacity());
         }
     }
 }

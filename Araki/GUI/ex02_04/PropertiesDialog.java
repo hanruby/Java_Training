@@ -222,6 +222,46 @@ public class PropertiesDialog extends JDialog {
                 gbcc.anchor = GridBagConstraints.WEST;
                 layoutt.setConstraints(colorpicker, gbcc);
             }
+            {
+                // Opacity
+                JLabel label = new JLabel("Opacity",JLabel.RIGHT);
+                JSlider slider = new JSlider(JSlider.HORIZONTAL);
+                slider.setSize(400, 50);
+                slider.setPreferredSize(slider.getSize());
+
+                // slider settings
+                slider.setMaximum(100);
+                slider.setMinimum(10);
+                slider.setMajorTickSpacing(20);
+                slider.setMinorTickSpacing(10);
+                slider.setPaintTicks(true);
+                slider.setPaintLabels(true);
+
+                // set saved size 
+                slider.setValue((int)(config.getOpacity()*100.0f));
+                
+                slider.addChangeListener(new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        JSlider source = (JSlider)e.getSource();
+                        config.setOpacity(source.getValue()/100.0f);
+                    }
+                });
+                propertiesPanel.add(label);
+                propertiesPanel.add(slider);
+                
+                // Layout
+                gbcc.gridx = 0;
+                gbcc.gridy = 14;
+                gbcc.gridheight = 1;
+                gbcc.weightx = label_weight;
+                gbcc.anchor = GridBagConstraints.EAST;
+                layoutt.setConstraints(label, gbcc);
+                gbcc.gridx = 1;
+                gbcc.weightx = control_weight;
+                gbcc.anchor = GridBagConstraints.WEST;
+                layoutt.setConstraints(slider, gbcc);
+            }
         }
         {
             controlPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));

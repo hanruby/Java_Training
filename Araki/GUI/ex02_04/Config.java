@@ -23,6 +23,8 @@ public class Config extends Observable {
     private Color backgroundColor;
     private Color fontColor;
     private Point clockPos;
+    
+    private float opacity;
 
     public Config() {
         // Load user preferences
@@ -38,6 +40,8 @@ public class Config extends Observable {
 
         clockPos = new Point(prefs.getInt("a2.clockPos_x", 0), prefs.getInt("a2.clockPos_y", 0));
         margin = new Insets(10, 10, 10, 10);
+        
+        opacity = prefs.getFloat("a2.opacity", 0.72f);
     }
 
     public Config(Config conf) {
@@ -53,6 +57,7 @@ public class Config extends Observable {
         this.fontColor = conf.fontColor;
         this.margin = conf.margin;
         this.clockPos = conf.clockPos;
+        this.opacity = conf.opacity;
 
         setChanged();
         notifyObservers("all");
@@ -71,6 +76,7 @@ public class Config extends Observable {
         prefs.putInt("a2.fontColor", fontColor.getRGB());
         prefs.putInt("a2.clockPos_x", clockPos.x);
         prefs.putInt("a2.clockPos_y", clockPos.y);
+        prefs.putFloat("a2.opacity", opacity);
     }
     
     public String clock(Calendar cal) {
@@ -148,5 +154,16 @@ public class Config extends Observable {
     
     public void setPosition(Point pos) {
         this.clockPos = pos;
+    }
+    
+    public float getOpacity() {
+        return this.opacity;
+    }
+    
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
+
+        setChanged();
+        notifyObservers("opacity");
     }
 }
