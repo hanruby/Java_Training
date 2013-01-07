@@ -31,17 +31,15 @@ public class SortedList extends LinkedList<String> {
     }
 
     public void addLine(String line) {
-        String prev = "";
         ListIterator<String> it = this.listIterator();
 
         while(it.hasNext()) {
             String curr = it.next();
-            if(line.compareTo(prev) >= 0 && line.compareTo(curr) < 0) {
+            if(line.compareTo(curr) < 0) {
                 it.previous();
                 it.add(line);
                 return;
             }
-            curr = prev;
         }
         this.addLast(line);
     }
