@@ -21,7 +21,9 @@ public class WhichChars {
     }
 
     public String toString() {
-        TreeSet<Character> sorted = new TreeSet<Character>(used);
+        // HashSetで保存するとhash値で並ぶだけで、ソートされない。
+        // そのため、TreeSetでソートする
+        Set<Character> sorted = new TreeSet<Character>(used);
                 
         StringBuilder desc = new StringBuilder();
         desc.append("[");
