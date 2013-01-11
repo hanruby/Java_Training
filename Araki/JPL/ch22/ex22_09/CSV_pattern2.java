@@ -6,11 +6,11 @@ public class CSV_pattern2 extends CSV{
     public String createPattern(int cells_num) {
      
         // パターン生成
-        StringBuilder exp = new StringBuilder("([^.]*)");
+        StringBuilder exp = new StringBuilder("^(.*?)");
         for (int cell = 1; cell < cells_num; cell++) {
-            exp.append(",([^.]*)");
+            exp.append(",(.*?)");
         }
-        exp.append(",(.*)");
+        exp.append(",(.*?)");
         
         return exp.toString();
     }
