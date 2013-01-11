@@ -119,29 +119,31 @@ public class CSVTest {
     
     @Test
     public void test_readCSVTable_Benchmark() throws Exception {
+
+        System.out.println(csv.getClass());
+        int count = 1000;
         {
             StringReader in = new StringReader(
                     "1,2,3,4\n" +
                     "4,3,2,1\n"
             );
 
-            int count = 1000;
             long time = new CSVPatternBenchmark(csv, in, 4).repeat(count);
-            System.out.println(csv.getClass() + 
-                    ":\n \t" + csv.createPattern(4) + 
-                    "\n \t\t short string csv, " + count + " exec in " + time + " nanoseconds");
+            System.out.println(
+                    "\tshort pattern : " + csv.createPattern(4) + 
+                    "\n \t " + time + " nanoseconds");
         }
         {
             StringReader in = new StringReader(
                     "12345678909876543213456,78909876543,211112345678,90987654321234567,890987654321,123456789,098765432123456789098765,43213456789098767y6543212345,67890987654321,23,45678976543213456,756787654323,4567890809876,54343432,1234\n" +
                     "123456789098765432134567,890987654,32111123456789,098765432123456,7890987654321,1234567890,9876543212345678909876,543213456789098767y65432123456,7890987654321,2,3456789765432134567,5678765432,345678908098765,4343432,1234\n"
             );
-            
-            int count = 1000;
+
             long time = new CSVPatternBenchmark(csv, in, 15).repeat(count);
-            System.out.println(csv.getClass() + 
-                    ":\n \t" + csv.createPattern(15) + 
-                    "\n \t\t  long string csv, " + count + " exec in " + time + " nanoseconds");
+            System.out.println(
+                    "\tlong pattern : " + csv.createPattern(15) + 
+                    "\n \t " + time + " nanoseconds");
         }
+        System.out.println();
     }
 }
