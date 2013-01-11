@@ -14,16 +14,16 @@ public class WhichChars {
      * 出現した文字を保持する<br>
      * 上位8ビットをキーへ保存し、下位ビットをBitSetへ保存する
      */
-    private HashMap<Byte, BitSet> usedMap = new HashMap<Byte, BitSet>();
+    private Map<Byte, BitSet> usedMap = new HashMap<Byte, BitSet>();
 
-    private static int shift = (21-8);
+    private static int shift = (21-8); // Unicode 
     
     public WhichChars(String str) {
         for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
+            int c = str.charAt(i);
 
-            Byte topByte = (byte) ((c >>> shift) & 0xFF); // 上位8ビット
-            Integer lowBytes = (int) (c & 0xFFFF); // 下位ビット
+            byte topByte = (byte) ((c >>> shift) & 0xFF); // 上位8ビット
+            int lowBytes = (int) (c & 0xFFFF); // 下位ビット
 
             // Mapに上位バイトが格納されている場合
             if (usedMap.containsKey(topByte)) {
