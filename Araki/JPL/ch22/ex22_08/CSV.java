@@ -15,11 +15,11 @@ public class CSV {
         List<String[]> vals = new ArrayList<String[]>();
         
         // パターン生成
-        StringBuilder exp = new StringBuilder("^(.*)");
-        for (int cell = 1; cell < cells_num; cell++) {
-            exp.append(",(.*)");
+        StringBuilder exp = new StringBuilder("^([^,]*?)");
+        for (int cell = 1; cell < cells_num - 1; cell++) {
+            exp.append(",([^,]*?)");
         }
-        exp.append(",(.*)");
+        exp.append(",([^,]*?)$");
         
         Pattern pat = Pattern.compile(exp.toString(), Pattern.MULTILINE);
         while (in.hasNextLine()) {
@@ -28,20 +28,17 @@ public class CSV {
                 
                 String[] cells = new String[cells_num];
                 MatchResult match = in.match();
-                
-                // セルの数の指定よりもデータセットが多い場合はエラー
-                if (match.group(cells_num + 1) != null) {
-                    throw new IOException("input format error : " + line);
-                }
 
                 for (int i = 0; i < cells_num; i++)
                     cells[i] = match.group(i + 1);
                 vals.add(cells);
                 in.nextLine(); // 改行を読み飛ばす
             }
-
             else {
-                in.nextLine(); // 改行を読み飛ばす
+                String unmatchedLine = in.nextLine(); // 改行を読み飛ばす
+                if (!unmatchedLine.equals("")) {
+                    throw new IOException("input format error : " + line);                    
+                }
             }
         }
 

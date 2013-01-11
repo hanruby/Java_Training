@@ -86,9 +86,16 @@ public class CSVTest {
     }
     
     @Test(expected=IOException.class)
-    public void test_readCSVTable_wrong_cell() throws Exception {
+    public void test_readCSVTable_wrong_cell_many() throws Exception {
         File file = new File("JPL/ch22/ex22_07/testdata_4cells.csv");
         
         CSV.readCSVTable(new FileReader(file), 3);
+    }
+    
+    @Test(expected=IOException.class)
+    public void test_readCSVTable_wrong_cell_few() throws Exception {
+        File file = new File("JPL/ch22/ex22_07/testdata_4cells.csv");
+        
+        CSV.readCSVTable(new FileReader(file), 5);
     }
 }
