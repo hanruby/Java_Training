@@ -22,7 +22,7 @@ public class CSVTest {
         
         List<String[]> list = CSV.readCSVTable(new FileReader(file));
         
-        String[][] expected = {{"1","2","3","4",},{"4","3","2","1",}};
+        String[][] expected = {{"1.0","2.0","3.0","4.0",},{"4.0","3.0","2.0","1.0",}};
         
         int i = 0;
         for (String[] strings : list) {
@@ -31,5 +31,5 @@ public class CSVTest {
             }
             i++;
         }
-    }
+    } 
 }
