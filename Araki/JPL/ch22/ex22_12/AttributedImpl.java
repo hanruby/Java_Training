@@ -1,9 +1,13 @@
 package ch22.ex22_12;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StreamTokenizer;
+import java.io.Writer;
 import java.util.*;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 
 class AttributedImpl implements Attributed, Iterable<Attr> {
     protected Map<String, Attr> attrTable =
@@ -59,6 +63,56 @@ class AttributedImpl implements Attributed, Iterable<Attr> {
                 attr.setValue(new Double(in.nval));
                 attr = null;
             }
+        }
+        return attrs;
+    }
+    
+    public static Attributed readAttrs2(Reader source)
+    throws IOException
+    {
+        Scanner in = new Scanner(source);
+        AttributedImpl attrs = new AttributedImpl();
+
+        int count = in.nextInt();
+        in.nextLine();    // skip rest of line
+        Pattern attrPat =
+            Pattern.compile("(.*?)=(.*)$", Pattern.MULTILINE);
+        for (int i = 0; i < count; i++) {
+            in.findInLine(attrPat);
+            MatchResult m = in.match();
+            attrs.add(new Attr(m.group(1), m.group(2)));
+            in.nextLine();
+        }
+
+        return attrs;
+    }
+    
+    // JPL P.572
+    public static void printAttrs(Writer dest, Attr[] attrs) {
+        PrintWriter out = new PrintWriter(dest);
+        out.printf("%d attrs%n", attrs.length);
+        for (int i = 0; i < attrs.length; i++) {
+            Attr attr = attrs[i];
+            out.printf("%s=%s%n",
+                    attr.getName(), attr.getValue());
+        }
+        out.flush();
+    }
+
+    public static Attr[] scanAttrs(Reader source) {
+        Scanner in = new Scanner(source);
+        int count = in.nextInt();
+        in.nextLine();    // skip rest of line
+
+
+        Attr[] attrs = new Attr[count];
+        Pattern attrPat =
+            Pattern.compile("(.*?)=(.*)$", Pattern.MULTILINE);
+        for (int i = 0; i < count; i++) {
+            in.findInLine(attrPat);
+            MatchResult m = in.match();
+            attrs[i] = new Attr(m.group(1), m.group(2));
+            in.nextLine();
         }
         return attrs;
     }
