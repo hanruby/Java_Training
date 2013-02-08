@@ -26,7 +26,7 @@ public class CSV {
 		        if (i >= CELLS)
 		            throw new IOException("input format error, val:" + in.sval);
 
-		        cells[i] = in.sval;
+		        cells[i] = in.sval.trim();
 		        i++;
 		        break;
 
