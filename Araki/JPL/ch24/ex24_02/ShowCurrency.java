@@ -17,8 +17,9 @@ public class ShowCurrency {
     
     static String[] ISO_4217 = new String[] {
         "JPY", // ￥
-        "EUR", // €
         "KRW", // ₩ ウォン
+        "CNY", // 中国
+        "EUR", // €
         "NZD", // ニュージーランドドル
         "USD", // アメリカドル
         "AUD", // オーストラリアドル
