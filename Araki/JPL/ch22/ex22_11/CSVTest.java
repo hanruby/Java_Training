@@ -23,9 +23,12 @@ public class CSVTest {
         List<String[]> list = CSV.readCSVTable(new FileReader(file));
         
         String[][] expected = {{"1.0","2.0","3.0","4.0",},{"4.0","3.0","2.0","1.0",}};
-        
+            
+        assertEquals(expected.length, list.size());
+            
         int i = 0;
         for (String[] strings : list) {
+            assertEquals(expected[i].length, strings.length);
             for (int col = 0; col < strings.length; col++) {
                 assertEquals(expected[i][col], strings[col]);
             }
