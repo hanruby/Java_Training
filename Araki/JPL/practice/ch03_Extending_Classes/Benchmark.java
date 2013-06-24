@@ -1,8 +1,8 @@
 package practice.ch03_Extending_Classes;
 
 public abstract class Benchmark {
-    abstract void benchmark();
-    
+    public abstract void benchmark();
+
     public final long repeat(int count) {
         long start = System.nanoTime();
         for (int i = 0; i < count; i++) {
@@ -14,7 +14,7 @@ public abstract class Benchmark {
 
 class MethodBenchmark extends Benchmark {
     /** なにもしないで、単に戻るだけ */
-    void benchmark() {
+    public void benchmark() {
     }
 
     public static void main(String[] args) {
